@@ -7,7 +7,8 @@
     <title>Inicio de Sesión</title>
      <link rel="stylesheet" href="Content/reset.css">
      <%--<link rel="stylesheet" href="Content/style.css">--%>
-    <link rel="stylesheet" href="Content/Ingreso.css"
+    <link rel="stylesheet" href="css/boostrap.css"/>
+    <link rel="stylesheet" href="Content/Ingreso.css"/>
     
 </head>
 <body>
@@ -18,10 +19,15 @@
                     <div class="Panel-Ingreso">
                         <img src="/Images/LOGO_MJP.png" alt="LogoMJP" class="ImagenIngreso"/>
                         <div class ="container">
-                        <legend class="TituloIngreso">Inicio de sesión</legend>
-                        <h5>Usuario:</h5>
-                        <asp:TextBox ID="txtUsuario" runat="server" placeholder="Usuario" class="input-txt"></asp:TextBox>
-                        <h5>Contraseña:</h5>
+                        <h3 class="TituloIngreso">Inicio de sesión</h3>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Usuario</label>
+                        
+                            <div class="col-md-10">
+                                <asp:TextBox ID="txtUsuario" runat="server" placeholder="Usuario" class="input-txt"></asp:TextBox>
+                            </div>
+                        </div>
+                        <h5>Contraseña</h5>
                         <asp:TextBox ID="txtContraseña" TextMode="Password" runat="server" placeholder="Contraseña" class="input-txt"></asp:TextBox>
                         <asp:Label ID="Label1" runat="server" Text="Label">Olvidé la contraseña</asp:Label>
                         <asp:Button ID="btnIngresar" class="btn btn-success" runat="server" Text="Iniciar sesión"/>
