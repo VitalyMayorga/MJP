@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Security.Principal;
+using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -68,13 +68,38 @@ namespace SistemaMJP
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ArrayList listaBodegas = (ArrayList)Session["Bodegas"];
+            //ArrayList listaPP = (ArrayList)Session["ProgramasPresupuestarios"];
+            //string rol = (string)Session["rol"];
+            //string nombre = (string)Session["Nombre"];
+            //string bodegas = "";
+            //string programas = "";
+            //foreach (object bodega in listaBodegas)
+            //{
+            //    bodegas += (string)bodega + ", ";
+            //}
+            //foreach (object programa in listaPP)
+            //{
+            //    programas += (string)programa + ", ";
+            //}
+
+            //if (!IsPostBack)
+            //{
+            //    this.InfoUsuario.Text = string.Format(nombre);
+            //}
 
         }
 
-        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        protected void clickSalir(object sender, EventArgs e)//Desloguearse del Sistema
         {
-            Context.GetOwinContext().Authentication.SignOut();
+            Session["username"] = null;
+            Response.Redirect("~/Ingresar.aspx");
         }
+
+        //protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        //{
+        //    Context.GetOwinContext().Authentication.SignOut();
+        //}
     }
 
 }

@@ -1,0 +1,15 @@
+﻿body {
+    background-color: white;
+}
+
+.Panel-Ingreso {
+    text-align:center;
+    margin-left:10%;    
+    margin-right: 10%;
+}
+
+.ImagenIngreso{
+    display:block;
+    width:225px;
+    margin: 0 auto;
+}
