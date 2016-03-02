@@ -58,6 +58,15 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.TextBox txtUsuario;
         
         /// <summary>
+        /// MsjErrorUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorUsuario;
+        
+        /// <summary>
         /// txtContraseña control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,24 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContraseña;
+        
+        /// <summary>
+        /// MsjErrorContraseña control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorContraseña;
+        
+        /// <summary>
+        /// MsjErrorLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorLogin;
         
         /// <summary>
         /// btnIngresar control.
