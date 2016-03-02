@@ -10,7 +10,7 @@
 namespace SistemaMJP {
     
     
-    public partial class Ingresar {
+    public partial class MenuPrincipal {
         
         /// <summary>
         /// form1 control.

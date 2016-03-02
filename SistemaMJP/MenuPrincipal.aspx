@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Ingresar" Language="C#" AutoEventWireup="true" CodeBehind="MenuPrincipal.aspx.cs" Inherits="SistemaMJP.Ingresar" %>
+﻿<%@ Page Title="MenuPrincipal" Language="C#" AutoEventWireup="true" CodeBehind="MenuPrincipal.aspx.cs" Inherits="SistemaMJP.MenuPrincipal" %>
 
 <!DOCTYPE html>
 
@@ -12,44 +12,60 @@
     
 </head>
 <body>
+     <header style="background-color:blue;"></header>
     <section>
         <form id="form1" runat="server">
             <asp:ScriptManager runat="server" />
 
                     <div class="Panel-Princiapl">
-                      <%--  <img src="/Images/LOGO_MJP.png" alt="LogoMJP" class="ImagenIngreso"/> --%>
+          
                         <div class ="container">
-                        <h3 class="Titulo">Menu Principal</h3>
+                              <h1 class="Titulo">Menu Principal</h1>
+                         </div>
+
                             <div class="form-group">
-                                <label class="col-md-2 control-label">Administracion</label>
-                                <asp:Button ID="Button1" class="btn btn-success" runat="server" />
-                            
-                                 <label class="col-md-2 control-label">Ingreso Facturas</label>
-                                <asp:Button ID="Button2" class="btn btn-success" runat="server" />
-
-                                 <label class="col-md-2 control-label">Control Activos</label>
-                                <asp:Button ID="Button3" class="btn btn-success" runat="server"/>
-
-                                 <label class="col-md-2 control-label">Requisiciones</label>
-                                <asp:Button ID="Button4" class="btn btn-success" runat="server" />
-
-                                 <label class="col-md-2 control-label">Devolucion/Baja Mercaderia</label>
-                                <asp:Button ID="Button5" class="btn btn-success" runat="server" />
-
-                                 <label class="col-md-2 control-label">Reportes</label>
-                                <asp:Button ID="Button6" class="btn btn-success" runat="server" />
-
-                                 <label class="col-md-2 control-label">Seguimiento Requisiciones</label>
-                                <asp:Button ID="Button7" class="btn btn-success" runat="server" />
+                                <div class="form-group2">                                    
+                                       <div class="LabelMenu"> <label class="col-md-4 control-label" >Administracion</label></div>
+                                       <div class="BotonMenu"> <asp:Button ID="Button1" class="btn btn-success" runat="server" Height="109px" Width="133px" /> </div>
+                                 </div>
+                                 <div class="form-group2">
+                                        <div class="LabelMenu"><label class="col-md-4 control-label" >Ingreso Facturas</label></div>
+                                        <div class="BotonMenu"> <asp:Button ID="Button2" class="btn btn-success" runat="server" Height="109px" Width="133px" />   </div> 
+                                 </div>
+                                 <div class="form-group2">
+                                       <div class="LabelMenu"> <label class="col-md-4 control-label" >Control Activos</label></div>
+                                       <div class="BotonMenu">  <asp:Button ID="Button3" class="btn btn-success" runat="server" Height="109px" Width="133px" /></div>
+                                 </div>   
                             </div>
-                        
-                       
-                        
-                       
-                        </div>
 
-                    </div>
-                           
+                                <div class="form-group">                                    
+                                        <div class="form-group2">
+                                            <div class="LabelMenu"> <label class="col-md-4 control-label" >Requisiciones</label></div>
+                                            <div class="BotonMenu"> <asp:Button ID="Button4" class="btn btn-success" runat="server" Height="109px" Width="133px" /> </div>
+                                        </div>
+
+                                       <div class="form-group2">
+                                           <div class="LabelMenu">  <label class="col-md-4 control-label" >Devolucion/Baja <br /> Mercaderia</label></div>
+                                           <div class="BotonMenu"> <asp:Button ID="Button5" class="btn btn-success" runat="server" Height="109px" Width="133px" /></div>
+                                       </div>
+
+                                       <div class="form-group2">
+                                           <div class="LabelMenu"> <label class="col-md-4 control-label" >Reportes</label></div>
+                                           <div class="BotonMenu"><asp:Button ID="Button6" class="btn btn-success" runat="server" Height="109px" Width="133px" /></div>
+                                       </div>                                                                          
+                               </div>
+                                    
+                                 <div class="form-group">
+                                     <div class="form-group2">
+                                         <div class="LabelMenu">
+                                            <label class="col-md-4 control-label">Seguimiento Requisiciones</label>
+                                         </div>
+                                         <div class="BotonMenu">
+                                            <asp:Button ID="Button7" class="btn btn-success" runat="server" Height="109px" Width="133px" />
+                                         </div>
+                                     </div>
+                                </div>
+                     </div>                          
         </form>
     </section>
 </body>
