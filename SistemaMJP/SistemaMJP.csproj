@@ -154,6 +154,7 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\MenuPrincipal.css" />
     <Content Include="Content\Ingreso.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css" />
@@ -164,6 +165,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\LOGO_MJP.png" />
+    <Content Include="MenuPrincipal.aspx" />
     <Content Include="Ingresar.aspx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -286,6 +288,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipal.aspx.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.aspx.designer.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ingresar.aspx.cs">
       <DependentUpon>Ingresar.aspx</DependentUpon>
