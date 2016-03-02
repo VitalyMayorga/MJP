@@ -23,7 +23,13 @@
     width:50%;
 }
 
+.msjErroneo {
+    color: #AD2020;
+    margin-left: 12px;
+}
+
 .BotonIngreso {
     text-align:center;
     margin-top:3%;
 }
+

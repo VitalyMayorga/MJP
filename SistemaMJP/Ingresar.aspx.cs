@@ -13,5 +13,10 @@ namespace SistemaMJP
         {
 
         }
+
+        protected Boolean login(String Usuario, String Contraseña) {
+            Boolean ingresa = false;
+            return ingresa;
+        }
     }
 }
