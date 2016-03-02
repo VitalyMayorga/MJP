@@ -4,48 +4,26 @@
 
 .Panel-Ingreso {
     display:table;
+    width:45%;
     margin: 0 auto;
 }
 
 .ImagenIngreso{
     display:block;
     width:225px;
-    margin: 0 auto;
+    margin: 5% auto;
 }
 
-/*.input-txt {
-  width: 50%;
-  padding: 20px 10px;
-  background: #EAF0F5;
-  border: solid;
-  font-size: 1em;
-  color: white;
-  border-bottom: 1px dotted rgba(250, 250, 250, 0.4);
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -moz-transition: background-color 0.5s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out;
-  -webkit-transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 10px;
-}*/
-.input-txt{
-    display: block;
-    width: 50%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+.Titulo {
+    text-align:center;
+    color: #27426B;
+}
+
+.form-control {
+    width:50%;
+}
+
+.BotonIngreso {
+    text-align:center;
+    margin-top:3%;
 }
