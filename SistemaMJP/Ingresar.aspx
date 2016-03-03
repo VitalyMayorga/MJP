@@ -8,66 +8,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="Content/Ingreso.css" />
     <script src="/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
-    <script type="text/javascript">
-
+   
+    <script>
         $(document).ready(function () {
-            $('#btnIngresar').click(function (event) {
-                var usuario = $("#txtUsuario").val();
-                var contraseña = $("#txtContraseña").val();
-                contraseña = contraseña.replace = (/\s+/g, '');
-                usuario = usuario.replace(/\s+/g, '');
-                if (usuario == "") {
-                    $("#MsjErrorUsuario").css('display', 'block');
-                    event.preventDefault();
-                }
-                else if (contraseña == "") {
-                    $("#MsjErrorContraseña").css('display', 'block');
-                    event.preventDefault();
-                }
-                else {
-                    $.ajax({
-                        type: "POST",
-                        url: "Ingresar.aspx/login",
-                        data: {
-                            Usuario: usuario,
-                            Contraseña: contraseña
-                        },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            
-                        },
-                        failure: function(data){
-                            $("#MsjErrorLogin").css('display', 'block');
-                            event.preventDefault();
-                        }
-                    });
-
-                }
-                //alert("Funciona la alerta ;D");
+            $("#txtUsuario").keydown(function () {
+                $("#MsjErrorUsuario").css('display', 'none');
+                $("#MsjErrorLogin").css('display', 'none');
             });
 
-        });
-
-    </script>
-    <script>
-        $("#txtUsuario").keyup(function (event) {
-            $("#MsjErrorUsuario").css('display', 'none');
-        });
-
-        $("#txtContraseña").keyup(function () {
-            $("#MsjErrorContraseña").css('display', 'none');
+            $("#txtContraseña").keydown(function () {
+                $("#MsjErrorContraseña").css('display', 'none');
+                $("#MsjErrorLogin").css('display', 'none');
+            });
         });
     </script>
-   <%-- <script>
-        $("#txtUsuario").keyup(function (event) {
-            $("#MsjErrorUsuario").css('display', 'none');
-        });
-
-        $("#txtContraseña").keyup(function () {
-            $("#MsjErrorContraseña").css('display', 'none');
-        });
-    </script>--%>
+    
     <title>Inicio de Sesión</title>
 
 </head>
@@ -93,8 +48,8 @@
                         <asp:TextBox ID="txtUsuario" runat="server" placeholder="Usuario" class="form-control"></asp:TextBox>
                     </div>
                 </div>
-                <div <%--style="display: none;"--%> id="MsjErrorUsuario" class="col-md-offset-4">
-                    <p class="msjErroneo">Debe ingresar un usuario</p>
+                <div style="display: none;" id="MsjErrorUsuario" class="col-md-offset-4" runat="server">
+                    <label class="msjErroneo">Debe ingresar un usuario</label>
                 </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label">Contraseña</label>
@@ -103,18 +58,18 @@
                         <asp:TextBox ID="txtContraseña" TextMode="Password" runat="server" placeholder="Contraseña" class="form-control"></asp:TextBox>
                     </div>
                 </div>
-                <div style="display: none;" id="MsjErrorContraseña" class="col-md-offset-4">
-                    <label class="labelError">Debe ingresar una contraseña</label>
+                <div style="display: none;" id="MsjErrorContraseña" class="col-md-offset-4" runat="server">
+                    <label class="msjErroneo">Debe ingresar una contraseña</label>
                 </div>
                 <div class="col-md-offset-5">
                     <a>Olvidé la contraseña</a>
                 </div>
-                <div style="display: none;" id="MsjErrorLogin" class="col-md-offset-5">
-                    <label class="labelError">Usuario/Contraseña inválidos</label>
+                <div style="display: none;" id="MsjErrorLogin" class="col-md-offset-4" runat="server">
+                    <label class="msjErroneo2">Usuario/Contraseña inválidos</label>
                 </div>
                 <div class="col-md-offset-1 col-md-10">
                     <div class="BotonIngreso">
-                        <asp:Button ID="btnIngresar" class="btn btn-default" runat="server" Text="Ingresar" />
+                        <asp:Button ID="btnIngresar" class="btn btn-default" runat="server" Text="Ingresar" OnClick="login" />
                     </div>
 
                 </div>
