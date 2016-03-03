@@ -36,12 +36,13 @@ namespace SistemaMJP
             
             else if (servicio.Autenticar(usuario,contraseña))
             {
-                Response.Redirect("Default.aspx");
+                Response.Redirect("MenuPrincipal.aspx");
             }
             else {
                 MsjErrorLogin.Style.Add("display", "block");
                 MsjErrorContraseña.Style.Add("display", "none");
                 MsjErrorUsuario.Style.Add("display", "none");
+                
             }
             
         }
