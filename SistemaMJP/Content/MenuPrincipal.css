@@ -1,0 +1,39 @@
+﻿body {
+    background-color: white;
+}
+
+.Panel-Principal {
+    display:table;
+    width:45%;
+    margin: 0 auto;
+}
+.container {
+    text-align: center;
+    background-color:blue;
+    margin: 0 auto;
+    margin-bottom:2%;
+}
+
+.form-group {
+    text-align:center;    
+}
+.form-group2 {
+     display: inline-block;
+     margin-left:5%;
+     margin-right:5%;
+     margin-top:4%;
+}
+
+.LabelMenu {
+    text-align:center;
+    margin-top:4%; 
+    color: #27426B;  
+    font-weight: bold;
+    font-size: 18px; 
+}
+
+.BotonMenu {
+    text-align:center;
+    margin-top:2%;
+    
+}
