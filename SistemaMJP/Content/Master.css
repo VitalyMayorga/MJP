@@ -1,0 +1,37 @@
+﻿body {
+}
+
+header{
+    background-color:blue;
+    color:gold;
+}
+
+p{
+    text-align:center;   
+    margin-bottom:1%; 
+}
+
+.first{
+    display:inline-block;
+}
+
+.float-left {
+    float: left;
+}
+
+.second {
+     margin-right:30%;
+}
+
+.float-right {
+    float: right;
+}
+
+.footer-content {
+    margin-top:2%;
+}
+
+.label {
+color:black;
+font-size:18px;
+}

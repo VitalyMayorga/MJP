@@ -1,25 +1,22 @@
-﻿<%@ Page Title="MenuPrincipal" Language="C#" AutoEventWireup="true" CodeBehind="MenuPrincipal.aspx.cs" Inherits="SistemaMJP.MenuPrincipal" %>
+﻿<%@ Page Title="MenuPrincipal" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MenuPrincipal.aspx.cs" Inherits="SistemaMJP.MenuPrincipal" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Menu Principal</title>
      <link rel="stylesheet" href="Content/reset.css">
      <%--<link rel="stylesheet" href="Content/style.css">--%>
     <link rel="stylesheet" href="css/boostrap.css"/>
     <link rel="stylesheet" href="Content/MenuPrincipal.css" />
-</head>
-<body>
-     <header style="background-color:blue;"></header>
-    <section>
-        <form id="form1" runat="server">
+</asp:Content>
+
+
+            <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
             <asp:ScriptManager runat="server" />
 
                     <div class="Panel-Princiapl">
           
                         <div class ="container">
-                              <h1 class="Titulo">Menu Principal</h1>
+                              <h1 class="titulo" >Menu Principal</h1>
+                            <hr/>
                          </div>
 
                             <div class="form-group">
@@ -98,8 +95,6 @@
                                          </div>
                                      </div>
                                 </div>
-                     </div>                          
-        </form>
-    </section>
-</body>
-</html>
+                     </div>    
+            </asp:Content>                      
+

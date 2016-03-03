@@ -1,0 +1,47 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.Master.cs" Inherits="SistemaMJP.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="Content/Master.css"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <header>
+            <div class="content-wrapper">
+                <div class="first second">                    
+                        <a runat="server" href="~/">
+                        <img src="/Images/LOGO_MJP.png" style="width: 100px" title="ImagenHeader"/></a> 
+               </div>
+
+                <div class="first"><p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
+                <p style="font-size:20px" >Republica de Costa Rica</p></div>
+
+            </div>
+                <br/>
+                <div class="float-right">
+                    <!-- info de usuario -->
+                    <asp:Label class="label" runat="server" ID="nombreLabel">Nombre Usuario:</asp:Label>                
+                 </div>  
+        </header>
+
+    <div>
+        <asp:ContentPlaceHolder ID="BodyContent" runat="server">        
+        </asp:ContentPlaceHolder>
+    </div>
+
+    <div class="footer-content">           
+            <hr/>
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Sistema Control de Inventarios</p>
+            </footer>
+      </div>
+
+    </form>
+</body>
+</html>
