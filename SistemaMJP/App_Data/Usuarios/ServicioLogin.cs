@@ -16,6 +16,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         
         }
+        //Metodo que se encarga de revisar si el usuario puso la contraseña correcta
         public bool Autenticar(string usuario, string contraseña)
         {
             bool correcto = false;
