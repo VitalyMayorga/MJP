@@ -35,8 +35,14 @@ namespace SistemaMJP
             }
             
             else if (servicio.Autenticar(usuario,contraseña))
-            {
-                Session["correoInstitucional"] = txtUsuario.Text;
+            {//Se guardan los datos importantes del usuario logueado en la variable Session, para su posterior uso cuando sea necesario en el programa
+                Session["username"] = servicio.GetUsername(usuario);
+                Session["rol"] = servicio.GetRol(usuario);
+                if (!Session["rol"].Equals("AdminGeneral")) {//Solo el AdminGeneral no posee bodegas ni programas presupuestarios, ya que su labor es crear cuentas
+                    Session["programas"] = servicio.GetProgramasPresupuestarios(usuario);
+                    Session["bodegas"] = servicio.GetBodegas(usuario);
+                }
+                Session["correoInstitucional"] = usuario;
                 Response.Redirect("MenuPrincipal.aspx");
             }
             else {

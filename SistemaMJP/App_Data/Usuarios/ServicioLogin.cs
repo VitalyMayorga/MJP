@@ -77,32 +77,137 @@ namespace SistemaMJP
         public string GetUsername(string correo)
         {
            string nombre = "";
-           
             try
             {
-                SqlDataAdapter MyDataAdapter = new SqlDataAdapter("P_Username", con);
-                MyDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                //Se asigan los parametros
-                MyDataAdapter.SelectCommand.Parameters.Add(new SqlParameter("@correo", SqlDbType.VarChar)).Value = (correo).Trim();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Username";
+                cmd.Parameters.AddWithValue("@correo", correo);
                 con.Open();
-                //Create a new DataSet to hold the records.
-                DataSet ds = new DataSet();
-
-                //Fill the DataSet with the rows that are returned.
-                MyDataAdapter.Fill(ds, "Username");
-                MyDataAdapter.Dispose(); //Dispose the DataAdapter.
-                con.Close(); //Close the connection.
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    nombre = (string)ds.Tables[0].Rows[0]["nombreUsuario"];
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                while (reader.Read()) {
+                    nombre += reader.GetString(0) + " " + reader.GetString(1); 
+                
                 }
-            }
-            catch (Exception e)
-            {
+                reader.Close();
+                con.Close();
+                //SqlDataAdapter MyDataAdapter = new SqlDataAdapter("P_Username", con);
+                //MyDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                ////Se asigan los parametros
+                //MyDataAdapter.SelectCommand.Parameters.Add(new SqlParameter("@correo", SqlDbType.VarChar)).Value = (correo).Trim();
+                //con.Open();
+                ////Create a new DataSet to hold the records.
+                //DataSet ds = new DataSet();
 
+                ////Fill the DataSet with the rows that are returned.
+                //MyDataAdapter.Fill(ds, "Username");
+                //MyDataAdapter.Dispose(); //Dispose the DataAdapter.
+                //con.Close(); //Close the connection.
+                //if (ds.Tables[0].Rows.Count > 0)
+                //{
+                //    nombre = (string)ds.Tables[0].Rows[0]["nombreUsuario"];
+                //}
+            }
+            catch (Exception)
+            {
+                throw;
             }
 
             return nombre;
+
+        }
+
+        //Metodo que se encarga de devolver el rol por medio del correoInstitucional
+        public string GetRol(string correo)
+        {
+            string nombre = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Rol";
+                cmd.Parameters.AddWithValue("@correo", correo);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nombre = reader.GetString(0);
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return nombre;
+
+        }
+
+        //Metodo que se encarga de devolver la lista de programas presupuestarios accesibles de un usuario, por medio del correoInstitucional
+        public List<string> GetProgramasPresupuestarios(string correo)
+        {
+            List<string> programas = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Programas_Presupuestarios_Usuario";
+                cmd.Parameters.AddWithValue("@correo", correo);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    programas.Add(reader.GetString(0));
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return programas;
+
+        }
+        //Metodo que se encarga de devolver la lista de bodegas accesibles de un usuario, por medio del correoInstitucional
+        public List<string> GetBodegas(string correo)
+        {
+            List<string> programas = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Bodegas_Usuario";
+                cmd.Parameters.AddWithValue("@correo", correo);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    programas.Add(reader.GetString(0));
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return programas;
 
         }
     }
