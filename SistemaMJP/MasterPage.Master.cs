@@ -9,14 +9,26 @@ namespace SistemaMJP
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
+        ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
+            string user = servicio.GetUsername((string)(Session["correoInstitucional"]));
+            if (user!=null)
+                {
+                    nombreLabel.Text = "Bienvenido "+user;
+                }
+                else
+                {
+                    nombreLabel.Text = "Bienvenido";
+                }
+            }
 
-        }
+
         protected void clickSalir(object sender, EventArgs e)//Desloguearse del Sistema
         {
-            Session["username"] = null;
+            Session["correoInstitucional"] = null;
             Response.Redirect("~/Ingresar.aspx");
         }
     }
+
 }

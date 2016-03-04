@@ -72,5 +72,38 @@ namespace SistemaMJP
             //Convertimos el arreglo de bytes a cadena.
             return Convert.ToBase64String(hash);
         }
+
+        //Metodo que se encarga de devolver el nombre de usuario por medio del correoInstitucional
+        public string GetUsername(string correo)
+        {
+           string nombre = "";
+           
+            try
+            {
+                SqlDataAdapter MyDataAdapter = new SqlDataAdapter("P_Username", con);
+                MyDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                //Se asigan los parametros
+                MyDataAdapter.SelectCommand.Parameters.Add(new SqlParameter("@correo", SqlDbType.VarChar)).Value = (correo).Trim();
+                con.Open();
+                //Create a new DataSet to hold the records.
+                DataSet ds = new DataSet();
+
+                //Fill the DataSet with the rows that are returned.
+                MyDataAdapter.Fill(ds, "Username");
+                MyDataAdapter.Dispose(); //Dispose the DataAdapter.
+                con.Close(); //Close the connection.
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    nombre = (string)ds.Tables[0].Rows[0]["nombreUsuario"];
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return nombre;
+
+        }
     }
 }

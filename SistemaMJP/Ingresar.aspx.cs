@@ -36,6 +36,7 @@ namespace SistemaMJP
             
             else if (servicio.Autenticar(usuario,contraseña))
             {
+                Session["correoInstitucional"] = txtUsuario.Text;
                 Response.Redirect("MenuPrincipal.aspx");
             }
             else {

@@ -24,7 +24,10 @@ p{
 }
 
 .float-right {
-    float: right;
+    background-color:white;
+    text-align:right;
+    padding-right:1%;
+    margin-bottom:0.5%;
 }
 
 .footer-content {

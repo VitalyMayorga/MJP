@@ -26,7 +26,8 @@
                 <br/>
                 <div class="float-right">
                     <!-- info de usuario -->
-                    <asp:Label class="label" runat="server" ID="nombreLabel">Nombre Usuario:</asp:Label>                
+                    <asp:Label class="label" runat="server" style="margin-right:0.5%" ID="nombreLabel"></asp:Label>
+                   <asp:LinkButton runat="server" OnClick="clickSalir" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Salir del sistema">Salir</asp:LinkButton>                 
                  </div>  
         </header>
 

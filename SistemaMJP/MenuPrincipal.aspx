@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Menu Principal</title>
-     <link rel="stylesheet" href="Content/reset.css">
+     <link rel="stylesheet" href="Content/reset.css"/>
      <%--<link rel="stylesheet" href="Content/style.css">--%>
     <link rel="stylesheet" href="css/boostrap.css"/>
     <link rel="stylesheet" href="Content/MenuPrincipal.css" />
