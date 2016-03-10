@@ -54,11 +54,10 @@
                 <p style="font-size:20px" >Republica de Costa Rica</p></div>
 
             </div>
-                <br/>
                 <div class="float-right">
                     <!-- info de usuario -->
-                    <asp:Label class="label" runat="server" style="margin-right:0.5%" ID="nombreLabel"></asp:Label>
-                   <asp:LinkButton runat="server" OnClick="clickSalir"  UseSubmitBehavior="false" ToolTip="Salir del sistema">Salir</asp:LinkButton>                 
+                    <asp:Label  runat="server" class="content-label" ID="nombreLabel" style="margin-right:8px"></asp:Label>
+                   <asp:LinkButton runat="server" OnClick="clickSalir"  UseSubmitBehavior="false" ToolTip="Salir del sistema" style="text-decoration:underline">Cerrar Sesión</asp:LinkButton>                 
                  </div>  
         </header>
         <div>

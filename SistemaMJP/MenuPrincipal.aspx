@@ -13,7 +13,7 @@
 
     <div class="Panel-Princiapl">
 
-        <div class="container">
+        <div>
             <h1 class="titulo">Menu Principal</h1>
             <hr />
         </div>
