@@ -6,12 +6,17 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Ministerio De Justicia y Paz</title>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
     <link href="Content/boostrap.min.css" rel="stylesheet" type="text/css" />
+    
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link rel="stylesheet" href="Content/Master.css"/>
+
 <%--    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
 
 </head>
@@ -38,31 +43,35 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <header style="color: blue">
+        <header>
             <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">
+                <div class="logo">                    
                         <a runat="server" href="~/">
-                            <img src="/Images/LOGO_MJP.png" style="width: 100px" title="Página principal"></a>
-                    </p>
-                </div>
+                        <img src="/Images/LOGO_MJP.png" style="width: 100px" title="ImagenHeader"/></a> 
+               </div>
+
+                <div class="tituloHead"><p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
+                <p style="font-size:20px" >Republica de Costa Rica</p></div>
+
+            </div>
+                <br/>
                 <div class="float-right">
                     <!-- info de usuario -->
-                    <asp:Label runat="server" ID="nombreLabel">Nombre Usuario</asp:Label>
-                    
-                    <asp:LinkButton runat="server" OnClick="clickSalir" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Salir del sistema"><i class="glyphicon glyphicon-log-out"></i></asp:LinkButton>
-                </div>
-                
-            </div>
+                    <asp:Label class="label" runat="server" style="margin-right:0.5%" ID="nombreLabel"></asp:Label>
+                   <asp:LinkButton runat="server" OnClick="clickSalir"  UseSubmitBehavior="false" ToolTip="Salir del sistema">Salir</asp:LinkButton>                 
+                 </div>  
         </header>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <hr />
+        <div>
+        <asp:ContentPlaceHolder ID="BodyContent" runat="server">        
+        </asp:ContentPlaceHolder>
+    </div>
+
+    <div class="footer-content">           
+            <hr/>
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Sistema Control de Inventarios</p>
             </footer>
-        </div>
+      </div>
     </form>
 </body>
 </html>

@@ -65,34 +65,30 @@ namespace SistemaMJP
                 }
             }
         }
-
+        ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ArrayList listaBodegas = (ArrayList)Session["Bodegas"];
-            //ArrayList listaPP = (ArrayList)Session["ProgramasPresupuestarios"];
-            //string rol = (string)Session["rol"];
-            //string nombre = (string)Session["Nombre"];
-            //string bodegas = "";
-            //string programas = "";
-            //foreach (object bodega in listaBodegas)
-            //{
-            //    bodegas += (string)bodega + ", ";
-            //}
-            //foreach (object programa in listaPP)
-            //{
-            //    programas += (string)programa + ", ";
-            //}
+            string user = servicio.GetUsername((string)(Session["correoInstitucional"]));
+            if (user != null)
+            {
+                nombreLabel.Text = "Bienvenido " + user;
+            }
+            else
+            {
+                nombreLabel.Text = "Bienvenido";
+            }
 
-            //if (!IsPostBack)
-            //{
-            //    this.InfoUsuario.Text = string.Format(nombre);
-            //}
+            
 
         }
 
         protected void clickSalir(object sender, EventArgs e)//Desloguearse del Sistema
         {
+            Session["correoInstitucional"] = null;
             Session["username"] = null;
+            Session["rol"] = null;
+            Session["programas"] = null;
+            Session["bodegas"] = null;
             Response.Redirect("~/Ingresar.aspx");
         }
 
