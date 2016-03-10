@@ -39,7 +39,7 @@
                         AlternateText="ImageButton 1"
                         ImageAlign="middle"
                         ImageUrl="http://blog.facturalegal.com/wp-content/uploads/2011/11/talonario1.jpg"
-                        PostBackUrl="http://localhost:62386/IngresoFacturas" />
+                        OnClick="ingresarFacturas" />
                 </div>
             </div>
             <div class="form-group2">

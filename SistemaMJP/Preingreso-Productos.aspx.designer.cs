@@ -19,7 +19,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListaBodegas;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaBodegas;
         
         /// <summary>
         /// MsjErrorBodega control.
@@ -37,7 +37,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListaProgramas;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaProgramas;
         
         /// <summary>
         /// MsjsErrorPrograma control.
@@ -64,7 +64,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListaSubBodegas;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaSubBodegas;
         
         /// <summary>
         /// MsjErrorSubBodega control.

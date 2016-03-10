@@ -14,7 +14,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label">Ubicación</label>
             <div class="col-md-8">
-                <asp:DropDownList ID="ListaBodegas" runat="server" class="form-control"></asp:DropDownList>
+                <select ID="ListaBodegas" runat="server" class="dropdown"></select>
 
             </div>
             <div style="display: none;" id="MsjErrorBodega" class="col-md-offset-4" runat="server">
@@ -24,7 +24,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label">Programa Presupuestario</label>
             <div class="col-md-8">
-                <asp:DropDownList ID="ListaProgramas" runat="server" class="form-control"></asp:DropDownList>
+                <select ID="ListaProgramas" runat="server" class="dropdown"></select>
 
             </div>
             <div style="display: none;" id="MsjsErrorPrograma" class="col-md-offset-4" runat="server">
@@ -34,7 +34,7 @@
         <div class="form-group" id="Subbodega" style="display: none;" runat="server">
             <label class="col-md-4 control-label">Departamento</label>
             <div class="col-md-8">
-                <asp:DropDownList ID="ListaSubBodegas" runat="server" class="form-control"></asp:DropDownList>
+                <select ID="ListaSubBodegas" runat="server" class="dropdown"></select>
 
             </div>
             <div style="display: none;" id="MsjErrorSubBodega" class="col-md-offset-4" runat="server">

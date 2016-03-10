@@ -50,7 +50,9 @@
                         <img src="/Images/LOGO_MJP.png" style="width: 100px" title="ImagenHeader"/></a> 
                </div>
 
-                <div class="tituloHead"><p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
+                <div class>
+                    
+                    <p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
                 <p style="font-size:20px" >Republica de Costa Rica</p></div>
 
             </div>

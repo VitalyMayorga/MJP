@@ -13,5 +13,10 @@ namespace SistemaMJP
         {
 
         }
+
+        protected void ingresarFacturas(object sender, EventArgs e)
+        {
+            Response.Redirect("Preingreso-Productos");
+        }
     }
 }

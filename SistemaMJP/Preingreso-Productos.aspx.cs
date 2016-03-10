@@ -11,6 +11,21 @@ namespace SistemaMJP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack) {
+                llenarDatos();
+            }
+        }
+
+        protected void aceptar(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void llenarDatos()
+        {
+            ListaBodegas.Items.Add("---Elija una bodega---");
+            ListaProgramas.Items.Add("---Elija un Programa---");
+            ListaSubBodegas.Items.Add("---Elija un Departamento---");
 
         }
     }
