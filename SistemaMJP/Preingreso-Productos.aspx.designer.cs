@@ -40,13 +40,13 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlSelect ListaProgramas;
         
         /// <summary>
-        /// MsjsErrorPrograma control.
+        /// MsjErrorPrograma control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjsErrorPrograma;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorPrograma;
         
         /// <summary>
         /// Subbodega control.
@@ -103,21 +103,30 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton IngresoFactura;
         
         /// <summary>
-        /// MercaderiaInicial control.
+        /// InventarioInicial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton MercaderiaInicial;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton InventarioInicial;
         
         /// <summary>
-        /// btnAceptar control.
+        /// txtNumFactura control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        protected global::System.Web.UI.WebControls.TextBox txtNumFactura;
+        
+        /// <summary>
+        /// MsjErrorFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFactura;
     }
 }

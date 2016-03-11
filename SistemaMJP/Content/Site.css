@@ -40,4 +40,16 @@ input[type="password"] {
     position:absolute;
 }
 
+.cmbsize {
+    max-width:280px;
+}
 
+.msjErroneo {
+    color: #AD2020;
+    margin-left: 12px;
+}
+
+.msjErroneo2 {
+    color: #AD2020;
+    margin-top: 3%;
+}
