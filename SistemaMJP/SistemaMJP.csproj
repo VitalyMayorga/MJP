@@ -152,7 +152,9 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Administracion.aspx" />
+    <Content Include="Bodegas.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\Bodegas.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
@@ -168,7 +170,14 @@
     <Content Include="ControlActivos.aspx" />
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\admin.png" />
+    <Content Include="Images\check.jpg" />
+    <Content Include="Images\devolucion.jpg" />
+    <Content Include="Images\facturas.jpg" />
     <Content Include="Images\LOGO_MJP.png" />
+    <Content Include="Images\reportes.jpg" />
+    <Content Include="Images\requisicion.png" />
+    <Content Include="Images\seguimiento.png" />
     <Content Include="Ingresar.aspx" />
     <Content Include="IngresoFacturas.aspx" />
     <Content Include="MenuPrincipal.aspx" />
@@ -275,6 +284,7 @@
     <Compile Include="Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Bodegas\ServicioBodegas.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -285,6 +295,13 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Bodegas.aspx.cs">
+      <DependentUpon>Bodegas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bodegas.aspx.designer.cs">
+      <DependentUpon>Bodegas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

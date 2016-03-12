@@ -26,7 +26,7 @@
                                             <asp:ImageButton id="imagebutton1" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="http://botanicalgardens.penang.gov.my/images/images/adun.png"
+                                               ImageUrl="/Images/admin.png"
                                                PostBackUrl="http://localhost:62386/Administracion"/>
                                         </div> 
                                          <%--   <asp:Button ID="Button1" class="btn btn-success" runat="server" Height="109px" Width="133px" /> --%>                                 
@@ -36,7 +36,7 @@
                                         <div class="BotonMenu"> <asp:ImageButton id="imagebutton2" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="http://blog.facturalegal.com/wp-content/uploads/2011/11/talonario1.jpg"
+                                               ImageUrl="/Images/facturas.jpg"
                                              PostBackUrl="http://localhost:62386/IngresoFacturas"/>
                                         </div> 
                                  </div>
@@ -46,7 +46,7 @@
                                            <asp:ImageButton id="imagebutton3" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="http://4.bp.blogspot.com/-zHl3ZnPfUew/Vl3jK5-2L6I/AAAAAAAAEUc/dcg5GKwlm5Y/s200/The-Parts-of-a-Usability-Test-Plan.jpg"
+                                               ImageUrl="/Images/check.jpg"
                                                 PostBackUrl="http://localhost:62386/ControlActivos"/>
                                        </div>
                                  </div>   
@@ -58,7 +58,7 @@
                                             <div class="BotonMenu"> <asp:ImageButton id="imagebutton4" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="http://site.b2bservicios.com/imagenes/REQUISICION.png"
+                                               ImageUrl="/Images/requisicion.png"
                                                  PostBackUrl="http://localhost:62386/Requisiciones"/> </div>
                                         </div>
 
@@ -67,7 +67,7 @@
                                            <div class="BotonMenu"> <asp:ImageButton id="imagebutton5" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="http://www.todojuguete.es/imagenes/b2b/post-venta.jpg"
+                                               ImageUrl="/Images/devolucion.jpg"
                                                 PostBackUrl="http://localhost:62386/DevolucionBajas"/></div>
                                        </div>
 
@@ -76,7 +76,7 @@
                                            <div class="BotonMenu"><asp:ImageButton id="imagebutton6" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="https://vencoasesores.files.wordpress.com/2014/11/reporte-comercial-imagen.jpg"
+                                               ImageUrl="/Images/reportes.jpg"
                                                 PostBackUrl="http://localhost:62386/Reportes"/></div>
                                        </div>                                                                          
                                </div>
@@ -90,7 +90,7 @@
                                             <asp:ImageButton id="imagebutton7" class="btn btn-success" runat="server" Height="109px" Width="133px"
                                                AlternateText="ImageButton 1"
                                                ImageAlign="middle"
-                                               ImageUrl="http://osmoscloud.com/img/home_components/home_0003s_0005s_0000_graphic_7.png"
+                                               ImageUrl="/Images/seguimiento.png"
                                                PostBackUrl="http://localhost:62386/Seguimiento"/>
                                          </div>
                                      </div>

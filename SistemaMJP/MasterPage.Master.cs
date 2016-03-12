@@ -27,6 +27,10 @@ namespace SistemaMJP
         protected void clickSalir(object sender, EventArgs e)//Desloguearse del Sistema
         {
             Session["correoInstitucional"] = null;
+            Session["programas"] = null;
+            Session["bodegas"] = null;
+            Session["username"] = null;
+            Session["rol"] = null;
             Response.Redirect("~/Ingresar.aspx");
         }
     }

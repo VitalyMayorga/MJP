@@ -1,5 +1,6 @@
-﻿body {
+﻿html, body {
     background-color: white;
+    text-align: center;
 }
 
 .Panel-Principal {

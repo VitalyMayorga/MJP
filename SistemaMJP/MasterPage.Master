@@ -13,16 +13,16 @@
     <form id="form1" runat="server">
 
         <header>
-            <div class="content-wrapper">
+                        
                 <div class="first second">                    
                         <a runat="server" href="~/">
-                        <img src="/Images/LOGO_MJP.png" style="width: 100px" title="ImagenHeader"/></a> 
+                        <img src="/Images/LOGO_MJP.png" style="width: 115px" title="ImagenHeader"/></a> 
                </div>
 
-                <div class="first"><p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
-                <p style="font-size:20px" >Republica de Costa Rica</p></div>
+               <p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
+               <p style="font-size:25px" >Republica de Costa Rica</p>
 
-            </div>
+            
                 <br/>
                 <div class="float-right">
                     <!-- info de usuario -->
