@@ -4,7 +4,7 @@
     <title>Menu Principal</title>
     <link rel="stylesheet" href="Content/reset.css" />
     <%--<link rel="stylesheet" href="Content/style.css">--%>
-    <link rel="stylesheet" href="css/boostrap.css" />
+    <link rel="stylesheet" href="Content/boostrap.css" />
     <link rel="stylesheet" href="Content/MenuPrincipal.css" />
 </asp:Content>
 

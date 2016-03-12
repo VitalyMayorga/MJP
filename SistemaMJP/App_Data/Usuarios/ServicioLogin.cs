@@ -29,13 +29,6 @@ namespace SistemaMJP
                 MyDataAdapter.SelectCommand.Parameters.Add(new SqlParameter("@usuario", SqlDbType.VarChar)).Value = (usuario).Trim();
                 MyDataAdapter.SelectCommand.Parameters.Add(new SqlParameter("@contraseña", SqlDbType.VarChar)).Value = (hash);
 
-                ////Create and add an output parameter to the Parameters collection. 
-                //MyDataAdapter.SelectCommand.Parameters.Add(new SqlParameter("@RowCount", SqlDbType.Int, 4));
-
-                ////Set the direction for the parameter. This parameter returns the Rows that are returned.
-                //MyDataAdapter.SelectCommand.Parameters["@RowCount"].Direction = ParameterDirection.Output;
-                con.Open();
-                //Create a new DataSet to hold the records.
                 DataSet ds = new DataSet();
 
                 //Fill the DataSet with the rows that are returned.
@@ -45,11 +38,7 @@ namespace SistemaMJP
                 if (ds.Tables[0].Rows.Count > 0) {
                     correcto = true;
                 }
-                //Declaramos la sentencia SQL
-                //string sql = "SELECT COUNT(*) FROM Usuario WHERE Username = '" + usuario + "' AND Contrasena = '" + hash + "'";
-                //DataTable dt = adaptadorBD.consultar(sql);
-                //if (int.Parse(dt.Rows[0][0].ToString()) == 0) { return false; }
-                //else { return true; }
+                
             }
             catch (Exception e) { 
             

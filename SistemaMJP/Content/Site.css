@@ -1,7 +1,15 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    
 }
+
+html, body, #container {
+    height: 100%;
+}
+
+    body > #container {
+        height: auto;
+        min-height: 100%;
+    }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -21,6 +29,7 @@ input[type="password"] {
     .jumbotron {
         margin-top: 20px;
     }
+
     .body-content {
         padding: 0;
     }
@@ -28,7 +37,6 @@ input[type="password"] {
 
 .float-left {
     float: left;
-    
 }
 
 .float-right {
@@ -36,12 +44,12 @@ input[type="password"] {
 }
 
 .logo {
-    float:left;
-    position:absolute;
+    float: left;
+    position: absolute;
 }
 
 .cmbsize {
-    max-width:280px;
+    max-width: 280px;
 }
 
 .msjErroneo {
@@ -52,4 +60,46 @@ input[type="password"] {
 .msjErroneo2 {
     color: #AD2020;
     margin-top: 3%;
+}
+
+.perfil {
+    color: black;
+}
+
+    .perfil:hover {
+        text-decoration: underline;
+    }
+
+.Encabezado {
+    color: #27426B;
+    margin-left: 3%;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 800px) {
+    .logo {
+        position: relative;
+    }
+}
+
+.alinearDerecha {
+    text-align: right;
+}
+
+@media screen and (max-width: 992px) {
+    .alinearDerecha {
+        text-align: left;
+    }
+}
+
+#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+}
+
+#content {
+    padding-bottom: 3em;
 }

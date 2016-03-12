@@ -92,6 +92,10 @@ namespace SistemaMJP
             Response.Redirect("~/Ingresar.aspx");
         }
 
+        protected void perfilUsuario(object sender, EventArgs e)//Desloguearse del Sistema
+        {
+            Response.Redirect("~/PerfilUsuario.aspx");
+        }
         //protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         //{
         //    Context.GetOwinContext().Authentication.SignOut();

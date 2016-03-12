@@ -10,15 +10,16 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Content/boostrap.min.css" rel="stylesheet" type="text/css" />
-    
+
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link rel="stylesheet" href="Content/Master.css"/>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link rel="stylesheet" href="Content/Master.css" />
+    <script src="/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
 
-<%--    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
-
+    <script src="Scripts/mjp.js" type="text/javascript"></script>
+    <%--    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
 </head>
 <body>
     <form runat="server">
@@ -42,37 +43,36 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+        <div id="container">
+            <div id="content">
+                <header>
+                    <div class="content-wrapper">
+                        <div class="logo">
+                            <img src="/Images/LOGO_MJP.png" style="width: 100px" title="Ministerio de Justicia y Paz" />
+                        </div>
 
-        <header>
-            <div class="content-wrapper">
-                <div class="logo">                    
-                        <a runat="server" href="~/">
-                        <img src="/Images/LOGO_MJP.png" style="width: 100px" title="ImagenHeader"/></a> 
-               </div>
+                        <div>
 
-                <div class>
-                    
-                    <p style="font-size:40px">MINISTERIO DE JUSTICIA Y PAZ</p>
-                <p style="font-size:20px" >Republica de Costa Rica</p></div>
+                            <p style="font-size: 40px">MINISTERIO DE JUSTICIA Y PAZ</p>
+                            <p style="font-size: 20px">República de Costa Rica</p>
+                        </div>
 
+                    </div>
+                    <div class="float-right">
+                        <!-- info de usuario -->
+                        <asp:LinkButton runat="server" OnClick="perfilUsuario" class="content-label perfil" ID="nombreLabel" Style="margin-right: 8px"></asp:LinkButton>
+                        <asp:LinkButton runat="server" OnClick="clickSalir" UseSubmitBehavior="false" ToolTip="Salir del sistema" Style="text-decoration: underline">Cerrar Sesión</asp:LinkButton>
+                    </div>
+                </header>
+
+                <asp:ContentPlaceHolder ID="BodyContent" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
-                <div class="float-right">
-                    <!-- info de usuario -->
-                    <asp:Label  runat="server" class="content-label" ID="nombreLabel" style="margin-right:8px"></asp:Label>
-                   <asp:LinkButton runat="server" OnClick="clickSalir"  UseSubmitBehavior="false" ToolTip="Salir del sistema" style="text-decoration:underline">Cerrar Sesión</asp:LinkButton>                 
-                 </div>  
-        </header>
-        <div>
-        <asp:ContentPlaceHolder ID="BodyContent" runat="server">        
-        </asp:ContentPlaceHolder>
-    </div>
+        </div>
+        <div id="footer" class="footer-content">
+            <p>&copy; <%: DateTime.Now.Year %> - Sistema Control de Inventarios</p>
 
-    <div class="footer-content">           
-            <hr/>
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Sistema Control de Inventarios</p>
-            </footer>
-      </div>
+        </div>
     </form>
 </body>
 </html>

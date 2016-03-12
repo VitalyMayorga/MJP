@@ -182,6 +182,7 @@
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="PerfilUsuario.aspx" />
     <Content Include="Preingreso-Productos.aspx" />
     <Content Include="Reportes.aspx" />
     <Content Include="Requisiciones.aspx" />
@@ -189,6 +190,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\mjp.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -300,6 +302,12 @@
     <Compile Include="ControlActivos.aspx.designer.cs">
       <DependentUpon>ControlActivos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Productos\ControladoraBDProductos.cs" />
+    <Compile Include="App_Data\Productos\ControladoraProductos.cs" />
+    <Compile Include="App_Data\Bodegas\ControladoraBDBodegas.cs" />
+    <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraBDProgramasPresupeustarios.cs" />
+    <Compile Include="App_Data\Bodegas\ControladoraBodegas.cs" />
+    <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraProgramasPresupuestarios.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -314,6 +322,7 @@
     <Compile Include="DevolucionBajas.aspx.designer.cs">
       <DependentUpon>DevolucionBajas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Productos\EntidadProductos.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -339,6 +348,13 @@
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="PerfilUsuario.aspx.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PerfilUsuario.aspx.designer.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Preingreso-Productos.aspx.cs">
       <DependentUpon>Preingreso-Productos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

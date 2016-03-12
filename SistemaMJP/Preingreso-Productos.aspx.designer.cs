@@ -37,7 +37,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaProgramas;
+        protected global::System.Web.UI.WebControls.DropDownList ListaProgramas;
         
         /// <summary>
         /// MsjErrorPrograma control.
@@ -82,8 +82,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSubPartida;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaSubPartidas;
         /// <summary>
         /// MsjErrorSubPartida control.
         /// </summary>
@@ -101,6 +100,9 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton IngresoFactura;
+
+        protected global::System.Web.UI.WebControls.RadioButton ingresoF;
+        protected global::System.Web.UI.WebControls.RadioButton mercaderiaI;
         
         /// <summary>
         /// InventarioInicial control.
@@ -128,5 +130,7 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFactura;
+
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturas;
     }
 }

@@ -6,6 +6,7 @@
 <head runat="server">
     <link rel="stylesheet" href="Content/css/bootstrap.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <link rel="stylesheet" href="Content/Site.css" />
     <link rel="stylesheet" href="Content/Ingreso.css" />
     <script src="/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
    

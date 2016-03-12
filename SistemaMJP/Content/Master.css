@@ -34,11 +34,13 @@ p{
     color: black;
 }
 
-.footer-content {
-    margin-top:2%;
+.footer-content {    
+    border-top-width:2px;
+    border-top-color:black;
 }
 
 .label {
 color:black;
 font-size:18px;
 }
+
