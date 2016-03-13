@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 ﻿html, body { margin: 0; padding: 0; }
+=======
+﻿body {
+    padding-top:0px;
+}
+>>>>>>> origin/master
 
 header{
     background-color:blue;
     color:gold;
+    margin-bottom:15px;
+    padding-bottom: 20px;
 }
 
 p{
@@ -23,17 +31,20 @@ p{
 }
 
 .float-right {
-    background-color:white;
-    text-align:right;
-    padding-right:1%;
-    margin-bottom:0.5%;
+    width: 100%;
+    background-color: white;
+    text-align: right;
+    padding-right: 1%;
+    color: black;
 }
 
-.footer-content {
-    margin-top:2%;
+.footer-content {    
+    border-top-width:2px;
+    border-top-color:black;
 }
 
 .label {
 color:black;
 font-size:18px;
 }
+
