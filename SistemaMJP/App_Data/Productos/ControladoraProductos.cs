@@ -17,6 +17,7 @@ namespace SistemaMJP
         internal List<string> getProgramas() {
             return controladoraPP.getProgramas();
         }
+
         //Llama a la controladora de Bodegas para retornar la lista de subbodegas del programa
         internal List<string> getSubBodegas(string programa,string bodega)
         {

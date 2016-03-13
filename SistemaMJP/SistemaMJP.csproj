@@ -171,12 +171,14 @@
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\admin.png" />
+    <Content Include="Images\bodega.png" />
     <Content Include="Images\check.jpg" />
     <Content Include="Images\devolucion.jpg" />
     <Content Include="Images\facturas.jpg" />
     <Content Include="Images\LOGO_MJP.png" />
     <Content Include="Images\reportes.jpg" />
     <Content Include="Images\requisicion.png" />
+    <Content Include="Images\rolesperfiles.png" />
     <Content Include="Images\seguimiento.png" />
     <Content Include="Ingresar.aspx" />
     <Content Include="IngresoFacturas.aspx" />
@@ -287,7 +289,6 @@
     <Compile Include="Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\Bodegas\ServicioBodegas.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

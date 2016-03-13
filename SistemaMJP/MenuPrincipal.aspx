@@ -13,86 +13,6 @@
 
     <div class="Panel-Princiapl">
 
-<<<<<<< HEAD
-                            <div class="form-group">
-                                <div class="form-group2">                                    
-                                       <div class="LabelMenu"> <label class="col-md-4 control-label" >Administracion</label></div>
-                                       <div class="BotonMenu">
-                                            <asp:ImageButton id="imagebutton1" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/admin.png"
-                                               PostBackUrl="http://localhost:62386/Administracion"/>
-                                        </div> 
-                                         <%--   <asp:Button ID="Button1" class="btn btn-success" runat="server" Height="109px" Width="133px" /> --%>                                 
-                                </div>
-                                 <div class="form-group2">
-                                        <div class="LabelMenu"><label class="col-md-4 control-label" >Ingreso Facturas</label></div>
-                                        <div class="BotonMenu"> <asp:ImageButton id="imagebutton2" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/facturas.jpg"
-                                             PostBackUrl="http://localhost:62386/IngresoFacturas"/>
-                                        </div> 
-                                 </div>
-                                 <div class="form-group2">
-                                       <div class="LabelMenu"> <label class="col-md-4 control-label" >Control Activos</label></div>
-                                       <div class="BotonMenu">
-                                           <asp:ImageButton id="imagebutton3" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/check.jpg"
-                                                PostBackUrl="http://localhost:62386/ControlActivos"/>
-                                       </div>
-                                 </div>   
-                            </div>
-
-                                <div class="form-group">                                    
-                                        <div class="form-group2">
-                                            <div class="LabelMenu"> <label class="col-md-4 control-label" >Requisiciones</label></div>
-                                            <div class="BotonMenu"> <asp:ImageButton id="imagebutton4" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/requisicion.png"
-                                                 PostBackUrl="http://localhost:62386/Requisiciones"/> </div>
-                                        </div>
-
-                                       <div class="form-group2">
-                                           <div class="LabelMenu">  <label class="col-md-4 control-label" >Devolucion/Baja <br /> Mercaderia</label></div>
-                                           <div class="BotonMenu"> <asp:ImageButton id="imagebutton5" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/devolucion.jpg"
-                                                PostBackUrl="http://localhost:62386/DevolucionBajas"/></div>
-                                       </div>
-
-                                       <div class="form-group2">
-                                           <div class="LabelMenu"> <label class="col-md-4 control-label" >Reportes</label></div>
-                                           <div class="BotonMenu"><asp:ImageButton id="imagebutton6" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/reportes.jpg"
-                                                PostBackUrl="http://localhost:62386/Reportes"/></div>
-                                       </div>                                                                          
-                               </div>
-                                    
-                                 <div class="form-group">
-                                     <div class="form-group2">
-                                         <div class="LabelMenu">
-                                            <label class="col-md-4 control-label">Seguimiento Requisiciones</label>
-                                         </div>
-                                         <div class="BotonMenu">
-                                            <asp:ImageButton id="imagebutton7" class="btn btn-success" runat="server" Height="109px" Width="133px"
-                                               AlternateText="ImageButton 1"
-                                               ImageAlign="middle"
-                                               ImageUrl="/Images/seguimiento.png"
-                                               PostBackUrl="http://localhost:62386/Seguimiento"/>
-                                         </div>
-                                     </div>
-                                </div>
-                     </div>    
-            </asp:Content>                      
-=======
         <div>
             <h1 class="titulo">Menu Principal</h1>
             <hr />
@@ -104,9 +24,9 @@
                     <label class="control-label">Administracion</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton1" runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Administracion"
                         ImageAlign="middle"
-                        ImageUrl="http://botanicalgardens.penang.gov.my/images/images/adun.png"
+                        ImageUrl="/Images/admin.png"
                         PostBackUrl="http://localhost:62386/Administracion" />
                 </div>
                 <%--   <asp:Button ID="Button1" class="btn btn-success" runat="server" Height="109px" Width="133px" /> --%>
@@ -116,9 +36,9 @@
                     <label class="control-label">Ingreso Facturas</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton2" runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Facturas"
                         ImageAlign="middle"
-                        ImageUrl="http://blog.facturalegal.com/wp-content/uploads/2011/11/talonario1.jpg"
+                        ImageUrl="/Images/facturas.jpg"
                         OnClick="ingresarFacturas" />
                 </div>
             </div>
@@ -127,9 +47,9 @@
                     <label class="control-label">Control Activos</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton3" runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Activos"
                         ImageAlign="middle"
-                        ImageUrl="http://4.bp.blogspot.com/-zHl3ZnPfUew/Vl3jK5-2L6I/AAAAAAAAEUc/dcg5GKwlm5Y/s200/The-Parts-of-a-Usability-Test-Plan.jpg"
+                        ImageUrl="/Images/check.jpg"
                         PostBackUrl="http://localhost:62386/ControlActivos" />
                 </div>
             </div>
@@ -141,9 +61,9 @@
                     <label class="control-label">Requisiciones</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton4" runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Requicisiones"
                         ImageAlign="middle"
-                        ImageUrl="http://site.b2bservicios.com/imagenes/REQUISICION.png"
+                        ImageUrl="/Images/requisicion.png"
                         PostBackUrl="http://localhost:62386/Requisiciones" />
                 </div>
             </div>
@@ -155,9 +75,9 @@
                         Mercaderia</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton5"  runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Devoluciones"
                         ImageAlign="middle"
-                        ImageUrl="http://www.todojuguete.es/imagenes/b2b/post-venta.jpg"
+                        ImageUrl="/Images/devolucion.jpg"
                         PostBackUrl="http://localhost:62386/DevolucionBajas" />
                 </div>
             </div>
@@ -167,9 +87,9 @@
                     <label class="control-label">Reportes</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton6"  runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Reportes"
                         ImageAlign="middle"
-                        ImageUrl="https://vencoasesores.files.wordpress.com/2014/11/reporte-comercial-imagen.jpg"
+                        ImageUrl="/Images/reportes.jpg"
                         PostBackUrl="http://localhost:62386/Reportes" />
                 </div>
             </div>
@@ -182,14 +102,14 @@
                 </div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton7" runat="server" Height="109px" Width="133px"
-                        AlternateText="ImageButton 1"
+                        AlternateText="Seguimiento"
                         ImageAlign="middle"
-                        ImageUrl="http://osmoscloud.com/img/home_components/home_0003s_0005s_0000_graphic_7.png"
+                        ImageUrl="/Images/seguimiento.png"
                         PostBackUrl="http://localhost:62386/Seguimiento" />
                 </div>
             </div>
         </div>
     </div>
 </asp:Content>
->>>>>>> origin/master
+
 

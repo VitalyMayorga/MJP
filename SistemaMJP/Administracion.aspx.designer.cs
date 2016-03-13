@@ -10,7 +10,7 @@
 namespace SistemaMJP {
     
     
-    public partial class WebForm1 {
+    public partial class Administracion {
         
         /// <summary>
         /// imagebutton1 control.

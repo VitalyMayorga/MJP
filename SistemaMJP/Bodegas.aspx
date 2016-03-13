@@ -1,16 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Bodegas.aspx.cs" Inherits="SistemaMJP.Bodegas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Bodegas.aspx.cs" Inherits="SistemaMJP.Bodegas" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Manejo de Bodegas</title>
-     <link rel="stylesheet" href="Content/reset.css"/>
-     <%--<link rel="stylesheet" href="Content/style.css">--%>
-    <link rel="stylesheet" href="css/boostrap.css"/> 
+     <link rel="stylesheet" href="Content/reset.css" />
+    <%--<link rel="stylesheet" href="Content/style.css">--%>
+    <link rel="stylesheet" href="Content/boostrap.css" />
     <link rel="stylesheet" href="Content/Bodegas.css" />
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
-    
-   
-            <asp:ScriptManager runat="server" />
-          
+             
             <div class="Panel-Bodegas">
                
                 <h3 class="titulo">Agregar Bodegas y subBodegas</h3>
@@ -22,8 +21,7 @@
                     <br/>
                         <div> 
                             <asp:RadioButton id="RbBodegas" runat="server" GroupName="GroupBodegas" name="bodega" value="bodega"></asp:RadioButton>
-                                            
-                    
+                                                  
                             <asp:TextBox ID="txtBodega" runat="server" placeholder="Bodega" class="form-control"></asp:TextBox>
                         </div>
                    
@@ -35,7 +33,6 @@
                      <div> 
                          <asp:RadioButton id="RbSubBodegas" runat="server" GroupName="GroupBodegas" name="subbodega" value="subbodega"></asp:RadioButton>   
                        
-
                             <asp:DropDownList ID = "ListBodegas" runat="server">                                
                             </asp:DropDownList>
 

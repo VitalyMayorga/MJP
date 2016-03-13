@@ -9,7 +9,7 @@ namespace SistemaMJP
 {
     public partial class Bodegas : System.Web.UI.Page
     {
-        ServicioBodegas bodega = new ServicioBodegas();
+        ControladoraBodegas bodega = new ControladoraBodegas();
         protected void Page_Load(object sender, EventArgs e)
         {
             int cont = 0;
@@ -18,7 +18,7 @@ namespace SistemaMJP
            
             ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
 
-            nomBodega = bodega.CargarBodegas();
+            nomBodega = bodega.getBodegas();
             while (cont < nomBodega.Count())
             {
                 ListBodegas.Items.Insert(cont2, new ListItem(nomBodega[cont], nomBodega[cont+1]));
@@ -33,13 +33,13 @@ namespace SistemaMJP
         {
              if (RbBodegas.Checked)
              {
-                 bodega.AgergarBodega(txtBodega.Text);
+                 bodega.AgregarBodega(txtBodega.Text);
 
              }
              else { 
                  if (RbSubBodegas.Checked) {
-                     bodega.AgergarSubBodega(txtSubBodega.Text);
-                     bodega.AgergarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue), bodega.);
+                     bodega.AgregarSubBodega(txtSubBodega.Text);
+                     bodega.AgregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
                  }
              }
              Response.Redirect("Administracion.aspx");
