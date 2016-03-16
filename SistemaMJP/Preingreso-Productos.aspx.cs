@@ -10,11 +10,12 @@ namespace SistemaMJP
 {
     public partial class Preingreso_Productos : System.Web.UI.Page
     {
-        ControladoraProductos controladora = new ControladoraProductos();
+        private ControladoraProductos controladora = new ControladoraProductos();
         public static string programa;
         public static string subBodega;
         public bool tieneSubBodega;
         public static string numFactura;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
@@ -31,7 +32,7 @@ namespace SistemaMJP
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
             string subpartida = ListaSubPartidas.Items[ListaSubPartidas.SelectedIndex].Text;
             if (bodega.Equals("---Elija una bodega---"))
-            {
+            {//Ocultar y mostrar mensajes de Error
                 MsjErrorBodega.Style.Add("display", "block");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "none");
@@ -41,7 +42,7 @@ namespace SistemaMJP
             }
 
             else if (programa.Equals("---Elija un Programa---"))
-            {
+            {//Ocultar y mostrar mensajes de Error
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "block");
                 MsjErrorSubBodega.Style.Add("display", "none");
@@ -51,7 +52,8 @@ namespace SistemaMJP
             }
             else if (tieneSubBodega) { 
                 subBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
-                if (subBodega.Equals("---Elija un Departamento---")) {
+                if (subBodega.Equals("---Elija un Departamento---"))
+                {//Ocultar y mostrar mensajes de Error
                     MsjErrorBodega.Style.Add("display", "none");
                     MsjErrorPrograma.Style.Add("display", "none");
                     MsjErrorSubBodega.Style.Add("display", "block");
@@ -62,7 +64,8 @@ namespace SistemaMJP
             
             
             }
-            else if (subpartida.Equals("---Elija una Subpartida---")) {
+            else if (subpartida.Equals("---Elija una Subpartida---"))
+            {//Ocultar y mostrar mensajes de Error
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "none");
@@ -74,7 +77,7 @@ namespace SistemaMJP
                 numFactura = txtNumFactura.Text;
                 numFactura = numFactura.Replace(" ", "");//Elimino espacios en blanco para saber si se digito numero factura o no
                 if (numFactura.Equals(""))
-                {
+                {//Ocultar y mostrar mensajes de Error
                     MsjErrorBodega.Style.Add("display", "none");
                     MsjErrorPrograma.Style.Add("display", "none");
                     MsjErrorSubBodega.Style.Add("display", "none");
