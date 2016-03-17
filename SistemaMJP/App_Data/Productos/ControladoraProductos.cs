@@ -14,7 +14,8 @@ namespace SistemaMJP
             controladoraB = new ControladoraBodegas();
         }
         //Llama a la controladora de programas presupuestarios, para obtener el nombre de los programas en el sistema
-        internal List<string> getProgramas() {
+        internal Dictionary<string, int> getProgramas()
+        {
             return controladoraPP.getProgramas();
         }
 

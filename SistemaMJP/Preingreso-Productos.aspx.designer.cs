@@ -83,6 +83,7 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect ListaSubPartidas;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaProveedores;
         /// <summary>
         /// MsjErrorSubPartida control.
         /// </summary>
@@ -121,6 +122,9 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumFactura;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreProveedor;
+        protected global::System.Web.UI.WebControls.TextBox txtCorreo;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefonos;
         
         /// <summary>
         /// MsjErrorFactura control.

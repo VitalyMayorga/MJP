@@ -19,7 +19,7 @@ namespace SistemaMJP
                 int cont = 0;
                 int cont2 = 1;
                 List<string> nomBodega = new List<string>();
-                List<string> nomPrograma = new List<string>();
+                Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
                 ListBodegas.Items.Clear();
                 ListProgramas.Items.Clear();
 
@@ -36,15 +36,10 @@ namespace SistemaMJP
                     cont += 2;
                     cont2++;
                 }
-                cont = 0;
-                cont2 = 1;
-                while (cont < nomPrograma.Count())
-                {
-                    ListProgramas.Items.Add(new ListItem { Text = nomPrograma[cont], Value = nomPrograma[cont + 1] });
-                    //ListProgramas.Items.Insert(cont2, new ListItem(nomPrograma[cont], nomPrograma[cont+1]));
-
-                    cont += 2;
-                    cont2++;
+                //Itera sobre el diccionario para obtener el programa y su respectivo id y guardaro en un dropdownlist
+                foreach (var item in nomPrograma){
+                    ListProgramas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                    
                 }
 
             

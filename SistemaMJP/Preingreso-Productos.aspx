@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Programa Presupuestario</label>
                     <div class="col-md-10">
-                        <asp:DropDownList id="ListaProgramas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarPrograma" autopostback="true"></asp:DropDownList>
+                        <asp:DropDownList ID="ListaProgramas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarPrograma" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div style="display: none;" id="MsjErrorPrograma" class="col-md-offset-2" runat="server">
@@ -68,7 +68,20 @@
                         <label class="msjErroneo">Debe ingresar un número de factura</label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Proveedor</label>
+                    <div class="col-md-3">
+                        <select id="ListaProveedores" runat="server" class="form-control dropdown cmbsize"></select>
 
+                    </div>
+                    <div class="col-md-7">
+                        <asp:Button ID="nuevoProveedor" class="btn btn-default" runat="server" Text="Nuevo Proveedor" data-toggle="modal" data-target="#ProveedorModal" />
+
+                    </div>
+                    <div style="display: none;" id="MsjErrorProveedor" class="col-md-offset-2" runat="server">
+                        <label class="msjErroneo">Debe elegir un Proveedor</label>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-offset-1 col-md-2 alinearDerecha">
                         <div class="BotonIngreso">
@@ -86,5 +99,42 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <div id="ProveedorModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Datos Proveedor</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <asp:TextBox ID="txtNombreProveedor" runat="server" placeholder="Nombre" class="form-control text-box single-line"></asp:TextBox>
+                         
+                    </div>
+                    <div class="form-group">
+                        <label>Correo</label>
+                        <asp:TextBox ID="txtCorreo" runat="server" placeholder="ejemplo@correo.com" class="form-control text-box single-line"></asp:TextBox>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfonos(Separado por comas)</label>
+                        <asp:TextBox ID="txtTelefonos" runat="server" placeholder="22222222,8888888" class="form-control text-box single-line"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarProveedor"></asp:Button>
+                    <asp:Button id="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        function openModal() {
+            $('#ProveedorModal').modal('show');
+        }
+</script>
 </asp:Content>

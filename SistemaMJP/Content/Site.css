@@ -103,3 +103,9 @@ input[type="password"] {
 #content {
     padding-bottom: 3em;
 }
+
+.atras {
+    font-size: 35px;
+    margin-left: 2%;
+
+}

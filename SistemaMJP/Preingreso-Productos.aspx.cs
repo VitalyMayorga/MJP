@@ -15,13 +15,27 @@ namespace SistemaMJP
         public static string subBodega;
         public bool tieneSubBodega;
         public static string numFactura;
+        public static string proveedor;
+        public static string correo;
+        public static string telefonos;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
-                tieneSubBodega = false;
-                subBodega = "";
-                llenarDatos();
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null) {
+                    Response.Redirect("Ingresar");
+                }
+                else if (!rol.Equals("Inclusión Pedidos"))
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+                else
+                {
+                    tieneSubBodega = false;
+                    subBodega = "";
+                    llenarDatos();
+                }
             }
         }
         //Revisa si los campos necesarios fueron agregados, de ser así ingresa a la ventana de ingreso de productos
@@ -133,21 +147,46 @@ namespace SistemaMJP
         //Redirecciona al menu principal
         protected void cancelar(object sender, EventArgs e)
         {
-            Response.Redirect("MenuPrincipal.aspx");
+            Response.Redirect("Facturas.aspx");
         }
         //Se llenan los datos iniciales, se cargan las bodegas programas, subpartidas
         protected void llenarDatos()
         {
-            ArrayList bodegas = (ArrayList)Session["bodegas"];
-            List<string> programas = controladora.getProgramas();
+            List<string> bodegas = (List<string>)Session["bodegas"];
+            string bodega = bodegas[0];
+            Dictionary<string, int> programas = controladora.getProgramas();
             ListaBodegas.Items.Add("---Elija una bodega---");
-            ListaBodegas.Items.Add("Barrio Cuba");
+            ListaBodegas.Items.Add(bodega);
             ListaProgramas.Items.Add("---Elija un Programa---");           
-            foreach(string nombreP in programas){
-                ListaProgramas.Items.Add(nombreP);
+            foreach(var nombreP in programas){
+                ListaProgramas.Items.Add(new ListItem { Text = nombreP.Key, Value = nombreP.Value.ToString() });
             }
             ListaSubPartidas.Items.Add("---Elija una Subpartida---");
+            ListaProveedores.Items.Add("---Elija un Proveedor---");
             ingresoF.Checked = true;
+        }
+
+        protected void aceptarProveedor(object sender, EventArgs e) {
+            proveedor = txtNombreProveedor.Text.Replace(" ", "");
+            correo = txtCorreo.Text.Replace(" ", "");
+            telefonos = txtTelefonos.Text.Replace(" ", "");
+            if (proveedor.Equals("")) {
+                txtNombreProveedor.Focus();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            }
+            else if (correo.Equals("")) {
+                txtCorreo.Focus();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            }
+            else if (telefonos.Equals(""))
+            {
+                txtTelefonos.Focus();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            }
+            else {
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ProveedorModal').modal('hide');</script>");
+            }
+        
         }
     }
 }

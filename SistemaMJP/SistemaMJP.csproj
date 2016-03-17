@@ -183,6 +183,7 @@
     <Content Include="Images\seguimiento.png" />
     <Content Include="Ingresar.aspx" />
     <Content Include="IngresoFacturas.aspx" />
+    <Content Include="Ingreso_Productos.aspx" />
     <Content Include="MenuPrincipal.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -368,6 +369,13 @@
       <DependentUpon>IngresoFacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Facturas\Item_Grid_Facturas.cs" />
+    <Compile Include="Ingreso_Productos.aspx.cs">
+      <DependentUpon>Ingreso_Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_Productos.aspx.designer.cs">
+      <DependentUpon>Ingreso_Productos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

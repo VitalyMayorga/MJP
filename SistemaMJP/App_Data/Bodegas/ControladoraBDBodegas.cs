@@ -78,35 +78,7 @@ namespace SistemaMJP
 
         }
 
-        //Metodo que se encarga de devolver la lista de todas los programas presupuestarios en el sistema
-        public List<string> CargarProgramaPresupuestario()
-        {
-            List<string> programa = new List<string>();
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_ProgramaPresupuestario";
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    programa.Add(reader.GetString(0));
-                    programa.Add(reader.GetInt32(1).ToString());
-                }
-
-                reader.Close();
-                con.Close();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return programa;
-
-        }
+        
 
         //Metodo que se encarga de agregar las bodegas al sistema
         public void AgregarBodega(string prefijo,string bodega)

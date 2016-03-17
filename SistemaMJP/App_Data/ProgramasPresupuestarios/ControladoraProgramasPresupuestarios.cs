@@ -12,8 +12,9 @@ namespace SistemaMJP
             controladoraBD = new ControladoraBDProgramasPresupeustarios();
         }
 
-        internal List<string> getProgramas() {
-            return controladoraBD.getProgramas();
+        internal Dictionary<string, int> getProgramas()
+        {
+            return controladoraBD.CargarProgramaPresupuestario();
         }
     }
 }

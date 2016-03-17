@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,7 +17,18 @@ namespace SistemaMJP
         {
             if (!IsPostBack)
             {
-                llenarFacturas();
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null) {
+                    Response.Redirect("Ingresar");
+                }
+                else if (!rol.Equals("Inclusión Pedidos"))
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+                else {
+
+                    llenarFacturas();
+                }
 
             }
         }
@@ -58,7 +70,8 @@ namespace SistemaMJP
         internal void llenarFacturas()
         {
             DataTable tabla = crearTablaFacturas();
-            string bodega = (string)Session["bodegas"];
+            List<string> bodegas = (List<string>)Session["bodegas"];
+            string bodega = bodegas[0];
             List<Item_Grid_Facturas> data = controladora.getListaFacturas(bodega);
             Object[] datos = new Object[7];
             

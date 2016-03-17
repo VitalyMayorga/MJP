@@ -8,8 +8,10 @@ namespace SistemaMJP
     public class ControladoraBodegas
     {
         ControladoraBDBodegas controladoraBD;
+        ControladoraProgramasPresupuestarios controladoraPP;
         public ControladoraBodegas() {
             controladoraBD = new ControladoraBDBodegas();
+            controladoraPP = new ControladoraProgramasPresupuestarios();
 
         }
         //Llama a la controladora de Base de datos de bodegas, para obtener las subbodegas de un programa presupuestario en específico y la bodega específica
@@ -23,10 +25,10 @@ namespace SistemaMJP
             return controladoraBD.CargarBodegas();
         }
 
-        //Llama a la controladora de Base de datos de bodegas, para obtener los programas presupuestarios en el sistema
-        internal List<string> getProgramas()
+        //Llama a la controladora de Programas presupuestarios, para obtener los programas presupuestarios en el sistema
+        internal Dictionary<string, int> getProgramas()
         {
-            return controladoraBD.CargarProgramaPresupuestario();
+            return controladoraPP.getProgramas();
         }
 
         //Llama a la controladora de Base de datos de bodegas, para agregar nuevas bodegas al sistema 

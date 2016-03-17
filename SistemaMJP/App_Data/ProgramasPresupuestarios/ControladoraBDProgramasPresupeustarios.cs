@@ -16,34 +16,33 @@ namespace SistemaMJP
         
         }
 
-        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
-        internal List<string> getProgramas()
+        //Metodo que se encarga de devolver la lista de todas los programas presupuestarios en el sistema
+        public Dictionary<string, int> CargarProgramaPresupuestario()
         {
-            List<string> programas = new List<string>();
+            Dictionary<string, int> programa = new Dictionary<string, int>();
             try
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_NombresProgramas";
+                cmd.CommandText = "P_ProgramaPresupuestario";
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-
                 while (reader.Read())
                 {
-                    programas.Add(reader.GetString(0));
+                    programa.Add(reader.GetString(0), reader.GetInt32(1));
 
                 }
+
                 reader.Close();
                 con.Close();
-
             }
             catch (Exception)
             {
                 throw;
             }
 
-            return programas;
+            return programa;
 
         }
     }
