@@ -13,7 +13,6 @@ namespace SistemaMJP
         public ControladoraBDBodegas()
         {
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
-
         }
 
         //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
@@ -79,22 +78,50 @@ namespace SistemaMJP
 
         }
 
-        //Metodo que se encarga de agregar las bodegas al sistema
-        public void AgregarBodega(string bodega)
+        //Metodo que se encarga de devolver la lista de todas los programas presupuestarios en el sistema
+        public List<string> CargarProgramaPresupuestario()
         {
-
+            List<string> programa = new List<string>();
             try
             {
-                
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_ProgramaPresupuestario";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    programa.Add(reader.GetString(0));
+                    programa.Add(reader.GetInt32(1).ToString());
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return programa;
+
+        }
+
+        //Metodo que se encarga de agregar las bodegas al sistema
+        public void AgregarBodega(string prefijo,string bodega)
+        {
+            try
+            {                
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.CommandText = "P_Agregar_Bodega";
+                cmd.Parameters.AddWithValue("@prefijo", prefijo);
                 cmd.Parameters.AddWithValue("@nombre", bodega);
                 cmd.ExecuteNonQuery();
-                con.Close();
-                
+                con.Close();                
             }
             catch (Exception)
             {
@@ -103,17 +130,17 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar las subBodegas al sistema
-        public void AgregarSubBodega(string subBodega)
+        public void AgregarSubBodega(string subBodega, int idPrograma)
         {
             try
-            {
-                
+            {                
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.CommandText = "P_Agregar_SubBodega";
                 cmd.Parameters.AddWithValue("@nombre", subBodega);
+                cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
                 cmd.ExecuteNonQuery();
                 con.Close();
             }

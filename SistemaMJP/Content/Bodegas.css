@@ -22,9 +22,20 @@
     font-size: 14px;
      padding-bottom:2%;
 }
+.mensjaeError{
+    color: #AD2020;
+    float:left;
+    margin-bottom:3%;
+
+}
+
+.radioGroup {
+     vertical-align: middle;
+     float:left;
+}
 
 .form-group {
-    text-align:center;    
+    text-align:left;    
 }
 
 .Panel-Bodegas {
@@ -35,5 +46,6 @@
 
 .BotonIncluir {
     text-align:center;
-    margin-top:2%;    
+    margin-top:2%;   
+    padding-bottom:1%; 
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Seguimiento.aspx.cs" Inherits="SistemaMJP.Seguimiento" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Seguimiento.aspx.cs" Inherits="SistemaMJP.Seguimiento" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

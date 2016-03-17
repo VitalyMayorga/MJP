@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Requisiciones.aspx.cs" Inherits="SistemaMJP.Requisiciones" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Requisiciones.aspx.cs" Inherits="SistemaMJP.Requisiciones" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
