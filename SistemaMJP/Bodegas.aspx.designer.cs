@@ -94,6 +94,24 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrortextSubBodega;
         
         /// <summary>
+        /// MsjErrorListBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorListBodegas;
+        
+        /// <summary>
+        /// MsjErrorListProgramas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorListProgramas;
+        
+        /// <summary>
         /// btnIncluir control.
         /// </summary>
         /// <remarks>
