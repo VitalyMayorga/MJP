@@ -40,15 +40,23 @@
                         <div class="radioGroup"> 
                             <asp:RadioButton id="RbSubBodegas" runat="server" GroupName="GroupBodegas" OnCheckedChanged="rbEnable" AutoPostBack="true" name="subbodega" value="subbodega"></asp:RadioButton>   
                        
-                             <asp:DropDownList ID = "ListProgramas" OnSelectedIndexChanged="guardardatosPrograma" autopostback="false" runat="server">                                
+                             <asp:DropDownList ID = "ListProgramas" runat="server">                                
                             </asp:DropDownList>
-                            <asp:DropDownList ID = "ListBodegas" OnSelectedIndexChanged="guardardatosBodega" autopostback="false" runat="server">                                
+                            <asp:DropDownList ID = "ListBodegas"  runat="server">                                
                             </asp:DropDownList>
 
                             <asp:TextBox ID="txtSubBodega" runat="server" placeholder="SubBodega" ></asp:TextBox>
                             <div style="display: none;" id="MsjErrortextSubBodega" runat="server">
                                 <label class="mensjaeError">Debe ingresar el nombre de la SubBodega</label>
                                 <br/>  
+                            </div>
+                             <div style="display: none;" id="MsjErrorListBodegas" runat="server">
+                                <label class="mensjaeError">Debe elegir una Bodega</label>
+                                 <br/> 
+                            </div>
+                             <div style="display: none;" id="MsjErrorListProgramas" runat="server">
+                                <label class="mensjaeError">Debe elegir un programa</label>
+                                 <br/> 
                             </div>
                         </div>
                             

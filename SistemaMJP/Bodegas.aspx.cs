@@ -10,8 +10,6 @@ namespace SistemaMJP
     public partial class Bodegas : System.Web.UI.Page
     {
         ControladoraBodegas bodega = new ControladoraBodegas();
-        public static string programa;
-        public static string subBodega;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
@@ -23,16 +21,14 @@ namespace SistemaMJP
                 ListBodegas.Items.Clear();
                 ListProgramas.Items.Clear();
 
-                // ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
-                //ListProgramas.Items.Insert(0, new ListItem("--Selecione el Programa Presupuestario--", "0"));
+                 ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
+                 ListProgramas.Items.Insert(0, new ListItem("--Selecione el Programa Presupuestario--", "0"));
 
                 nomBodega = bodega.getBodegas();
                 nomPrograma = bodega.getProgramas();
                 while (cont < nomBodega.Count())
                 {
-                    ListBodegas.Items.Add(new ListItem { Text = nomBodega[cont], Value = nomBodega[cont + 1] });
-                    // ListBodegas.Items.Insert(cont2, new ListItem(, ));
-
+                    ListBodegas.Items.Add(new ListItem { Text = nomBodega[cont], Value = nomBodega[cont + 1] });                   
                     cont += 2;
                     cont2++;
                 }
@@ -41,8 +37,6 @@ namespace SistemaMJP
                 while (cont < nomPrograma.Count())
                 {
                     ListProgramas.Items.Add(new ListItem { Text = nomPrograma[cont], Value = nomPrograma[cont + 1] });
-                    //ListProgramas.Items.Insert(cont2, new ListItem(nomPrograma[cont], nomPrograma[cont+1]));
-
                     cont += 2;
                     cont2++;
                 }
@@ -81,6 +75,14 @@ namespace SistemaMJP
                      {
                          MsjErrortextSubBodega.Style.Add("display", "block");
                          MsjErrortextBodega.Style.Add("display", "none");
+                         if (ListProgramas.SelectedValue=="0")
+                         {
+                             MsjErrorListProgramas.Style.Add("display", "block");
+                         }
+                        if (ListBodegas.SelectedValue == "0")
+                        {
+                            MsjErrorListBodegas.Style.Add("display", "block");
+                        }
                          RbSubBodegas.Checked = true;
                          txtSubBodega.Enabled = true;
                          ListBodegas.Enabled = true;
@@ -88,8 +90,6 @@ namespace SistemaMJP
                      }
                      else
                      {
-                         //string g = programa;
-                         //string h = subBodega;
                          bodega.AgregarSubBodega(txtSubBodega.Text, Int32.Parse(ListProgramas.SelectedValue));
                          bodega.AgregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
                          Response.Redirect("Administracion.aspx");
@@ -119,25 +119,7 @@ namespace SistemaMJP
                     ListProgramas.Enabled = true;
                 }
             }
-        }
-
-        protected void guardardatosPrograma(object sender, EventArgs e)
-        {
-            programa = ListProgramas.SelectedValue;
-            /*RbSubBodegas.Checked = true;
-            txtSubBodega.Enabled = true;
-            ListBodegas.Enabled = true;
-            ListProgramas.Enabled = true;*/
-        }
-
-        protected void guardardatosBodega(object sender, EventArgs e)
-        {
-            subBodega = ListBodegas.SelectedValue;
-           /* RbSubBodegas.Checked = true;
-            txtSubBodega.Enabled = true;
-            ListBodegas.Enabled = true;
-            ListProgramas.Enabled = true;*/
-        }
+        }       
 
     }
 }

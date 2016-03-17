@@ -154,21 +154,15 @@ namespace SistemaMJP
         public void AgregarBodegaSubBodega(int bodega)
         {
             try
-            {
-                con.Open();
-                SqlCommand cmd1 = new SqlCommand();
-                cmd1.Connection = con;
-                cmd1.CommandType = CommandType.StoredProcedure;
-                cmd1.CommandText = "P_SubBodega_MaxID";
-                SqlDataReader reader = cmd1.ExecuteReader();
-
+            {                
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
+                int id=BuscarMaximo();
+                con.Open();
                 cmd.CommandText = "P_Agregar_Bodega_SubBodega";
-
                 cmd.Parameters.AddWithValue("@idBodega", bodega);
-                cmd.Parameters.AddWithValue("@idSubBodega", reader.GetInt32(0));
+                cmd.Parameters.AddWithValue("@idSubBodega", id);
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
@@ -176,6 +170,31 @@ namespace SistemaMJP
             {
                 throw;
             }
+        }
+
+        //Metodo que se encarga de buscar el id de la ultima bodega agregada al sistema
+        public int BuscarMaximo()
+        {
+            int id;
+            try
+            {                
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_SubBodega_MaxID";
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
         }
 
     }
