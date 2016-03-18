@@ -14,9 +14,7 @@ namespace SistemaMJP
         {
             if (!IsPostBack) {
 
-                int cont = 0;
-                int cont2 = 1;
-                List<string> nomBodega = new List<string>();
+                Dictionary<string, int> nomBodega = new Dictionary<string, int>();
                 Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
                 ListBodegas.Items.Clear();
                 ListProgramas.Items.Clear();
@@ -26,19 +24,18 @@ namespace SistemaMJP
 
                 nomBodega = bodega.getBodegas();
                 nomPrograma = bodega.getProgramas();
-                while (cont < nomBodega.Count())
+
+                //Itera sobre el diccionario para obtener la bodega y el respectivo id y guardarlo en un dropdownlist
+                foreach (var item in nomBodega)
                 {
-                    ListBodegas.Items.Add(new ListItem { Text = nomBodega[cont], Value = nomBodega[cont + 1] });
-                    cont += 2;
-                    cont2++;
-                }
-                //Itera sobre el diccionario para obtener el programa y su respectivo id y guardaro en un dropdownlist
-                foreach (var item in nomPrograma){
-                    ListProgramas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
-                    
+                    ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
 
-            
+                //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
+                foreach (var item in nomPrograma)
+                {
+                    ListProgramas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });                    
+                }            
             }
             
             txtBodega.Enabled = false;
@@ -54,8 +51,7 @@ namespace SistemaMJP
              {
                  if (txtBodega.Text == "")
                  {
-                     MsjErrortextBodega.Style.Add("display", "block");
-                     MsjErrortextSubBodega.Style.Add("display", "none");
+                     MsjErrortextBodega.Style.Add("display", "block");                    
                      RbBodegas.Checked = true;
                      txtBodega.Enabled = true;
                      txtPrefijo.Enabled = true;
@@ -67,30 +63,74 @@ namespace SistemaMJP
                  }
              }
              else { 
-                 if (RbSubBodegas.Checked) {
+                 if (RbSubBodegas.Checked)
+                 {      
                      if (txtSubBodega.Text == "")
                      {
                          MsjErrortextSubBodega.Style.Add("display", "block");
-                         MsjErrortextBodega.Style.Add("display", "none");
-                         if (ListProgramas.SelectedValue=="0")
+
+                         if (ListProgramas.SelectedValue == "0")
                          {
                              MsjErrorListProgramas.Style.Add("display", "block");
                          }
-                        if (ListBodegas.SelectedValue == "0")
-                        {
-                            MsjErrorListBodegas.Style.Add("display", "block");
-                        }
-                         RbSubBodegas.Checked = true;
-                         txtSubBodega.Enabled = true;
-                         ListBodegas.Enabled = true;
-                         ListProgramas.Enabled = true;
+                         else 
+                         {
+                             MsjErrorListProgramas.Style.Add("display", "none");
+                         }
+
+                         if (ListBodegas.SelectedValue == "0")
+                         {
+                             MsjErrorListBodegas.Style.Add("display", "block");
+                         }
+                         else
+                         {
+                             MsjErrorListBodegas.Style.Add("display", "none");
+                         }                        
+                        
+                        RbSubBodegas.Checked = true;
+                        txtSubBodega.Enabled = true;
+                        ListBodegas.Enabled = true;
+                        ListProgramas.Enabled = true;
                      }
                      else
                      {
-                         bodega.AgregarSubBodega(txtSubBodega.Text, Int32.Parse(ListProgramas.SelectedValue));
-                         bodega.AgregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
-                         Response.Redirect("Administracion.aspx");
-                     }
+                         if (ListProgramas.SelectedValue == "0")
+                         {
+                             if (ListBodegas.SelectedValue == "0")
+                             {
+                                 MsjErrorListBodegas.Style.Add("display", "block");
+                             }
+                             else
+                             {
+                                 MsjErrorListBodegas.Style.Add("display", "none");
+                             }                             
+                             MsjErrortextSubBodega.Style.Add("display", "none");
+                             MsjErrorListProgramas.Style.Add("display", "block");
+                             RbSubBodegas.Checked = true;
+                             txtSubBodega.Enabled = true;
+                             ListBodegas.Enabled = true;
+                             ListProgramas.Enabled = true;
+                         }
+                         else
+                         {
+                             if (ListBodegas.SelectedValue == "0")
+                             {                                 
+                                 MsjErrorListBodegas.Style.Add("display", "block");
+                                 MsjErrorListProgramas.Style.Add("display", "none");
+                                 MsjErrortextSubBodega.Style.Add("display", "none");
+                                 RbSubBodegas.Checked = true;
+                                 txtSubBodega.Enabled = true;
+                                 ListBodegas.Enabled = true;
+                                 ListProgramas.Enabled = true;
+                             }
+                             else
+                             {
+                                 bodega.AgregarSubBodega(txtSubBodega.Text, Int32.Parse(ListProgramas.SelectedValue));
+                                 bodega.AgregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
+                                 Response.Redirect("Administracion.aspx");
+                             }                             
+                         }
+                    }
                  }
              }
          }
@@ -99,6 +139,9 @@ namespace SistemaMJP
         {
             if (RbBodegas.Checked)
             {
+                MsjErrortextSubBodega.Style.Add("display", "none");
+                MsjErrorListProgramas.Style.Add("display", "none");
+                MsjErrorListBodegas.Style.Add("display", "none");
                 txtBodega.Enabled = true;
                 txtPrefijo.Enabled = true;
                 txtSubBodega.Enabled = false;
@@ -109,6 +152,7 @@ namespace SistemaMJP
             {
                 if (RbSubBodegas.Checked)
                 {
+                    MsjErrortextBodega.Style.Add("display", "none");
                     txtBodega.Enabled=false;
                     txtPrefijo.Enabled = false;
                     txtSubBodega.Enabled = true;

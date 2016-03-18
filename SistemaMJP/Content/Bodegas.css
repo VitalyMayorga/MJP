@@ -24,9 +24,11 @@
 }
 .mensjaeError{
     color: #AD2020;
-    float:left;
     margin-bottom:3%;
+}
 
+.divError {
+    
 }
 
 .radioGroup {

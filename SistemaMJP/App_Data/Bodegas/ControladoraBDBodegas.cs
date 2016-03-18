@@ -49,9 +49,9 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de devolver la lista de todas las Bodegas en el sistema
-        public List<string> CargarBodegas()
+        public Dictionary<string, int> CargarBodegas()
         {
-            List<string> bodega = new List<string>();
+            Dictionary<string, int> bodega = new Dictionary<string, int>();
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -62,8 +62,7 @@ namespace SistemaMJP
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    bodega.Add(reader.GetString(0));
-                    bodega.Add(reader.GetInt32(1).ToString());
+                    bodega.Add(reader.GetString(0), reader.GetInt32(1));
                 }
 
                 reader.Close();
@@ -76,9 +75,7 @@ namespace SistemaMJP
 
             return bodega;
 
-        }
-
-        
+        }        
 
         //Metodo que se encarga de agregar las bodegas al sistema
         public void AgregarBodega(string prefijo,string bodega)

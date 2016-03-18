@@ -45,21 +45,19 @@
                             <asp:DropDownList ID = "ListBodegas"  runat="server">                                
                             </asp:DropDownList>
 
-                            <asp:TextBox ID="txtSubBodega" runat="server" placeholder="SubBodega" ></asp:TextBox>
-                            <div style="display: none;" id="MsjErrortextSubBodega" runat="server">
-                                <label class="mensjaeError">Debe ingresar el nombre de la SubBodega</label>
-                                <br/>  
-                            </div>
-                             <div style="display: none;" id="MsjErrorListBodegas" runat="server">
-                                <label class="mensjaeError">Debe elegir una Bodega</label>
-                                 <br/> 
-                            </div>
-                             <div style="display: none;" id="MsjErrorListProgramas" runat="server">
-                                <label class="mensjaeError">Debe elegir un programa</label>
-                                 <br/> 
-                            </div>
+                            <asp:TextBox ID="txtSubBodega" runat="server" placeholder="SubBodega" ></asp:TextBox>                            
                         </div>
-                            
+                    <div class="divError">    
+                        <div style="display: none;" id="MsjErrortextSubBodega" runat="server">
+                            <label class="mensjaeError">Debe ingresar el nombre de la SubBodega</label>
+                        </div>
+                        <div style="display: none;" id="MsjErrorListBodegas" runat="server">
+                            <label class="mensjaeError">Debe elegir una Bodega</label>
+                        </div>
+                        <div style="display: none;" id="MsjErrorListProgramas" runat="server">
+                            <label class="mensjaeError">Debe elegir un programa</label>
+                        </div>
+                    </div> 
                 </div>
                  <br/>
                 <hr/>

@@ -20,7 +20,7 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de Base de datos de bodegas,  para obtener las bodegas en el sistema
-        internal List<string> getBodegas()
+        internal Dictionary<string, int> getBodegas()
         {
             return controladoraBD.CargarBodegas();
         }
