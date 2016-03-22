@@ -60,5 +60,16 @@ namespace SistemaMJP
 
         }
 
+        protected void asignar(object sender, EventArgs e)
+        {
+
+
+        }
+        protected void desasignar(object sender, EventArgs e)
+        {
+
+
+        }
+
     }
 }

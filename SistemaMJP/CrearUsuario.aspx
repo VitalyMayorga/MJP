@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CrearUsuario.aspx.cs" Inherits="SistemaMJP.CrearUsuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="Content/RolesyPerfiles.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
      <asp:UpdatePanel runat="server">
@@ -62,29 +63,21 @@
 
                 <div class="form-group">
 
-                     <div class="col-md-4">
-                        <asp:ListBox id="ListBoxProgramasAsignados" Width="300px" runat="server" class="form-control listbox cmbsize" SelectionMode="Single">
+                     <div class="col-md-3" style="margin-left:9%;">
+                        <asp:ListBox id="ListBoxProgramasAsignados" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>                              
                     </div>  
 
-                    <div class="BotonMenu">
-                    <asp:ImageButton ID="imagebutton1" runat="server" Height="109px" Width="133px"
-                        AlternateText="Administracion"
-                        ImageAlign="middle"
-                        ImageUrl="/Images/admin.png"
-                        OnClick="asignar" />
-                </div>
-                    <div class="BotonMenu">
-                    <asp:ImageButton ID="imagebutton2" runat="server" Height="109px" Width="133px"
-                        AlternateText="Administracion"
-                        ImageAlign="middle"
-                        ImageUrl="/Images/admin.png"
-                        OnClick="desasignar" />
-                </div>
-
-
-                    <div class="col-md-4">
-                        <asp:ListBox id="ListBoxProgramas" Width="300px" runat="server" class="form-control listbox cmbsize" SelectionMode="Single">
+                    <div class="col-md-1">
+                        <div class="form-group style-flecha">
+                    <asp:LinkButton runat="server" OnClick="asignar"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                         </div>  
+                        <div class="form-group style-flecha">
+                    <asp:LinkButton runat="server" OnClick="desasignar"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                        </div> 
+                         </div> 
+                    <div class="col-md-3">
+                        <asp:ListBox id="ListBoxProgramas" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>
                     </div> 
                                    

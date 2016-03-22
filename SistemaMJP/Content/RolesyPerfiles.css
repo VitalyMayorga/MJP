@@ -1,1 +1,9 @@
-﻿
+﻿.item-center {
+    display: block;
+    margin: 0 auto;
+}
+
+.style-flecha {
+   text-align:center;
+    font-size:25px;
+}

@@ -85,24 +85,6 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.ListBox ListBoxProgramasAsignados;
         
         /// <summary>
-        /// imagebutton1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imagebutton1;
-        
-        /// <summary>
-        /// imagebutton2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imagebutton2;
-        
-        /// <summary>
         /// ListBoxProgramas control.
         /// </summary>
         /// <remarks>
