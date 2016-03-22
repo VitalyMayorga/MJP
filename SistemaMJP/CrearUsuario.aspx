@@ -67,6 +67,22 @@
                         </asp:ListBox>                              
                     </div>  
 
+                    <div class="BotonMenu">
+                    <asp:ImageButton ID="imagebutton1" runat="server" Height="109px" Width="133px"
+                        AlternateText="Administracion"
+                        ImageAlign="middle"
+                        ImageUrl="/Images/admin.png"
+                        OnClick="asignar" />
+                </div>
+                    <div class="BotonMenu">
+                    <asp:ImageButton ID="imagebutton2" runat="server" Height="109px" Width="133px"
+                        AlternateText="Administracion"
+                        ImageAlign="middle"
+                        ImageUrl="/Images/admin.png"
+                        OnClick="desasignar" />
+                </div>
+
+
                     <div class="col-md-4">
                         <asp:ListBox id="ListBoxProgramas" Width="300px" runat="server" class="form-control listbox cmbsize" SelectionMode="Single">
                         </asp:ListBox>
