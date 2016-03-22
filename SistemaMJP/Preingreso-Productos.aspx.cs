@@ -13,17 +13,20 @@ namespace SistemaMJP
         private ControladoraProductos controladora = new ControladoraProductos();
         public static string programa;
         public static string subBodega;
-        public bool tieneSubBodega;
+        public static bool tieneSubBodega;
         public static string numFactura;
         public static string proveedor;
         public static string correo;
         public static string telefonos;
+        public static bool nuevoProveedor = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) {
+            if (!IsPostBack)
+            {//Se revisa primero si tiene los permisos para ingresar al sitio
                 string rol = (string)Session["rol"];
-                if (Session["correoInstitucional"] == null) {
+                if (Session["correoInstitucional"] == null)
+                {
                     Response.Redirect("Ingresar");
                 }
                 else if (!rol.Equals("Inclusión Pedidos"))
@@ -45,6 +48,11 @@ namespace SistemaMJP
             string bodega = ListaBodegas.Items[ListaBodegas.SelectedIndex].Text;
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
             string subpartida = ListaSubPartidas.Items[ListaSubPartidas.SelectedIndex].Text;
+            if (tieneSubBodega) {
+                subBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
+            }
+            proveedor = ListaProveedores.Items[ListaProveedores.SelectedIndex].Text;
+
             if (bodega.Equals("---Elija una bodega---"))
             {//Ocultar y mostrar mensajes de Error
                 MsjErrorBodega.Style.Add("display", "block");
@@ -64,19 +72,14 @@ namespace SistemaMJP
                 MsjErrorFactura.Style.Add("display", "none");
                 
             }
-            else if (tieneSubBodega) { 
-                subBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
-                if (subBodega.Equals("---Elija un Departamento---"))
-                {//Ocultar y mostrar mensajes de Error
-                    MsjErrorBodega.Style.Add("display", "none");
-                    MsjErrorPrograma.Style.Add("display", "none");
-                    MsjErrorSubBodega.Style.Add("display", "block");
-                    MsjErrorSubPartida.Style.Add("display", "none");
-                    MsjErrorFactura.Style.Add("display", "none");
-                
-                }
-            
-            
+            else if (tieneSubBodega && (subBodega.Equals("---Elija un Departamento---"))) { 
+                //Ocultar y mostrar mensajes de Error
+                MsjErrorBodega.Style.Add("display", "none");
+                MsjErrorPrograma.Style.Add("display", "none");
+                MsjErrorSubBodega.Style.Add("display", "block");
+                MsjErrorSubPartida.Style.Add("display", "none");
+                MsjErrorFactura.Style.Add("display", "none");
+                           
             }
             else if (subpartida.Equals("---Elija una Subpartida---"))
             {//Ocultar y mostrar mensajes de Error
@@ -99,8 +102,21 @@ namespace SistemaMJP
                     MsjErrorFactura.Style.Add("display", "block");
                 }
             }
+            else if(!nuevoProveedor && proveedor.Equals("---Elija un Proveedor---")){
+                MsjErrorProveedor.Style.Add("display","block");
+                
+            }
             else
             {//Se envían los datos necesarios para empezar a ingresar productos
+                Ingreso_Productos.bodega = bodega;
+                Ingreso_Productos.subbodega = subBodega;
+                Ingreso_Productos.programa = programa;
+                Ingreso_Productos.subpartida = subpartida;
+                if (ingresoF.Checked) {
+                    Ingreso_Productos.numFactura = numFactura;
+                }
+
+                Response.Redirect("Ingreso_Productos");
 
 
             }
@@ -110,7 +126,8 @@ namespace SistemaMJP
         {
             ListaSubBodegas.Items.Clear();
             List<string> subbodegas = controladora.getSubBodegas(ListaProgramas.Items[ListaProgramas.SelectedIndex].Text, ListaBodegas.Items[ListaBodegas.SelectedIndex].Text);
-            if(subbodegas.Count>0){
+            if (subbodegas.Count > 0)
+            {
                 Subbodega.Style.Add("display", "block");
                 ListaSubBodegas.Items.Add("---Elija un Departamento---");
                 foreach (string nombreSb in subbodegas)
@@ -119,21 +136,49 @@ namespace SistemaMJP
                 }
                 tieneSubBodega = true;
             }
-            else{
+            else
+            {
                 Subbodega.Style.Add("display", "none");
                 tieneSubBodega = false;
-                
+
+            }
+            if (ListaProgramas.SelectedIndex != 0)
+            {
+                MsjErrorPrograma.Style.Add("display", "none");
             }
         }
-        //Si está seleccionado ingresar Factura, habilita la inserción de una factura
-        protected void rbIngresoF(object sender, EventArgs e)
-        {
-            if (ingresoF.Checked)
-            {
 
-                formFacturas.Style.Add("display", "block");
-                
-                
+        //Si se selecciona la subbodega el msj de error se esconde
+        protected void revisarSubB(object sender, EventArgs e)
+        {
+            if (ListaSubBodegas.SelectedIndex != 0)
+            {
+                MsjErrorSubBodega.Style.Add("display", "none");
+            }
+        }
+        //Si se selecciona la Bodega el msj de error se esconde
+        protected void revisarBodega(object sender, EventArgs e)
+        {
+            if (ListaBodegas.SelectedIndex != 0)
+            {
+                MsjErrorBodega.Style.Add("display", "none");
+            }
+        }
+
+        //Si se selecciona la Bodega el msj de error se esconde
+        protected void revisarProveedores(object sender, EventArgs e)
+        {
+            if (ListaProveedores.SelectedIndex != 0)
+            {
+                MsjErrorProveedor.Style.Add("display", "none");
+            }
+        }
+        //Si se selecciona la Subpartida el msj de error se esconde
+        protected void revisarSubPartida(object sender, EventArgs e)
+        {
+            if (ListaSubPartidas.SelectedIndex != 0)
+            {
+                MsjErrorSubPartida.Style.Add("display", "none");
             }
         }
         //Si está seleccionado Mercaderia Inicial,esconde el div de la inserción de una factura
@@ -142,6 +187,15 @@ namespace SistemaMJP
             if (mercaderiaI.Checked)
             {
                 formFacturas.Style.Add("display", "none");
+            }
+        }
+
+        //Si está seleccionado Facturas,muestra el div de numero de facturas
+        protected void rbIngresoF(object sender, EventArgs e)
+        {
+            if (mercaderiaI.Checked)
+            {
+                formFacturas.Style.Add("display", "block");
             }
         }
         //Redirecciona al menu principal
@@ -155,26 +209,41 @@ namespace SistemaMJP
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             Dictionary<string, int> programas = controladora.getProgramas();
+            Dictionary<string, int> subpartidas = controladora.getSubPartidas();
+            Dictionary<string, int> proveedores = controladora.getProveedores();
             ListaBodegas.Items.Add("---Elija una bodega---");
             ListaBodegas.Items.Add(bodega);
-            ListaProgramas.Items.Add("---Elija un Programa---");           
-            foreach(var nombreP in programas){
+            ListaProgramas.Items.Add("---Elija un Programa---");
+            foreach (var nombreP in programas)
+            {
                 ListaProgramas.Items.Add(new ListItem { Text = nombreP.Key, Value = nombreP.Value.ToString() });
             }
             ListaSubPartidas.Items.Add("---Elija una Subpartida---");
+            foreach (var nombreS in subpartidas)
+            {
+                ListaSubPartidas.Items.Add(new ListItem { Text = nombreS.Key, Value = nombreS.Value.ToString() });
+            }
             ListaProveedores.Items.Add("---Elija un Proveedor---");
+            foreach (var nombrePr in proveedores)
+            {
+                ListaProveedores.Items.Add(new ListItem { Text = nombrePr.Key, Value = nombrePr.Value.ToString() });
+            }
             ingresoF.Checked = true;
         }
-
-        protected void aceptarProveedor(object sender, EventArgs e) {
+        //Revisa si los datos del nuevo proveedor estan dados, sino no cierra el modal hasta que se llenen todos los campos
+        protected void aceptarProveedor(object sender, EventArgs e)
+        {
+            string tmp = txtNombreProveedor.Text.Replace(" ", "");
             proveedor = txtNombreProveedor.Text.Replace(" ", "");
             correo = txtCorreo.Text.Replace(" ", "");
             telefonos = txtTelefonos.Text.Replace(" ", "");
-            if (proveedor.Equals("")) {
+            if (tmp.Equals(""))
+            {
                 txtNombreProveedor.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             }
-            else if (correo.Equals("")) {
+            else if (correo.Equals(""))
+            {
                 txtCorreo.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             }
@@ -183,10 +252,14 @@ namespace SistemaMJP
                 txtTelefonos.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             }
-            else {
+            else
+            {
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ProveedorModal').modal('hide');</script>");
+                nuevoProveedor = true;
+                ListaProveedores.Enabled = false;
+                controladora.agregarProveedor(proveedor, correo, telefonos);
             }
-        
+
         }
     }
 }

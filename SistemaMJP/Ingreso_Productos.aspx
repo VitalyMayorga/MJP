@@ -69,23 +69,17 @@
                     </div>
                 </div>
                 <h4 class="Encabezado">Datos opcionales</h4>
-                <div class="row">
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Fecha Vencimiento</label>
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" runat="server" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Fecha Vencimiento</label>
+                    <div class='input-group date col-md-10' style="max-width:320px" >
+                        
+                            <input type='text' class="form-control" runat="server" id="txtFrom"/>
+                                      
+                        
                     </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#datetimepicker1').datetimepicker();
-                        });
-                    </script>
+
+
                 </div>
                 <div id="formActivo" runat="server">
                     <div class="form-group">
@@ -99,7 +93,7 @@
                         </div>
 
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label class="col-md-2 control-label">Funcionario Asignado</label>
 
                         <div class="col-md-10">
@@ -110,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="form-group">
                         <label class="col-md-2 control-label">Cédula Funcionario</label>
 
                         <div class="col-md-10">
@@ -129,9 +123,9 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1">
                         <div class="BotonIngreso">
-                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptarYSalir" />
+                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
                         </div>
 
                     </div>
@@ -146,5 +140,34 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    
+    <script type="text/javascript">//Convertimos el calendario a español
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '<Ant',
+            nextText: 'Sig>',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        $(function () {
+            $("#<%= txtFrom.ClientID %>").datepicker({
+                 showmonth: true,
+                 autoSize: true,
+                 showAnim: 'slideDown',
+                 duration: 'fast'
+             });
+                        
+         });
+
+    </script>
 </asp:Content>

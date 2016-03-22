@@ -109,3 +109,13 @@ input[type="password"] {
     margin-left: 2%;
 
 }
+
+input.selectorDeFecha{
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    background-color:rgba(245, 240, 240, 0.00);
+    border-radius: 0px;
+    background-image:url('../Images/datepicker.png');
+    height:18px;
+}

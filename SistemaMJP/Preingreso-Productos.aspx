@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Ubicación</label>
                     <div class="col-md-10">
-                        <select id="ListaBodegas" runat="server" class="form-control dropdown cmbsize"></select>
+                        <asp:DropDownList id="ListaBodegas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarBodega" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div style="display: none;" id="MsjErrorBodega" class="col-md-offset-2" runat="server">
@@ -28,7 +28,7 @@
                 <div class="form-group" id="Subbodega" style="display: none;" runat="server">
                     <label class="col-md-2 control-label">Departamento</label>
                     <div class="col-md-10">
-                        <select id="ListaSubBodegas" runat="server" class="form-control dropdown cmbsize"></select>
+                        <asp:DropDownList id="ListaSubBodegas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarSubB" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div style="display: none;" id="MsjErrorSubBodega" class="col-md-offset-2" runat="server">
@@ -39,7 +39,7 @@
                     <label class="col-md-2 control-label">SubPartida</label>
 
                     <div class="col-md-10">
-                        <select id="ListaSubPartidas" runat="server" class="form-control dropdown cmbsize"></select>
+                        <asp:DropDownList id="ListaSubPartidas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarSubPartida" AutoPostBack="true"></asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorSubPartida" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe elegir una subpartida</label>
@@ -71,7 +71,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Proveedor</label>
                     <div class="col-md-3">
-                        <select id="ListaProveedores" runat="server" class="form-control dropdown cmbsize"></select>
+                        <asp:DropDownList id="ListaProveedores" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarProveedores" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div class="col-md-7">

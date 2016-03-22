@@ -19,7 +19,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaBodegas;
+        protected global::System.Web.UI.WebControls.DropDownList ListaBodegas;
         
         /// <summary>
         /// MsjErrorBodega control.
@@ -64,7 +64,7 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaSubBodegas;
+        protected global::System.Web.UI.WebControls.DropDownList ListaSubBodegas;
         
         /// <summary>
         /// MsjErrorSubBodega control.
@@ -82,8 +82,8 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaSubPartidas;
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ListaProveedores;
+        protected global::System.Web.UI.WebControls.DropDownList ListaSubPartidas;
+        protected global::System.Web.UI.WebControls.DropDownList ListaProveedores;
         /// <summary>
         /// MsjErrorSubPartida control.
         /// </summary>
@@ -134,7 +134,7 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFactura;
-
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorProveedor;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturas;
     }
 }

@@ -44,6 +44,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -174,6 +175,7 @@
     <Content Include="Images\admin.png" />
     <Content Include="Images\bodega.png" />
     <Content Include="Images\check.jpg" />
+    <Content Include="Images\datepicker.png" />
     <Content Include="Images\devolucion.jpg" />
     <Content Include="Images\facturas.jpg" />
     <Content Include="Images\LOGO_MJP.png" />
@@ -201,6 +203,7 @@
     <Content Include="Requisiciones.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2-ui.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\mjp.js" />
@@ -329,6 +332,8 @@
     <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraProgramasPresupuestarios.cs" />
     <Compile Include="App_Data\Facturas\ControladoraBDFacturas.cs" />
     <Compile Include="App_Data\Facturas\ControladoraFacturas.cs" />
+    <Compile Include="App_Data\Proveedores\ControladoraBDProveedores.cs" />
+    <Compile Include="App_Data\Proveedores\ControladoraProveedores.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
