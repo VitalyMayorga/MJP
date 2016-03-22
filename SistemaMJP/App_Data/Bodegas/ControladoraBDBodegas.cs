@@ -49,7 +49,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de devolver la lista de todas las Bodegas en el sistema
-        public Dictionary<string, int> CargarBodegas()
+        public Dictionary<string, int> cargarBodegas()
         {
             Dictionary<string, int> bodega = new Dictionary<string, int>();
             try
@@ -78,7 +78,7 @@ namespace SistemaMJP
         }        
 
         //Metodo que se encarga de agregar las bodegas al sistema
-        public void AgregarBodega(string prefijo,string bodega)
+        public void agregarBodega(string prefijo,string bodega)
         {
             try
             {                
@@ -99,7 +99,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar las subBodegas al sistema
-        public void AgregarSubBodega(string subBodega, int idPrograma)
+        public void agregarSubBodega(string subBodega, int idPrograma)
         {
             try
             {                
@@ -120,14 +120,14 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar las bodegas y subBodegas relacionadas a la tabla de BodegaSubBodega
-        public void AgregarBodegaSubBodega(int bodega)
+        public void agregarBodegaSubBodega(int bodega)
         {
             try
             {                
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                int id=BuscarMaximo();
+                int id=buscarMaximo();
                 con.Open();
                 cmd.CommandText = "P_Agregar_Bodega_SubBodega";
                 cmd.Parameters.AddWithValue("@idBodega", bodega);
@@ -142,7 +142,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de buscar el id de la ultima bodega agregada al sistema
-        public int BuscarMaximo()
+        public int buscarMaximo()
         {
             int id;
             try

@@ -13,5 +13,13 @@ namespace SistemaMJP
         {
 
         }
+        protected void ingresarBodegas(object sender, EventArgs e)
+        {
+            Response.Redirect("Bodegas.aspx");
+        }
+        protected void ingresarRolesPerfiles(object sender, EventArgs e)
+        {
+            Response.Redirect("RolesPerfiles.aspx");
+        }
     }
 }

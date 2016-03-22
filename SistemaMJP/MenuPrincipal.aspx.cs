@@ -16,7 +16,32 @@ namespace SistemaMJP
 
         protected void ingresarFacturas(object sender, EventArgs e)
         {
-            Response.Redirect("Facturas");
+            Response.Redirect("Facturas.aspx");
         }
+        protected void ingresarMenuAdministracion(object sender, EventArgs e)
+        {
+            Response.Redirect("Administracion.aspx");
+        }
+        protected void ingresarRequisiciones(object sender, EventArgs e)
+        {
+            Response.Redirect("Requisiciones.aspx");
+        }
+        protected void ingresarReportes(object sender, EventArgs e)
+        {
+            Response.Redirect("Reportes.aspx");
+        }
+        protected void ingresarControlActivos(object sender, EventArgs e)
+        {
+            Response.Redirect("ControlActivos.aspx");
+        }
+        protected void ingresarDevolucionBajas(object sender, EventArgs e)
+        {
+            Response.Redirect("DevolucionBajas.aspx");
+        }
+        protected void ingresarSeguimiento(object sender, EventArgs e)
+        {
+            Response.Redirect("Seguimiento.aspx");
+        }
+
     }
 }

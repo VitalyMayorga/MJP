@@ -25,7 +25,7 @@
                                                AlternateText="Roles y Oerfiles"
                                                ImageAlign="middle"
                                                ImageUrl="/Images/rolesperfiles.png"
-                                               PostBackUrl="http://localhost:62386/RolesPerfiles"/>
+                                               OnClick="ingresarRolesPerfiles"/>
                                         </div>                                
                                 </div>
                                  <div class="form-group2">
@@ -34,7 +34,7 @@
                                                AlternateText="Bodegas"
                                                ImageAlign="middle"
                                                ImageUrl="/Images/bodega.png"
-                                             PostBackUrl="http://localhost:62386/Bodegas"/>
+                                             OnClick="ingresarBodegas"/>
                                         </div> 
                                  </div>
                                  </div>

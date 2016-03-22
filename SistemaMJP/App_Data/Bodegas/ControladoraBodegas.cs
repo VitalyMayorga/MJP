@@ -22,7 +22,7 @@ namespace SistemaMJP
         //Llama a la controladora de Base de datos de bodegas,  para obtener las bodegas en el sistema
         internal Dictionary<string, int> getBodegas()
         {
-            return controladoraBD.CargarBodegas();
+            return controladoraBD.cargarBodegas();
         }
 
         //Llama a la controladora de Programas presupuestarios, para obtener los programas presupuestarios en el sistema
@@ -34,19 +34,19 @@ namespace SistemaMJP
         //Llama a la controladora de Base de datos de bodegas, para agregar nuevas bodegas al sistema 
         internal void AgregarBodega(string prefijo,string bodega)
         {
-            controladoraBD.AgregarBodega(prefijo,bodega);
+            controladoraBD.agregarBodega(prefijo,bodega);
         }
 
         //Llama a la controladora de Base de datos de bodegas, para agregar nuevas subBodegas al sistema
         internal void AgregarSubBodega(string subBodega, int idPrograma)
         {
-            controladoraBD.AgregarSubBodega(subBodega, idPrograma);
+            controladoraBD.agregarSubBodega(subBodega, idPrograma);
         }
 
         //Llama a la controladora de Base de datos de bodegas, para agregar la relacion entre bodegas y subBodegas
         internal void AgregarBodegaSubBodega(int bodega)
         {
-            controladoraBD.AgregarBodegaSubBodega(bodega);
+            controladoraBD.agregarBodegaSubBodega(bodega);
         }
     }
 }

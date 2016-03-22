@@ -27,7 +27,7 @@
                         AlternateText="Administracion"
                         ImageAlign="middle"
                         ImageUrl="/Images/admin.png"
-                        PostBackUrl="http://localhost:62386/Administracion" />
+                        OnClick="ingresarMenuAdministracion" />
                 </div>
                 <%--   <asp:Button ID="Button1" class="btn btn-success" runat="server" Height="109px" Width="133px" /> --%>
             </div>
@@ -50,7 +50,7 @@
                         AlternateText="Activos"
                         ImageAlign="middle"
                         ImageUrl="/Images/check.jpg"
-                        PostBackUrl="http://localhost:62386/ControlActivos" />
+                        OnClick="ingresarControlActivos" />
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                         AlternateText="Requicisiones"
                         ImageAlign="middle"
                         ImageUrl="/Images/requisicion.png"
-                        PostBackUrl="http://localhost:62386/Requisiciones" />
+                        OnClick="ingresarRequisiciones" />
                 </div>
             </div>
 
@@ -78,7 +78,7 @@
                         AlternateText="Devoluciones"
                         ImageAlign="middle"
                         ImageUrl="/Images/devolucion.jpg"
-                        PostBackUrl="http://localhost:62386/DevolucionBajas" />
+                        OnClick="ingresarDevolucionBajas" />
                 </div>
             </div>
 
@@ -90,7 +90,7 @@
                         AlternateText="Reportes"
                         ImageAlign="middle"
                         ImageUrl="/Images/reportes.jpg"
-                        PostBackUrl="http://localhost:62386/Reportes" />
+                        OnClick="ingresarReportes" />
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
                         AlternateText="Seguimiento"
                         ImageAlign="middle"
                         ImageUrl="/Images/seguimiento.png"
-                        PostBackUrl="http://localhost:62386/Seguimiento" />
+                        OnClick="ingresarSeguimiento" />
                 </div>
             </div>
         </div>
