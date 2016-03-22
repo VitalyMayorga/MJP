@@ -338,8 +338,8 @@
     <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraProgramasPresupuestarios.cs" />
     <Compile Include="App_Data\Facturas\ControladoraBDFacturas.cs" />
     <Compile Include="App_Data\Facturas\ControladoraFacturas.cs" />
-    <Compile Include="ControladoraBDProveedores.cs" />
-    <Compile Include="ControladoraProveedores.cs" />
+    <Compile Include="App_Data\Proveedores\ControladoraBDProveedores.cs" />
+    <Compile Include="App_Data\Proveedores\ControladoraProveedores.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -472,9 +472,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\Proveedores\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

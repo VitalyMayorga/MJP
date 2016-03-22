@@ -107,20 +107,25 @@ namespace SistemaMJP
             }
             else
             {//Se envían los datos necesarios para empezar a ingresar productos
-                //int idBodega = controladora.obtenerIDBodega(bodega);
+                int idBodega = controladora.obtenerIDBodega(bodega);
 
                 Ingreso_Productos.bodega = bodega;
                 Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
                 Ingreso_Productos.subpartida = Convert.ToInt32(ListaSubPartidas.SelectedValue);
-                if (ingresoF.Checked) {
-                    //Ingreso_Productos.numFactura = numFactura;
-                    //controladora.agregarFactura=(idBodega,proveedor,);
-                }
-                if (tieneSubBodega) {
+                int idSubBodega=0;//Por default, subbodega 0 = No hay subbodega asignada
+                if (tieneSubBodega)
+                {
+                    idSubBodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
                     Ingreso_Productos.subbodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
+                    
                 }
+                if (ingresoF.Checked) {
+                    Ingreso_Productos.numFactura = numFactura;
+                    controladora.agregarFactura(idBodega,proveedor,Convert.ToInt32(ListaProgramas.SelectedValue),idSubBodega,numFactura);
+                }
+                
 
-                Response.Redirect("Ingreso_Productos");
+                Response.Redirect("Ingreso_Productos"); 
 
 
             }
@@ -175,6 +180,9 @@ namespace SistemaMJP
             if (ListaProveedores.SelectedIndex != 0)
             {
                 MsjErrorProveedor.Style.Add("display", "none");
+            }
+            else {
+                proveedor = ListaProveedores.SelectedItem.Text;
             }
         }
         //Si se selecciona la Subpartida el msj de error se esconde

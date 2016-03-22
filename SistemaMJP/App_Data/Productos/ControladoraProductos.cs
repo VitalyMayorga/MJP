@@ -11,11 +11,13 @@ namespace SistemaMJP
         ControladoraBodegas controladoraB;
         ControladoraProveedores controladoraP;
         ControladoraBDProductos controladoraBD;
+        ControladoraFacturas controladoraF;
         public ControladoraProductos() {
             controladoraPP = new ControladoraProgramasPresupuestarios();
             controladoraB = new ControladoraBodegas();
             controladoraP = new ControladoraProveedores();
             controladoraBD = new ControladoraBDProductos();
+            controladoraF = new ControladoraFacturas();
         }
         //Llama a la controladora de programas presupuestarios, para obtener el nombre de los programas en el sistema
         internal Dictionary<string, int> getProgramas()
@@ -43,6 +45,16 @@ namespace SistemaMJP
         //Llama a la controladora de proveedores para insertar el proveedor
         internal void agregarProveedor(string proveedor, string correo, string telefonos) {
             controladoraP.agregarProveedor(proveedor, correo, telefonos);
+        }
+        //Llama a la controladora de bodegas para obtener el id de una bodega
+        internal int obtenerIDBodega(string bodega) {
+            return controladoraB.obtenerIDBodega(bodega);
+        }
+        //Primero obtiene el id del proveedor,luego llama a la controladora de Facturas para agregar una factura nueva
+        internal void agregarFactura(int bodega, string proveedor, int programa,int subbodega,string numF) {
+            int idProveedor = controladoraP.obtenerIDProveedor(proveedor);
+            controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF);
+        
         }
     }
 }

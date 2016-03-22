@@ -166,5 +166,32 @@ namespace SistemaMJP
             return id;
         }
 
+        //Metodo que se encarga de obtener el id de una bodega, dado su nombre
+        public int cargarBodegas(string bodega)
+        {
+            int id = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_id_bodega";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+
+        }        
+
     }
 }
