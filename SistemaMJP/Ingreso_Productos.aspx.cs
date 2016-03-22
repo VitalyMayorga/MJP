@@ -10,11 +10,10 @@ namespace SistemaMJP
     public partial class Ingreso_Productos : System.Web.UI.Page
     {
         public static string bodega;
-        public static string subbodega;
-        public static string programa;
-        public static string proveedor;
+        public static int subbodega;
+        public static int programa;
         public static string numFactura;
-        public static string subpartida;
+        public static int subpartida;
         protected void Page_Load(object sender, EventArgs e)
         {
 

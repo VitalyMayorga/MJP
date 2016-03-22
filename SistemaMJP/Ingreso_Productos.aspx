@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso_Productos.aspx.cs" Inherits="SistemaMJP.Ingreso_Productos" %>
+﻿         <%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso_Productos.aspx.cs" Inherits="SistemaMJP.Ingreso_Productos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
     <asp:UpdatePanel runat="server">
