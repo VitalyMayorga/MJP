@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.Web.Services;
 namespace SistemaMJP
 {
     public class ControladoraProductos
@@ -38,7 +38,7 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de Bodegas para retornar la lista de subbodegas del programa
-        internal List<string> getSubBodegas(string programa,string bodega)
+        internal Dictionary<string, int> getSubBodegas(string programa, string bodega)
         {
             return controladoraB.getSubBodegas(programa,bodega);
         }
@@ -56,6 +56,10 @@ namespace SistemaMJP
             int idProveedor = controladoraP.obtenerIDProveedor(proveedor);
             controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF);
         
+        }
+        [WebMethod]
+        public static List<string> getProductos(string prefix) {
+            return ControladoraBDProductos.getProductos(prefix);
         }
     }
 }

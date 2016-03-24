@@ -159,7 +159,7 @@ namespace SistemaMJP
                     ListBodegas.Enabled = true;
                     ListProgramas.Enabled = true;
                 }
-        }
+            }
         }
 
     }

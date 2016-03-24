@@ -119,3 +119,25 @@ input.selectorDeFecha{
     background-image:url('../Images/datepicker.png');
     height:18px;
 }
+
+.tablaMJP {
+    margin: 0 3%;
+}
+
+.gridsFormat th {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #9393C5;
+    font-size: 15px;
+
+}
+
+.gridsFormat td {
+    padding:0 15px;    
+    text-align:center;
+}
+
+.gridF  td:nth-child(8){
+    width: 14px;
+}
+

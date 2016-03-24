@@ -12,12 +12,12 @@ namespace SistemaMJP
         private String proveedor;
         private String programa;
         private int subBodega;
-        private int monto;
+        private decimal monto;
         private String estado;
-        public Item_Grid_Facturas(String factura, String fecha, String proveedor,String programa, int subBodega, int monto,String estado)
+        public Item_Grid_Facturas(String factura, DateTime fecha, String proveedor,String programa, int subBodega, decimal monto,String estado)
         {
             NumFactura = factura;
-            Fecha = fecha;
+            Fecha = fecha.ToString("dd/MM/yyyy");
             Proveedor = proveedor;
             Monto = monto;
             Estado = estado;
@@ -81,7 +81,7 @@ namespace SistemaMJP
         * Efectúa : Asigna a la variable global Monto con el parámetro
         * Retorna : El valor de la variable global Monto
         */
-        public int Monto
+        public decimal Monto
         {
             get { return monto; }
             set { monto = value; }

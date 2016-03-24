@@ -170,4 +170,38 @@
          });
 
     </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("[id$=<%= txtDescripcion.ClientID %>]").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '<%=ResolveUrl("~/Ingreso_Productos.aspx/getProductos") %>',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            return {
+                                label: item.split('-')[0],
+                                val: item.split('-')[1]
+                            }
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                $("[id$=id_producto]").val(i.item.val);
+            },
+            minLength: 1
+        });
+    });
+</script>
 </asp:Content>

@@ -4,7 +4,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-
+using System.Web.Services;
+using System.Configuration;
 namespace SistemaMJP
 {
     public class ControladoraBDProductos
@@ -43,6 +44,36 @@ namespace SistemaMJP
 
             return programa;
 
+        }
+
+        [WebMethod]
+        public static List<string> getProductos(string prefix)
+        {
+            prefix = prefix.ToLower();
+            prefix = prefix.First().ToString().ToUpper() + prefix.Substring(1);
+            List<string> productos = new List<string>();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString;
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "P_Obtener_Productos";
+                    cmd.Parameters.AddWithValue("@Buscar", prefix);
+                    cmd.Connection = conn;
+                    conn.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            productos.Add(string.Format("{0}-{1}", sdr["descripcion"], sdr["id_producto"]));
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return productos;
         }
     }
 }

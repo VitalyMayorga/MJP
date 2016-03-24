@@ -92,7 +92,7 @@ namespace SistemaMJP
                 MsjErrorSubPartida.Style.Add("display", "block");
                 MsjErrorFactura.Style.Add("display", "none");
             }
-            else if (numFactura.Equals(""))
+            else if (ingresoF.Checked && numFactura.Equals(""))
             {//Ocultar y mostrar mensajes de Error
                     MsjErrorBodega.Style.Add("display", "none");
                     MsjErrorPrograma.Style.Add("display", "none");
@@ -134,14 +134,14 @@ namespace SistemaMJP
         protected void revisarPrograma(object sender, EventArgs e)
         {
             ListaSubBodegas.Items.Clear();
-            List<string> subbodegas = controladora.getSubBodegas(ListaProgramas.Items[ListaProgramas.SelectedIndex].Text, ListaBodegas.Items[ListaBodegas.SelectedIndex].Text);
+            Dictionary<string, int> subbodegas = controladora.getSubBodegas(ListaProgramas.Items[ListaProgramas.SelectedIndex].Text, ListaBodegas.Items[ListaBodegas.SelectedIndex].Text);
             if (subbodegas.Count > 0)
             {
                 Subbodega.Style.Add("display", "block");
                 ListaSubBodegas.Items.Add("---Elija un Departamento---");
-                foreach (string nombreSb in subbodegas)
+                foreach (var nombreSb in subbodegas)
                 {
-                    ListaSubBodegas.Items.Add(nombreSb);
+                    ListaSubBodegas.Items.Add(new ListItem { Text = nombreSb.Key, Value = nombreSb.Value.ToString() });
                 }
                 tieneSubBodega = true;
             }
