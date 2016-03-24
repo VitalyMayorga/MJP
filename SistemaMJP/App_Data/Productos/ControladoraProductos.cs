@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.Web.Services;
 namespace SistemaMJP
 {
     public class ControladoraProductos
@@ -55,6 +55,10 @@ namespace SistemaMJP
             int idProveedor = controladoraP.obtenerIDProveedor(proveedor);
             controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF);
         
+        }
+        [WebMethod]
+        public static List<string> getProductos(string prefix) {
+            return ControladoraBDProductos.getProductos(prefix);
         }
     }
 }

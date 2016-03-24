@@ -92,7 +92,7 @@ namespace SistemaMJP
                 MsjErrorSubPartida.Style.Add("display", "block");
                 MsjErrorFactura.Style.Add("display", "none");
             }
-            else if (numFactura.Equals(""))
+            else if (ingresoF.Checked && numFactura.Equals(""))
             {//Ocultar y mostrar mensajes de Error
                     MsjErrorBodega.Style.Add("display", "none");
                     MsjErrorPrograma.Style.Add("display", "none");

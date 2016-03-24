@@ -121,14 +121,23 @@ input.selectorDeFecha{
 }
 
 .tablaMJP {
-    margin: 0 30%;
+    margin: 0 3%;
 }
 
-.gridsFormat>th {
+.gridsFormat th {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #9393C5;
+    font-size: 15px;
+
+}
+
+.gridsFormat td {
+    padding:0 15px;    
     text-align:center;
-
 }
 
-.gridsFormat > td {
-    padding:15px;
+.gridF  td:nth-child(8){
+    width: 14px;
 }
+

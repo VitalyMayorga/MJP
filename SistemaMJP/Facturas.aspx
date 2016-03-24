@@ -19,7 +19,7 @@
                 </div>
                 <h4 class="Encabezado">Facturas de la bodega</h4>
                 <div class="table-responsive tablaMJP">
-                    <asp:GridView ID="GridFacturas" class="table-hover gridsFormat" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridFacturas_RowCreated" Width="100%">
+                    <asp:GridView ID="GridFacturas" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridFacturas_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>

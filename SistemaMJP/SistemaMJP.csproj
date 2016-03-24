@@ -185,7 +185,6 @@
     <Content Include="Images\rolesperfiles.png" />
     <Content Include="Images\seguimiento.png" />
     <Content Include="Ingresar.aspx" />
-    <Content Include="IngresoFacturas.aspx" />
     <Content Include="Ingreso_Productos.aspx" />
     <Content Include="MenuPrincipal.aspx" />
     <Content Include="packages.config" />
@@ -371,13 +370,6 @@
     </Compile>
     <Compile Include="Ingresar.aspx.designer.cs">
       <DependentUpon>Ingresar.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="IngresoFacturas.aspx.cs">
-      <DependentUpon>IngresoFacturas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="IngresoFacturas.aspx.designer.cs">
-      <DependentUpon>IngresoFacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Facturas\Item_Grid_Facturas.cs" />
     <Compile Include="Ingreso_Productos.aspx.cs">
