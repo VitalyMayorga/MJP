@@ -64,25 +64,88 @@
                 <div class="form-group">
 
                      <div class="col-md-3" style="margin-left:9%;">
-                        <asp:ListBox id="ListBoxProgramasAsignados" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
+                        <asp:ListBox id="ListBoxProgramasDisponibles" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>                              
                     </div>  
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="asignar"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                    <asp:LinkButton runat="server" OnClick="asignarProgramas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
                          </div>  
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="desasignar"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                    <asp:LinkButton runat="server" OnClick="desasignarProgramas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
                          </div> 
                     <div class="col-md-3">
-                        <asp:ListBox id="ListBoxProgramas" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
+                        <asp:ListBox id="ListBoxProgramasAsignados" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>
                     </div> 
                                    
                 </div>
                 
+                 <div class="form-group" >
+                     
+                    <label class="col-md-3 control-label" style="margin-left:4%;" >Bodegas Disponibles: </label>
+                    <label class="col-md-4 control-label" >Bodegas Asignados: </label>                          
+                        
+                 </div>
+
+                <div class="form-group">
+
+                     <div class="col-md-3" style="margin-left:9%;">
+                        <asp:ListBox id="ListBoxBodegasDisponibles" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
+                        </asp:ListBox>                              
+                    </div>  
+
+                    <div class="col-md-1">
+                        <div class="form-group style-flecha">
+                    <asp:LinkButton runat="server" OnClick="asignarBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                         </div>  
+                        <div class="form-group style-flecha">
+                    <asp:LinkButton runat="server" OnClick="desasignarBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                        </div> 
+                         </div> 
+                    <div class="col-md-3">
+                        <asp:ListBox id="ListBoxBodegasAsignadas" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
+                        </asp:ListBox>
+                    </div> 
+                                   
+                </div>
+
+                 <div class="form-group" >
+                     
+                    <label class="col-md-3 control-label" style="margin-left:4%;" >SubBodegas Disponibles: </label>
+                    <label class="col-md-4 control-label" >Subbodegas Asignados: </label>                          
+                        
+                 </div>
+
+                <div class="form-group">
+
+                     <div class="col-md-3" style="margin-left:9%;">
+                        <asp:ListBox id="ListBoxSubBodegasDisponibles" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
+                        </asp:ListBox>                              
+                    </div>  
+
+                    <div class="col-md-1">
+                        <div class="form-group style-flecha">
+                    <asp:LinkButton runat="server" OnClick="asignarSubBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                         </div>  
+                        <div class="form-group style-flecha">
+                    <asp:LinkButton runat="server" OnClick="desasignarSubBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                        </div> 
+                         </div> 
+                    <div class="col-md-3">
+                        <asp:ListBox id="ListBoxSubBodegasAsignadas" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
+                        </asp:ListBox>
+                    </div> 
+                                   
+                </div>
+
+                <div class="form-group">
+                    <div class="BotonAgregar col-md-offset-4">
+                        <asp:Button ID="btnAgregar" class="btn btn-default" runat="server" Text="Agregar Usuario" OnClick="agregar" />
+                    </div>
+                </div>
 
              </div>    
         </ContentTemplate>

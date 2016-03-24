@@ -46,6 +46,7 @@ namespace SistemaMJP
         internal void agregarProveedor(string proveedor, string correo, string telefonos) {
             controladoraP.agregarProveedor(proveedor, correo, telefonos);
         }
+        
         //Llama a la controladora de bodegas para obtener el id de una bodega
         internal int obtenerIDBodega(string bodega) {
             return controladoraB.obtenerIDBodega(bodega);

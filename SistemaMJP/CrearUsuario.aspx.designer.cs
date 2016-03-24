@@ -76,6 +76,15 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.DropDownList ListRoles;
         
         /// <summary>
+        /// ListBoxProgramasDisponibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxProgramasDisponibles;
+        
+        /// <summary>
         /// ListBoxProgramasAsignados control.
         /// </summary>
         /// <remarks>
@@ -85,12 +94,48 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.ListBox ListBoxProgramasAsignados;
         
         /// <summary>
-        /// ListBoxProgramas control.
+        /// ListBoxBodegasDisponibles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBoxProgramas;
+        protected global::System.Web.UI.WebControls.ListBox ListBoxBodegasDisponibles;
+        
+        /// <summary>
+        /// ListBoxBodegasAsignadas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxBodegasAsignadas;
+        
+        /// <summary>
+        /// ListBoxSubBodegasDisponibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxSubBodegasDisponibles;
+        
+        /// <summary>
+        /// ListBoxSubBodegasAsignadas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxSubBodegasAsignadas;
+        
+        /// <summary>
+        /// btnAgregar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregar;
     }
 }

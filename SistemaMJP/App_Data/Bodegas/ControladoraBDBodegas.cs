@@ -191,7 +191,13 @@ namespace SistemaMJP
 
             return id;
 
-        }        
+        }
+
+        internal int obtenerIDBodega(string bodega)
+        {
+            int a=1;
+            return a;
+        }
 
     }
 }
