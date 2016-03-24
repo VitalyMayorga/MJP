@@ -48,9 +48,10 @@ namespace SistemaMJP
         }
         //Metodo que se encarga de guardar una factura en la base de datos
         internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF) {
-            string fecha = DateTime.Today.ToString("dd/MM/yyyy");
+            DateTime fecha = DateTime.Today;
             string estado = "Pendiente de aprobación";
             int total = 0;
+            DateTime fhoy = Convert.ToDateTime(fecha);
             using (TransactionScope ts = new TransactionScope())
             {
                 try
@@ -85,11 +86,11 @@ namespace SistemaMJP
         //Metodo que se encarga de llenar los datos de la clase item grid facturas y devolver dicha clase encapsulada
         internal Item_Grid_Facturas LoadItemGridFacturas(SqlDataReader reader) {
             String factura = reader.GetString(0);
-            String fecha = reader.GetString(1);
+            DateTime fecha = reader.GetDateTime(1);
             String proveedor = reader.GetString(2);
             String programa = reader.GetString(3);
             int sb = reader.GetInt32(4);
-            int monto = reader.GetInt32(5);
+            decimal monto = reader.GetDecimal(5);
             String estado = reader.GetString(6);
             Item_Grid_Facturas items = new Item_Grid_Facturas(factura,fecha,proveedor,programa,sb,monto,estado);
             return items;

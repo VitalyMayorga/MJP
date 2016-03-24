@@ -38,7 +38,7 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de Bodegas para retornar la lista de subbodegas del programa
-        internal List<string> getSubBodegas(string programa,string bodega)
+        internal Dictionary<string, int> getSubBodegas(string programa, string bodega)
         {
             return controladoraB.getSubBodegas(programa,bodega);
         }

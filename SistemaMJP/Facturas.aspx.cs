@@ -82,7 +82,13 @@ namespace SistemaMJP
                 datos[1] = fila.Fecha;
                 datos[2] = fila.Proveedor;
                 datos[3] = fila.Programa;
-                datos[4] = fila.SubBodega.ToString();
+                if (fila.SubBodega == 0) {//Si es 0 entonces no muestra subbodega
+                    datos[4] = "--------";
+                }
+                else{
+                    
+                datos[4] = controladora.getNombreSb(fila.SubBodega);
+                }
                 datos[5] = fila.Monto.ToString();
                 datos[6] = fila.Estado;
 
@@ -122,6 +128,16 @@ namespace SistemaMJP
 
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Programa";
+            tabla.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "SubBodega";
+            tabla.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Monto Total";
             tabla.Columns.Add(columna);
 
@@ -135,6 +151,27 @@ namespace SistemaMJP
             GridFacturas.DataBind();
 
             return tabla;
+        }
+
+        protected void gridFacturas_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            GridViewRow row = e.Row;
+            // Intitialize TableCell list
+            List<TableCell> columns = new List<TableCell>();
+            if (e.Row.RowType != DataControlRowType.Pager)
+            {
+                foreach (DataControlField column in GridFacturas.Columns)
+                {
+                    //Get the first Cell /Column
+                    TableCell cell = row.Cells[0];
+                    // Then Remove it after
+                    row.Cells.Remove(cell);
+                    //And Add it to the List Collections
+                    columns.Add(cell);
+                }
+                // Add cells
+                row.Cells.AddRange(columns.ToArray());
+            }
         }
     }
 }

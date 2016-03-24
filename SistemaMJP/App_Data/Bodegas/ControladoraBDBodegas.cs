@@ -16,9 +16,9 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
-        internal List<string> getSubBodegas(string programa, string bodega)
+        internal Dictionary<string,int> getSubBodegas(string programa, string bodega)
         {
-            List<string> subbodegas = new List<string>();
+            Dictionary<string,int> subbodegas = new Dictionary<string,int>();
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -32,7 +32,7 @@ namespace SistemaMJP
 
                 while (reader.Read())
                 {
-                    subbodegas.Add(reader.GetString(0));
+                    subbodegas.Add(reader.GetString(1),reader.GetInt32(0));
 
                 }
                 reader.Close();
@@ -167,7 +167,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de obtener el id de una bodega, dado su nombre
-        public int cargarBodegas(string bodega)
+        internal int obtenerIDBodega(string bodega)
         {
             int id = 0;
             try
@@ -176,6 +176,7 @@ namespace SistemaMJP
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "P_Obtener_id_bodega";
+                cmd.Parameters.AddWithValue("@nombre", bodega);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
@@ -191,7 +192,36 @@ namespace SistemaMJP
 
             return id;
 
-        }        
+        }
 
+        //Metodo que se encarga de obtener el nombre de una subbodega,dado su id
+        internal string getNombreSb(int id)
+        {
+            string nombre = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_nombre_SubBodega";
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                nombre = reader.GetString(0);
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return nombre;
+
+        }
+
+        
     }
 }
