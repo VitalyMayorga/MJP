@@ -45,7 +45,6 @@ namespace SistemaMJP
             }
 
             return subbodegas;
-
         }
 
         //Metodo que se encarga de devolver la lista de todas las Bodegas en el sistema
@@ -74,7 +73,6 @@ namespace SistemaMJP
             }
 
             return bodega;
-
         }        
 
         //Metodo que se encarga de agregar las bodegas al sistema
@@ -191,15 +189,8 @@ namespace SistemaMJP
             }
 
             return id;
-
         }
 
-<<<<<<< HEAD
-        internal int obtenerIDBodega(string bodega)
-        {
-            int a=1;
-            return a;
-=======
         //Metodo que se encarga de obtener el nombre de una subbodega,dado su id
         internal string getNombreSb(int id)
         {
@@ -225,10 +216,7 @@ namespace SistemaMJP
             }
 
             return nombre;
-
->>>>>>> origin/master
         }
-
         
     }
 }
