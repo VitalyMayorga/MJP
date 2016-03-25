@@ -49,22 +49,22 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorPresentacion;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtCantidadE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtCantidadE;
         
         /// <summary>
-        /// Div1 control.
+        /// MsjErrorCantEmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorCantEmp;
         
         /// <summary>
         /// txtCantidadT control.
@@ -94,13 +94,13 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.TextBox txtPrecioT;
         
         /// <summary>
-        /// esActivo control.
+        /// MsjErrorPrecio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton esActivo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorPrecio;
         
         /// <summary>
         /// noActivo control.
@@ -112,13 +112,22 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.RadioButton noActivo;
         
         /// <summary>
-        /// txtFrom control.
+        /// esActivo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFrom;
+        protected global::System.Web.UI.WebControls.RadioButton esActivo;
+        
+        /// <summary>
+        /// txtFechaV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFechaV;
         
         /// <summary>
         /// formActivo control.
@@ -130,58 +139,58 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formActivo;
         
         /// <summary>
-        /// TextBox3 control.
+        /// txtNumActivo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox txtNumActivo;
         
         /// <summary>
-        /// MensajeErrorNumActivo control.
+        /// MsjErrorNumActivo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeErrorNumActivo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorNumActivo;
         
         /// <summary>
-        /// TextBox4 control.
+        /// txtFuncionario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox txtFuncionario;
         
         /// <summary>
-        /// MensajeErrorFuncionario control.
+        /// MsjErrorFuncionario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeErrorFuncionario;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFuncionario;
         
         /// <summary>
-        /// TextBox2 control.
+        /// txtCedula control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtCedula;
         
         /// <summary>
-        /// MensajeErrorCedula control.
+        /// MsjErrorCedula control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeErrorCedula;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorCedula;
         
         /// <summary>
         /// btnAceptar control.

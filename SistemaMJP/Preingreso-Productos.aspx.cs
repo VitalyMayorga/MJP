@@ -19,7 +19,7 @@ namespace SistemaMJP
         public static string correo;
         public static string telefonos;
         public static bool nuevoProveedor = false;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -51,7 +51,9 @@ namespace SistemaMJP
             if (tieneSubBodega) {
                 subBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
             }
-            proveedor = ListaProveedores.Items[ListaProveedores.SelectedIndex].Text;
+            if (!nuevoProveedor) {
+                proveedor = ListaProveedores.Items[ListaProveedores.SelectedIndex].Text;
+            }
             if (ingresoF.Checked) {
                 numFactura = txtNumFactura.Text;
                 numFactura = numFactura.Replace(" ", "");//Elimino espacios en blanco para saber si se digito numero factura o no
@@ -101,7 +103,7 @@ namespace SistemaMJP
                     MsjErrorFactura.Style.Add("display", "block");
                 
             }
-            else if(!nuevoProveedor && proveedor.Equals("---Elija un Proveedor---")){
+            else if(ingresoF.Checked && !nuevoProveedor && proveedor.Equals("---Elija un Proveedor---")){
                 MsjErrorProveedor.Style.Add("display","block");
                 
             }
@@ -193,21 +195,23 @@ namespace SistemaMJP
                 MsjErrorSubPartida.Style.Add("display", "none");
             }
         }
-        //Si está seleccionado Mercaderia Inicial,esconde el div de la inserción de una factura
+        //Si está seleccionado Mercaderia Inicial,esconde el div de la inserción de una factura y proveedor
         protected void rbMercaderiaI(object sender, EventArgs e)
         {
             if (mercaderiaI.Checked)
             {
                 formFacturas.Style.Add("display", "none");
+                formProveedor.Style.Add("display", "none");
             }
         }
 
-        //Si está seleccionado Facturas,muestra el div de numero de facturas
+        //Si está seleccionado Facturas,muestra el div de numero de facturas y proveedor
         protected void rbIngresoF(object sender, EventArgs e)
         {
             if (mercaderiaI.Checked)
             {
                 formFacturas.Style.Add("display", "block");
+                formProveedor.Style.Add("display", "none");
             }
         }
         //Redirecciona al menu principal
@@ -246,7 +250,7 @@ namespace SistemaMJP
         protected void aceptarProveedor(object sender, EventArgs e)
         {
             string tmp = txtNombreProveedor.Text.Replace(" ", "");
-            proveedor = txtNombreProveedor.Text.Replace(" ", "");
+            proveedor = txtNombreProveedor.Text;
             correo = txtCorreo.Text.Replace(" ", "");
             telefonos = txtTelefonos.Text.Replace(" ", "");
             if (tmp.Equals(""))

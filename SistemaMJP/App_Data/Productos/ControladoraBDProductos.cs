@@ -45,7 +45,7 @@ namespace SistemaMJP
             return programa;
 
         }
-
+       //Obtiene la lista de productos que comienzan con el prefijo dado
         [WebMethod]
         public static List<string> getProductos(string prefix)
         {

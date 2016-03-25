@@ -39,7 +39,7 @@ namespace SistemaMJP
             return controladoraB.getBodegas();
         }
         //Llama a la controladora de Base de datos de bodegas, para obtener las subbodegas de un programa presupuestario en específico y la bodega específica
-        internal List<string> getSubBodegas(string programa, string bodega)
+        internal Dictionary<string,int> getSubBodegas(string programa, string bodega)
         {
             return controladoraB.getSubBodegas(programa, bodega);
         }
