@@ -49,19 +49,19 @@
                 <div class="form-group" >
                     <label class="col-md-2 control-label" >Rol: </label>
                     <div class="col-md-10">
-                        <asp:DropDownList ID = "ListRoles" class="form-control dropdown cmbsize" runat="server">                                
+                        <asp:DropDownList ID = "ListRoles" class="form-control dropdown cmbsize" OnSelectedIndexChanged="mostrarListBox" AutoPostBack="true" runat="server">                                
                         </asp:DropDownList>
                     </div>
                 </div>
 
-                 <div class="form-group" >
+                 <div class="form-group" style="display: none;" id="labelPrograma" runat="server">
                      
                     <label class="col-md-4 control-label" >Programas Presupuestarios Disponibles: </label>
                     <label class="col-md-4 control-label" >Programas Presupuestarios Asignados: </label>                          
                         
                  </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display: none;" id="listBoxPrograma" runat="server">
 
                      <div class="col-md-3" style="margin-left:9%;">
                         <asp:ListBox id="ListBoxProgramasDisponibles" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
@@ -81,16 +81,24 @@
                         </asp:ListBox>
                     </div> 
                                    
+                </div>                
+                 
+                <div class="form-group" style="display: none;" id="listBodega" runat="server">
+                    <label class="col-md-2 control-label" >Bodega: </label>
+                    <div class="col-md-10">
+                        <asp:DropDownList ID = "ListBodegas" class="form-control dropdown cmbsize" runat="server" >                                
+                        </asp:DropDownList>
+                    </div>
                 </div>
                 
-                 <div class="form-group" >
+                <div class="form-group" style="display: none;" id="labelBodegas" runat="server">
                      
                     <label class="col-md-3 control-label" style="margin-left:4%;" >Bodegas Disponibles: </label>
                     <label class="col-md-4 control-label" >Bodegas Asignados: </label>                          
                         
                  </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display: none;" id="listBoxBodegas" runat="server">
 
                      <div class="col-md-3" style="margin-left:9%;">
                         <asp:ListBox id="ListBoxBodegasDisponibles" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
@@ -112,14 +120,14 @@
                                    
                 </div>
 
-                 <div class="form-group" >
+                 <div class="form-group" style="display: none;" id="labelSubBodegas" runat="server">
                      
                     <label class="col-md-3 control-label" style="margin-left:4%;" >SubBodegas Disponibles: </label>
                     <label class="col-md-4 control-label" >Subbodegas Asignados: </label>                          
                         
                  </div>
-
-                <div class="form-group">
+                 
+                <div class="form-group" style="display: none;" id="listBoxSubBodegas" runat="server">
 
                      <div class="col-md-3" style="margin-left:9%;">
                         <asp:ListBox id="ListBoxSubBodegasDisponibles" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">

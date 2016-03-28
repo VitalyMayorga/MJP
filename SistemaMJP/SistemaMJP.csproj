@@ -297,6 +297,8 @@
     </Compile>
     <Compile Include="App_Data\RolesPerfiles\ControladoraBDRolesPerfiles.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraRolesPerfiles.cs" />
+    <Compile Include="App_Data\Usuarios\ControladoraBDUsuarios.cs" />
+    <Compile Include="App_Data\Usuarios\ControladoraUsuarios.cs" />
     <Compile Include="App_Data\Usuarios\Item_Grid_Usuarios.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

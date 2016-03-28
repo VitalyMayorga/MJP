@@ -76,6 +76,24 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.DropDownList ListRoles;
         
         /// <summary>
+        /// labelPrograma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelPrograma;
+        
+        /// <summary>
+        /// listBoxPrograma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl listBoxPrograma;
+        
+        /// <summary>
         /// ListBoxProgramasDisponibles control.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,42 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.ListBox ListBoxProgramasAsignados;
         
         /// <summary>
+        /// listBodega control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl listBodega;
+        
+        /// <summary>
+        /// ListBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ListBodegas;
+        
+        /// <summary>
+        /// labelBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelBodegas;
+        
+        /// <summary>
+        /// listBoxBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl listBoxBodegas;
+        
+        /// <summary>
         /// ListBoxBodegasDisponibles control.
         /// </summary>
         /// <remarks>
@@ -110,6 +164,24 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox ListBoxBodegasAsignadas;
+        
+        /// <summary>
+        /// labelSubBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelSubBodegas;
+        
+        /// <summary>
+        /// listBoxSubBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl listBoxSubBodegas;
         
         /// <summary>
         /// ListBoxSubBodegasDisponibles control.
