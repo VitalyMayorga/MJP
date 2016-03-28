@@ -57,6 +57,12 @@ namespace SistemaMJP
             controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF);
         
         }
+        //Recibe un objeto de datos para encapsularlo y enviar a agregar a la controladora de base de datos de productos
+        internal void agregarProducto(object[] producto) {
+            EntidadProductos productoEncapsulado = new EntidadProductos(producto);
+
+            controladoraBD.agregarProducto(productoEncapsulado);
+        }
         [WebMethod]
         public static List<string> getProductos(string prefix) {
             return ControladoraBDProductos.getProductos(prefix);

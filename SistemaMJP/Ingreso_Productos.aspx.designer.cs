@@ -127,7 +127,25 @@ namespace SistemaMJP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFechaV;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaV;
+        
+        /// <summary>
+        /// txtFechaC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaC;
+        
+        /// <summary>
+        /// txtFechaG control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaG;
         
         /// <summary>
         /// formActivo control.

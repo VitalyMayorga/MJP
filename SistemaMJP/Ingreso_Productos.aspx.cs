@@ -42,8 +42,56 @@ namespace SistemaMJP
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
         protected void aceptar(object sender, EventArgs e)
         {
-            if (validar()) {
-            
+            if (validar()) {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
+                decimal total = 0;
+                DateTime fechaV;
+                DateTime fechaG;
+                DateTime fechaC;
+                string descripcion = txtDescripcion.Text;
+                string presentacionEmpaque = txtPresentacion.Text;
+                int cantidadEmpaque = Convert.ToInt32(txtCantidadE.Text);
+                decimal precioU = Convert.ToDecimal(txtPrecioT.Text);
+                int cantidad = Convert.ToInt32(txtCantidadT.Text);
+                bool activo = false;
+                string numActivo = txtNumActivo.Text;
+                string funcionario = txtFuncionario.Text;
+                string cedula = txtCedula.Text;
+                if (esActivo.Checked) {
+                    activo = true;
+                }
+                
+                if (!txtFechaV.Text.Equals("")) {
+                    fechaV = Convert.ToDateTime(txtFechaV.Text);
+                
+                }
+                if (!txtFechaC.Text.Equals(""))
+                {
+                    fechaC = Convert.ToDateTime(txtFechaV.Text);
+
+                }
+                if (!txtFechaG.Text.Equals(""))
+                {
+                    fechaG = Convert.ToDateTime(txtFechaV.Text);
+
+                }
+                object[] nuevoProducto = new object[6];
+                nuevoProducto[0] = descripcion;
+                nuevoProducto[1] = presentacionEmpaque;
+                nuevoProducto[2] = activo;
+                nuevoProducto[3] = precioU;
+                nuevoProducto[4] = cantidadEmpaque;
+                nuevoProducto[5] = subpartida;
+
+                if (numFactura != null)
+                {
+
+                    total = precioU * cantidad;
+
+
+                }
+                else {
+                    controladora.agregarProducto(nuevoProducto);
+                }
             
             }
         }

@@ -77,69 +77,85 @@
                     <label class="col-md-2 control-label">Fecha Vencimiento</label>
                     <div class='input-group date col-md-10' style="max-width: 320px">
 
-                        <input type='text' id="txtFechaV" class="form-control" runat="server"  />
+                        <asp:TextBox type='text' id="txtFechaV" class="form-control" runat="server" ></asp:TextBox>
 
-
-                    </div>
-
-
-                </div>
-                <div id="formActivo" runat="server" style="display: none">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Número de Activo</label>
-
-                        <div class="col-md-10">
-                            <asp:TextBox ID="txtNumActivo" runat="server" placeholder="Número de Activo" class="form-control text-box single-line"></asp:TextBox>
-                        </div>
-                        <div style="display: none;" id="MsjErrorNumActivo" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo">Debe ingresar un número de Activo</label>
-                        </div>
 
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Funcionario Asignado</label>
+                        <label class="col-md-2 control-label">Fecha Caducidad</label>
+                        <div class='input-group date col-md-10' style="max-width: 320px">
 
-                        <div class="col-md-10">
-                            <asp:TextBox ID="txtFuncionario" runat="server" placeholder="Funcionario" class="form-control text-box single-line"></asp:TextBox>
+                            <asp:TextBox type='text' id="txtFechaC" class="form-control" runat="server"></asp:TextBox>
+
+
                         </div>
-                        <div style="display: none;" id="MsjErrorFuncionario" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo">Debe ingresar un funcionario</label>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Fecha Garantia</label>
+                            <div class='input-group date col-md-10' style="max-width: 320px">
+
+                                <asp:TextBox type='text' id="txtFechaG" class="form-control" runat="server"><</asp:TextBox>
+
+
+                            </div>
+
+
+                        </div>
+                        <div id="formActivo" runat="server" style="display: none">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Número de Activo</label>
+
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtNumActivo" runat="server" placeholder="Número de Activo" class="form-control text-box single-line"></asp:TextBox>
+                                </div>
+                                <div style="display: none;" id="MsjErrorNumActivo" class="col-md-offset-2" runat="server">
+                                    <label class="msjErroneo">Debe ingresar un número de Activo</label>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Funcionario Asignado</label>
+
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtFuncionario" runat="server" placeholder="Funcionario" class="form-control text-box single-line"></asp:TextBox>
+                                </div>
+                                <div style="display: none;" id="MsjErrorFuncionario" class="col-md-offset-2" runat="server">
+                                    <label class="msjErroneo">Debe ingresar un funcionario</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Cédula Funcionario</label>
+
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtCedula" runat="server" placeholder="Cédula" class="form-control text-box single-line"></asp:TextBox>
+                                </div>
+                                <div style="display: none;" id="MsjErrorCedula" class="col-md-offset-2" runat="server">
+                                    <label class="msjErroneo">Debe ingresar una cedula</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-2 alinearDerecha">
+                                <div class="BotonIngreso">
+                                    <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="BotonIngreso">
+                                    <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="BotonIngreso">
+                                    <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Cédula Funcionario</label>
-
-                        <div class="col-md-10">
-                            <asp:TextBox ID="txtCedula" runat="server" placeholder="Cédula" class="form-control text-box single-line"></asp:TextBox>
-                        </div>
-                        <div style="display: none;" id="MsjErrorCedula" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo">Debe ingresar una cedula</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
-                        </div>
-
-                    </div>
-                    <div class="col-md-1">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
-                        </div>
-
-                    </div>
-                    <div class="col-md-3">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 
@@ -170,19 +186,45 @@
                 duration: 'fast'
             });
 
+            $("#<%= txtFechaC.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+            $("#<%= txtFechaG.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
         });
 
         var prm = Sys.WebForms.PageRequestManager.getInstance();
 
         prm.add_endRequest(function () {
-                $("#<%= txtFechaV.ClientID %>").datepicker({
-                    showmonth: true,
-                    autoSize: true,
-                    showAnim: 'slideDown',
-                    duration: 'fast'
-                });
+            $("#<%= txtFechaV.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+            $("#<%= txtFechaC.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
 
-            
+            $("#<%= txtFechaG.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
         });
 
     </script>
@@ -213,9 +255,7 @@
                         }
                     });
                 },
-                select: function (e, i) {
-                    $("[id$=id_producto]").val(i.item.val);
-                },
+                
                 minLength: 1
             });
         });
@@ -246,9 +286,7 @@
                         }
                     });
                 },
-                select: function (e, i) {
-                    $("[id$=id_producto]").val(i.item.val);
-                },
+                
                 minLength: 1
             });
         });
@@ -294,7 +332,7 @@
             $("#<%= txtPresentacion.ClientID %>").keydown(function () {
                 $("#<%= MsjErrorPresentacion.ClientID %>").css('display', 'none');
 
-             });
+            });
 
             $("#<%= txtCantidadE.ClientID %>").keydown(function () {
                 $("#<%= MsjErrorCantEmp.ClientID %>").css('display', 'none');
