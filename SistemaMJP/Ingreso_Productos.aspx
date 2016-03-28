@@ -1,4 +1,4 @@
-﻿         <%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso_Productos.aspx.cs" Inherits="SistemaMJP.Ingreso_Productos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso_Productos.aspx.cs" Inherits="SistemaMJP.Ingreso_Productos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
     <asp:UpdatePanel runat="server">
@@ -32,9 +32,9 @@
                     <label class="col-md-2 control-label">Cantidad por empaque</label>
 
                     <div class="col-md-10">
-                        <asp:TextBox ID="TextBox1" runat="server" placeholder="Ej: 10" class="form-control text-box single-line"></asp:TextBox>
+                        <asp:TextBox ID="txtCantidadE" runat="server" placeholder="Ej: 10" class="form-control text-box single-line"></asp:TextBox>
                     </div>
-                    <div style="display: none;" id="Div1" class="col-md-offset-2" runat="server">
+                    <div style="display: none;" id="MsjErrorCantEmp" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe ingresar la cantidad por empaque</label>
                     </div>
 
@@ -51,92 +51,111 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Precio Total</label>
+                    <label class="col-md-2 control-label">Precio Unitario</label>
                     <div class="col-md-10">
                         <asp:TextBox ID="txtPrecioT" runat="server" class="form-control text-box single-line"></asp:TextBox>
 
+                    </div>
+                    <div style="display: none;" id="MsjErrorPrecio" class="col-md-offset-2" runat="server">
+                        <label class="msjErroneo">Debe ingresar el precio Unitario</label>
                     </div>
                 </div>
                 <div class="form-group">
 
                     <div class="col-md-3 alinearDerecha">
-                        <asp:RadioButton ID="esActivo" runat="server" GroupName="tipoP" OnCheckedChanged="rbNo" AutoPostBack="true" />
-                        <label class="control-label" for="ingresoF">No es un Activo</label>
+                        <asp:RadioButton ID="noActivo" runat="server" GroupName="tipoP" OnCheckedChanged="rbNo" AutoPostBack="true" />
+                        <label class="control-label" for="noActivo">No es un Activo</label>
                     </div>
                     <div class="col-md-5">
-                        <asp:RadioButton ID="noActivo" runat="server" GroupName="tipoP" OnCheckedChanged="rbSi" AutoPostBack="true" />
-                        <label class="control-label" for="mercaderiaI">Es un Activo</label>
+                        <asp:RadioButton ID="esActivo" runat="server" GroupName="tipoP" OnCheckedChanged="rbSi" AutoPostBack="true" />
+                        <label class="control-label" for="esActivo">Es un Activo</label>
                     </div>
                 </div>
                 <h4 class="Encabezado">Datos opcionales</h4>
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">Fecha Vencimiento</label>
-                    <div class='input-group date col-md-10' style="max-width:320px" >
-                        
-                            <input type='text' class="form-control" runat="server" id="txtFrom"/>
-                                      
-                        
-                    </div>
+                    <div class='input-group date col-md-10' style="max-width: 320px">
 
+                        <asp:TextBox type='text' id="txtFechaV" class="form-control" runat="server" ></asp:TextBox>
 
-                </div>
-                <div id="formActivo" runat="server">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Número de Activo</label>
-
-                        <div class="col-md-10">
-                            <asp:TextBox ID="TextBox3" runat="server" placeholder="Número de Activo" class="form-control text-box single-line"></asp:TextBox>
-                        </div>
-                        <div style="display: none;" id="MensajeErrorNumActivo" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo">Debe ingresar un número de Activo</label>
-                        </div>
 
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Funcionario Asignado</label>
+                        <label class="col-md-2 control-label">Fecha Caducidad</label>
+                        <div class='input-group date col-md-10' style="max-width: 320px">
 
-                        <div class="col-md-10">
-                            <asp:TextBox ID="TextBox4" runat="server" placeholder="Funcionario" class="form-control text-box single-line"></asp:TextBox>
+                            <asp:TextBox type='text' id="txtFechaC" class="form-control" runat="server"></asp:TextBox>
+
+
                         </div>
-                        <div style="display: none;" id="MensajeErrorFuncionario" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo">Debe ingresar un funcionario</label>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Fecha Garantia</label>
+                            <div class='input-group date col-md-10' style="max-width: 320px">
+
+                                <asp:TextBox type='text' id="txtFechaG" class="form-control" runat="server"><</asp:TextBox>
+
+
+                            </div>
+
+
+                        </div>
+                        <div id="formActivo" runat="server" style="display: none">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Número de Activo</label>
+
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtNumActivo" runat="server" placeholder="Número de Activo" class="form-control text-box single-line"></asp:TextBox>
+                                </div>
+                                <div style="display: none;" id="MsjErrorNumActivo" class="col-md-offset-2" runat="server">
+                                    <label class="msjErroneo">Debe ingresar un número de Activo</label>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Funcionario Asignado</label>
+
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtFuncionario" runat="server" placeholder="Funcionario" class="form-control text-box single-line"></asp:TextBox>
+                                </div>
+                                <div style="display: none;" id="MsjErrorFuncionario" class="col-md-offset-2" runat="server">
+                                    <label class="msjErroneo">Debe ingresar un funcionario</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Cédula Funcionario</label>
+
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtCedula" runat="server" placeholder="Cédula" class="form-control text-box single-line"></asp:TextBox>
+                                </div>
+                                <div style="display: none;" id="MsjErrorCedula" class="col-md-offset-2" runat="server">
+                                    <label class="msjErroneo">Debe ingresar una cedula</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-2 alinearDerecha">
+                                <div class="BotonIngreso">
+                                    <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="BotonIngreso">
+                                    <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="BotonIngreso">
+                                    <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Cédula Funcionario</label>
-
-                        <div class="col-md-10">
-                            <asp:TextBox ID="TextBox2" runat="server" placeholder="Cédula" class="form-control text-box single-line"></asp:TextBox>
-                        </div>
-                        <div style="display: none;" id="MensajeErrorCedula" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo">Debe ingresar una cedula</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
-                        </div>
-
-                    </div>
-                    <div class="col-md-1">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
-                        </div>
-
-                    </div>
-                    <div class="col-md-3">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 
@@ -159,49 +178,176 @@
             yearSuffix: ''
         };
         $.datepicker.setDefaults($.datepicker.regional['es']);
-        $(function () {
-            $("#<%= txtFrom.ClientID %>").datepicker({
-                 showmonth: true,
-                 autoSize: true,
-                 showAnim: 'slideDown',
-                 duration: 'fast'
-             });
-                        
-         });
+        $(document).ready(function () {
+            $("#<%= txtFechaV.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+            $("#<%= txtFechaC.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+            $("#<%= txtFechaG.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+        });
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        prm.add_endRequest(function () {
+            $("#<%= txtFechaV.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+            $("#<%= txtFechaC.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+            $("#<%= txtFechaG.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+        });
 
     </script>
 
     <script type="text/javascript">
-        $(function () {
+        $(document).ready(function () {
             $("[id$=<%= txtDescripcion.ClientID %>]").autocomplete({
                 source: function (request, response) {
                     $.ajax({
                         url: '<%=ResolveUrl("~/Ingreso_Productos.aspx/getProductos") %>',
-                    data: "{ 'prefix': '" + request.term + "'}",
-                    dataType: "json",
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        response($.map(data.d, function (item) {
-                            return {
-                                label: item.split('-')[0],
-                                val: item.split('-')[1]
-                            }
-                        }))
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
-                    },
-                    failure: function (response) {
-                        alert(response.responseText);
-                    }
-                });
-            },
-            select: function (e, i) {
-                $("[id$=id_producto]").val(i.item.val);
-            },
-            minLength: 1
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data.d, function (item) {
+                                return {
+                                    label: item.split('-')[0],
+                                    val: item.split('-')[1]
+                                }
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                
+                minLength: 1
+            });
         });
-    });
-</script>
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        prm.add_endRequest(function () {
+            $("[id$=<%= txtDescripcion.ClientID %>]").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '<%=ResolveUrl("~/Ingreso_Productos.aspx/getProductos") %>',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data.d, function (item) {
+                                return {
+                                    label: item.split('-')[0],
+                                    val: item.split('-')[1]
+                                }
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                
+                minLength: 1
+            });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#<%= txtDescripcion.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorDescripcion.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtPresentacion.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorPresentacion.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtCantidadE.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorCantEmp.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtCantidadT.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorCantidad.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtPrecioT.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorPrecio.ClientID %>").css('display', 'none');
+
+            });
+        });
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        prm.add_endRequest(function () {
+            $("#<%= txtDescripcion.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorDescripcion.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtPresentacion.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorPresentacion.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtCantidadE.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorCantEmp.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtCantidadT.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorCantidad.ClientID %>").css('display', 'none');
+
+            });
+
+            $("#<%= txtPrecioT.ClientID %>").keydown(function () {
+                $("#<%= MsjErrorPrecio.ClientID %>").css('display', 'none');
+
+            });
+        });
+    </script>
 </asp:Content>

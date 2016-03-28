@@ -49,7 +49,7 @@ namespace SistemaMJP
         //Metodo que se encarga de guardar una factura en la base de datos
         internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF) {
             DateTime fecha = DateTime.Today;
-            string estado = "Pendiente de aprobación";
+            string estado = "En edición";
             int total = 0;
             DateTime fhoy = Convert.ToDateTime(fecha);
             using (TransactionScope ts = new TransactionScope())

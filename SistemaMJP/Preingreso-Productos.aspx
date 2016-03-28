@@ -68,7 +68,7 @@
                         <label class="msjErroneo">Debe ingresar un número de factura</label>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="formProveedor" runat="server">
                     <label class="col-md-2 control-label">Proveedor</label>
                     <div class="col-md-3">
                         <asp:DropDownList id="ListaProveedores" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarProveedores" AutoPostBack="true"></asp:DropDownList>
@@ -78,6 +78,9 @@
                         <asp:Button ID="nuevoProveedor" class="btn btn-default" runat="server" Text="Nuevo Proveedor" data-toggle="modal" data-target="#ProveedorModal" />
 
                     </div>
+                    
+                </div>
+                <div class="form-group">
                     <div style="display: none;" id="MsjErrorProveedor" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe elegir un Proveedor</label>
                     </div>

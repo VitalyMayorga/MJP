@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Configuration;
+using System.Transactions;
 namespace SistemaMJP
 {
     public class ControladoraBDProductos
@@ -45,7 +46,42 @@ namespace SistemaMJP
             return programa;
 
         }
+        //Recibe el producto encapsulado y procede a guardarlo en la BD
+        internal void agregarProducto(EntidadProductos producto) {
+            int valor = 0;
+            if (producto.Activo) {
+                valor = 1;
+            }
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_Producto";
+                    cmd.Parameters.AddWithValue("@descripcion", producto.Descripcion);
+                    cmd.Parameters.AddWithValue("@presentacion", producto.Presentacion);
+                    cmd.Parameters.AddWithValue("@activo", valor);
+                    cmd.Parameters.AddWithValue("@precioU", producto.PrecioU);
+                    cmd.Parameters.AddWithValue("@cantidad", producto.CantidadEmpaque);
+                    cmd.Parameters.AddWithValue("@catalogo", producto.Catalogo);
+                    
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
+            }
+        
+        }
+
+       //Obtiene la lista de productos que comienzan con el prefijo dado
         [WebMethod]
         public static List<string> getProductos(string prefix)
         {
@@ -67,7 +103,7 @@ namespace SistemaMJP
                     {
                         while (sdr.Read())
                         {
-                            productos.Add(string.Format("{0}-{1}", sdr["descripcion"], sdr["id_producto"]));
+                            productos.Add(string.Format("{0}", sdr["descripcion"]));
                         }
                     }
                     conn.Close();
