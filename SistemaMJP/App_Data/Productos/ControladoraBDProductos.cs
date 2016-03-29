@@ -47,8 +47,9 @@ namespace SistemaMJP
 
         }
         //Recibe el producto encapsulado y procede a guardarlo en la BD
-        internal void agregarProducto(EntidadProductos producto) {
+        internal bool agregarProducto(EntidadProductos producto) {
             int valor = 0;
+            bool agregado = false;
             if (producto.Activo) {
                 valor = 1;
             }
@@ -71,6 +72,7 @@ namespace SistemaMJP
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
+                    agregado = true;
                 }
                 catch (Exception)
                 {
@@ -78,9 +80,80 @@ namespace SistemaMJP
                 }
 
             }
+            return agregado;
         
         }
+        //Metodo que se encarga de del producto buscado en el sistema
+        public int obtenerIDProducto(string descripcion, int cantidad)
+        {
+            int id = -1;//inicializo el id
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_ID_Producto";
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@cantE", cantidad);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
+            return id;
+
+        }
+        
+        //Recibe la informacion del producto para asignarlo a la bodega programa  y subbodega correspondiente.
+        internal void agregarProductoABodega(int bodega,int producto,int programa,int subbodega,int cantidad, Nullable<DateTime> fechaG,Nullable<DateTime>fechaC,Nullable<DateTime>fechaV)
+        {
+            
+             using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_Informacion_Producto";
+                    cmd.Parameters.AddWithValue("@bodega", bodega);
+                    cmd.Parameters.AddWithValue("@producto", producto);
+                    cmd.Parameters.AddWithValue("@programa", programa);
+                    cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    if (fechaG.HasValue) {
+                        cmd.Parameters.AddWithValue("@fechaG", fechaG);
+                    }
+                    if (fechaC.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@fechaC", fechaC);
+                    }
+                    if (fechaV.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@fechaV", fechaV);
+                    }
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                    
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+            
+
+        }
        //Obtiene la lista de productos que comienzan con el prefijo dado
         [WebMethod]
         public static List<string> getProductos(string prefix)

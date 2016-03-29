@@ -58,11 +58,18 @@ namespace SistemaMJP
         
         }
         //Recibe un objeto de datos para encapsularlo y enviar a agregar a la controladora de base de datos de productos
-        internal void agregarProducto(object[] producto) {
+        internal bool agregarProducto(object[] producto) {
             EntidadProductos productoEncapsulado = new EntidadProductos(producto);
 
-            controladoraBD.agregarProducto(productoEncapsulado);
+           return controladoraBD.agregarProducto(productoEncapsulado);
         }
+        //Metodo que se encarga primero de obtener el id del producto en la base de datos para luego guardarlo en la tabla informacion producto
+        internal void agregarProductoABodega(int bodega, string descripcion, int cantEmpaque, int programa, int subBodega, int cantidad, Nullable<DateTime> fechaG, Nullable<DateTime> fechaC, Nullable<DateTime> fechaV)
+        {
+            int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantEmpaque);
+            controladoraBD.agregarProductoABodega(bodega, idProducto, programa, subBodega, cantidad, fechaG, fechaC, fechaV);
+        }
+
         [WebMethod]
         public static List<string> getProductos(string prefix) {
             return ControladoraBDProductos.getProductos(prefix);

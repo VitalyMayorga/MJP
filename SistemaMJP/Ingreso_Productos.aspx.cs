@@ -10,7 +10,7 @@ namespace SistemaMJP
 {
     public partial class Ingreso_Productos : System.Web.UI.Page
     {
-        public static string bodega;
+        public static int bodega;
         public static int subbodega;
         public static int programa;
         public static string numFactura;
@@ -25,7 +25,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusión Pedidos"))
+                else if (!rol.Equals("Inclusion Pedidos"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }
@@ -42,12 +42,21 @@ namespace SistemaMJP
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
         protected void aceptar(object sender, EventArgs e)
         {
+            bool correcto = false;//Para saber si agregó bien el producto
             if (validar()) {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 decimal total = 0;
-                DateTime fechaV;
-                DateTime fechaG;
-                DateTime fechaC;
+                Nullable<DateTime> fechaV = null;
+                Nullable<DateTime> fechaG = null;
+                Nullable<DateTime> fechaC = null;
                 string descripcion = txtDescripcion.Text;
+                //Se modifica la descripcion para que la primer letra se mayúscula y no hayan tildes
+                descripcion = descripcion.ToLower();
+                descripcion = descripcion.Replace("á", "a");
+                descripcion = descripcion.Replace("é", "e");
+                descripcion = descripcion.Replace("í", "i");
+                descripcion = descripcion.Replace("ó", "o");
+                descripcion = descripcion.Replace("ú", "u");
+                descripcion = descripcion.First().ToString().ToUpper() + descripcion.Substring(1);
                 string presentacionEmpaque = txtPresentacion.Text;
                 int cantidadEmpaque = Convert.ToInt32(txtCantidadE.Text);
                 decimal precioU = Convert.ToDecimal(txtPrecioT.Text);
@@ -90,9 +99,26 @@ namespace SistemaMJP
 
                 }
                 else {
-                    controladora.agregarProducto(nuevoProducto);
+                    correcto = controladora.agregarProducto(nuevoProducto);
+                    
                 }
-            
+                if (correcto) {//Si se ingreso el producto,se procede a guardar el producto en la tabla Informacion producto
+                    controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto "+descripcion+" agregado con éxito')", true);
+                }
+                //Al final se limpian los campos
+                txtDescripcion.Text = "";
+                txtPresentacion.Text = "";
+                txtCantidadE.Text = "";
+                txtCantidadT.Text = "";
+                txtPrecioT.Text = "";
+                txtFechaC.Text = "";
+                txtFechaG.Text = "";
+                txtFechaV.Text = "";
+                txtFuncionario.Text = "";
+                txtCedula.Text = "";
+                txtNumActivo.Text = "";
+
             }
         }
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página factura_detalles

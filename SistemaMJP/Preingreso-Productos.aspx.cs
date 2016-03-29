@@ -111,7 +111,7 @@ namespace SistemaMJP
             {//Se envían los datos necesarios para empezar a ingresar productos
                 int idBodega = controladora.obtenerIDBodega(bodega);
 
-                Ingreso_Productos.bodega = bodega;
+                Ingreso_Productos.bodega = idBodega;
                 Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
                 Ingreso_Productos.subpartida = Convert.ToInt32(ListaSubPartidas.SelectedValue);
                 int idSubBodega=0;//Por default, subbodega 0 = No hay subbodega asignada

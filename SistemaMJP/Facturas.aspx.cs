@@ -21,7 +21,7 @@ namespace SistemaMJP
                 if (Session["correoInstitucional"] == null) {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusión Pedidos"))
+                else if (!rol.Equals("Inclusion Pedidos"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }
