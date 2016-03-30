@@ -33,19 +33,19 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de Base de datos de bodegas, para agregar nuevas bodegas al sistema 
-        internal void AgregarBodega(string prefijo,string bodega)
+        internal void agregarBodega(string prefijo,string bodega)
         {
             controladoraBD.agregarBodega(prefijo,bodega);
         }
 
         //Llama a la controladora de Base de datos de bodegas, para agregar nuevas subBodegas al sistema
-        internal void AgregarSubBodega(string subBodega, int idPrograma)
+        internal void agregarSubBodega(string subBodega, int idPrograma)
         {
             controladoraBD.agregarSubBodega(subBodega, idPrograma);
         }
 
         //Llama a la controladora de Base de datos de bodegas, para agregar la relacion entre bodegas y subBodegas
-        internal void AgregarBodegaSubBodega(int bodega)
+        internal void agregarBodegaSubBodega(int bodega)
         {
             controladoraBD.agregarBodegaSubBodega(bodega);
         }
@@ -54,6 +54,7 @@ namespace SistemaMJP
         internal int obtenerIDBodega(string bodega) {
             return controladoraBD.obtenerIDBodega(bodega);
         }
+
         //Llama a la controladora de base de datos de bodegas para obtener el nombre de la subbodega dado un id
         internal string getNombreSb(int id) {
             return controladoraBD.getNombreSb(id);

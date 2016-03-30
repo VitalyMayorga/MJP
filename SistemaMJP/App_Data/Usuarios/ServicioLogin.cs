@@ -47,7 +47,8 @@ namespace SistemaMJP
             return correcto;
 
         }
-        public static string EncodePassword(string originalPassword)
+
+        public string EncodePassword(string originalPassword)
         {
             //Clave que se utilizará para encriptar el usuario y la contraseña
             string clave = "7f9facc418f74439c5e9709832;0ab8a5:OCOdN5Wl,q8SLIQz8i|8agmu¬s13Q7ZXyno/";

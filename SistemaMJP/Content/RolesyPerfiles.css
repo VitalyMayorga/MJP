@@ -10,5 +10,11 @@
 
 .BotonAgregar {
     text-align:center;
+    margin-right:23%;
     margin-top:1%;
+}
+
+.mensajeError{
+    color: #AD2020;
+    margin-bottom:2%;
 }

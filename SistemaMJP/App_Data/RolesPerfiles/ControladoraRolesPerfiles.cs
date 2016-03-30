@@ -8,6 +8,7 @@ namespace SistemaMJP
     public class ControladoraRolesPerfiles
     {
         ControladoraBDRolesPerfiles controladoraBD;
+        
         public ControladoraRolesPerfiles()
         {
             controladoraBD = new ControladoraBDRolesPerfiles();

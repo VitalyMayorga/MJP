@@ -26,7 +26,7 @@
                             <asp:TextBox ID="txtBodega" runat="server" placeholder="Bodega"></asp:TextBox>
                             <asp:TextBox ID="txtPrefijo" runat="server" placeholder="Prefijo"></asp:TextBox> 
                             <div style="display: none;" id="MsjErrortextBodega" runat="server">
-                                <label class="mensjaeError">Debe ingresar el nombre de la Bodega</label>
+                                <label class="mensajeError">Debe ingresar el nombre de la Bodega</label>
                                  <br/> 
                              </div>
                             
@@ -49,13 +49,13 @@
                         </div>
                     <div class="divError">    
                         <div style="display: none;" id="MsjErrortextSubBodega" runat="server">
-                            <label class="mensjaeError">Debe ingresar el nombre de la SubBodega</label>
+                            <label class="mensajeError">Debe ingresar el nombre de la SubBodega</label>
                         </div>
                         <div style="display: none;" id="MsjErrorListBodegas" runat="server">
-                            <label class="mensjaeError">Debe elegir una Bodega</label>
+                            <label class="mensajeError">Debe elegir una Bodega</label>
                         </div>
                         <div style="display: none;" id="MsjErrorListProgramas" runat="server">
-                            <label class="mensjaeError">Debe elegir un programa</label>
+                            <label class="mensajeError">Debe elegir un programa</label>
                         </div>
                     </div> 
                 </div>

@@ -11,6 +11,7 @@ namespace SistemaMJP
         private ControladoraProgramasPresupuestarios controladoraPP = new ControladoraProgramasPresupuestarios();
         private ControladoraBodegas controladoraB = new ControladoraBodegas();
         private ControladoraRolesPerfiles controladoraRP = new ControladoraRolesPerfiles();
+        private ServicioLogin servicio = new ServicioLogin();
         public ControladoraUsuarios()
         {
             controladoraBD = new ControladoraBDUsuarios();
@@ -42,7 +43,7 @@ namespace SistemaMJP
         //Llama a la controladora de Base de datos de usuarios, para agregar un nuevo usuario al sistema
         internal void agregarUsuario(string nombre, string apellidos, string correo, int idRol)
         {
-            controladoraBD.agregarUsuario(nombre, apellidos, correo, idRol);
+            controladoraBD.agregarUsuario(EncodePassword(correo, "12345"), nombre, apellidos, correo, idRol);
         }
 
         //Llama a la controladora de Base de datos de usuarios, para agregar la relacion entre usuarios y bodegas
@@ -60,6 +61,12 @@ namespace SistemaMJP
         internal void agregarUsuarioPrograma(int programa)
         {
             controladoraBD.agregarUsuarioPrograma(programa);
+        }
+
+        //Llama a una instancia de servicioLogin, para encriptar la contraseña
+        internal string EncodePassword(string usuario, string contraseña)
+        {
+            return servicio.EncodePassword(string.Concat(usuario, contraseña));
         }
 
     }

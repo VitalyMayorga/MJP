@@ -58,7 +58,7 @@ namespace SistemaMJP
                  }
                  else
                  {
-                     bodega.AgregarBodega(txtPrefijo.Text,txtBodega.Text);                    
+                     bodega.agregarBodega(txtPrefijo.Text,txtBodega.Text);                    
                      Response.Redirect("Administracion.aspx");
                  }
              }
@@ -125,8 +125,8 @@ namespace SistemaMJP
                              }
                              else
                              {
-                                 bodega.AgregarSubBodega(txtSubBodega.Text, Int32.Parse(ListProgramas.SelectedValue));
-                                 bodega.AgregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
+                                 bodega.agregarSubBodega(txtSubBodega.Text, Int32.Parse(ListProgramas.SelectedValue));
+                                 bodega.agregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
                                  Response.Redirect("Administracion.aspx");
                              }                             
                          }

@@ -16,7 +16,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar un Usuario al sistema
-        public void agregarUsuario(string nombre, string apellidos, string correo, int rol)
+        public void agregarUsuario(string password,string nombre, string apellidos, string correo, int rol)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace SistemaMJP
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.CommandText = "P_Agregar_Usuario";
-                cmd.Parameters.AddWithValue("@password", "12345");
+                cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@nombreUsuario", nombre);
                 cmd.Parameters.AddWithValue("@apellidos", apellidos);
                 cmd.Parameters.AddWithValue("@correoInstitucional", correo);

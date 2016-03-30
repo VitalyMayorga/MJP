@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CrearUsuario.aspx.cs" Inherits="SistemaMJP.CrearUsuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="Content/RolesyPerfiles.css" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
      <asp:UpdatePanel runat="server">
@@ -16,7 +17,7 @@
                         <asp:TextBox ID="txtNombre" class="form-control text-box single-line" runat="server" placeholder="Nombre de Usuario"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextNombre" class="col-md-offset-2" runat="server">
-                        <label class="mensjaeError">Debe ingresar el Nombre del Usuario</label>
+                        <label class="mensajeError">Debe ingresar el Nombre del Usuario</label>
                         <br/> 
                     </div>
                     
@@ -28,7 +29,7 @@
                         <asp:TextBox ID="TextApellidos" class="form-control text-box single-line" runat="server" placeholder="Apellidos del usuario"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextApellidos" class="col-md-offset-2" runat="server">
-                        <label class="mensjaeError">Debe ingresar los Apellidos del Usuario</label>
+                        <label class="mensajeError">Debe ingresar los Apellidos del Usuario</label>
                         <br/> 
                     </div>
                     
@@ -40,7 +41,7 @@
                         <asp:TextBox ID="txtCorreo" class="form-control text-box single-line" runat="server" placeholder="Correo Institucional"></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextCorreo" class="col-md-offset-2" runat="server">
-                        <label class="mensjaeError">Debe ingresar el correo Institucional</label>
+                        <label class="mensajeError">Debe ingresar el correo Institucional</label>
                         <br/> 
                     </div>
                    
@@ -51,6 +52,10 @@
                     <div class="col-md-10">
                         <asp:DropDownList ID = "ListRoles" class="form-control dropdown cmbsize" OnSelectedIndexChanged="mostrarListBox" AutoPostBack="true" runat="server">                                
                         </asp:DropDownList>
+                    </div>
+                    <div style="display: none;" id="MsjErrorListRol" class="col-md-offset-2" runat="server">
+                        <label class="mensajeError">Debe seleccionar un Rol para el usuario</label>
+                        <br/> 
                     </div>
                 </div>
 
@@ -70,24 +75,33 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="asignarProgramas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
-                         </div>  
+                            <asp:LinkButton runat="server" OnClick="asignarProgramas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                        </div>  
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="desasignarProgramas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                            <asp:LinkButton runat="server" OnClick="desasignarProgramas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
-                         </div> 
+                    </div> 
+
                     <div class="col-md-3">
                         <asp:ListBox id="ListBoxProgramasAsignados" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>
-                    </div> 
+                    </div>                    
                                    
-                </div>                
+                 </div>  
+                <div style="display: none; margin-left:25%;" id="MsjErrorListBoxPrograma" class="form-group col-md-offset-2" runat="server">
+                    <label class="mensajeError">Debe asignar al menos un Programa al Usuario</label>
+                    <br/> 
+                </div>              
                  
                 <div class="form-group" style="display: none;" id="listBodega" runat="server">
                     <label class="col-md-2 control-label" >Bodega: </label>
                     <div class="col-md-10">
                         <asp:DropDownList ID = "ListBodegas" class="form-control dropdown cmbsize" runat="server" >                                
                         </asp:DropDownList>
+                    </div>
+                    <div style="display: none;" id="MsjErrorlistBodega" class="col-md-offset-2" runat="server">
+                        <label class="mensajeError">Debe seleccionar una bodega para el usuario</label>
+                        <br/> 
                     </div>
                 </div>
                 
@@ -107,18 +121,24 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="asignarBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
-                         </div>  
+                            <asp:LinkButton runat="server" OnClick="asignarBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                        </div>  
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="desasignarBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                            <asp:LinkButton runat="server" OnClick="desasignarBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
-                         </div> 
+                    </div> 
+
                     <div class="col-md-3">
                         <asp:ListBox id="ListBoxBodegasAsignadas" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>
                     </div> 
-                                   
+                            
                 </div>
+                <div style="display: none; margin-left:25%;" id="MsjErrorListBoxBodegas" class="form-group col-md-offset-2" runat="server">
+                    <label class="mensajeError">Debe asignar al menos una Bodega al Usuario</label>
+                    <br/> 
+                 </div>
+                           
 
                  <div class="form-group" style="display: none;" id="labelSubBodegas" runat="server">
                      
@@ -136,21 +156,26 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="asignarSubBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
-                         </div>  
+                            <asp:LinkButton runat="server" OnClick="asignarSubBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                        </div>  
                         <div class="form-group style-flecha">
-                    <asp:LinkButton runat="server" OnClick="desasignarSubBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                            <asp:LinkButton runat="server" OnClick="desasignarSubBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
-                         </div> 
+                     </div> 
+
                     <div class="col-md-3">
                         <asp:ListBox id="ListBoxSubBodegasAsignadas" Width="300px" runat="server" class="form-control item-center cmbsize" SelectionMode="Single">
                         </asp:ListBox>
-                    </div> 
+                    </div>                     
                                    
+                </div>
+                <div style="display: none; margin-left:25%;" id="MsjErrorListBoxSubBodega" class="form-group col-md-offset-2" runat="server">
+                    <label class="mensajeError">Debe asignar al menos una SubBodega al Usuario</label>
+                    <br/> 
                 </div>
 
                 <div class="form-group">
-                    <div class="BotonAgregar col-md-offset-4">
+                    <div class="BotonAgregar">
                         <asp:Button ID="btnAgregar" class="btn btn-default" runat="server" Text="Agregar Usuario" OnClick="agregar" />
                     </div>
                 </div>
