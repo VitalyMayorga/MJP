@@ -15,6 +15,7 @@ namespace SistemaMJP
         public static int programa;
         public static string numFactura;
         public static int subpartida;
+        public static bool editar;
         ControladoraProductos controladora = new ControladoraProductos();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +37,7 @@ namespace SistemaMJP
                 }
                 else {
                     noActivo.Checked = true;
+
                 }
             }
         }
@@ -45,6 +47,7 @@ namespace SistemaMJP
             bool correcto = false;//Para saber si agregó bien el producto
             if (validar()) {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 decimal total = 0;
+                int id_factura = 0;
                 Nullable<DateTime> fechaV = null;
                 Nullable<DateTime> fechaG = null;
                 Nullable<DateTime> fechaC = null;
@@ -59,7 +62,7 @@ namespace SistemaMJP
                 descripcion = descripcion.First().ToString().ToUpper() + descripcion.Substring(1);
                 string presentacionEmpaque = txtPresentacion.Text;
                 int cantidadEmpaque = Convert.ToInt32(txtCantidadE.Text);
-                decimal precioU = Convert.ToDecimal(txtPrecioT.Text);
+                decimal precioU = Convert.ToDecimal(txtPrecioT.Text.Replace(".",","));
                 int cantidad = Convert.ToInt32(txtCantidadT.Text);
                 bool activo = false;
                 string numActivo = txtNumActivo.Text;
@@ -91,21 +94,25 @@ namespace SistemaMJP
                 nuevoProducto[4] = cantidadEmpaque;
                 nuevoProducto[5] = subpartida;
 
-                if (numFactura != null)
-                {
-
-                    total = precioU * cantidad;
-
-
-                }
-                else {
-                    correcto = controladora.agregarProducto(nuevoProducto);
+                correcto = controladora.agregarProducto(nuevoProducto);
                     
+                
+                if (!numActivo.Equals("") && correcto) { 
+                    cantidad= 1;//Por defecto, si el producto ingresado
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " al ser activo asignado,su cantidad es 1')", true);
+                    controladora.agregarActivo(numActivo, funcionario, cedula,descripcion,cantidadEmpaque);
                 }
-                if (correcto) {//Si se ingreso el producto,se procede a guardar el producto en la tabla Informacion producto
+                if (correcto && numFactura==null) {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
                     controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto "+descripcion+" agregado con éxito')", true);
                 }
+                else if(correcto){//Si es un producto de factura
+                    id_factura = controladora.obtenerIDFactura(numFactura);
+                    total = precioU * cantidad;
+                    controladora.agregarProductoFactura(id_factura, descripcion, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+                }
+                
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " agregado con éxito')", true);
+                
                 //Al final se limpian los campos
                 txtDescripcion.Text = "";
                 txtPresentacion.Text = "";
@@ -124,9 +131,85 @@ namespace SistemaMJP
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página factura_detalles
         protected void aceptarYSalir(object sender, EventArgs e)
         {
+            bool correcto = false;//Para saber si agregó bien el producto
             if (validar())
-            {
+            {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
+                decimal total = 0;
+                int id_factura = 0;
+                Nullable<DateTime> fechaV = null;
+                Nullable<DateTime> fechaG = null;
+                Nullable<DateTime> fechaC = null;
+                string descripcion = txtDescripcion.Text;
+                //Se modifica la descripcion para que la primer letra se mayúscula y no hayan tildes
+                descripcion = descripcion.ToLower();
+                descripcion = descripcion.Replace("á", "a");
+                descripcion = descripcion.Replace("é", "e");
+                descripcion = descripcion.Replace("í", "i");
+                descripcion = descripcion.Replace("ó", "o");
+                descripcion = descripcion.Replace("ú", "u");
+                descripcion = descripcion.First().ToString().ToUpper() + descripcion.Substring(1);
+                string presentacionEmpaque = txtPresentacion.Text;
+                int cantidadEmpaque = Convert.ToInt32(txtCantidadE.Text);
+                decimal precioU = Convert.ToDecimal(txtPrecioT.Text.Replace(".",","));//Se debe remplazar el . por , dependiendo del  idioma de la pc,sino da problemas
+                int cantidad = Convert.ToInt32(txtCantidadT.Text);
+                bool activo = false;
+                string numActivo = txtNumActivo.Text;
+                string funcionario = txtFuncionario.Text;
+                string cedula = txtCedula.Text;
+                if (esActivo.Checked)
+                {
+                    activo = true;
+                }
 
+                if (!txtFechaV.Text.Equals(""))
+                {
+                    fechaV = Convert.ToDateTime(txtFechaV.Text);
+
+                }
+                if (!txtFechaC.Text.Equals(""))
+                {
+                    fechaC = Convert.ToDateTime(txtFechaV.Text);
+
+                }
+                if (!txtFechaG.Text.Equals(""))
+                {
+                    fechaG = Convert.ToDateTime(txtFechaV.Text);
+
+                }
+                object[] nuevoProducto = new object[6];
+                nuevoProducto[0] = descripcion;
+                nuevoProducto[1] = presentacionEmpaque;
+                nuevoProducto[2] = activo;
+                nuevoProducto[3] = precioU;
+                nuevoProducto[4] = cantidadEmpaque;
+                nuevoProducto[5] = subpartida;
+
+                correcto = controladora.agregarProducto(nuevoProducto);
+
+
+                if (!numActivo.Equals("") && correcto)
+                {
+                    cantidad = 1;//Por defecto, si el producto ingresado
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " al ser activo asignado,su cantidad es 1')", true);
+                    controladora.agregarActivo(numActivo, funcionario, cedula, descripcion, cantidadEmpaque);
+                }
+                if (correcto && numFactura == null)
+                {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
+                    controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
+                }
+                else if (correcto)
+                {//Si es un producto de factura
+                    id_factura = controladora.obtenerIDFactura(numFactura);
+                    total = precioU * cantidad;
+                    controladora.agregarProductoFactura(id_factura, descripcion, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+                }
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " agregado con éxito')", true);
+                if (numFactura != null)
+                {
+                    Detalles_Factura.numFactura = numFactura;
+                    Response.Redirect("Detalles_Factura");
+                }
 
             }
         }
@@ -155,7 +238,15 @@ namespace SistemaMJP
         //Redirecciona a la pagina facturas
         protected void cancelar(object sender, EventArgs e)
         {
-            Response.Redirect("Facturas.aspx");
+            if (editar)
+            {
+                Response.Redirect("Detalles_Factura");
+            }
+            else
+            {
+                Response.Redirect("Facturas.aspx");
+            
+            }
         }
         
         

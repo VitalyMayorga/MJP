@@ -32,7 +32,7 @@ namespace SistemaMJP
 
             }
         }
-
+        //Regresa al menu principal
         protected void regresarMP(object sender, EventArgs e)
         {
             Response.Redirect("MenuPrincipal");
@@ -56,14 +56,17 @@ namespace SistemaMJP
             GridFacturas.DataBind();
         }
 
-        protected void btnVer_Click(object sender, EventArgs e)
-        {
-
-
-        }
+        //Obtiene el id de la factura seleccionada y redirecciona a la pantalla Detalles_Factura
         protected void btnEditar_Click(object sender, EventArgs e)
-        { 
+        {
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            int i = Convert.ToInt32(row.RowIndex);
             
+
+            string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
+            Detalles_Factura.numFactura = numFactura;            
+            Response.Redirect("Detalles_Factura");
         
         }
         //Llena la grid de facturas con los datos correspondientes

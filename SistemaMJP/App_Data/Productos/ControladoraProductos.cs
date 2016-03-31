@@ -12,12 +12,14 @@ namespace SistemaMJP
         ControladoraProveedores controladoraP;
         ControladoraBDProductos controladoraBD;
         ControladoraFacturas controladoraF;
+        ControladoraActivos controladoraA;
         public ControladoraProductos() {
             controladoraPP = new ControladoraProgramasPresupuestarios();
             controladoraB = new ControladoraBodegas();
             controladoraP = new ControladoraProveedores();
             controladoraBD = new ControladoraBDProductos();
             controladoraF = new ControladoraFacturas();
+            controladoraA = new ControladoraActivos();
         }
         //Llama a la controladora de programas presupuestarios, para obtener el nombre de los programas en el sistema
         internal Dictionary<string, int> getProgramas()
@@ -68,6 +70,21 @@ namespace SistemaMJP
         {
             int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantEmpaque);
             controladoraBD.agregarProductoABodega(bodega, idProducto, programa, subBodega, cantidad, fechaG, fechaC, fechaV);
+        }
+        //Metodo que llama la controladora de facturas, para obtener el ID de la factura
+        internal int obtenerIDFactura(string factura) {
+           return controladoraF.obtenerIDFactura(factura);
+        }
+
+        //Metodo que llama a la controladora de base de datos para guardar un producto de una factura
+        internal void agregarProductoFactura(int id_factura, string descripcion, int cantidadEmpaque, int cantidad, decimal total, Nullable<DateTime> fechaC, Nullable<DateTime> fechaG, Nullable<DateTime> fechaV) {
+            int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantidadEmpaque);
+            controladoraBD.agregarProductoFactura(id_factura,idProducto,cantidad,total,fechaC,fechaG,fechaV);
+        }
+        //Metodo que llama ala controladora de activos para agregar el activo nuevo
+        internal void agregarActivo(string numActivo, string funcionario, string cedula,string descripcion,int cantidadEmpaque) {
+            int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantidadEmpaque);
+            controladoraA.agregarActivo(numActivo, funcionario, cedula,idProducto);
         }
 
         [WebMethod]

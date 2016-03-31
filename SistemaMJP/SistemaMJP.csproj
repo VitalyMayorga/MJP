@@ -170,6 +170,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="ControlActivos.aspx" />
+    <Content Include="Detalles_Factura.aspx" />
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="Facturas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -341,12 +342,21 @@
     <Compile Include="App_Data\Facturas\ControladoraFacturas.cs" />
     <Compile Include="App_Data\Proveedores\ControladoraBDProveedores.cs" />
     <Compile Include="App_Data\Proveedores\ControladoraProveedores.cs" />
+    <Compile Include="App_Data\Activos\ControladoraActivos.cs" />
+    <Compile Include="App_Data\Activos\ControladoraBDActivos.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Detalles_Factura.aspx.cs">
+      <DependentUpon>Detalles_Factura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Detalles_Factura.aspx.designer.cs">
+      <DependentUpon>Detalles_Factura.aspx</DependentUpon>
     </Compile>
     <Compile Include="DevolucionBajas.aspx.cs">
       <DependentUpon>DevolucionBajas.aspx</DependentUpon>
@@ -381,6 +391,7 @@
     <Compile Include="Ingreso_Productos.aspx.designer.cs">
       <DependentUpon>Ingreso_Productos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Detalles_Producto\Item_Grid_Produtos_Factura.cs" />
     <Compile Include="MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

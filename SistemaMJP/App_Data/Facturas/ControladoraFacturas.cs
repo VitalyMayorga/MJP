@@ -23,6 +23,11 @@ namespace SistemaMJP
         internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF) {
             controladoraBD.agregarFactura(bodega, proveedor, programa, subbodega, numF);
         }
+        //Metodo que llama la controladora de base de datos de facturas, para obtener el ID de la factura
+        internal int obtenerIDFactura(string factura)
+        {
+           return controladoraBD.obtenerIDFactura(factura);
+        }
         //Llama a la controladora de Bodegas para obtener el nombre de la subbodega de la factura.
         internal string getNombreSb(int id) {
             return controladoraB.getNombreSb(id);

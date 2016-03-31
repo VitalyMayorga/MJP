@@ -83,6 +83,34 @@ namespace SistemaMJP
         
         
         }
+
+        //Metodo que se encarga de obtener el ID de la factura
+        internal int obtenerIDFactura(string factura)
+        {
+            int id=0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_ID_Factura";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numF", factura);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+        }
+
         //Metodo que se encarga de llenar los datos de la clase item grid facturas y devolver dicha clase encapsulada
         internal Item_Grid_Facturas LoadItemGridFacturas(SqlDataReader reader) {
             String factura = reader.GetString(0);

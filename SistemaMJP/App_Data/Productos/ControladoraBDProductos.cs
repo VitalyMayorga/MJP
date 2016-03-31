@@ -154,6 +154,51 @@ namespace SistemaMJP
             
 
         }
+
+        //Recibe la informacion del producto para asignarlo a la Factura correspondiente.
+        internal void agregarProductoFactura(int factura, int producto, int cantidad,decimal total, Nullable<DateTime> fechaG, Nullable<DateTime> fechaC, Nullable<DateTime> fechaV)
+        {
+            string estado = "Pendiende de aprobación";
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_Producto_Factura";
+                    cmd.Parameters.AddWithValue("@factura", factura);
+                    cmd.Parameters.AddWithValue("@producto", producto);
+                    cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@total", total);
+                    if (fechaG.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@fechaG", fechaG);
+                    }
+                    if (fechaC.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@fechaC", fechaC);
+                    }
+                    if (fechaV.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@fechaV", fechaV);
+                    }
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+
+        }
        //Obtiene la lista de productos que comienzan con el prefijo dado
         [WebMethod]
         public static List<string> getProductos(string prefix)
