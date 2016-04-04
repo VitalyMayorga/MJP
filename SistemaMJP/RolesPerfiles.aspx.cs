@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace SistemaMJP
 {
@@ -64,9 +64,25 @@ namespace SistemaMJP
 
 
         }
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        protected void btnEliminar_Click(object sender, System.EventArgs e)
         {
+            string nombre="hola";
+            string apellidos="adios";
+            if (MessageBox.Show("Esta seguro que desea borrar al usuario del sistema?", "Confirmar borrado", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                //Get the button that raised the event
+                System.Web.UI.WebControls.LinkButton btn = (System.Web.UI.WebControls.LinkButton)sender;
 
+                //Get the row that contains this button
+                GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+               nombre= gvr.Cells[0].Text;
+               apellidos = gvr.Cells[1].Text;
+               controladora.eliminarUsuario(nombre, apellidos);
+               Response.Redirect("Administracion");
+            }
+            
+            
+        
 
         }
 

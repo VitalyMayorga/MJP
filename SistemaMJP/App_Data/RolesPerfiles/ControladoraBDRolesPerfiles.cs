@@ -83,9 +83,27 @@ namespace SistemaMJP
 
             return roles;
 
-        }        
+        }
 
-
+        public void eliminarUsuario(string nombre, string apellidos)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Eliminar_Usuario";
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

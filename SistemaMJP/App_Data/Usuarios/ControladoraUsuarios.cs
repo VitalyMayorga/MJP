@@ -57,6 +57,7 @@ namespace SistemaMJP
         {
             controladoraBD.agregarUsuarioSubBodega(subBodega);
         }
+
         //Llama a la controladora de Base de datos de usuarios, para agregar la relacion entre usuarios y programas
         internal void agregarUsuarioPrograma(int programa)
         {

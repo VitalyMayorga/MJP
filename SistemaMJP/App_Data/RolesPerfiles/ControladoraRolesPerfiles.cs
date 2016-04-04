@@ -25,6 +25,10 @@ namespace SistemaMJP
             return controladoraBD.cargarRoles();
         }
 
-
+        //Llama a la controladora de Base de datos de Roles y Perfiles, para eliminar al usuario del sistema
+        internal void eliminarUsuario(string nombre, string apellidos)
+        {
+            controladoraBD.eliminarUsuario(nombre, apellidos);
+        }
     }
 }

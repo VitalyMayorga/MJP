@@ -7,9 +7,9 @@ namespace SistemaMJP
 {
     public class ControladoraProgramasPresupuestarios
     {
-        ControladoraBDProgramasPresupeustarios controladoraBD;
+        ControladoraBDProgramasPresupuestarios controladoraBD;
         public ControladoraProgramasPresupuestarios() {
-            controladoraBD = new ControladoraBDProgramasPresupeustarios();
+            controladoraBD = new ControladoraBDProgramasPresupuestarios();
         }
         //LLama a la controladora de base de datos para obtener los programas presupuestarios
         internal Dictionary<string, int> getProgramas()

@@ -46,6 +46,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -335,7 +336,7 @@
     <Compile Include="App_Data\Productos\ControladoraBDProductos.cs" />
     <Compile Include="App_Data\Productos\ControladoraProductos.cs" />
     <Compile Include="App_Data\Bodegas\ControladoraBDBodegas.cs" />
-    <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraBDProgramasPresupeustarios.cs" />
+    <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraBDProgramasPresupuestarios.cs" />
     <Compile Include="App_Data\Bodegas\ControladoraBodegas.cs" />
     <Compile Include="App_Data\ProgramasPresupuestarios\ControladoraProgramasPresupuestarios.cs" />
     <Compile Include="App_Data\Facturas\ControladoraBDFacturas.cs" />

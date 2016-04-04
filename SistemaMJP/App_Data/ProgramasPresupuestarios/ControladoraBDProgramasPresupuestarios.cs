@@ -7,10 +7,10 @@ using System.Web;
 
 namespace SistemaMJP
 {
-    public class ControladoraBDProgramasPresupeustarios
+    public class ControladoraBDProgramasPresupuestarios
     {
         SqlConnection con;
-        public ControladoraBDProgramasPresupeustarios()
+        public ControladoraBDProgramasPresupuestarios()
         { 
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         
