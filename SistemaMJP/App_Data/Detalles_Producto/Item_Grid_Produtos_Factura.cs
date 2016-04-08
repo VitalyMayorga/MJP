@@ -7,89 +7,52 @@ namespace SistemaMJP
 {
     public class Item_Grid_Produtos_Factura
     {
-        private String numFactura;
-        private String fecha;
-        private String proveedor;
-        private String programa;
-        private int subBodega;
-        private decimal monto;
+        private String descripcion;
+        private int cantidad;
+        private decimal precioTotal;
         private String estado;
-        public Item_Grid_Produtos_Factura(String factura, DateTime fecha, String proveedor, String programa, int subBodega, decimal monto, String estado)
+        public Item_Grid_Produtos_Factura(String descripcion, int cantidad, decimal precioTotal, String estado)
         {
-            NumFactura = factura;
-            Fecha = fecha.ToString("dd/MM/yyyy");
-            Proveedor = proveedor;
-            Monto = monto;
+            Descripcion = descripcion;
+            Cantidad = cantidad;
+            PrecioTotal = precioTotal;
             Estado = estado;
-            Programa = programa;
-            SubBodega = subBodega;
+            
             
                 
         }
         /*
          * Requiere: una Hilera con el valor nuevo
-         * Efectúa : Asigna a la variable global numFactura con el parámetro
-         * Retorna : El valor de la variable global numFactura
+         * Efectúa : Asigna a la variable global descripcion con el parámetro
+         * Retorna : El valor de la variable global descripcion
          */
-        public String NumFactura
+        public String Descripcion
         {
-            get { return numFactura; }
-            set { numFactura = value; }
+            get { return descripcion; }
+            set { descripcion = value; }
         }
         /*
          * Requiere: una Hilera con el valor nuevo
-         * Efectúa : Asigna a la variable global Fecha con el parámetro
-         * Retorna : El valor de la variable global Fecha
+         * Efectúa : Asigna a la variable global Cantidad con el parámetro
+         * Retorna : El valor de la variable global Cantidad
          */
-        public String Fecha
+        public int Cantidad
         {
-            get { return fecha; }
-            set { fecha = value; }
+            get { return cantidad; }
+            set { cantidad = value; }
         }
         /*
          * Requiere: una Hilera con el valor nuevo
-         * Efectúa : Asigna a la variable global Proveedor con el parámetro
-         * Retorna : El valor de la variable global Proveedor
+         * Efectúa : Asigna a la variable global PrecioTotal con el parámetro
+         * Retorna : El valor de la variable global PrecioTotal
          */
-        public String Proveedor
+        public decimal PrecioTotal
         {
-            get { return proveedor; }
-            set { proveedor = value; }
+            get { return precioTotal; }
+            set { precioTotal = value; }
         }
 
-        /*
-        * Requiere: una Hilera con el valor nuevo
-        * Efectúa : Asigna a la variable global Programa con el parámetro
-        * Retorna : El valor de la variable global Programa
-        */
-        public String Programa
-        {
-            get { return programa; }
-            set { programa = value; }
-        }
-
-        /*
-        * Requiere: una Hilera con el valor nuevo
-        * Efectúa : Asigna a la variable global SubBodega con el parámetro
-        * Retorna : El valor de la variable global SubBodega
-        */
-        public int SubBodega
-        {
-            get { return subBodega; }
-            set { subBodega = value; }
-        }
-
-        /*
-        * Requiere: una Hilera con el valor nuevo
-        * Efectúa : Asigna a la variable global Monto con el parámetro
-        * Retorna : El valor de la variable global Monto
-        */
-        public decimal Monto
-        {
-            get { return monto; }
-            set { monto = value; }
-        }
-
+        
         /*
         * Requiere: una Hilera con el valor nuevo
         * Efectúa : Asigna a la variable global Estado con el parámetro

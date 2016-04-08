@@ -65,7 +65,7 @@ namespace SistemaMJP
             
 
             string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
-            Detalles_Factura.numFactura = numFactura;            
+            Detalles_Factura.numFactura = numFactura;      
             Response.Redirect("Detalles_Factura");
         
         }

@@ -11,9 +11,10 @@ namespace SistemaMJP
 {
     public partial class Detalles_Factura : System.Web.UI.Page
     {
+        private ControladoraDetalles_Producto controladora = new ControladoraDetalles_Producto();
         public DataTable datosFactura;
         public static string numFactura;
-        
+        public static int id_factura;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -62,13 +63,27 @@ namespace SistemaMJP
             GridProductos.DataSource = datosFactura;
             GridProductos.DataBind();
         }
-
+        //Elimina el item seleccionado
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
 
 
         }
+        //Edita el item seleccionado
         protected void btnEditar_Click(object sender, EventArgs e)
+        {
+
+
+        }
+        //Crea un nuevo producto
+        protected void nuevoProducto(object sender, EventArgs e)
+        {
+
+
+        }
+        //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
+        //Este botón solo está disponible si la factura estaba anteriormente en modo aprobación
+        protected void enviarAAprobacion(object sender, EventArgs e)
         {
 
 
@@ -76,28 +91,25 @@ namespace SistemaMJP
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
         {
-            //DataTable tabla = crearTablaProductos();
-            //List<string> bodegas = (List<string>)Session["bodegas"];
-            //string bodega = bodegas[0];
-            //List<Item_Grid_Produtos_Factura> data = controladora.getListaFacturas(bodega);
-            //Object[] datos = new Object[7];
+            DataTable tabla = crearTablaProductos();
+            id_factura = controladora.obtenerIDFactura(numFactura);
+            List<Item_Grid_Produtos_Factura> data = controladora.obtenerListaProductos(id_factura);
+            Object[] datos = new Object[4];
 
-            //foreach (Item_Grid_Produtos_Factura fila in data)
-            //{
+            foreach (Item_Grid_Produtos_Factura fila in data)
+            {
 
-            //    datos[0] = fila.NumFactura;
-            //    datos[1] = fila.Fecha;
-            //    datos[2] = fila.Proveedor;
-            //    datos[3] = fila.Programa;
-            //    datos[5] = fila.Monto.ToString();
-            //    datos[6] = fila.Estado;
+                datos[0] = fila.Descripcion;
+                datos[1] = fila.Cantidad.ToString();
+                datos[2] = fila.PrecioTotal.ToString();
+                datos[3] = fila.Estado;
+                
 
-            //    tabla.Rows.Add(datos);
-            //}
-
-            //datosFactura = tabla;
-            //GridProductos.DataSource = datosFactura;
-            //GridProductos.DataBind();
+                tabla.Rows.Add(datos);
+            }
+            datosFactura = tabla;
+            GridProductos.DataSource = datosFactura;
+            GridProductos.DataBind();
 
         }
 

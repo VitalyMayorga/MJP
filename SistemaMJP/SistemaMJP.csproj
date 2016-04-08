@@ -345,6 +345,8 @@
     <Compile Include="App_Data\Proveedores\ControladoraProveedores.cs" />
     <Compile Include="App_Data\Activos\ControladoraActivos.cs" />
     <Compile Include="App_Data\Activos\ControladoraBDActivos.cs" />
+    <Compile Include="App_Data\Detalles_Producto\ControladoraBDDetalles_Producto.cs" />
+    <Compile Include="App_Data\Detalles_Producto\ControladoraDetalles_Producto.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

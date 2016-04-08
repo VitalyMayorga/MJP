@@ -137,7 +137,8 @@ input.selectorDeFecha{
     text-align:center;
 }
 
-.gridF  td:nth-child(8){
+.gridPF  td:nth-child(5),td:nth-child(6){
     width: 14px;
 }
+
 
