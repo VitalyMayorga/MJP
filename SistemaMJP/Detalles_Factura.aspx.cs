@@ -12,9 +12,10 @@ namespace SistemaMJP
     public partial class Detalles_Factura : System.Web.UI.Page
     {
         private ControladoraDetalles_Producto controladora = new ControladoraDetalles_Producto();
-        public DataTable datosFactura;
+        private DataTable datosFactura;
         public static string numFactura;
-        public static int id_factura;
+        private static int id_factura;
+        private static int[] ids;//se guardaran los ids de los productos de la factura
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -66,19 +67,38 @@ namespace SistemaMJP
         //Elimina el item seleccionado
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            int i = Convert.ToInt32(row.RowIndex);
+            //Se obtiene el id del producto
+            int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+            String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('desea eliminar el producto " + descripcion+" ?')", true);
+            //controladora.eliminarProducto(id_factura, idProducto);
+            //Una vez eliminado el producto, se procede a volver a cargar los datos en el grid, sin el producto eliminado.
+            llenarDetallesProducto();
 
         }
         //Edita el item seleccionado
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            int i = Convert.ToInt32(row.RowIndex);
+            //Se obtiene el id del producto
+            int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+            Ingreso_Productos.id_factura = id_factura;
+            Ingreso_Productos.idProducto = idProducto;
+            Ingreso_Productos.numFactura = numFactura;
+            Ingreso_Productos.editar = true;
+            Response.Redirect("Ingreso_productos");
 
         }
         //Crea un nuevo producto
         protected void nuevoProducto(object sender, EventArgs e)
         {
-
+            Ingreso_Productos.numFactura = numFactura;
+            Response.Redirect("Ingreso_productos");
 
         }
         //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
@@ -95,15 +115,16 @@ namespace SistemaMJP
             id_factura = controladora.obtenerIDFactura(numFactura);
             List<Item_Grid_Produtos_Factura> data = controladora.obtenerListaProductos(id_factura);
             Object[] datos = new Object[4];
-
+            ids= new int[data.Count];
+            int contador = 0;
             foreach (Item_Grid_Produtos_Factura fila in data)
             {
-
+                ids[contador] = fila.Id;
                 datos[0] = fila.Descripcion;
                 datos[1] = fila.Cantidad.ToString();
                 datos[2] = fila.PrecioTotal.ToString();
                 datos[3] = fila.Estado;
-                
+                contador++;
 
                 tabla.Rows.Add(datos);
             }

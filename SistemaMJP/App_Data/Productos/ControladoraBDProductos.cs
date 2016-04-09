@@ -17,6 +17,68 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         
         }
+        //Obtiene los datos de un producto de una factura en especifico
+        internal List<string> obtenerDatosProducto(int idF, int idP)
+        {
+            List<string> datos = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Datos_Producto_Factura";
+                cmd.Parameters.AddWithValue("@idFactura", idF);
+                cmd.Parameters.AddWithValue("@idProducto", idP);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                datos.Add(reader.GetString(0));
+                datos.Add(reader.GetString(1));
+                datos.Add((reader.GetInt32(2)).ToString());
+                datos.Add((reader.GetInt32(3)).ToString());
+                datos.Add((reader.GetDecimal(4)).ToString());
+                bool active = reader.GetBoolean(reader.GetOrdinal("activo"));
+                if (active)
+                {
+                    datos.Add("1");
+                }
+                else {
+                    datos.Add("0");
+                }
+                //Revisa si son datos null
+                if (reader.IsDBNull(6)) {
+                    datos.Add(null);
+                }
+                else
+                {
+                    datos.Add((reader.GetDateTime(6)).ToString());
+                }
+                if (reader.IsDBNull(7))
+                {
+                    datos.Add(null);
+                }
+                else
+                {
+                    datos.Add((reader.GetDateTime(7)).ToString());
+                }
+                if (reader.IsDBNull(8))
+                {
+                    datos.Add(null);
+                }
+                else
+                {
+                    datos.Add((reader.GetDateTime(8)).ToString());
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return datos;
+        }
         //Metodo que se encarga de devolver la lista de todas las supartidas en el sistema
         public Dictionary<string, int> getSubPartidas()
         {

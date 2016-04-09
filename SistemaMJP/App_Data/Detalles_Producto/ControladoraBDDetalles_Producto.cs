@@ -56,7 +56,8 @@ namespace SistemaMJP
             int cantidad = reader.GetInt32(1);
             decimal precioTotal = reader.GetDecimal(2);
             String estado = reader.GetString(3);
-            Item_Grid_Produtos_Factura items = new Item_Grid_Produtos_Factura(descripcion, cantidad, precioTotal, estado);
+            int id = reader.GetInt32(4);
+            Item_Grid_Produtos_Factura items = new Item_Grid_Produtos_Factura(id,descripcion, cantidad, precioTotal, estado);
             return items;
         }
     }

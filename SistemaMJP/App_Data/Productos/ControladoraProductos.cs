@@ -21,6 +21,11 @@ namespace SistemaMJP
             controladoraF = new ControladoraFacturas();
             controladoraA = new ControladoraActivos();
         }
+
+        //Llama a la controladora de BD de productos, para obtener los datos de un producto de una factura en especifico
+        internal List<string> obtenerDatosProducto(int idF, int idP) {
+            return controladoraBD.obtenerDatosProducto(idF, idP);
+        }
         //Llama a la controladora de programas presupuestarios, para obtener el nombre de los programas en el sistema
         internal Dictionary<string, int> getProgramas()
         {

@@ -11,13 +11,14 @@ namespace SistemaMJP
         private int cantidad;
         private decimal precioTotal;
         private String estado;
-        public Item_Grid_Produtos_Factura(String descripcion, int cantidad, decimal precioTotal, String estado)
+        private int id;
+        public Item_Grid_Produtos_Factura(int id,String descripcion, int cantidad, decimal precioTotal, String estado)
         {
             Descripcion = descripcion;
             Cantidad = cantidad;
             PrecioTotal = precioTotal;
             Estado = estado;
-            
+            Id = id;
             
                 
         }
@@ -40,6 +41,16 @@ namespace SistemaMJP
         {
             get { return cantidad; }
             set { cantidad = value; }
+        }
+        /*
+        * Requiere: una Hilera con el valor nuevo
+        * Efectúa : Asigna a la variable global Id con el parámetro
+        * Retorna : El valor de la variable global Id
+        */
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
         }
         /*
          * Requiere: una Hilera con el valor nuevo

@@ -15,6 +15,8 @@ namespace SistemaMJP
         public static int programa;
         public static string numFactura;
         public static int subpartida;
+        public static int idProducto;
+        public static int id_factura;
         public static bool editar;
         ControladoraProductos controladora = new ControladoraProductos();
         protected void Page_Load(object sender, EventArgs e)
@@ -37,9 +39,52 @@ namespace SistemaMJP
                 }
                 else {
                     noActivo.Checked = true;
+                    if (editar) {
+                        //campos no editables
+                        txtDescripcion.Enabled = false;
+                        esActivo.Enabled = false;
+                        noActivo.Enabled = false;
+                        //La informacion del activo si fue asignada, se modifica desde la interfaz de control de activos, no desde esta
+                        
 
+                        llenarDatosProducto();
+                    }
                 }
             }
+        }
+        //Obtiene los datos del producto a editar
+        protected void llenarDatosProducto() {
+            List<string> datos = controladora.obtenerDatosProducto(id_factura, idProducto);
+            txtDescripcion.Text = datos[0];
+            txtPresentacion.Text = datos[1];
+            txtCantidadE.Text = datos[2];
+            txtCantidadT.Text = datos[3];
+            //Obtengo  el precio unitario con base en la cntidad y el precioTotal
+            int cantidad = Convert.ToInt32(datos[3]);
+            decimal precio = Convert.ToDecimal(datos[4]);
+            decimal precioUnitario = precio / cantidad;
+            txtPrecioT.Text = precioUnitario.ToString();
+            int activo = Convert.ToInt32(datos[5]);
+            if (activo == 1)
+            {
+                esActivo.Checked = true;
+                
+            }
+            else {
+                noActivo.Checked = true;
+            }
+            if (datos[6] != null) {
+                txtFechaV.Text = datos[6];
+            }
+            if (datos[7] != null)
+            {
+                txtFechaC.Text = datos[7];
+            }
+            if (datos[8] != null)
+            {
+                txtFechaG.Text = datos[8];
+            }
+
         }
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
         protected void aceptar(object sender, EventArgs e)
@@ -47,12 +92,12 @@ namespace SistemaMJP
             bool correcto = false;//Para saber si agregó bien el producto
             if (validar()) {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 decimal total = 0;
-                int id_factura = 0;
+                id_factura = 0;
                 Nullable<DateTime> fechaV = null;
                 Nullable<DateTime> fechaG = null;
                 Nullable<DateTime> fechaC = null;
                 string descripcion = txtDescripcion.Text;
-                //Se modifica la descripcion para que la primer letra se mayúscula y no hayan tildes
+                //Se modifica la descripcion para que la primer letra sea mayúscula y no hayan tildes
                 descripcion = descripcion.ToLower();
                 descripcion = descripcion.Replace("á", "a");
                 descripcion = descripcion.Replace("é", "e");
@@ -135,7 +180,7 @@ namespace SistemaMJP
             if (validar())
             {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 decimal total = 0;
-                int id_factura = 0;
+                id_factura = 0;
                 Nullable<DateTime> fechaV = null;
                 Nullable<DateTime> fechaG = null;
                 Nullable<DateTime> fechaC = null;
@@ -240,6 +285,7 @@ namespace SistemaMJP
         {
             if (editar)
             {
+                Detalles_Factura.numFactura = numFactura;
                 Response.Redirect("Detalles_Factura");
             }
             else
