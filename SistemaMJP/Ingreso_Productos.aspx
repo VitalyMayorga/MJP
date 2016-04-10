@@ -7,6 +7,17 @@
                 <h3 class="Encabezado">Ingreso de Mercadería</h3>
 
                 <div class="form-group">
+                    <label class="col-md-2 control-label">SubPartida</label>
+
+                    <div class="col-md-10">
+                        <asp:DropDownList id="ListaSubPartidas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarSubPartida" AutoPostBack="true"></asp:DropDownList>
+                    </div>
+                    <div style="display: none;" id="MsjErrorSubPartida" class="col-md-offset-2" runat="server">
+                        <label class="msjErroneo">Debe elegir una subpartida</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-md-2 control-label">Descripción del Artículo</label>
                     <div class="col-md-10">
                         <asp:TextBox ID="txtDescripcion" runat="server" class="form-control text-box single-line"></asp:TextBox>

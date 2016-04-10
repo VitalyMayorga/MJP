@@ -21,5 +21,9 @@ namespace SistemaMJP
         internal List<Item_Grid_Produtos_Factura> obtenerListaProductos(int id) {
             return controladoraBD.obtenerListaProductos(id);
         }
+        //llama a la controladora de base de datos para eliminar el producto seleccionado
+        internal void eliminarProducto(int idFactura, int idProducto) {
+            controladoraBD.eliminarProducto(idFactura, idProducto);
+        }
     }
 }

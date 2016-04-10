@@ -13,6 +13,24 @@ namespace SistemaMJP {
     public partial class Ingreso_Productos {
         
         /// <summary>
+        /// ListaSubPartidas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ListaSubPartidas;
+        
+        /// <summary>
+        /// MsjErrorSubPartida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorSubPartida;
+        
+        /// <summary>
         /// txtDescripcion control.
         /// </summary>
         /// <remarks>

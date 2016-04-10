@@ -35,17 +35,7 @@
                         <label class="msjErroneo">Debe ingresar un departamento</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">SubPartida</label>
-
-                    <div class="col-md-10">
-                        <asp:DropDownList id="ListaSubPartidas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarSubPartida" AutoPostBack="true"></asp:DropDownList>
-                    </div>
-                    <div style="display: none;" id="MsjErrorSubPartida" class="col-md-offset-2" runat="server">
-                        <label class="msjErroneo">Debe elegir una subpartida</label>
-                    </div>
-                </div>
-
+                
                 <div class="form-group">
 
                     <div class="col-md-3 alinearDerecha">

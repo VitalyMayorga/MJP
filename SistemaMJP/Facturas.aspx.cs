@@ -56,7 +56,7 @@ namespace SistemaMJP
             GridFacturas.DataBind();
         }
 
-        //Obtiene el id de la factura seleccionada y redirecciona a la pantalla Detalles_Factura
+        //Obtiene el id de la factura seleccionada y redirecciona a la pantalla DetallesFactura
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
@@ -65,8 +65,8 @@ namespace SistemaMJP
             
 
             string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
-            Detalles_Factura.numFactura = numFactura;      
-            Response.Redirect("Detalles_Factura");
+            DetallesFactura.numFactura = numFactura;      
+            Response.Redirect("DetallesFactura");
         
         }
         //Llena la grid de facturas con los datos correspondientes

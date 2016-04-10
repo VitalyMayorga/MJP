@@ -47,7 +47,6 @@ namespace SistemaMJP
         {
             string bodega = ListaBodegas.Items[ListaBodegas.SelectedIndex].Text;
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
-            string subpartida = ListaSubPartidas.Items[ListaSubPartidas.SelectedIndex].Text;
             if (tieneSubBodega) {
                 subBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
             }
@@ -86,14 +85,7 @@ namespace SistemaMJP
                 MsjErrorFactura.Style.Add("display", "none");
                            
             }
-            else if (subpartida.Equals("---Elija una Subpartida---"))
-            {//Ocultar y mostrar mensajes de Error
-                MsjErrorBodega.Style.Add("display", "none");
-                MsjErrorPrograma.Style.Add("display", "none");
-                MsjErrorSubBodega.Style.Add("display", "none");
-                MsjErrorSubPartida.Style.Add("display", "block");
-                MsjErrorFactura.Style.Add("display", "none");
-            }
+            
             else if (ingresoF.Checked && numFactura.Equals(""))
             {//Ocultar y mostrar mensajes de Error
                     MsjErrorBodega.Style.Add("display", "none");
@@ -113,7 +105,6 @@ namespace SistemaMJP
 
                 Ingreso_Productos.bodega = idBodega;
                 Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
-                Ingreso_Productos.subpartida = Convert.ToInt32(ListaSubPartidas.SelectedValue);
                 int idSubBodega=0;//Por default, subbodega 0 = No hay subbodega asignada
                 if (tieneSubBodega)
                 {
@@ -187,14 +178,7 @@ namespace SistemaMJP
                 proveedor = ListaProveedores.SelectedItem.Text;
             }
         }
-        //Si se selecciona la Subpartida el msj de error se esconde
-        protected void revisarSubPartida(object sender, EventArgs e)
-        {
-            if (ListaSubPartidas.SelectedIndex != 0)
-            {
-                MsjErrorSubPartida.Style.Add("display", "none");
-            }
-        }
+        
         //Si está seleccionado Mercaderia Inicial,esconde el div de la inserción de una factura y proveedor
         protected void rbMercaderiaI(object sender, EventArgs e)
         {
@@ -225,7 +209,6 @@ namespace SistemaMJP
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             Dictionary<string, int> programas = controladora.getProgramas();
-            Dictionary<string, int> subpartidas = controladora.getSubPartidas();
             Dictionary<string, int> proveedores = controladora.getProveedores();
             ListaBodegas.Items.Add("---Elija una bodega---");
             ListaBodegas.Items.Add(bodega);
@@ -234,11 +217,7 @@ namespace SistemaMJP
             {
                 ListaProgramas.Items.Add(new ListItem { Text = nombreP.Key, Value = nombreP.Value.ToString() });
             }
-            ListaSubPartidas.Items.Add("---Elija una Subpartida---");
-            foreach (var nombreS in subpartidas)
-            {
-                ListaSubPartidas.Items.Add(new ListItem { Text = nombreS.Key, Value = nombreS.Value.ToString() });
-            }
+            
             ListaProveedores.Items.Add("---Elija un Proveedor---");
             foreach (var nombrePr in proveedores)
             {

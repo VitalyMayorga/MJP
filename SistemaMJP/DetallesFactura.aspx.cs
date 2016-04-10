@@ -6,16 +6,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace SistemaMJP
 {
-    public partial class Detalles_Factura : System.Web.UI.Page
+    public partial class DetallesFactura : System.Web.UI.Page
     {
         private ControladoraDetalles_Producto controladora = new ControladoraDetalles_Producto();
         private DataTable datosFactura;
         public static string numFactura;
         private static int id_factura;
         private static int[] ids;//se guardaran los ids de los productos de la factura
+        private int i;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -69,29 +71,48 @@ namespace SistemaMJP
         {
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
-            int i = Convert.ToInt32(row.RowIndex);
-            //Se obtiene el id del producto
-            int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-            String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('desea eliminar el producto " + descripcion+" ?')", true);
-            //controladora.eliminarProducto(id_factura, idProducto);
-            //Una vez eliminado el producto, se procede a volver a cargar los datos en el grid, sin el producto eliminado.
-            llenarDetallesProducto();
+            i = Convert.ToInt32(row.RowIndex);
 
+            //HTMLDECODE: es necesario para leer caracteres con tilde
+            String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
+            if (estado.Equals("En edición"))
+            {
+                //Se obtiene el id del producto
+                int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+                String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
+                
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Desea eliminar el producto: " + descripcion + "?');", true);
+                
+
+            }
+        }
+
+        protected void aceptarEliminado(object sender, EventArgs e)
+        {
+            int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+            controladora.eliminarProducto(id_factura,idProducto);
+            llenarDetallesProducto();
         }
         //Edita el item seleccionado
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
-            int i = Convert.ToInt32(row.RowIndex);
-            //Se obtiene el id del producto
-            int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-            Ingreso_Productos.id_factura = id_factura;
-            Ingreso_Productos.idProducto = idProducto;
-            Ingreso_Productos.numFactura = numFactura;
-            Ingreso_Productos.editar = true;
-            Response.Redirect("Ingreso_productos");
+            i = Convert.ToInt32(row.RowIndex);
+
+            String estado = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text;
+            if (!estado.Equals("En edición"))
+            {
+                //Se obtiene el id del producto
+                int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+                Ingreso_Productos.id_factura = id_factura;
+                Ingreso_Productos.idProducto = idProducto;
+                Ingreso_Productos.numFactura = numFactura;
+                Ingreso_Productos.editar = true;
+                Response.Redirect("Ingreso_productos");
+
+            }
+
 
         }
         //Crea un nuevo producto
@@ -115,7 +136,7 @@ namespace SistemaMJP
             id_factura = controladora.obtenerIDFactura(numFactura);
             List<Item_Grid_Produtos_Factura> data = controladora.obtenerListaProductos(id_factura);
             Object[] datos = new Object[4];
-            ids= new int[data.Count];
+            ids = new int[data.Count];
             int contador = 0;
             foreach (Item_Grid_Produtos_Factura fila in data)
             {

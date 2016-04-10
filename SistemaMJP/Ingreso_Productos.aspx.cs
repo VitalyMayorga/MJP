@@ -39,9 +39,18 @@ namespace SistemaMJP
                 }
                 else {
                     noActivo.Checked = true;
+                    //lleno la lista de subpartidas
+                    ListaSubPartidas.Items.Clear();
+                    Dictionary<string, int> subpartidas = controladora.getSubPartidas();
+                    ListaSubPartidas.Items.Add("---Elija una Subpartida---");
+                    foreach (var nombreS in subpartidas)
+                    {
+                        ListaSubPartidas.Items.Add(new ListItem { Text = nombreS.Key, Value = nombreS.Value.ToString() });
+                    }
                     if (editar) {
                         //campos no editables
                         txtDescripcion.Enabled = false;
+                        ListaSubPartidas.Enabled = false;
                         esActivo.Enabled = false;
                         noActivo.Enabled = false;
                         //La informacion del activo si fue asignada, se modifica desde la interfaz de control de activos, no desde esta
@@ -50,6 +59,15 @@ namespace SistemaMJP
                         llenarDatosProducto();
                     }
                 }
+            }
+        }
+
+        //Si se selecciona la Subpartida el msj de error se esconde
+        protected void revisarSubPartida(object sender, EventArgs e)
+        {
+            if (ListaSubPartidas.SelectedIndex != 0)
+            {
+                MsjErrorSubPartida.Style.Add("display", "none");
             }
         }
         //Obtiene los datos del producto a editar
@@ -84,6 +102,7 @@ namespace SistemaMJP
             {
                 txtFechaG.Text = datos[8];
             }
+            ListaSubPartidas.Items.FindByText(datos[9]).Selected = true;
 
         }
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
@@ -93,6 +112,7 @@ namespace SistemaMJP
             if (validar()) {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 decimal total = 0;
                 id_factura = 0;
+                subpartida = Convert.ToInt32(ListaSubPartidas.SelectedValue);
                 Nullable<DateTime> fechaV = null;
                 Nullable<DateTime> fechaG = null;
                 Nullable<DateTime> fechaC = null;
@@ -153,7 +173,14 @@ namespace SistemaMJP
                 else if(correcto){//Si es un producto de factura
                     id_factura = controladora.obtenerIDFactura(numFactura);
                     total = precioU * cantidad;
-                    controladora.agregarProductoFactura(id_factura, descripcion, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+                    if(editar){
+                        controladora.modificarProductoFactura(id_factura, idProducto, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+                    }
+                    else
+                    {
+                        controladora.agregarProductoFactura(id_factura, descripcion, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+
+                    }
                 }
                 
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " agregado con éxito')", true);
@@ -173,7 +200,7 @@ namespace SistemaMJP
 
             }
         }
-        //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página factura_detalles
+        //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página DetallesFactura
         protected void aceptarYSalir(object sender, EventArgs e)
         {
             bool correcto = false;//Para saber si agregó bien el producto
@@ -181,6 +208,7 @@ namespace SistemaMJP
             {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 decimal total = 0;
                 id_factura = 0;
+                subpartida = Convert.ToInt32(ListaSubPartidas.SelectedValue);
                 Nullable<DateTime> fechaV = null;
                 Nullable<DateTime> fechaG = null;
                 Nullable<DateTime> fechaC = null;
@@ -246,14 +274,22 @@ namespace SistemaMJP
                 {//Si es un producto de factura
                     id_factura = controladora.obtenerIDFactura(numFactura);
                     total = precioU * cantidad;
-                    controladora.agregarProductoFactura(id_factura, descripcion, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+                    if (editar)
+                    {
+                        controladora.modificarProductoFactura(id_factura, idProducto, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+                    }
+                    else
+                    {
+                        controladora.agregarProductoFactura(id_factura, descripcion, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
+
+                    }
                 }
 
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " agregado con éxito')", true);
                 if (numFactura != null)
                 {
-                    Detalles_Factura.numFactura = numFactura;
-                    Response.Redirect("Detalles_Factura");
+                    DetallesFactura.numFactura = numFactura;
+                    Response.Redirect("DetallesFactura");
                 }
 
             }
@@ -285,8 +321,8 @@ namespace SistemaMJP
         {
             if (editar)
             {
-                Detalles_Factura.numFactura = numFactura;
-                Response.Redirect("Detalles_Factura");
+                DetallesFactura.numFactura = numFactura;
+                Response.Redirect("DetallesFactura");
             }
             else
             {
@@ -312,14 +348,25 @@ namespace SistemaMJP
             string cantidad = txtCantidadE.Text;
             string cantidadT = txtCantidadT.Text;
             string precio = txtPrecioT.Text;
+            string subpartida = ListaSubPartidas.Items[ListaSubPartidas.SelectedIndex].Text;
             string tmp = descripcion.Replace(" ", "");
-            if (tmp.Equals(""))
+            if (subpartida.Equals("---Elija una Subpartida---"))
+            {//Ocultar y mostrar mensajes de Error
+                MsjErrorDescripcion.Style.Add("display", "none");
+                MsjErrorPresentacion.Style.Add("display", "none");
+                MsjErrorCantEmp.Style.Add("display", "none");
+                MsjErrorCantidad.Style.Add("display", "none");
+                MsjErrorPrecio.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "block");
+            }
+            else if (tmp.Equals(""))
             {
                 MsjErrorDescripcion.Style.Add("display", "block");
                 MsjErrorPresentacion.Style.Add("display", "none");
                 MsjErrorCantEmp.Style.Add("display", "none");
                 MsjErrorCantidad.Style.Add("display", "none");
                 MsjErrorPrecio.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "none");
             }
             else if (presentacion.Equals(""))
             {
@@ -328,6 +375,7 @@ namespace SistemaMJP
                 MsjErrorCantEmp.Style.Add("display", "none");
                 MsjErrorPrecio.Style.Add("display", "none");
                 MsjErrorCantidad.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "none");
             }
             else if (cantidad.Equals(""))
             {
@@ -336,6 +384,7 @@ namespace SistemaMJP
                 MsjErrorPresentacion.Style.Add("display", "none");
                 MsjErrorCantidad.Style.Add("display", "none");
                 MsjErrorPrecio.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "none");
 
             }
             else if (cantidadT.Equals(""))
@@ -345,6 +394,7 @@ namespace SistemaMJP
                 MsjErrorPresentacion.Style.Add("display", "none");
                 MsjErrorCantEmp.Style.Add("display", "none");
                 MsjErrorPrecio.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "none");
 
             }
             else if (precio.Equals(""))
@@ -354,6 +404,7 @@ namespace SistemaMJP
                 MsjErrorPresentacion.Style.Add("display", "none");
                 MsjErrorCantidad.Style.Add("display", "none");
                 MsjErrorCantEmp.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "none");
 
 
             }

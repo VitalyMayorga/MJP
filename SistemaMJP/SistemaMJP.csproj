@@ -171,7 +171,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="ControlActivos.aspx" />
-    <Content Include="Detalles_Factura.aspx" />
+    <Content Include="DetallesFactura.aspx" />
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="Facturas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -354,12 +354,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Detalles_Factura.aspx.cs">
-      <DependentUpon>Detalles_Factura.aspx</DependentUpon>
+    <Compile Include="DetallesFactura.aspx.cs">
+      <DependentUpon>DetallesFactura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Detalles_Factura.aspx.designer.cs">
-      <DependentUpon>Detalles_Factura.aspx</DependentUpon>
+    <Compile Include="DetallesFactura.aspx.designer.cs">
+      <DependentUpon>DetallesFactura.aspx</DependentUpon>
     </Compile>
     <Compile Include="DevolucionBajas.aspx.cs">
       <DependentUpon>DevolucionBajas.aspx</DependentUpon>

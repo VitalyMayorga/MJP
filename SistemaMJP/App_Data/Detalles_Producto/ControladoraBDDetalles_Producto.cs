@@ -60,5 +60,33 @@ namespace SistemaMJP
             Item_Grid_Produtos_Factura items = new Item_Grid_Produtos_Factura(id,descripcion, cantidad, precioTotal, estado);
             return items;
         }
+
+        //elimina el producto de la factura dada
+        internal void eliminarProducto(int idFactura, int idProducto) {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Eliminar_Producto_Factura";
+                    cmd.Parameters.AddWithValue("@factura", idFactura);
+                    cmd.Parameters.AddWithValue("@producto", idProducto);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        
+        }
     }
 }

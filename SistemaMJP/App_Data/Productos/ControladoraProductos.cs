@@ -20,6 +20,7 @@ namespace SistemaMJP
             controladoraBD = new ControladoraBDProductos();
             controladoraF = new ControladoraFacturas();
             controladoraA = new ControladoraActivos();
+            
         }
 
         //Llama a la controladora de BD de productos, para obtener los datos de un producto de una factura en especifico
@@ -86,6 +87,14 @@ namespace SistemaMJP
             int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantidadEmpaque);
             controladoraBD.agregarProductoFactura(id_factura,idProducto,cantidad,total,fechaC,fechaG,fechaV);
         }
+
+        //Metodo que llama a la controladora de base de datos para guardar un producto modificado de una factura
+        internal void modificarProductoFactura(int id_factura, int idProducto, int cantidadEmpaque, int cantidad, decimal total, Nullable<DateTime> fechaC, Nullable<DateTime> fechaG, Nullable<DateTime> fechaV)
+        {
+            controladoraBD.modificarProductoFactura(id_factura, idProducto, cantidad, total, fechaC, fechaG, fechaV);
+        }
+
+
         //Metodo que llama ala controladora de activos para agregar el activo nuevo
         internal void agregarActivo(string numActivo, string funcionario, string cedula,string descripcion,int cantidadEmpaque) {
             int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantidadEmpaque);
