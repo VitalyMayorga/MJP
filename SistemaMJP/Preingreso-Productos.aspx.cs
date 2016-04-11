@@ -192,10 +192,10 @@ namespace SistemaMJP
         //Si está seleccionado Facturas,muestra el div de numero de facturas y proveedor
         protected void rbIngresoF(object sender, EventArgs e)
         {
-            if (mercaderiaI.Checked)
+            if (ingresoF.Checked)
             {
                 formFacturas.Style.Add("display", "block");
-                formProveedor.Style.Add("display", "none");
+                formProveedor.Style.Add("display", "block");
             }
         }
         //Redirecciona al menu principal

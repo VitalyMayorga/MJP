@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -72,6 +73,8 @@ namespace SistemaMJP
         //Llena la grid de facturas con los datos correspondientes
         internal void llenarFacturas()
         {
+
+            CultureInfo crCulture = new CultureInfo("es-CR");
             DataTable tabla = crearTablaFacturas();
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
@@ -92,7 +95,7 @@ namespace SistemaMJP
                     
                 datos[4] = controladora.getNombreSb(fila.SubBodega);
                 }
-                datos[5] = fila.Monto.ToString();
+                datos[5] = fila.Monto.ToString("C2",crCulture);
                 datos[6] = fila.Estado;
 
                 tabla.Rows.Add(datos);

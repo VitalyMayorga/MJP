@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -119,6 +120,7 @@ namespace SistemaMJP
         protected void nuevoProducto(object sender, EventArgs e)
         {
             Ingreso_Productos.numFactura = numFactura;
+            Ingreso_Productos.editar = false;
             Response.Redirect("Ingreso_productos");
 
         }
@@ -132,6 +134,8 @@ namespace SistemaMJP
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
         {
+
+            CultureInfo crCulture = new CultureInfo("es-CR");
             DataTable tabla = crearTablaProductos();
             id_factura = controladora.obtenerIDFactura(numFactura);
             List<Item_Grid_Produtos_Factura> data = controladora.obtenerListaProductos(id_factura);
@@ -143,7 +147,7 @@ namespace SistemaMJP
                 ids[contador] = fila.Id;
                 datos[0] = fila.Descripcion;
                 datos[1] = fila.Cantidad.ToString();
-                datos[2] = fila.PrecioTotal.ToString();
+                datos[2] = fila.PrecioTotal.ToString("C2", crCulture);
                 datos[3] = fila.Estado;
                 contador++;
 
