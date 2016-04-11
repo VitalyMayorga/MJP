@@ -12,6 +12,7 @@ namespace SistemaMJP
     public partial class RolesPerfiles : System.Web.UI.Page
     {
         public DataTable datosUsuario;
+        private EditarUsuario editarUsuario = new EditarUsuario();
         private ControladoraRolesPerfiles controladora = new ControladoraRolesPerfiles(); 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -61,13 +62,26 @@ namespace SistemaMJP
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
+            string nombre = "";
+            string apellidos = "";
+            string rol = "";
+           
+            //Get the button that raised the event
+            System.Web.UI.WebControls.LinkButton btn = (System.Web.UI.WebControls.LinkButton)sender;
 
-
+            //Get the row that contains this button
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            nombre = gvr.Cells[0].Text;
+            apellidos = gvr.Cells[1].Text;
+            rol = gvr.Cells[2].Text;
+            editarUsuario.llenarDatos(nombre, apellidos, rol);
+            Response.Redirect("EditarUsuario");
         }
+
         protected void btnEliminar_Click(object sender, System.EventArgs e)
         {
-            string nombre="hola";
-            string apellidos="adios";
+            string nombre="";
+            string apellidos="";
             if (MessageBox.Show("Esta seguro que desea borrar al usuario del sistema?", "Confirmar borrado", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 //Get the button that raised the event
@@ -81,9 +95,6 @@ namespace SistemaMJP
                Response.Redirect("Administracion");
             }
             
-            
-        
-
         }
 
         //Llena la grid de usuarios con los datos correspondientes

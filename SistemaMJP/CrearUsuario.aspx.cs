@@ -406,14 +406,12 @@ namespace SistemaMJP
                         //Itera sobre el diccionario para relacionar al Usuario con cada SubBodega de la Bodega asignada
                         foreach (KeyValuePair<string, int> entry in SubBodegas)
                         {
-                            controladoraU.agregarUsuarioBodega(entry.Value);
+                            controladoraU.agregarUsuarioSubBodega(entry.Value);
                         }
                         Response.Redirect("RolesPerfiles");
-                    }
-                   
+                    }                   
                 }
-
-            }            
+            }      
 
         }
 

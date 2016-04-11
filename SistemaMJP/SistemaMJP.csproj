@@ -200,6 +200,7 @@
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="RolesPerfiles.aspx" />
     <Content Include="CrearUsuario.aspx" />
+    <Content Include="EditarUsuario.aspx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="PerfilUsuario.aspx" />
     <Content Include="Preingreso-Productos.aspx" />
@@ -475,6 +476,13 @@
     </Compile>
     <Compile Include="CrearUsuario.aspx.designer.cs">
       <DependentUpon>CrearUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarUsuario.aspx.cs">
+      <DependentUpon>EditarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarUsuario.aspx.designer.cs">
+      <DependentUpon>EditarUsuario.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
