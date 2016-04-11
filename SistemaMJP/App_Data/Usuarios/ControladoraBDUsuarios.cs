@@ -131,7 +131,207 @@ namespace SistemaMJP
             return id;
         }
 
-        
+        //Metodo que se encarga de obtener el id del rol
+        public int ObtenerIdRol(string nombre)
+        {
+            int id;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Obtener_Id_Rol";
+                cmd.Parameters.AddWithValue("@nomRol", nombre);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);               
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+        }
+
+        //Metodo que se encarga de devolver la lista de Bodegas relacionadas con cierto Usuario
+        public Dictionary<string, int> llenarBodegasAsignadas(string nombre, string apellidos)
+        {
+            Dictionary<string, int> bodegas = new Dictionary<string, int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Bodega_Segun_Id";
+                con.Open();
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);                
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    bodegas.Add(reader.GetString(0), reader.GetInt32(1));
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bodegas;
+        }
+
+        //Metodo que se encarga de devolver la lista de SubBodegas relacionadas con cierto Usuario
+        public Dictionary<string, int> llenarSubBodegasAsignadas(string nombre, string apellidos)
+        {
+            Dictionary<string, int> subBodegas = new Dictionary<string, int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_SubBodega_Segun_Id";
+                con.Open();
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    subBodegas.Add(reader.GetString(0), reader.GetInt32(1));
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return subBodegas;
+        }
+
+        //Metodo que se encarga de devolver la lista de Programas relacionados con cierto Usuario
+        public Dictionary<string, int> llenarProgramasAsignados(string nombre, string apellidos)
+        {
+            Dictionary<string, int> programas = new Dictionary<string, int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Programa_Segun_Id";
+                con.Open();
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    programas.Add(reader.GetString(0), reader.GetInt32(1));
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return programas;
+        }
+
+        //Metodo que se encarga de eliminar las relaciones entre un Usuario y las Bodegas 
+        public void eliminarUsuarioBodega(string nombre, string apellidos)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Eliminar_Usuario_Bodega";
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //Metodo que se encarga de eliminar las relaciones entre un Usuario y los Programas 
+        public void eliminarUsuarioPrograma(string nombre, string apellidos)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Eliminar_Usuario_Programa";
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //Metodo que se encarga de eliminar las relaciones entre un Usuario y las SubBodegas 
+        public void eliminarUsuarioSubBodega(string nombre, string apellidos)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Eliminar_Usuario_SubBodega";
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //Metodo que se encarga de actualizar el Rol del Usuario
+        public void actualizarRolUsuario(int id, string nombre, string apellidos)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Actualizar_Rol_Usuario";
+                cmd.Parameters.AddWithValue("@idRol", id);
+                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }

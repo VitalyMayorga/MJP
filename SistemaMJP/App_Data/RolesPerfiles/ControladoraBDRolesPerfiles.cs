@@ -85,6 +85,7 @@ namespace SistemaMJP
 
         }
 
+        //Metodo que se encarga de eliminar un Usuario del Sistema
         public void eliminarUsuario(string nombre, string apellidos)
         {
             try
