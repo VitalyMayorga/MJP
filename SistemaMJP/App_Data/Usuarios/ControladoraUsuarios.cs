@@ -118,5 +118,11 @@ namespace SistemaMJP
             return controladoraBD.llenarSubBodegasAsignadas(nombre, apellidos);
         }
 
+        //Llama a la controladora de Base de datos de bodegas, para obtener las subBodegas segun el id de una Bodega
+        internal Dictionary<string, int> getSubBodegasPorBodega(int idBodega)
+        {
+            return controladoraB.getSubBodegasPorBodega(idBodega);
+        }
+
     }
 }

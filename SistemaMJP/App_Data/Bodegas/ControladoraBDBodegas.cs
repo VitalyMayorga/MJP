@@ -217,6 +217,37 @@ namespace SistemaMJP
 
             return nombre;
         }
+
+        //Metodo que se encarga de obtener el nombre de una subbodega, dado el id de una Bodega
+        internal Dictionary<string, int> getSubBodegasPorBodega(int idBodega)
+        {
+            Dictionary<string, int> subbodegas = new Dictionary<string, int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Nombre_SubBodegas_Por_Bodega";
+                con.Open();
+                cmd.Parameters.AddWithValue("@idBodega", idBodega);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    subbodegas.Add(reader.GetString(0), reader.GetInt32(1));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return subbodegas;
+        }
         
     }
 }
