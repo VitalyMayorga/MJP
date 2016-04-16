@@ -25,5 +25,20 @@ namespace SistemaMJP
         internal void eliminarProducto(int idFactura, int idProducto) {
             controladoraBD.eliminarProducto(idFactura, idProducto);
         }
+        //Envia una factura a aprobacion
+        internal void enviarAAprobacion(int idFactura) {
+            controladoraBD.enviarAAprobacion(idFactura);
+        
+        }
+        //Envia el estado del prodcuto de la factura a modificar a la controladora de base de datos
+        internal void cambiarEstadoProducto(int idFactura, int idProducto, string estado) {
+            controladoraBD.cambiarEstadoProducto(idFactura, idProducto, estado);
+        }
+
+        //Ingresa la fecha de Recpecion definitiva de un producto
+        internal void agregarRecepcionDefinitiva(int idFactura, int idProducto, string fecha)
+        {
+            controladoraBD.agregarRecepcionDefinitiva(idFactura, idProducto, fecha);
+        }
     }
 }

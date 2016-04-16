@@ -126,9 +126,10 @@ namespace SistemaMJP
         }
         //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
         //Este botón solo está disponible si la factura estaba anteriormente en modo aprobación
-        protected void enviarAAprobacion(object sender, EventArgs e)
+        protected void btnEnviar(object sender, EventArgs e)
         {
-
+            controladora.enviarAAprobacion(id_factura);
+            ScriptManager.RegisterStartupScript(this, this.GetType(),"Alerta","alert(Factura enviada a aprobación)", true);
 
         }
         //Llena la grid de productos con los datos correspondientes

@@ -172,6 +172,7 @@
     <Content Include="Content\style.css" />
     <Content Include="ControlActivos.aspx" />
     <Content Include="DetallesFactura.aspx" />
+    <Content Include="DetallesFacturaRevision.aspx" />
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="Facturas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -198,6 +199,7 @@
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="RevisionFacturas.aspx" />
     <Content Include="RolesPerfiles.aspx" />
     <Content Include="CrearUsuario.aspx" />
     <Content Include="EditarUsuario.aspx" />
@@ -362,6 +364,13 @@
     <Compile Include="DetallesFactura.aspx.designer.cs">
       <DependentUpon>DetallesFactura.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DetallesFacturaRevision.aspx.cs">
+      <DependentUpon>DetallesFacturaRevision.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallesFacturaRevision.aspx.designer.cs">
+      <DependentUpon>DetallesFacturaRevision.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DevolucionBajas.aspx.cs">
       <DependentUpon>DevolucionBajas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -433,6 +442,13 @@
     </Compile>
     <Compile Include="Requisiciones.aspx.designer.cs">
       <DependentUpon>Requisiciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RevisionFacturas.aspx.cs">
+      <DependentUpon>RevisionFacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RevisionFacturas.aspx.designer.cs">
+      <DependentUpon>RevisionFacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Seguimiento.aspx.cs">
       <DependentUpon>Seguimiento.aspx</DependentUpon>

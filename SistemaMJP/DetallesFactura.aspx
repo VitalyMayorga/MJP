@@ -39,12 +39,12 @@
                 <div class="form-group" style="margin-top: 2%; margin-right: 5%">
                     <div class="col-md-10" style="text-align: right; margin-left: 7.8%">
                         <div class="BotonIngreso">
-                            <input type="submit" name="btnVistaPrevia" value="Vista Previa" id="btnVistaPrevia" class="btn btn-default">
+                            <asp:Button type="submit" name="btnVistaPrevia" value="Vista Previa" id="btnVistaPrevia" class="btn btn-default" runat="server" OnClick="vistaPrevia"></asp:Button>
                         </div>
                     </div>
                     <div class="col-md-1" style="margin-left: 0.5%;">
                         <div class="BotonIngreso">
-                            <input type="submit" name="btnEnviarAprobacion" value="Enviar a aprobación" id="btnEnviarAprobacion" class="btn btn-default">
+                            <asp:Button type="submit" name="btnEnviarAprobacion" value="Enviar a aprobación" id="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar"></asp:Button>
                         </div>
 
 

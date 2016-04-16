@@ -58,6 +58,19 @@
                         <label class="msjErroneo">Debe ingresar un número de factura</label>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Fecha Factura</label>
+                    <div class='input-group date col-md-10' style="max-width: 320px">
+
+                        <asp:TextBox type='text' ID="txtFechaF" class="form-control" runat="server"></asp:TextBox>
+
+
+                    </div>
+                    <div style="display: none;" id="msjErrorFecha" class="col-md-offset-2" runat="server">
+                        <label class="msjErroneo">Debe ingresar una fecha a la factura</label>
+                    </div>
+                </div>
                 <div class="form-group" id="formProveedor" runat="server">
                     <label class="col-md-2 control-label">Proveedor</label>
                     <div class="col-md-3">
@@ -130,4 +143,49 @@
             $('#ProveedorModal').modal('show');
         }
 </script>
+
+    <script type="text/javascript">//Convertimos el calendario a español
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '<Ant',
+            nextText: 'Sig>',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        $(document).ready(function () {
+            $("#<%= txtFechaF.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+            
+        });
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        prm.add_endRequest(function () {
+            $("#<%= txtFechaF.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+           
+
+        });
+
+    </script>
 </asp:Content>

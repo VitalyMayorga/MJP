@@ -13,9 +13,10 @@ namespace SistemaMJP
     public class ControladoraBDDetalles_Producto
     {
         SqlConnection con;
-        public ControladoraBDDetalles_Producto() {
+        public ControladoraBDDetalles_Producto()
+        {
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
-                
+
         }
         //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
         internal List<Item_Grid_Produtos_Factura> obtenerListaProductos(int id)
@@ -57,12 +58,13 @@ namespace SistemaMJP
             decimal precioTotal = reader.GetDecimal(2);
             String estado = reader.GetString(3);
             int id = reader.GetInt32(4);
-            Item_Grid_Produtos_Factura items = new Item_Grid_Produtos_Factura(id,descripcion, cantidad, precioTotal, estado);
+            Item_Grid_Produtos_Factura items = new Item_Grid_Produtos_Factura(id, descripcion, cantidad, precioTotal, estado);
             return items;
         }
 
         //elimina el producto de la factura dada
-        internal void eliminarProducto(int idFactura, int idProducto) {
+        internal void eliminarProducto(int idFactura, int idProducto)
+        {
             using (TransactionScope ts = new TransactionScope())
             {
                 try
@@ -86,7 +88,92 @@ namespace SistemaMJP
 
             }
 
-        
+
+        }
+        //Envia una factura y sus productos a aprobacion
+        internal void enviarAAprobacion(int idFactura)
+        {
+            string estado = "Pendiente de aprobación";
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Enviar_Factura_Aprobacion";
+                    cmd.Parameters.AddWithValue("@factura", idFactura);
+                    cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+        //Modifica el estado de un producto de una factura 
+        internal void cambiarEstadoProducto(int idFactura, int idProducto, string estado)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Cambiar_Estado_Producto_Factura";
+                    cmd.Parameters.AddWithValue("@factura", idFactura);
+                    cmd.Parameters.AddWithValue("@producto", idProducto);
+                    cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+        }
+
+
+        //Ingresa la fecha de Recpecion definitiva de un producto
+        internal void agregarRecepcionDefinitiva(int idFactura, int idProducto,string fecha)
+        {
+            DateTime fechaRD = Convert.ToDateTime(fecha);
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_FechaRD_Producto";
+                    cmd.Parameters.AddWithValue("@factura", idFactura);
+                    cmd.Parameters.AddWithValue("@producto", idProducto);
+                    cmd.Parameters.AddWithValue("@fecha", fechaRD);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
         }
     }
 }

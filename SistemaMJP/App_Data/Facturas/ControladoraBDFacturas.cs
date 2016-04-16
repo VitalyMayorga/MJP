@@ -46,9 +46,41 @@ namespace SistemaMJP
             return facturas;
 
         }
+
+        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
+        internal List<Item_Grid_Facturas> getListaFacturasAdmin(string bodega)
+        {
+            List<Item_Grid_Facturas> facturas = new List<Item_Grid_Facturas>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Lista_Facturas_Bodega_Admin";
+                con.Open();
+                cmd.Parameters.AddWithValue("@nombreB", bodega);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    facturas.Add(LoadItemGridFacturas(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return facturas;
+
+        }
         //Metodo que se encarga de guardar una factura en la base de datos
-        internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF) {
-            DateTime fecha = DateTime.Today;
+        internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF,string fecha) {
+            DateTime fechaF = Convert.ToDateTime(fecha);
             string estado = "En edición";
             int total = 0;
             DateTime fhoy = Convert.ToDateTime(fecha);
@@ -62,7 +94,7 @@ namespace SistemaMJP
                     con.Open();
                     cmd.CommandText = "P_Agregar_Factura";
                     cmd.Parameters.AddWithValue("@numF", numF);
-                    cmd.Parameters.AddWithValue("@fecha", fecha);
+                    cmd.Parameters.AddWithValue("@fecha", fechaF);
                     cmd.Parameters.AddWithValue("@estado", estado);
                     cmd.Parameters.AddWithValue("@total", total);
                     cmd.Parameters.AddWithValue("@proveedor", proveedor);

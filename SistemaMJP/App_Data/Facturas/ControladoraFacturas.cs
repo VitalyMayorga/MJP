@@ -20,8 +20,8 @@ namespace SistemaMJP
 
         }
         //Llama a la controladora de base de datos de facturas para agregar la nueva factura
-        internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF) {
-            controladoraBD.agregarFactura(bodega, proveedor, programa, subbodega, numF);
+        internal void agregarFactura(int bodega, int proveedor, int programa,int subbodega,string numF,string fecha) {
+            controladoraBD.agregarFactura(bodega, proveedor, programa, subbodega, numF,fecha);
         }
         //Metodo que llama la controladora de base de datos de facturas, para obtener el ID de la factura
         internal int obtenerIDFactura(string factura)
@@ -31,6 +31,12 @@ namespace SistemaMJP
         //Llama a la controladora de Bodegas para obtener el nombre de la subbodega de la factura.
         internal string getNombreSb(int id) {
             return controladoraB.getNombreSb(id);
+        }
+        //LLama a la controladora de facturas para obtener la  lista con los item del grid
+        internal List<Item_Grid_Facturas> getListaFacturasAdmin(string bodega)
+        {
+            return controladoraBD.getListaFacturasAdmin(bodega);
+
         }
     }
 }

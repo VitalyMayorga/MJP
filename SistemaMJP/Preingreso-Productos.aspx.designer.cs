@@ -125,7 +125,7 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.TextBox txtNombreProveedor;
         protected global::System.Web.UI.WebControls.TextBox txtCorreo;
         protected global::System.Web.UI.WebControls.TextBox txtTelefonos;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFechaF;
         /// <summary>
         /// MsjErrorFactura control.
         /// </summary>
@@ -134,6 +134,7 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFactura;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFecha;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorProveedor;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturas;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formProveedor;

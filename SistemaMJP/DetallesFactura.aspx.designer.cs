@@ -40,6 +40,24 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.GridView GridProductos;
         
         /// <summary>
+        /// btnVistaPrevia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVistaPrevia;
+        
+        /// <summary>
+        /// btnEnviarAprobacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEnviarAprobacion;
+        
+        /// <summary>
         /// btnAceptarM control.
         /// </summary>
         /// <remarks>

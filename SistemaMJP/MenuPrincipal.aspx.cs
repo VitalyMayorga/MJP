@@ -16,7 +16,13 @@ namespace SistemaMJP
 
         protected void ingresarFacturas(object sender, EventArgs e)
         {
-            Response.Redirect("Facturas.aspx");
+            if (Session["rol"].Equals("bodeguero")) {
+                Response.Redirect("Facturas.aspx");
+            
+            }
+            else if (Session["rol"].Equals("Administrador Almacen")) {
+                Response.Redirect("RevisionFacturas.aspx");
+            }
         }
         protected void ingresarMenuAdministracion(object sender, EventArgs e)
         {

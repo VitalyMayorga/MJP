@@ -45,6 +45,7 @@ namespace SistemaMJP
         //En otro caso, despliega los mensajes de error
         protected void aceptar(object sender, EventArgs e)
         {
+            string fecha="";
             string bodega = ListaBodegas.Items[ListaBodegas.SelectedIndex].Text;
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
             if (tieneSubBodega) {
@@ -55,6 +56,7 @@ namespace SistemaMJP
             }
             if (ingresoF.Checked) {
                 numFactura = txtNumFactura.Text;
+                fecha =  txtFechaF.Value.ToString();
                 numFactura = numFactura.Replace(" ", "");//Elimino espacios en blanco para saber si se digito numero factura o no
             }
             if (bodega.Equals("---Elija una bodega---"))
@@ -93,11 +95,19 @@ namespace SistemaMJP
                     MsjErrorSubBodega.Style.Add("display", "none");
                     MsjErrorSubPartida.Style.Add("display", "none");
                     MsjErrorFactura.Style.Add("display", "block");
+                    MsjErrorFactura.Style.Add("display", "none");
+                    MsjErrorProveedor.Style.Add("display", "none");
                 
             }
-            else if(ingresoF.Checked && !nuevoProveedor && proveedor.Equals("---Elija un Proveedor---")){
-                MsjErrorProveedor.Style.Add("display","block");
-                
+            else if (ingresoF.Checked && fecha.Equals("")) {
+                MsjErrorFactura.Style.Add("display", "block");
+                MsjErrorProveedor.Style.Add("display", "none");
+            
+            }
+            else if (ingresoF.Checked && !nuevoProveedor && proveedor.Equals("---Elija un Proveedor---"))
+            {
+                MsjErrorProveedor.Style.Add("display", "block");
+                MsjErrorFactura.Style.Add("display", "none");
             }
             else
             {//Se envían los datos necesarios para empezar a ingresar productos
@@ -105,20 +115,21 @@ namespace SistemaMJP
 
                 Ingreso_Productos.bodega = idBodega;
                 Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
-                int idSubBodega=0;//Por default, subbodega 0 = No hay subbodega asignada
+                int idSubBodega = 0;//Por default, subbodega 0 = No hay subbodega asignada
                 if (tieneSubBodega)
                 {
                     idSubBodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
                     Ingreso_Productos.subbodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
-                    
-                }
-                if (ingresoF.Checked) {
-                    Ingreso_Productos.numFactura = numFactura;
-                    controladora.agregarFactura(idBodega,proveedor,Convert.ToInt32(ListaProgramas.SelectedValue),idSubBodega,numFactura);
-                }
-                
 
-                Response.Redirect("Ingreso_Productos"); 
+                }
+                if (ingresoF.Checked)
+                {
+                    Ingreso_Productos.numFactura = numFactura;
+                    controladora.agregarFactura(idBodega, proveedor, Convert.ToInt32(ListaProgramas.SelectedValue), idSubBodega, numFactura,fecha);
+                }
+
+
+                Response.Redirect("Ingreso_Productos");
 
 
             }
@@ -252,6 +263,7 @@ namespace SistemaMJP
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ProveedorModal').modal('hide');</script>");
                 nuevoProveedor = true;
                 ListaProveedores.Enabled = false;
+                ListaProveedores.SelectedIndex = 1;
                 controladora.agregarProveedor(proveedor, correo, telefonos);
             }
 

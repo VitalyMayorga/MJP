@@ -60,9 +60,9 @@ namespace SistemaMJP
             return controladoraB.obtenerIDBodega(bodega);
         }
         //Primero obtiene el id del proveedor,luego llama a la controladora de Facturas para agregar una factura nueva
-        internal void agregarFactura(int bodega, string proveedor, int programa,int subbodega,string numF) {
+        internal void agregarFactura(int bodega, string proveedor, int programa,int subbodega,string numF,string fecha) {
             int idProveedor = controladoraP.obtenerIDProveedor(proveedor);
-            controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF);
+            controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF,fecha);
         
         }
         //Recibe un objeto de datos para encapsularlo y enviar a agregar a la controladora de base de datos de productos
