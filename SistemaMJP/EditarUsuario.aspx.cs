@@ -10,26 +10,25 @@ namespace SistemaMJP
     public partial class EditarUsuario : System.Web.UI.Page
     {
         private ControladoraUsuarios controladoraU = new ControladoraUsuarios();
-        string nombre = "";
-        string apellidos="";
-        string rol = "";
+        public static string nombre = "";
+        public static string apellidos = "";
+        public static string rol = "";
          
         protected void Page_Load(object sender, EventArgs e)
         {
             llenarListRoles();
             InicializarListBox();
+            llenarProgramasAsignados();
+            llenarProgramasDisponibles();
+            llenarBodegasAsignadas();
+            llenarBodegasDisponibles();
+            llenarSubBodegasAsignadas();             
+            llenarSubBodegasDisponibles();
         }
 
         protected void regresarRP(object sender, EventArgs e)
         {
             Response.Redirect("RolesPerfiles");
-        }
-
-        public void llenarDatos(string nombreU, string apellidosU, string rolU)
-        {
-            nombre = nombreU;
-            apellidos = apellidosU;
-            rol = rolU;           
         }
 
         internal void llenarListRoles()
@@ -43,7 +42,7 @@ namespace SistemaMJP
 
                 nomRol = controladoraU.getRoles();
 
-                //Itera sobre el diccionario para obtener la bodega y el respectivo id y guardarlo en un dropdownlist
+                //Itera sobre el diccionario para obtener los roles y guardarlos en un dropdownlist
                 foreach (var item in nomRol)
                 {
                     ListRoles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
@@ -54,69 +53,60 @@ namespace SistemaMJP
 
         internal void llenarProgramasAsignados()
         {
-            ListBoxProgramasAsignados.Items.Clear();
-            ListBoxProgramasDisponibles.Items.Clear(); 
-            Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
-            ListBoxProgramasAsignados.Items.Clear();
-            nomPrograma = controladoraU.llenarProgramasAsignados(nombre, apellidos);
-
-            //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
-            foreach (var item in nomPrograma)
+            if (!IsPostBack)
             {
-                ListBoxProgramasAsignados.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
+                nomPrograma = controladoraU.llenarProgramasAsignados(nombre, apellidos);
+
+                //Itera sobre el diccionario para obtener los programas presupuestarios asignados y guardarlos en el listBox
+                foreach (var item in nomPrograma)
+                {
+                    ListBoxProgramasAsignados.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }
             }
         }
 
         internal void llenarBodegasAsignadas()
         {
-            ListBoxBodegasAsignadas.Items.Clear();
-            ListBoxBodegasDisponibles.Items.Clear();    
-            Dictionary<string, int> nomBodega = new Dictionary<string, int>();
-            ListBoxBodegasAsignadas.Items.Clear();
-            ListBodegas.Items.Clear();
-            ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
-            nomBodega = controladoraU.llenarBodegasAsignadas(nombre, apellidos);
+            if(!IsPostBack){  
+                Dictionary<string, int> nomBodegaPorId = new Dictionary<string, int>();
+                Dictionary<string, int> nomBodega = new Dictionary<string, int>();
+                ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
+                nomBodega = controladoraU.getBodegas();
+                nomBodegaPorId = controladoraU.llenarBodegasAsignadas(nombre, apellidos);
 
-            //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
-            foreach (var item in nomBodega)
-            {
-                ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
-                ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });               
+                //Itera sobre el diccionario para obtener las bodegas asignadas y guardarlos en el listBox
+                foreach (var item in nomBodegaPorId)
+                {
+                    ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });                              
+                }
+
+                foreach (var item in nomBodega)
+                {               
+                    ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }
+
+                if (nomBodegaPorId.Count() == 1)
+                {
+                    ListBodegas.SelectedIndex = nomBodegaPorId.First().Value;
+                }
             }
-            //Me falta poner como default la bodega escogida 
-        }
-
-        internal void revisarPrograma(string programa, string bodega)
-        {
-            Dictionary<string, int> nomSubBodega = new Dictionary<string, int>();
-            nomSubBodega = controladoraU.llenarSubBodegasAsignadas(nombre, apellidos);
-
-            //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
-            foreach (var item in nomSubBodega)
-            {
-                ListBoxSubBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
-            }
+                     
         }
 
         internal void llenarSubBodegasAsignadas()
         {
-            ListBoxSubBodegasAsignadas.Items.Clear();
-            ListBoxSubBodegasDisponibles.Items.Clear();
-            if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
+            if (!IsPostBack)
             {
-                Dictionary<string, int> items = new Dictionary<string, int>();
+                Dictionary<string, int> nomSubBodega = new Dictionary<string, int>();
+                nomSubBodega = controladoraU.llenarSubBodegasAsignadas(nombre, apellidos);
 
-                foreach (ListItem item in ListBoxBodegasAsignadas.Items)
+                //Itera sobre el diccionario para obtener las subBodegas asignadas y guardarlas en el listBox
+                foreach (var item in nomSubBodega)
                 {
-                    items.Add(item.Text, Int32.Parse(item.Value));
-                }
-
-                foreach (KeyValuePair<string, int> entry in items)
-                {
-                    revisarPrograma("Administración Penitenciaria", entry.Key);
+                    ListBoxSubBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
             }
-
         }
 
         protected void asignarProgramas(object sender, EventArgs e)
@@ -127,7 +117,7 @@ namespace SistemaMJP
                 string value = ListBoxProgramasDisponibles.SelectedValue.ToString();
                 ListBoxProgramasAsignados.Items.Add(new ListItem { Text = text, Value = value });
                 ListBoxProgramasDisponibles.Items.Remove(ListBoxProgramasDisponibles.SelectedItem);
-                llenarSubBodegasAsignadas();
+                llenarListBoxSubBodegas();
             }
         }
 
@@ -139,7 +129,7 @@ namespace SistemaMJP
                 string value = ListBoxProgramasAsignados.SelectedValue.ToString();
                 ListBoxProgramasDisponibles.Items.Add(new ListItem { Text = text, Value = value });
                 ListBoxProgramasAsignados.Items.Remove(ListBoxProgramasAsignados.SelectedItem);
-                llenarSubBodegasAsignadas();
+                llenarListBoxSubBodegas();
             }
         }
 
@@ -151,7 +141,7 @@ namespace SistemaMJP
                 string value = ListBoxBodegasDisponibles.SelectedValue.ToString();
                 ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = text, Value = value });
                 ListBoxBodegasDisponibles.Items.Remove(ListBoxBodegasDisponibles.SelectedItem);
-                llenarSubBodegasAsignadas();
+                llenarListBoxSubBodegas();
             }
         }
 
@@ -163,7 +153,7 @@ namespace SistemaMJP
                 string value = ListBoxBodegasAsignadas.SelectedValue.ToString();
                 ListBoxBodegasDisponibles.Items.Add(new ListItem { Text = text, Value = value });
                 ListBoxBodegasAsignadas.Items.Remove(ListBoxBodegasAsignadas.SelectedItem);
-                llenarSubBodegasAsignadas();
+                llenarListBoxSubBodegas();
             }
         }
 
@@ -321,9 +311,13 @@ namespace SistemaMJP
 
         protected void mostrarListBox(object sender, EventArgs e)
         {
-            llenarProgramasAsignados();
-            llenarBodegasAsignadas();
-            llenarSubBodegasAsignadas();
+            if (IsPostBack)
+            {
+                llenarListBoxProgramas();
+                llenarListBoxBodegas();
+                llenarListBoxSubBodegas();
+            }
+           
             if (ListRoles.SelectedItem.Text == "Usuario" || ListRoles.SelectedItem.Text == "Aprobador" || ListRoles.SelectedItem.Text == "Consulta" || ListRoles.SelectedItem.Text == "Revision y Aprobador Almacen")
             {
                 labelPrograma.Style.Add("display", "block");
@@ -362,6 +356,176 @@ namespace SistemaMJP
                 mostrarListBox(ListRoles, null);
             }
         }
+
+        internal void llenarBodegasDisponibles()
+        {
+            if (!IsPostBack)
+            {
+                Dictionary<string, int> nomBodegaPorId = new Dictionary<string, int>();
+                nomBodegaPorId = controladoraU.llenarBodegasAsignadas(nombre, apellidos);
+                Dictionary<string, int> nomBodega = new Dictionary<string, int>();
+                nomBodega = controladoraU.getBodegas();
+                Dictionary<string, int> bodegasDisponibles = new Dictionary<string, int>();
+
+                foreach (KeyValuePair<string, int> entry1 in nomBodegaPorId)
+                {
+                    foreach (KeyValuePair<string, int> entry2 in nomBodega)
+                    {
+                        if (entry1.Key == entry2.Key)
+                        {
+                            bodegasDisponibles.Add(entry2.Key, entry2.Value);
+                        }
+                    }
+                }
+                foreach (KeyValuePair<string, int> item in bodegasDisponibles)
+                {
+                    nomBodega.Remove(item.Key);
+                }
+
+                //Itera sobre el diccionario para obtener las bodegas disponibles y guardarlos en el listBox
+                foreach (var item in nomBodega)
+                {
+                    ListBoxBodegasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }
+            }
+        }
+
+        internal void llenarProgramasDisponibles()
+        {
+            if (!IsPostBack)
+            {
+                Dictionary<string, int> nomProgramaPorId = new Dictionary<string, int>();
+                nomProgramaPorId = controladoraU.llenarProgramasAsignados(nombre, apellidos);
+                Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
+                nomPrograma = controladoraU.getProgramas();
+                Dictionary<string, int> programasDisponibles = new Dictionary<string, int>();
+
+                foreach (KeyValuePair<string, int> entry1 in nomProgramaPorId)
+                {
+                    foreach (KeyValuePair<string, int> entry2 in nomPrograma)
+                    {
+                        if (entry1.Key == entry2.Key)
+                        {
+                            programasDisponibles.Add(entry2.Key, entry2.Value);
+                        }
+                    }
+                }
+                foreach (KeyValuePair<string, int> item in programasDisponibles)
+                {
+                    nomPrograma.Remove(item.Key);
+                }
+
+                //Itera sobre el diccionario para obtener los programas presupuestarios disponibles y guardarlos en el listBox
+                foreach (var item in nomPrograma)
+                {
+                    ListBoxProgramasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }
+            }
+        }
+
+        internal void llenarSubBodegasDisponibles()
+        {
+            if (!IsPostBack)
+            {
+                Dictionary<string, int> nomSubBodegaPorId = new Dictionary<string, int>();
+                nomSubBodegaPorId = controladoraU.llenarSubBodegasAsignadas(nombre, apellidos);
+
+                Dictionary<string, int> nomBodegaPorId = new Dictionary<string, int>();
+                nomBodegaPorId = controladoraU.llenarBodegasAsignadas(nombre, apellidos);
+
+                Dictionary<string, int> nomSubBodega = new Dictionary<string, int>();
+                foreach (KeyValuePair<string, int> entry in nomBodegaPorId)
+                {
+                    nomSubBodega = controladoraU.getSubBodegasPorBodega(entry.Value);
+                }
+
+                Dictionary<string, int> subBodegasDisponibles = new Dictionary<string, int>();
+
+                foreach (KeyValuePair<string, int> entry1 in nomSubBodegaPorId)
+                {
+                    foreach (KeyValuePair<string, int> entry2 in nomSubBodega)
+                    {
+                        if (entry1.Key == entry2.Key)
+                        {
+                            subBodegasDisponibles.Add(entry2.Key, entry2.Value);
+                        }
+                    }
+                }
+                foreach (KeyValuePair<string, int> item in subBodegasDisponibles)
+                {
+                    nomSubBodega.Remove(item.Key);
+                }
+
+                //Itera sobre el diccionario para obtener las subBodegas disponibles y guardarlos en el listBox
+                foreach (var item in nomSubBodega)
+                {
+                    ListBoxSubBodegasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }
+            }
+        }
+
+        internal void llenarListBoxProgramas()
+        {
+            Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
+            ListBoxProgramasAsignados.Items.Clear();
+            ListBoxProgramasDisponibles.Items.Clear();
+            nomPrograma = controladoraU.getProgramas();
+
+            //Itera sobre el diccionario para obtener los programas presupuestarios disponibles y guardarlos en el listBox
+            foreach (var item in nomPrograma)
+            {
+                ListBoxProgramasAsignados.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+            }
+        }
+
+        internal void llenarListBoxBodegas()
+        {
+            Dictionary<string, int> nomBodega = new Dictionary<string, int>();
+            ListBoxBodegasAsignadas.Items.Clear();
+            ListBodegas.Items.Clear();
+            ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
+            nomBodega = controladoraU.getBodegas();
+
+            //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
+            foreach (var item in nomBodega)
+            {
+                ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+            }
+        }
+
+
+        internal void llenarListBoxSubBodegas()
+        {
+            ListBoxSubBodegasAsignadas.Items.Clear();
+            ListBoxSubBodegasDisponibles.Items.Clear();
+            if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
+            {
+                Dictionary<string, int> items = new Dictionary<string, int>();
+
+                foreach (ListItem item in ListBoxBodegasAsignadas.Items)
+                {
+                    items.Add(item.Text, Int32.Parse(item.Value));
+                }
+
+                foreach (KeyValuePair<string, int> entry in items)
+                {
+                    revisarPrograma("Administración Penitenciaria", entry.Key);
+                }
+            }
+        }
+
+        internal void revisarPrograma(string programa, string bodega)
+        {           
+                Dictionary<string, int> nomSubBodega = new Dictionary<string, int>();
+                nomSubBodega = controladoraU.getSubBodegas(programa, bodega);
+
+                //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
+                foreach (var item in nomSubBodega)
+                {
+                    ListBoxSubBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }    
+        }       
 
     }
 }

@@ -58,7 +58,6 @@ namespace SistemaMJP
                 }
                 
             }
-
         }
 
         internal void llenarListBoxBodegas()
@@ -79,7 +78,6 @@ namespace SistemaMJP
                 }
 
             }
-
         }
 
         internal void revisarPrograma(string programa, string bodega)
@@ -111,8 +109,8 @@ namespace SistemaMJP
                 {
                     revisarPrograma("Administración Penitenciaria", entry.Key);
                 }
-            }
-            
+
+            }            
         }
 
         protected void asignarProgramas(object sender, EventArgs e)

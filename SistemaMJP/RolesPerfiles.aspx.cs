@@ -12,7 +12,6 @@ namespace SistemaMJP
     public partial class RolesPerfiles : System.Web.UI.Page
     {
         public DataTable datosUsuario;
-        private EditarUsuario editarUsuario = new EditarUsuario();
         private ControladoraRolesPerfiles controladora = new ControladoraRolesPerfiles(); 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -74,7 +73,9 @@ namespace SistemaMJP
             nombre = gvr.Cells[0].Text;
             apellidos = gvr.Cells[1].Text;
             rol = gvr.Cells[2].Text;
-            editarUsuario.llenarDatos(nombre, apellidos, rol);
+            EditarUsuario.nombre = nombre;
+            EditarUsuario.apellidos = apellidos;
+            EditarUsuario.rol = rol;
             Response.Redirect("EditarUsuario");
         }
 

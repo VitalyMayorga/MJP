@@ -51,13 +51,22 @@ namespace SistemaMJP
         }
         
         //Llama a la controladora de base de datos de bodegas para obtener el id de la bodega
-        internal int obtenerIDBodega(string bodega) {
+        internal int obtenerIDBodega(string bodega)
+        {
             return controladoraBD.obtenerIDBodega(bodega);
         }
 
         //Llama a la controladora de base de datos de bodegas para obtener el nombre de la subbodega dado un id
-        internal string getNombreSb(int id) {
+        internal string getNombreSb(int id)
+        {
             return controladoraBD.getNombreSb(id);
         }
+
+        //Llama a la controladora de base de datos de bodegas para obtener el nombre de la subbodega dado un id de una Bodega
+        internal Dictionary<string, int> getSubBodegasPorBodega(int idBodega)
+        {
+            return controladoraBD.getSubBodegasPorBodega(idBodega);
+        }
+         
     }
 }
