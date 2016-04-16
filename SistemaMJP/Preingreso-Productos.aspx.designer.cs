@@ -125,7 +125,7 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.TextBox txtNombreProveedor;
         protected global::System.Web.UI.WebControls.TextBox txtCorreo;
         protected global::System.Web.UI.WebControls.TextBox txtTelefonos;
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFechaF;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaF;
         /// <summary>
         /// MsjErrorFactura control.
         /// </summary>

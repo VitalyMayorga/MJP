@@ -18,7 +18,7 @@ namespace SistemaMJP
         public static string numFactura;
         private static int id_factura;
         private static int[] ids;//se guardaran los ids de los productos de la factura
-        private int i;
+        private static int i;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -101,8 +101,8 @@ namespace SistemaMJP
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             i = Convert.ToInt32(row.RowIndex);
 
-            String estado = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text;
-            if (!estado.Equals("En edición"))
+            String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
+            if (estado.Equals("En edición"))
             {
                 //Se obtiene el id del producto
                 int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
@@ -129,8 +129,8 @@ namespace SistemaMJP
         protected void btnEnviar(object sender, EventArgs e)
         {
             controladora.enviarAAprobacion(id_factura);
-            ScriptManager.RegisterStartupScript(this, this.GetType(),"Alerta","alert(Factura enviada a aprobación)", true);
-
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a aprobación.\n Cuando sea revisada por el administrador, su estado será Finalizado')", true);
+            llenarDetallesProducto();       
         }
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()

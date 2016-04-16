@@ -66,8 +66,11 @@ namespace SistemaMJP
             
 
             string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
-            DetallesFactura.numFactura = numFactura;      
-            Response.Redirect("DetallesFactura");
+            string estado = HttpUtility.HtmlDecode(GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[6].Text);
+            if (!estado.Equals("En revisión")) {
+                DetallesFactura.numFactura = numFactura;
+                Response.Redirect("DetallesFactura");
+            }
         
         }
         //Llena la grid de facturas con los datos correspondientes

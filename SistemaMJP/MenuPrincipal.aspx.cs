@@ -16,7 +16,7 @@ namespace SistemaMJP
 
         protected void ingresarFacturas(object sender, EventArgs e)
         {
-            if (Session["rol"].Equals("bodeguero")) {
+            if (Session["rol"].Equals("Inclusion Pedidos")) {
                 Response.Redirect("Facturas.aspx");
             
             }

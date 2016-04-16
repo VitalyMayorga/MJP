@@ -56,7 +56,7 @@ namespace SistemaMJP
             }
             if (ingresoF.Checked) {
                 numFactura = txtNumFactura.Text;
-                fecha =  txtFechaF.Value.ToString();
+                fecha =  txtFechaF.Text;
                 numFactura = numFactura.Replace(" ", "");//Elimino espacios en blanco para saber si se digito numero factura o no
             }
             if (bodega.Equals("---Elija una bodega---"))
