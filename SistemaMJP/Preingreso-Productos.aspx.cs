@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,8 @@ namespace SistemaMJP
     public partial class Preingreso_Productos : System.Web.UI.Page
     {
         private ControladoraProductos controladora = new ControladoraProductos();
+        private EmailManager email = new EmailManager();
+        Bitacora bitacora = new Bitacora();
         public static string programa;
         public static string subBodega;
         public static bool tieneSubBodega;
@@ -19,6 +22,7 @@ namespace SistemaMJP
         public static string correo;
         public static string telefonos;
         public static bool nuevoProveedor = false;
+        bool invalid;
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,6 +49,8 @@ namespace SistemaMJP
         //En otro caso, despliega los mensajes de error
         protected void aceptar(object sender, EventArgs e)
         {
+            string descripcion="";
+            string usuario = (string)Session["correoInstitucional"];
             string fecha="";
             string bodega = ListaBodegas.Items[ListaBodegas.SelectedIndex].Text;
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
@@ -126,9 +132,11 @@ namespace SistemaMJP
                 {
                     Ingreso_Productos.numFactura = numFactura;
                     controladora.agregarFactura(idBodega, proveedor, Convert.ToInt32(ListaProgramas.SelectedValue), idSubBodega, numFactura,fecha);
+                    descripcion = "Agregada factura" + numFactura;
+                    bitacora.registrarActividad(usuario, descripcion);
                 }
-
-
+                descripcion = "Nodifica bodega "+bodega+" para programa "+programa;
+                bitacora.registrarActividad(usuario, descripcion);
                 Response.Redirect("Ingreso_Productos");
 
 
@@ -248,7 +256,7 @@ namespace SistemaMJP
                 txtNombreProveedor.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             }
-            else if (correo.Equals(""))
+            else if (correo.Equals("") || !email.IsValidEmail(correo) )
             {
                 txtCorreo.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -265,8 +273,13 @@ namespace SistemaMJP
                 ListaProveedores.Enabled = false;
                 ListaProveedores.SelectedIndex = 1;
                 controladora.agregarProveedor(proveedor, correo, telefonos);
+                string descripcion = "Agregado proveedor"+proveedor;
+                string usuario = (string)Session["correoInstitucional"];
+                bitacora.registrarActividad(usuario,descripcion);
             }
 
         }
+        
+
     }
 }

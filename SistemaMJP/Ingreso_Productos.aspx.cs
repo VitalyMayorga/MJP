@@ -19,6 +19,7 @@ namespace SistemaMJP
         public static int id_factura;
         public static bool editar;
         ControladoraProductos controladora = new ControladoraProductos();
+        Bitacora bitacora = new Bitacora();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -169,6 +170,9 @@ namespace SistemaMJP
                 }
                 if (correcto && numFactura==null) {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
                     controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
+                    string descripcionRA = "Agregado producto " + descripcion+" a la bodega";
+                    string usuario = (string)Session["correoInstitucional"];
+                    bitacora.registrarActividad(usuario, descripcionRA);
                 }
                 else if(correcto){//Si es un producto de factura
                     id_factura = controladora.obtenerIDFactura(numFactura);
@@ -265,10 +269,16 @@ namespace SistemaMJP
                     cantidad = 1;//Por defecto, si el producto ingresado
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " al ser activo asignado,su cantidad es 1')", true);
                     controladora.agregarActivo(numActivo, funcionario, cedula, descripcion, cantidadEmpaque);
+                    string descripcionRA = "Agregado producto " + descripcion + " como activo a "+funcionario+ " cédula "+cedula;
+                    string usuario = (string)Session["correoInstitucional"];
+                    bitacora.registrarActividad(usuario, descripcionRA);
                 }
                 if (correcto && numFactura == null)
                 {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
                     controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
+                    string descripcionRA = "Agregado producto " + descripcion + " a la bodega";
+                    string usuario = (string)Session["correoInstitucional"];
+                    bitacora.registrarActividad(usuario, descripcionRA);
                 }
                 else if (correcto)
                 {//Si es un producto de factura

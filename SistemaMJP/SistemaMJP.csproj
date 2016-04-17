@@ -315,6 +315,7 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Data\Bitacora\Bitacora.cs" />
     <Compile Include="Bodegas.aspx.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -379,6 +380,7 @@
       <DependentUpon>DevolucionBajas.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Productos\EntidadProductos.cs" />
+    <Compile Include="App_Data\Email\EmailManager.cs" />
     <Compile Include="Facturas.aspx.cs">
       <DependentUpon>Facturas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
