@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Transactions;
 
 namespace SistemaMJP
 {
@@ -88,21 +89,24 @@ namespace SistemaMJP
         //Metodo que se encarga de eliminar un Usuario del Sistema
         public void eliminarUsuario(string nombre, string apellidos)
         {
-            try
+            using (TransactionScope ts = new TransactionScope())
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                cmd.CommandText = "P_Eliminar_Usuario";
-                cmd.Parameters.AddWithValue("@nomUsuario", nombre);
-                cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception)
-            {
-                throw;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Eliminar_Usuario";
+                    cmd.Parameters.AddWithValue("@nomUsuario", nombre);
+                    cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 

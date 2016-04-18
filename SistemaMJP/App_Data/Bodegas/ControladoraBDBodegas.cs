@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Transactions;
 
 namespace SistemaMJP
 {
@@ -78,64 +79,73 @@ namespace SistemaMJP
         //Metodo que se encarga de agregar las bodegas al sistema
         public void agregarBodega(string prefijo,string bodega)
         {
-            try
-            {                
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                cmd.CommandText = "P_Agregar_Bodega";
-                cmd.Parameters.AddWithValue("@prefijo", prefijo);
-                cmd.Parameters.AddWithValue("@nombre", bodega);
-                cmd.ExecuteNonQuery();
-                con.Close();                
-            }
-            catch (Exception)
+            using (TransactionScope ts = new TransactionScope())
             {
-                throw;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_Bodega";
+                    cmd.Parameters.AddWithValue("@prefijo", prefijo);
+                    cmd.Parameters.AddWithValue("@nombre", bodega);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
         //Metodo que se encarga de agregar las subBodegas al sistema
         public void agregarSubBodega(string subBodega, int idPrograma)
         {
-            try
-            {                
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                cmd.CommandText = "P_Agregar_SubBodega";
-                cmd.Parameters.AddWithValue("@nombre", subBodega);
-                cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception)
+            using (TransactionScope ts = new TransactionScope())
             {
-                throw;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_SubBodega";
+                    cmd.Parameters.AddWithValue("@nombre", subBodega);
+                    cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
         //Metodo que se encarga de agregar las bodegas y subBodegas relacionadas a la tabla de BodegaSubBodega
         public void agregarBodegaSubBodega(int bodega)
         {
-            try
-            {                
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                int id=buscarMaximo();
-                con.Open();
-                cmd.CommandText = "P_Agregar_Bodega_SubBodega";
-                cmd.Parameters.AddWithValue("@idBodega", bodega);
-                cmd.Parameters.AddWithValue("@idSubBodega", id);
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception)
+            using (TransactionScope ts = new TransactionScope())
             {
-                throw;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    int id = buscarMaximo();
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_Bodega_SubBodega";
+                    cmd.Parameters.AddWithValue("@idBodega", bodega);
+                    cmd.Parameters.AddWithValue("@idSubBodega", id);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
