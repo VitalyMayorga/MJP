@@ -124,5 +124,11 @@ namespace SistemaMJP
             return controladoraB.getSubBodegasPorBodega(idBodega);
         }
 
+        //Llama a la controladora de Base de datos de usuarios, para editar la info personal del Usuario
+        internal void editarInfoUsuario(string correo, string pass, string nombre, string apellidos)
+        {
+            controladoraBD.editarInfoUsuario(EncodePassword(correo, pass), nombre, apellidos);
+        }
+
     }
 }

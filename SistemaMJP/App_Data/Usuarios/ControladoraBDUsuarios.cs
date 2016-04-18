@@ -332,6 +332,28 @@ namespace SistemaMJP
             }
         }
 
+        //Metodo que se encarga de editar la informacion personal de un Usuario
+        public void editarInfoUsuario(string password, string nombre, string apellidos)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_EditarInfo_Usuario";
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@nombreUsuario", nombre);
+                cmd.Parameters.AddWithValue("@apellidos", apellidos);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }
