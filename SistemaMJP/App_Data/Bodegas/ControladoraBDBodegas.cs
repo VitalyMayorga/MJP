@@ -92,6 +92,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@nombre", bodega);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -116,6 +117,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -141,6 +143,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@idSubBodega", id);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {

@@ -102,6 +102,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {

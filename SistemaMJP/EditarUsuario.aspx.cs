@@ -16,14 +16,34 @@ namespace SistemaMJP
          
         protected void Page_Load(object sender, EventArgs e)
         {
-            llenarListRoles();
-            InicializarListBox();
-            llenarProgramasAsignados();
-            llenarProgramasDisponibles();
-            llenarBodegasAsignadas();
-            llenarBodegasDisponibles();
-            llenarSubBodegasAsignadas();             
-            llenarSubBodegasDisponibles();
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
+                {
+                    Response.Redirect("Ingresar");
+                }
+                else if (!rol.Equals("Administrador General"))
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("RolesPerfiles");
+                }
+                else
+                {
+                    llenarListRoles();
+                    InicializarListBox();
+                    llenarProgramasAsignados();
+                    llenarProgramasDisponibles();
+                    llenarBodegasAsignadas();
+                    llenarBodegasDisponibles();
+                    llenarSubBodegasAsignadas();
+                    llenarSubBodegasDisponibles();
+                }
+            }
+            
         }
 
         protected void regresarRP(object sender, EventArgs e)

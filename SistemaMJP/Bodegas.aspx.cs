@@ -12,32 +12,59 @@ namespace SistemaMJP
         ControladoraBodegas bodega = new ControladoraBodegas();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) {
-
-                Dictionary<string, int> nomBodega = new Dictionary<string, int>();
-                Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
-                ListBodegas.Items.Clear();
-                ListProgramas.Items.Clear();
-
-                 ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
-                 ListProgramas.Items.Insert(0, new ListItem("--Selecione el Programa Presupuestario--", "0"));
-
-                nomBodega = bodega.getBodegas();
-                nomPrograma = bodega.getProgramas();
-
-                //Itera sobre el diccionario para obtener la bodega y el respectivo id y guardarlo en un dropdownlist
-                foreach (var item in nomBodega)
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
                 {
-                    ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                    Response.Redirect("Ingresar");
                 }
-
-                //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
-                foreach (var item in nomPrograma)
+                else if (!rol.Equals("Administrador General"))
                 {
-                    ListProgramas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });                    
-                }            
+                    Response.Redirect("MenuPrincipal");
+                }
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("Administracion");
+                }
+                else
+                {
+                    cagarDatos();
+                }
             }
-            
+                
+        }
+
+        protected void regresarMA(object sender, EventArgs e)
+        {
+            Response.Redirect("Administracion");
+        }
+       
+        protected void cagarDatos()
+        {
+            Dictionary<string, int> nomBodega = new Dictionary<string, int>();
+            Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
+            ListBodegas.Items.Clear();
+            ListProgramas.Items.Clear();
+
+            ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
+            ListProgramas.Items.Insert(0, new ListItem("--Selecione el Programa Presupuestario--", "0"));
+
+            nomBodega = bodega.getBodegas();
+            nomPrograma = bodega.getProgramas();
+
+            //Itera sobre el diccionario para obtener la bodega y el respectivo id y guardarlo en un dropdownlist
+            foreach (var item in nomBodega)
+            {
+                ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+            }
+
+            //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
+            foreach (var item in nomPrograma)
+            {
+                ListProgramas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+            }
+
             txtBodega.Enabled = false;
             txtPrefijo.Enabled = false;
             txtSubBodega.Enabled = false;

@@ -11,7 +11,14 @@ namespace SistemaMJP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
+                {
+                    Response.Redirect("Ingresar");
+                }
+            }
         }
 
         protected void ingresarFacturas(object sender, EventArgs e)

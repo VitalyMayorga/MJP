@@ -13,9 +13,28 @@ namespace SistemaMJP
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            llenarListRoles();
-            llenarListBoxProgramas();
-            llenarListBoxBodegas();
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
+                {
+                    Response.Redirect("Ingresar");
+                }
+                else if (!rol.Equals("Administrador General"))
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("RolesPerfiles");
+                }
+                else {
+                    llenarListRoles();
+                    llenarListBoxProgramas();
+                    llenarListBoxBodegas();
+                }
+            }
+            
         }
 
         protected void regresarRP(object sender, EventArgs e)
@@ -24,9 +43,7 @@ namespace SistemaMJP
         }
 
         internal void llenarListRoles()
-        {
-            if (!IsPostBack)
-            {
+        {            
                 Dictionary<string, int> nomRol = new Dictionary<string, int>();               
                 ListRoles.Items.Clear();               
 
@@ -38,15 +55,11 @@ namespace SistemaMJP
                 foreach (var item in nomRol)
                 {
                     ListRoles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
-                }
-
-            }
+                }            
         }
 
         internal void llenarListBoxProgramas()
         {
-            if (!IsPostBack)
-            {
                 Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
                 ListBoxProgramasAsignados.Items.Clear();
                 nomPrograma = controladoraU.getProgramas();
@@ -56,14 +69,10 @@ namespace SistemaMJP
                 {
                     ListBoxProgramasAsignados.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
-                
-            }
         }
 
         internal void llenarListBoxBodegas()
         {
-            if (!IsPostBack)
-            {
                 Dictionary<string, int> nomBodega = new Dictionary<string, int>();
                 ListBoxBodegasAsignadas.Items.Clear();
                 ListBodegas.Items.Clear();
@@ -76,8 +85,6 @@ namespace SistemaMJP
                     ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString()});
                     ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
-
-            }
         }
 
         internal void revisarPrograma(string programa, string bodega)

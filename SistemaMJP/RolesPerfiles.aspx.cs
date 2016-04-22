@@ -26,19 +26,21 @@ namespace SistemaMJP
                 {
                     Response.Redirect("MenuPrincipal");
                 }
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("Administracion");
+                }
                 else
                 {
-
                     llenarUsuarios();
                 }
-
             }
         }
 
 
-        protected void regresarMP(object sender, EventArgs e)
+        protected void regresarMA(object sender, EventArgs e)
         {
-            Response.Redirect("MenuPrincipal");
+            Response.Redirect("Administracion");
         }
 
         protected void crear(object sender, EventArgs e)

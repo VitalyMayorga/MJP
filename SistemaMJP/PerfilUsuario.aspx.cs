@@ -13,8 +13,30 @@ namespace SistemaMJP
         ControladoraUsuarios controladoraU = new ControladoraUsuarios();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
+                {
+                    Response.Redirect("Ingresar");
+                }
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+                else
+                {
+                    cargarDatos();
+                }
+            }
+            
         }
+
+        protected void regresarMP(object sender, EventArgs e)
+        {
+            Response.Redirect("MenuPrincipal");
+        }
+           
 
         internal void cargarDatos(){
            string datos = servicio.GetUsername((string)Session["correoInstitucional"]);
@@ -79,11 +101,12 @@ namespace SistemaMJP
                 MsjErrortextPassword.Style.Add("display", "block"); 
             } 
             else{
-                MsjErrortextPassword.Style.Add("display", "none");    
-            
-                if(revisarPssword()){
+                MsjErrortextPassword.Style.Add("display", "none");
+
+                if (revisarPssword())
+                {
                     controladoraU.editarInfoUsuario((string)Session["correoInstitucional"], txtPassword.Text, txtNombre.Text, TextApellidos.Text);
-                    Response.Redirect("RolesPerfiles");
+                    Response.Redirect("MenuPrincipal");
                 }else{
                    MsjErrortextRevisarPassword.Style.Add("display", "block");  
                 }

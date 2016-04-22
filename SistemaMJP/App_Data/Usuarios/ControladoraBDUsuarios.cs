@@ -35,6 +35,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@idRol", rol);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -61,6 +62,7 @@ namespace SistemaMJP
 
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -86,6 +88,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@idSubBodega", subBodega);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -111,6 +114,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@idPrograma", programa);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -276,6 +280,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -300,6 +305,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -324,6 +330,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -349,6 +356,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@apellidosUsuario", apellidos);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {
@@ -358,7 +366,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de editar la informacion personal de un Usuario
-        public void editarInfoUsuario(string password, string nombre, string apellidos)
+        public void editarInfoUsuario(string password, string nombre, string apellidos, string correo)
         {
             using (TransactionScope ts = new TransactionScope())
             {
@@ -368,12 +376,14 @@ namespace SistemaMJP
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
-                    cmd.CommandText = "P_EditarInfo_Usuario";
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@nombreUsuario", nombre);
+                    cmd.CommandText = "P_Actualizar_Usuario";
+                    cmd.Parameters.AddWithValue("@pass", password);
+                    cmd.Parameters.AddWithValue("@nomUsuario", nombre);
                     cmd.Parameters.AddWithValue("@apellidos", apellidos);
+                    cmd.Parameters.AddWithValue("@correo", correo);
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    ts.Complete();
                 }
                 catch (Exception)
                 {

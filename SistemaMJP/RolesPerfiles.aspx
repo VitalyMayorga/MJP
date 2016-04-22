@@ -5,7 +5,7 @@
      <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="form-horizontal">
-                <asp:LinkButton runat="server" OnClick="regresarMP"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;
+                <asp:LinkButton runat="server" OnClick="regresarMA"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton> 
                 <h3 class="Encabezado">Roles y Perfiles</h3>
                 <div class="form-group">

@@ -31,15 +31,6 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.TextBox txtBodega;
         
         /// <summary>
-        /// txtPrefijo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrefijo;
-        
-        /// <summary>
         /// MsjErrortextBodega control.
         /// </summary>
         /// <remarks>
@@ -47,6 +38,15 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrortextBodega;
+        
+        /// <summary>
+        /// txtPrefijo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPrefijo;
         
         /// <summary>
         /// RbSubBodegas control.
@@ -67,6 +67,15 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.DropDownList ListProgramas;
         
         /// <summary>
+        /// MsjErrorListProgramas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorListProgramas;
+        
+        /// <summary>
         /// ListBodegas control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ListBodegas;
+        
+        /// <summary>
+        /// MsjErrorListBodegas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorListBodegas;
         
         /// <summary>
         /// txtSubBodega control.
@@ -92,24 +110,6 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrortextSubBodega;
-        
-        /// <summary>
-        /// MsjErrorListBodegas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorListBodegas;
-        
-        /// <summary>
-        /// MsjErrorListProgramas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorListProgramas;
         
         /// <summary>
         /// btnIncluir control.

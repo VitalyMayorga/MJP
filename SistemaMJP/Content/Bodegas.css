@@ -1,49 +1,14 @@
-﻿html, body {
-    background-color: white;
-    text-align: center;
-}
-
-.titulo {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-     margin-top:0.5%;  
-     margin-bottom:3%;   
-}
-
-.subtitulo {
-    text-align: center;
+﻿.subtitulo {
+    text-align: right;
     font-size: 20px;
     font-weight: bold;
      margin-top:1.5%;  
      margin-bottom:2%;    
 }
-.msjAgregar {
-    font-size: 14px;
-     padding-bottom:2%;
-}
+
 .mensajeError{
     color: #AD2020;
     margin-bottom:3%;
-}
-
-.divError {
-    
-}
-
-.radioGroup {
-     vertical-align: middle;
-     float:left;
-}
-
-.form-group {
-    text-align:left;    
-}
-
-.Panel-Bodegas {
-    display:table;
-    width:55%;
-    margin: 0 auto;
 }
 
 .BotonIncluir {

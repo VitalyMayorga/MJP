@@ -11,7 +11,22 @@ namespace SistemaMJP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
+                {
+                    Response.Redirect("Ingresar");
+                }
+                else if (!rol.Equals("Administrador General"))
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+            }
         }
         protected void ingresarBodegas(object sender, EventArgs e)
         {

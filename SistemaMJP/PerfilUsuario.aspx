@@ -57,7 +57,7 @@
                    
                 </div>
 
-                <div class="form-group">
+                <div class="col-md-offset-2">
                     <div class="BotonAgregar">
                         <asp:Button ID="EditarInfo" class="btn btn-default" runat="server" Text="Editar Informacion" OnClick="editarInfo" />
                     </div>
