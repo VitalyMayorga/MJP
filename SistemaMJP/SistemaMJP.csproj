@@ -153,6 +153,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Activos.aspx" />
     <Content Include="Administracion.aspx" />
     <Content Include="Bodegas.aspx" />
     <Content Include="Contact.aspx" />
@@ -293,6 +294,13 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Activos.aspx.cs">
+      <DependentUpon>Activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos.aspx.designer.cs">
+      <DependentUpon>Activos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administracion.aspx.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -407,6 +415,7 @@
       <DependentUpon>Ingreso_Productos.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Detalles_Producto\Item_Grid_Produtos_Factura.cs" />
+    <Compile Include="App_Data\Activos\Item_Grid_Activos.cs" />
     <Compile Include="MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
