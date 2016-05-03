@@ -11,7 +11,33 @@ namespace SistemaMJP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string rol = (string)Session["rol"];
+                if (Session["correoInstitucional"] == null)
+                {
+                    Response.Redirect("Ingresar");
+                }               
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("MenuPrincipal");
+                }
+            }
+        }
 
+        protected void ingresarBajas(object sender, EventArgs e)
+        {
+            Response.Redirect("Bajas");
+        }
+
+        protected void ingresarDevoluciones(object sender, EventArgs e)
+        {
+            Response.Redirect("Devoluciones");
+        }
+
+        protected void regresarMP(object sender, EventArgs e)
+        {
+            Response.Redirect("MenuPrincipal");
         }
     }
 }

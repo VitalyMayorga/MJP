@@ -50,7 +50,7 @@
                     <div class="col-md-10">
                     <asp:RadioButton id="RbSubBodegas" runat="server" GroupName="GroupBodegas" OnCheckedChanged="rbEnable" AutoPostBack="true" name="subbodega" value="subbodega"></asp:RadioButton>   
                        
-                        <asp:DropDownList ID = "ListProgramas" class="form-control dropdown cmbsize" runat="server">                                
+                    <asp:DropDownList ID = "ListProgramas" class="form-control dropdown cmbsize" runat="server">                                
                     </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorListProgramas" class="col-md-offset-2" runat="server">

@@ -28,13 +28,20 @@ namespace SistemaMJP
                 }
             }
         }
+
         protected void ingresarBodegas(object sender, EventArgs e)
         {
-            Response.Redirect("Bodegas.aspx");
+            Response.Redirect("Bodegas");
         }
+
         protected void ingresarRolesPerfiles(object sender, EventArgs e)
         {
-            Response.Redirect("RolesPerfiles.aspx");
+            Response.Redirect("RolesPerfiles");
+        }
+
+        protected void regresarMP(object sender, EventArgs e)
+        {
+            Response.Redirect("MenuPrincipal");
         }
     }
 }

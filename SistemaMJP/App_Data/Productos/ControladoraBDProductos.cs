@@ -265,8 +265,7 @@ namespace SistemaMJP
 
         //Recibe la informacion del producto modificado para asignarlo a la Factura correspondiente.
         internal void modificarProductoFactura(int factura, int producto, int cantidad, decimal total, Nullable<DateTime> fechaG, Nullable<DateTime> fechaC, Nullable<DateTime> fechaV)
-        {
-            
+        {            
             using (TransactionScope ts = new TransactionScope())
             {
                 try
@@ -303,8 +302,7 @@ namespace SistemaMJP
                 }
 
             }
-
-
+            
         }
 
        //Obtiene la lista de productos que comienzan con el prefijo dado
@@ -337,5 +335,33 @@ namespace SistemaMJP
             }
             return productos;
         }
+
+        //Metodo que se encarga de devolver la lista de usuarios que estan agregados al sistema
+        internal int getProductoConCantidadMin(string descripcion)
+        {
+            int idProducto;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Id_Producto_Min_Cantidad";
+                con.Open();
+                cmd.Parameters.AddWithValue("@descripcion",descripcion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                idProducto = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return idProducto;
+
+        }
+
     }
 }

@@ -261,6 +261,34 @@ namespace SistemaMJP
 
             return subbodegas;
         }
+
+        //Metodo que se encarga de obtener el nombre de una bodega,dado su id
+        internal string getNombreBodega(int id)
+        {
+            string nombre = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_nombre_Bodega";
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                nombre = reader.GetString(0);
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return nombre;
+        }
+
         
     }
 }

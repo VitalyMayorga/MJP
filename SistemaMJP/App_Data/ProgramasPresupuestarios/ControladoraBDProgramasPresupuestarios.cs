@@ -45,5 +45,32 @@ namespace SistemaMJP
             return programa;
 
         }
+
+        //Metodo que se encarga de obtener el nombre de un programa,dado su id
+        internal string getNombrePrograma(int id)
+        {
+            string nombre = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_nombre_Programa";
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                nombre = reader.GetString(0);
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return nombre;
+        }
     }
 }
