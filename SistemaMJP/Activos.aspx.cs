@@ -22,9 +22,17 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusion Pedidos") || !rol.Equals("Administrador Almacen"))
+                else if (rol.Equals("Inclusion Pedidos") || rol.Equals("Administrador Almacen"))
                 {
-                    Response.Redirect("MenuPrincipal");
+                    llenarListaActivos();
+
+                    if (editar)
+                    {
+                        //campos no editables
+                        ListaActivos.Enabled = false;
+                        txtNumActivo.Enabled = false;
+                        llenarDatosActivo();
+                    }
                 }
 
                 else if (Request.UrlReferrer == null)
@@ -33,15 +41,8 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    llenarListaActivos();
-                    
-                    if (editar)
-                    {
-                        //campos no editables
-                        ListaActivos.Enabled = false;
-                        txtNumActivo.Enabled = false;
-                        llenarDatosActivo();
-                    }
+
+                    Response.Redirect("MenuPrincipal");
                 }
             }
         }

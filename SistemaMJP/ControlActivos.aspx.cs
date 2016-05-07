@@ -23,14 +23,14 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusion Pedidos") || !rol.Equals("Administrador Almacen"))
+                else if (rol.Equals("Inclusion Pedidos") || rol.Equals("Administrador Almacen"))
                 {
-                    Response.Redirect("MenuPrincipal");
+                    llenarActivos();
                 }
                 else
                 {
-
-                    llenarActivos();
+                    Response.Redirect("MenuPrincipal");
+                    
                 }
 
             }
