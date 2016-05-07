@@ -105,5 +105,11 @@ namespace SistemaMJP
         public static List<string> getProductos(string prefix) {
             return ControladoraBDProductos.getProductos(prefix);
         }
+
+        //Llama a la controladora de Productos, para obtener el id del producto con cantidad minima segun cierta descripcion
+        internal int getProductoConCantidadMin(string descripcion)
+        {
+            return controladoraBD.getProductoConCantidadMin(descripcion);
+        }
     }
 }

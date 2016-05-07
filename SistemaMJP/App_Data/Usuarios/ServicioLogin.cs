@@ -134,7 +134,7 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Programas_Presupuestarios_Usuario";
+                cmd.CommandText = "P_ProgramaPresupuestario_Usuario";
                 cmd.Parameters.AddWithValue("@correo", correo);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();

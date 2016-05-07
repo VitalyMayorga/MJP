@@ -16,5 +16,11 @@ namespace SistemaMJP
         {
             return controladoraBD.CargarProgramaPresupuestario();
         }
+
+        //Llama a la controladora de base de datos de programas presupuestarios para obtener el nombre de un programa dado un id
+        internal string getNombrePrograma(int id)
+        {
+            return controladoraBD.getNombrePrograma(id);
+        }
     }
 }

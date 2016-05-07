@@ -155,6 +155,7 @@
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Activos.aspx" />
     <Content Include="Administracion.aspx" />
+    <Content Include="Bajas.aspx" />
     <Content Include="Bodegas.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Bodegas.css" />
@@ -175,13 +176,16 @@
     <Content Include="DetallesFactura.aspx" />
     <Content Include="DetallesFacturaRevision.aspx" />
     <Content Include="DevolucionBajas.aspx" />
+    <Content Include="Devoluciones.aspx" />
     <Content Include="Facturas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\admin.png" />
+    <Content Include="Images\bajas.png" />
     <Content Include="Images\bodega.png" />
     <Content Include="Images\check.jpg" />
     <Content Include="Images\datepicker.png" />
     <Content Include="Images\devolucion.jpg" />
+    <Content Include="Images\devoluciones.png" />
     <Content Include="Images\facturas.jpg" />
     <Content Include="Images\LOGO_MJP.png" />
     <Content Include="Images\reportes.jpg" />
@@ -308,6 +312,8 @@
     <Compile Include="Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Devolucion_Bajas\ControladoraBDDevolucionBajas.cs" />
+    <Compile Include="App_Data\Devolucion_Bajas\ControladoraDevolucionBajas.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraBDRolesPerfiles.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraRolesPerfiles.cs" />
     <Compile Include="App_Data\Usuarios\ControladoraBDUsuarios.cs" />
@@ -324,6 +330,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Data\Bitacora\Bitacora.cs" />
+    <Compile Include="Bajas.aspx.cs">
+      <DependentUpon>Bajas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bajas.aspx.designer.cs">
+      <DependentUpon>Bajas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Bodegas.aspx.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -389,6 +402,13 @@
     </Compile>
     <Compile Include="App_Data\Productos\EntidadProductos.cs" />
     <Compile Include="App_Data\Email\EmailManager.cs" />
+    <Compile Include="Devoluciones.aspx.cs">
+      <DependentUpon>Devoluciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Devoluciones.aspx.designer.cs">
+      <DependentUpon>Devoluciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Facturas.aspx.cs">
       <DependentUpon>Facturas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
