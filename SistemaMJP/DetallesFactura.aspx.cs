@@ -54,6 +54,8 @@ namespace SistemaMJP
         //Crea una vista Previa de la factura con los productos ingresados.
         protected void vistaPrevia(object sender, EventArgs e)
         {
+            FacturaVistaPrevia.idFactura = id_factura;
+            Response.Redirect("FacturaVistaPrevia");
             //Se debe encargar de generar una vista previa imprimible de la factura
 
         }
