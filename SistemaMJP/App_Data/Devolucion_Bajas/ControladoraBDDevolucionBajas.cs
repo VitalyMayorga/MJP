@@ -59,7 +59,7 @@ namespace SistemaMJP
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
                     cmd.CommandText = "P_Cambiar_Estado_Devolucion_Baja";
-                    cmd.Parameters.AddWithValue("@idDevolucionBaja", idDevolucion);
+                    cmd.Parameters.AddWithValue("@idDevolucion", idDevolucion);
                     cmd.Parameters.AddWithValue("@aceptado", aceptado);
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -73,11 +73,10 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de actualizar el Rol del Usuario
-        public void actualizarCantidadProducto(int idBodega, int idProducto, int idPrograma,  int idSubBodega, int cantidad, string tipo)
+        public void actualizarCantidadProducto(int idBodega, int idProducto, int idPrograma,  int idSubBodega, int cantidad, string tipo, int id)
         {
             using (TransactionScope ts = new TransactionScope())
             {
-                int id= buscarMaximo();
                 try
                 {
                     SqlCommand cmd = new SqlCommand();
@@ -128,5 +127,49 @@ namespace SistemaMJP
             return id;
         }
 
+        //Metodo que se encarga de devolver la lista de Bajas Pendientes
+        internal List<Item_Grid_Bajas> getListaBajasPendientes()
+        {
+            List<Item_Grid_Bajas> bajas = new List<Item_Grid_Bajas>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Lista_Bajas_Pendientes";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    bajas.Add(LoadItemGridBajas(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bajas;
+
+        }
+
+        //Metodo que se encarga de llenar los datos de la clase item grid bajas y devolver dicha clase encapsulada
+        internal Item_Grid_Bajas LoadItemGridBajas(SqlDataReader reader)
+        {
+            int idDevolucionBaja = reader.GetInt32(0);
+            int idProducto = reader.GetInt32(1);
+            int cantidad = reader.GetInt32(2);
+            int idPrograma = reader.GetInt32(3);
+            int idBodega = reader.GetInt32(4);
+            int idSubBodega = reader.GetInt32(5);
+            String justificacion = reader.GetString(6);
+            Item_Grid_Bajas items = new Item_Grid_Bajas(idDevolucionBaja, idProducto, cantidad, idPrograma, idBodega, idSubBodega, justificacion);
+            return items;
+        }
     }
 }

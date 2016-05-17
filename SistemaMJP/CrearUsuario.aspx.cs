@@ -10,7 +10,7 @@ namespace SistemaMJP
     public partial class CrearUsuario : System.Web.UI.Page
     {
         private ControladoraUsuarios controladoraU = new ControladoraUsuarios();
-       
+        private EmailManager email = new EmailManager();       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -366,32 +366,38 @@ namespace SistemaMJP
                          MsjErrorListBoxBodegas.Style.Add("display", "none");
                          MsjErrorListBoxSubBodega.Style.Add("display", "block");
                      }
-                     else {                   
-                         
-                         controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
+                     else {
 
-                         //Se llena la tabla de UsuarioPrograma
-                         foreach (KeyValuePair<string, int> entry in itemsPrograma)
+                         if (!email.IsValidEmail(txtCorreo.Text))
                          {
-                             controladoraU.agregarUsuarioPrograma(entry.Value);
+                             MsjErrorFormatEmail.Style.Add("display", "block");
                          }
-
-                         //Se llena la tabla de UsuarioBodega
-                         foreach (KeyValuePair<string, int> entry in itemsBodega)
+                         else
                          {
-                             controladoraU.agregarUsuarioBodega(entry.Value);
-                         }
+                             controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
 
-                         if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1 )
-                         { 
-                             //Se llena la tabla de UsuarioSubBodega
-                             foreach (KeyValuePair<string, int> entry in itemsSubBodega)
+                             //Se llena la tabla de UsuarioPrograma
+                             foreach (KeyValuePair<string, int> entry in itemsPrograma)
                              {
-                                 controladoraU.agregarUsuarioSubBodega(entry.Value);
+                                 controladoraU.agregarUsuarioPrograma(entry.Value);
                              }
+
+                             //Se llena la tabla de UsuarioBodega
+                             foreach (KeyValuePair<string, int> entry in itemsBodega)
+                             {
+                                 controladoraU.agregarUsuarioBodega(entry.Value);
+                             }
+
+                             if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
+                             {
+                                 //Se llena la tabla de UsuarioSubBodega
+                                 foreach (KeyValuePair<string, int> entry in itemsSubBodega)
+                                 {
+                                     controladoraU.agregarUsuarioSubBodega(entry.Value);
+                                 }
+                             }
+                             Response.Redirect("RolesPerfiles");
                          }
-                         Response.Redirect("RolesPerfiles");
-                     
                      }                  
 
                 }
@@ -403,6 +409,11 @@ namespace SistemaMJP
                     }
                     else
                     {
+                       if (!email.IsValidEmail(txtCorreo.Text))
+                       {
+                           MsjErrorFormatEmail.Style.Add("display", "block");
+                       }
+                       else{
                         controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
                         controladoraU.agregarUsuarioBodega(Int32.Parse(ListBodegas.SelectedValue));
                         Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
@@ -414,6 +425,9 @@ namespace SistemaMJP
                             controladoraU.agregarUsuarioSubBodega(entry.Value);
                         }
                         Response.Redirect("RolesPerfiles");
+                       }
+                        
+                        
                     }                   
                 }
             }      

@@ -44,6 +44,10 @@
                         <label class="mensajeError">Debe ingresar el correo Institucional</label>
                         <br/> 
                     </div>
+                    <div style="display: none;" id="MsjErrorFormatEmail" class="col-md-offset-2" runat="server">
+                        <label class="mensajeError">Formato de correo institucional invalido</label>
+                        <br/> 
+                    </div>
                    
                 </div>
                 

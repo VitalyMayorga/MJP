@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <h4 class="Encabezado">Usuarios del Sistema</h4>
-                <div class="table-responsive GridContainer">
-                    <asp:GridView ID="GridUsuarios" class="table-hover" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridUsuario_RowCreated" Width="100%">
+                <div class="table-responsive tablaMJP">
+                    <asp:GridView ID="GridUsuarios" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridUsuario_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField >
                                 <ItemTemplate>

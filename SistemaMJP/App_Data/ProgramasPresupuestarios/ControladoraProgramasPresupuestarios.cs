@@ -22,5 +22,12 @@ namespace SistemaMJP
         {
             return controladoraBD.getNombrePrograma(id);
         }
+
+        //Llama a la controladora de base de datos de programas presupuestarios para obtener el id del programa
+        public int obtenerIDPrograma(string programa)
+        {
+            return controladoraBD.obtenerIDPrograma(programa);
+        }
+
     }
 }

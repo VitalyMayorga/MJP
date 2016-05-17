@@ -33,6 +33,7 @@ namespace SistemaMJP
                 else
                 {
                     llenarUsuarios();
+                    // Resize the master DataGridView columns to fit the newly loaded data.
                 }
             }
         }

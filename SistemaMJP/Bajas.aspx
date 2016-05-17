@@ -93,8 +93,8 @@
         </ContentTemplate>
     </asp:UpdatePanel>
      <script type="text/javascript">
-        $(document).ready(function () {
-            $("[id$=<%= txtProducto.ClientID %>]").autocomplete({
+         $(document).ready(function () {
+             $("[id$=<%= txtProducto.ClientID %>]").autocomplete({
                 source: function (request, response) {
                     $.ajax({
                         url: '<%=ResolveUrl("~/Bajas.aspx/getProductos") %>',

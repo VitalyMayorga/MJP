@@ -21,6 +21,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         
         }
+
         //metodo usado para obtener los correos de los administradores del almacen solicitado
         internal List<string> obtenerCorreosAdminAlmacen(string bodega) { 
             List<string> correos = new List<string>();
@@ -47,9 +48,38 @@ namespace SistemaMJP
                 throw;
             }
 
-            return correos;
-        
+            return correos;        
         }
+
+        //metodo usado para obtener el correo del administrador general
+        internal List<string> obtenerCorreoAdminGeneral()
+        {
+            List<string> correos = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Correos_AdminGeneral";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    correos.Add(reader.GetString(0));
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return correos;
+        }
+
         //Método usado para verificar emal
         public bool IsValidEmail(string strIn)
         {

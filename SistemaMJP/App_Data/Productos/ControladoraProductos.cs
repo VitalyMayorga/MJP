@@ -111,5 +111,11 @@ namespace SistemaMJP
         {
             return controladoraBD.getProductoConCantidadMin(descripcion);
         }
+
+        //Llama a la controladora de base de datos de productos para obtener el nombre del producto dado un id
+        internal string getNombreProducto(int id)
+        {
+            return controladoraBD.getNombreProducto(id);
+        }
     }
 }

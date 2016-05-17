@@ -12,6 +12,7 @@ namespace SistemaMJP
     public partial class Bajas : System.Web.UI.Page
     {
         ControladoraDevolucionBajas controladora = new ControladoraDevolucionBajas();
+        EmailManager email = new EmailManager();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,7 +30,8 @@ namespace SistemaMJP
                 {
                     Response.Redirect("DevolucionBajas");
                 }
-                else {
+                else
+                {
                     cagarDatos();
                 }
             }
@@ -75,13 +77,13 @@ namespace SistemaMJP
                 DropDownSubBodegas.Items.Clear();
                 DropDownSubBodegas.Items.Insert(0, new ListItem("--Selecione la SubBodega--", "0"));
                 nomSubBodega = controladora.getSubBodegas(Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownBodegas.SelectedValue));
-            
+
                 //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
                 foreach (var item in nomSubBodega)
                 {
                     DropDownSubBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
-                } 
-           }
+                }
+            }
         }
 
         //Metodo que se encarga de obtener todos los productos que empiezan cn lo digitado por el usuario
@@ -95,7 +97,8 @@ namespace SistemaMJP
 
         protected void bajar(object sender, EventArgs e)
         {
-
+            string usuario = (string)Session["correoInstitucional"];
+            List<string> correo;
             if (DropDownPrograma.SelectedValue == "0")
             {
                 MsjErrorlistPrograma.Style.Add("display", "block");
@@ -280,8 +283,9 @@ namespace SistemaMJP
             else
             {
                 MsjErrortextJustificacion.Style.Add("display", "none");
-                controladora.agregarDevolucionBaja("Baja", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Aceptado");
-                controladora.actualizarCantidadProducto(Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue),Int32.Parse(TextCantidad.Text), "Baja");
+                controladora.agregarDevolucionBaja("Baja", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Pendiente");
+                correo = email.obtenerCorreoAdminGeneral();
+                email.MailSender("Solicitud de baja enviada a revisión por el usuario " + usuario + ".", "Notificación de solicitud de aprobación de productos de factura", correo);
                 Response.Redirect("DevolucionBajas");
             }
         }

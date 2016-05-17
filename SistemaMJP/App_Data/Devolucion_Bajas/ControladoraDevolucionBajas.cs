@@ -45,9 +45,39 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de base de datos de programas presupuestarios para obtener el nombre de un programa dado un id
+        internal string getNombreSb(int id)
+        {
+            return controladoraB.getNombreSb(id);
+        }
+
+        //Llama a la controladora de base de datos de bodegas para obtener el id de la Bodega
+        internal int obtenerIDBodega(string Bodega)
+        {
+            return controladoraB.obtenerIDBodega(Bodega);
+        }
+
+        //Llama a la controladora de base de datos de bodegas para obtener el id de la subBodega
+        internal int obtenerIDSubBodega(string subBodega)
+        {
+            return controladoraB.obtenerIDSubBodega(subBodega);
+        }
+
+        //Llama a la controladora de base de datos de programas presupuestarios para obtener el nombre de un programa dado un id
         internal string getNombrePrograma(int id)
         {
             return controladoraPP.getNombrePrograma(id);
+        }
+
+        //Llama a la controladora de base de datos de programas presupuestarios para obtener el id del programa
+        public int obtenerIDPrograma(string programa)
+        {
+            return controladoraPP.obtenerIDPrograma(programa);
+        }
+
+        //Llama a la controladora de base de datos de productos para obtener el nombre del producto dado un id
+        internal string getNombreProducto(int id)
+        {
+            return controladoraP.getNombreProducto(id);
         }
 
         //Llama a la controladora de Productos, para obtener el id del producto con cantidad minima segun cierta descripcion
@@ -63,15 +93,28 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de Base de datos de DevolucionBajas, para actualizar la cantidad de producto
-        internal void actualizarCantidadProducto(int idBodega, int idProducto, int idPrograma, int idSubBodega, int cantidad, string tipo)
+        internal void actualizarCantidadProducto(int idBodega, int idProducto, int idPrograma, int idSubBodega, int cantidad, string tipo, int id)
         {
-            controladoraBD.actualizarCantidadProducto(idBodega, idProducto, idPrograma, idSubBodega, cantidad, tipo);
+            controladoraBD.actualizarCantidadProducto(idBodega, idProducto, idPrograma, idSubBodega, cantidad, tipo, id);
         }
 
         //Llama a la controladora de Base de datos de DevolucionBajas, para agregar una Baja o Devolucion
         internal void agregarDevolucionBaja(string tipo, int idPrograma, int cantidad, string justificacion, int idBodega, int idProducto, int idSubBodega, string estado)
         {
             controladoraBD.agregarDevolucionBaja(tipo, idPrograma, cantidad, justificacion, idBodega, idProducto, idSubBodega, estado);
+        }
+
+        //LLama a la controladora de Devolucionesbajas para obtener la  lista con los item del grid
+        internal List<Item_Grid_Bajas> getListaBajasPendientes()
+        {
+            return controladoraBD.getListaBajasPendientes();
+
+        }
+
+        //Llama a la controladora de Base de datos de DevolucionBajas, para actualizar el estado de la devolucion
+        internal int buscarIdMaxDevolucion()
+        {
+           return controladoraBD.buscarMaximo();
         }
 
 

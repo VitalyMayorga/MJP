@@ -49,7 +49,15 @@ namespace SistemaMJP
         }
         protected void ingresarDevolucionBajas(object sender, EventArgs e)
         {
-            Response.Redirect("DevolucionBajas.aspx");
+            if (Session["rol"].Equals("Administrador Almacen"))
+            {
+                Response.Redirect("DevolucionBajas.aspx");
+
+            }
+            else if (Session["rol"].Equals("Administrador General"))
+            {
+                Response.Redirect("RevisionBajas.aspx");
+            }            
         }
         protected void ingresarSeguimiento(object sender, EventArgs e)
         {

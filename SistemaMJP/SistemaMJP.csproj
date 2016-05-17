@@ -204,6 +204,7 @@
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="RevisionBajas.aspx" />
     <Content Include="RevisionFacturas.aspx" />
     <Content Include="RolesPerfiles.aspx" />
     <Content Include="CrearUsuario.aspx" />
@@ -314,6 +315,7 @@
     </Compile>
     <Compile Include="App_Data\Devolucion_Bajas\ControladoraBDDevolucionBajas.cs" />
     <Compile Include="App_Data\Devolucion_Bajas\ControladoraDevolucionBajas.cs" />
+    <Compile Include="App_Data\Devolucion_Bajas\Item_Grid_Bajas.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraBDRolesPerfiles.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraRolesPerfiles.cs" />
     <Compile Include="App_Data\Usuarios\ControladoraBDUsuarios.cs" />
@@ -473,6 +475,13 @@
     </Compile>
     <Compile Include="Requisiciones.aspx.designer.cs">
       <DependentUpon>Requisiciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RevisionBajas.aspx.cs">
+      <DependentUpon>RevisionBajas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RevisionBajas.aspx.designer.cs">
+      <DependentUpon>RevisionBajas.aspx</DependentUpon>
     </Compile>
     <Compile Include="RevisionFacturas.aspx.cs">
       <DependentUpon>RevisionFacturas.aspx</DependentUpon>

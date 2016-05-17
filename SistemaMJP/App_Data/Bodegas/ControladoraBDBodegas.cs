@@ -289,6 +289,33 @@ namespace SistemaMJP
             return nombre;
         }
 
+        //Metodo que se encarga de obtener el id de una subBodega, dado su nombre
+        internal int obtenerIDSubBodega(string subBodega)
+        {
+            int id = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Id_SubBodega";
+                cmd.Parameters.AddWithValue("@nombre", subBodega);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+        }
+
         
     }
 }

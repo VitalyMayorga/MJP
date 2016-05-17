@@ -72,5 +72,33 @@ namespace SistemaMJP
 
             return nombre;
         }
+
+
+        //Metodo que se encarga de obtener el id de un programa presupuestario, dado su nombre
+        public int obtenerIDPrograma(string programa)
+        {
+            int id = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Id_Programa";
+                cmd.Parameters.AddWithValue("@nombre", programa);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+        }
     }
 }
