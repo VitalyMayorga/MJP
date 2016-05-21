@@ -1,13 +1,10 @@
-﻿html, body {
-    background-color: white;
-    text-align: center;
-}
-
+﻿
 .Panel-Principal {
     display:table;
     width:45%;
     margin: 0 auto;
 }
+
 .titulo {
     text-align: center;
     font-size: 30px;
@@ -15,9 +12,10 @@
      margin-top:0.5%;     
 }
 
-.form-group {
+.form-group1 {
     text-align:center;    
 }
+
 .form-group2 {
      display: inline-block;
      margin-left:5%;

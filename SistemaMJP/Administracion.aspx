@@ -6,16 +6,18 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">      
-
-                    <div class="Panel-Princiapl">
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+                    <div class="form-horizontal">
           <asp:LinkButton runat="server" OnClick="regresarMP"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton> 
+
                         <div class ="container">
                               <h1 class="titulo" >Menu Administrador</h1>
                             <hr/>
                          </div>
 
-                            <div class="form-group">
+                            <div class="form-group1">
                                 <div class="form-group2">                                    
                                        <div class="LabelMenu"> <label>Asignar Roles y Perfiles</label></div>
                                        <div class="BotonMenu">
@@ -37,4 +39,6 @@
                                  </div>
                                  </div>
                      </div>  
+             </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

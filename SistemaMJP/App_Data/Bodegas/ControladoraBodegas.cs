@@ -32,6 +32,12 @@ namespace SistemaMJP
             return controladoraPP.getProgramas();
         }
 
+        //Llama a la controladora de base de datos de programas presupuestarios para obtener el nombre de un programa dado un id
+        internal string getNombrePrograma(int id)
+        {
+            return controladoraPP.getNombrePrograma(id);
+        }
+
         //Llama a la controladora de Base de datos de bodegas, para agregar nuevas bodegas al sistema 
         internal void agregarBodega(string prefijo,string bodega)
         {

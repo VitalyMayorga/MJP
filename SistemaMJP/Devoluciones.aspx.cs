@@ -11,6 +11,7 @@ namespace SistemaMJP
 {
     public partial class Devoluciones : System.Web.UI.Page
     {
+        Bitacora bitacora = new Bitacora();
         ControladoraDevolucionBajas controladora = new ControladoraDevolucionBajas();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -96,7 +97,7 @@ namespace SistemaMJP
 
         protected void devolver(object sender, EventArgs e)
         {
-
+            string descripcionRA = "";
             if (DropDownPrograma.SelectedValue == "0")
             {
                 MsjErrorlistPrograma.Style.Add("display", "block");
@@ -283,6 +284,16 @@ namespace SistemaMJP
                 MsjErrortextJustificacion.Style.Add("display", "none");
                 controladora.agregarDevolucionBaja("Devolucion", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Aceptado");
                 controladora.actualizarCantidadProducto(Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue), Int32.Parse(TextCantidad.Text), "Devolucion", controladora.buscarIdMaxDevolucion());
+                if (Int32.Parse(DropDownSubBodegas.SelectedValue) == 0)
+                {
+                    descripcionRA = "Devolucion de " + TextCantidad.Text + " " + txtProducto.Text + " en la bodega: " + controladora.getNombreBodega(Int32.Parse(DropDownBodegas.SelectedValue)) + ", subBodega: -------- al programa presupuestario: " + controladora.getNombrePrograma(Int32.Parse(DropDownPrograma.SelectedValue));
+                }
+                else
+                {
+                    descripcionRA = "Devolucion de " + TextCantidad.Text + " " + txtProducto.Text + " en la bodega: " + controladora.getNombreBodega(Int32.Parse(DropDownBodegas.SelectedValue)) + ", subBodega: " + controladora.getNombreSb(Int32.Parse(DropDownSubBodegas.SelectedValue)) + "al programa presupuestario: " + controladora.getNombrePrograma(Int32.Parse(DropDownPrograma.SelectedValue));
+                }
+                string usuario = (string)Session["correoInstitucional"];
+                bitacora.registrarActividad(usuario, descripcionRA);
                 Response.Redirect("DevolucionBajas");
             }
         }

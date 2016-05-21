@@ -18,14 +18,14 @@
 
                 <h2 class="subtitulo">Bodegas</h2>
                 <div class="form-group" >
-                    <label class="col-md-4 control-label">Escriba el nombre de la bodega que desea agregar al sistema</label>
+                    <label class="col-md-5 control-label">Escriba el nombre de la bodega que desea agregar al sistema</label>
                 </div>    
 
-                <div class="form-group" >
-                    <div class="col-md-2">
+                <div class="form-group">
+                    <div class="col-md-1" style=" text-align:right;" >
                         <asp:RadioButton id="RbBodegas" runat="server" GroupName="GroupBodegas" OnCheckedChanged="rbEnable" AutoPostBack="true" name="bodega" value="bodega"></asp:RadioButton>
                      </div> 
-                    <div class="col-md-4">                            
+                    <div class="col-md-3">                            
                         <asp:TextBox ID="txtBodega" class="form-control text-box single-line" runat="server" placeholder="Bodega"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextBodega" class="col-md-offset-2" runat="server">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                             
-                <div class="form-group" >
+                <div class="form-group" style=" margin-left: 8.5%;">
                     <asp:TextBox ID="txtPrefijo"  class="form-control text-box single-line" runat="server" placeholder="Prefijo"></asp:TextBox>                             
                 </div>                            
                         
@@ -43,15 +43,16 @@
 
                 <h2 class="subtitulo">SubBodegas</h2>
                 <div class="form-group">                        
-                    <label class="col-md-6 control-label">Selccione la bodega a la que pertenece la nueva subBodega y escriba dicho nombre para agregarla al sistema</label>
+                    <label class="col-md-6 control-label">Escriba el nombre de la Subbodega y seleccione la bodega a la que pertenece</label>
                 </div>
                                       
                 <div class="form-group" >
-                    <div class="col-md-10">
-                    <asp:RadioButton id="RbSubBodegas" runat="server" GroupName="GroupBodegas" OnCheckedChanged="rbEnable" AutoPostBack="true" name="subbodega" value="subbodega"></asp:RadioButton>   
-                       
-                    <asp:DropDownList ID = "ListProgramas" class="form-control dropdown cmbsize" runat="server">                                
-                    </asp:DropDownList>
+                    <div class="col-md-1" style=" text-align:right;" >
+                        <asp:RadioButton id="RbSubBodegas" runat="server" GroupName="GroupBodegas" OnCheckedChanged="rbEnable" AutoPostBack="true" name="subbodega" value="subbodega"></asp:RadioButton>   
+                    </div> 
+                    <div class="col-md-3"> 
+                        <asp:DropDownList ID = "ListProgramas" class="form-control dropdown cmbsize" runat="server">                                
+                        </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorListProgramas" class="col-md-offset-2" runat="server">
                         <label class="mensajeError">Debe elegir un programa</label>
@@ -59,7 +60,7 @@
                 </div>
 
                 <div class="form-group" >
-                    <div class="col-md-10">
+                    <div style=" margin-left: 9.5%;"">
                         <asp:DropDownList ID = "ListBodegas"  class="form-control dropdown cmbsize" runat="server">                                
                         </asp:DropDownList>
                     </div>
@@ -69,7 +70,7 @@
                 </div>
 
                 <div class="form-group" >
-                    <div class="col-md-10">
+                    <div style=" margin-left: 9.5%;">
                         <asp:TextBox ID="txtSubBodega" class="form-control text-box single-line" runat="server" placeholder="SubBodega" ></asp:TextBox>     
                     </div>
                         <div style="display: none;" id="MsjErrortextSubBodega" class="col-md-offset-2" runat="server">

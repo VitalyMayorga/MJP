@@ -11,6 +11,7 @@ namespace SistemaMJP
 {
     public partial class RolesPerfiles : System.Web.UI.Page
     {
+        Bitacora bitacora = new Bitacora();
         public DataTable datosUsuario;
         private ControladoraRolesPerfiles controladora = new ControladoraRolesPerfiles(); 
         protected void Page_Load(object sender, EventArgs e)
@@ -96,6 +97,9 @@ namespace SistemaMJP
                nombre= gvr.Cells[0].Text;
                apellidos = gvr.Cells[1].Text;
                controladora.eliminarUsuario(nombre, apellidos);
+               string descripcionRA = "Usuario " + nombre + " " + apellidos + " eliminado";
+               string usuario = (string)Session["correoInstitucional"];
+               bitacora.registrarActividad(usuario, descripcionRA);
                Response.Redirect("Administracion");
             }
             

@@ -12,6 +12,7 @@ namespace SistemaMJP
     public partial class RevisionBajas : System.Web.UI.Page
     {
         public static List<Int32> Ids = new List<Int32>();
+        Bitacora bitacora = new Bitacora();
         public DataTable datosBaja;
         private ControladoraDevolucionBajas controladora = new ControladoraDevolucionBajas();
         protected void Page_Load(object sender, EventArgs e)
@@ -91,6 +92,9 @@ namespace SistemaMJP
             }  
             
             Ids.RemoveAt(rowindex);
+            string descripcionRA = "Baja de " + cantidad + " " + producto + " en la bodega: " + bodega + ", subBodega: " + subBodega + " al programa presupuestario: " + programa + " Rechazada";
+            string usuario = (string)Session["correoInstitucional"];
+            bitacora.registrarActividad(usuario, descripcionRA);
             
         }
 
@@ -98,17 +102,30 @@ namespace SistemaMJP
         public void rechazar(object sender, EventArgs e)
         {
             int rowindex = 0;
+            string producto = "";
+            string cantidad = "";
+            string programa = "";
+            string bodega = "";
+            string subBodega = "";
             //Get the button that raised the event
             System.Web.UI.WebControls.LinkButton btn = (System.Web.UI.WebControls.LinkButton)sender;
 
             //Get the row that contains this button
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            producto = gvr.Cells[0].Text;
+            cantidad = gvr.Cells[1].Text;
+            programa = gvr.Cells[2].Text;
+            bodega = gvr.Cells[3].Text;
+            subBodega = gvr.Cells[4].Text;
 
             //Get the rowindex
             rowindex = gvr.RowIndex;
 
             controladora.actualizarEstado(buscarId(rowindex), 0);
             Ids.RemoveAt(rowindex);
+            string descripcionRA = "Baja de " + cantidad + " " + producto + " en la bodega: " + bodega + ", subBodega: " + subBodega + " al programa presupuestario: " + programa + " Rechazada";
+            string usuario = (string)Session["correoInstitucional"];
+            bitacora.registrarActividad(usuario, descripcionRA);
 
         }
 

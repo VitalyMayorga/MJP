@@ -9,6 +9,7 @@ namespace SistemaMJP
 {
     public partial class Bodegas : System.Web.UI.Page
     {
+        Bitacora bitacora = new Bitacora();
         ControladoraBodegas bodega = new ControladoraBodegas();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -85,7 +86,10 @@ namespace SistemaMJP
                  }
                  else
                  {
-                     bodega.agregarBodega(txtPrefijo.Text,txtBodega.Text);                    
+                     bodega.agregarBodega(txtPrefijo.Text,txtBodega.Text);
+                     string descripcionRA = "Bodega " + txtBodega.Text + ", prefijo " + txtPrefijo.Text + " agregada al sistema";
+                     string usuario = (string)Session["correoInstitucional"];
+                     bitacora.registrarActividad(usuario, descripcionRA);
                      Response.Redirect("Administracion.aspx");
                  }
              }
@@ -154,6 +158,9 @@ namespace SistemaMJP
                              {
                                  bodega.agregarSubBodega(txtSubBodega.Text, Int32.Parse(ListProgramas.SelectedValue));
                                  bodega.agregarBodegaSubBodega(Int32.Parse(ListBodegas.SelectedValue));
+                                 string descripcionRA = "SubBodega " + txtSubBodega.Text + ", bodega: " + bodega.getNombrePrograma(Int32.Parse(ListBodegas.SelectedValue)) + ", programa: " + bodega.getNombrePrograma(Int32.Parse(ListProgramas.SelectedValue)) + " agregada al sistema";
+                                 string usuario = (string)Session["correoInstitucional"];
+                                 bitacora.registrarActividad(usuario, descripcionRA);
                                  Response.Redirect("Administracion.aspx");
                              }                             
                          }

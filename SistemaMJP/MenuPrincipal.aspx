@@ -18,7 +18,7 @@
             <hr />
         </div>
 
-        <div class="form-group">
+        <div class="form-group1">
             <div class="form-group2">
                 <div class="LabelMenu">
                     <label class="control-label">Administracion</label></div>
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group1">
             <div class="form-group2">
                 <div class="LabelMenu">
                     <label class="control-label">Requisiciones</label></div>
@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group1">
             <div class="form-group2">
                 <div class="LabelMenu">
                     <label class="control-label">Seguimiento Requisiciones</label>

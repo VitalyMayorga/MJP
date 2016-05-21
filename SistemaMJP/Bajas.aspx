@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="RealizarBaja">
+                    <div class="RealizarBaja" style="margin-left: 25%;">
                         <asp:Button ID="btnBajar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="bajar" />
                     </div>
                 </div>

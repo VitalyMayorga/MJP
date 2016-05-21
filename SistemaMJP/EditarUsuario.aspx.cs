@@ -263,7 +263,7 @@ namespace SistemaMJP
                             MsjErrorListBoxSubBodega.Style.Add("display", "none");
                         }
                     }
-                    else if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1 && itemsSubBodega.Count < 1)
+                    else if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1 && itemsSubBodega.Count < 1)
                     {
                         MsjErrorListBoxPrograma.Style.Add("display", "none");
                         MsjErrorListBoxBodegas.Style.Add("display", "none");
@@ -286,7 +286,7 @@ namespace SistemaMJP
                             controladoraU.agregarUsuarioBodega(entry.Value);
                         }
 
-                        if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
+                        if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1)
                         {
                             controladoraU.eliminarUsuarioSubBodega(nombre, apellidos);                            
                             //Se llena la tabla de UsuarioSubBodega
@@ -312,7 +312,7 @@ namespace SistemaMJP
                         controladoraU.eliminarUsuarioBodega(nombre, apellidos);
                         controladoraU.agregarUsuarioBodega(Int32.Parse(ListBodegas.SelectedValue));
                         Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
-                        SubBodegas = controladoraU.getSubBodegas("Administración Penitenciaria", ListBodegas.SelectedValue);
+                        SubBodegas = controladoraU.getSubBodegas("Administracion Penitenciaria", ListBodegas.SelectedValue);
                         controladoraU.eliminarUsuarioSubBodega(nombre, apellidos);
                         
                         //Itera sobre el diccionario para relacionar al Usuario con cada SubBodega de la Bodega asignada
@@ -502,6 +502,7 @@ namespace SistemaMJP
         {
             Dictionary<string, int> nomBodega = new Dictionary<string, int>();
             ListBoxBodegasAsignadas.Items.Clear();
+            ListBoxBodegasDisponibles.Items.Clear();
             ListBodegas.Items.Clear();
             ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
             nomBodega = controladoraU.getBodegas();
@@ -519,7 +520,7 @@ namespace SistemaMJP
         {
             ListBoxSubBodegasAsignadas.Items.Clear();
             ListBoxSubBodegasDisponibles.Items.Clear();
-            if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
+            if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1)
             {
                 Dictionary<string, int> items = new Dictionary<string, int>();
 
@@ -530,7 +531,7 @@ namespace SistemaMJP
 
                 foreach (KeyValuePair<string, int> entry in items)
                 {
-                    revisarPrograma("Administración Penitenciaria", entry.Key);
+                    revisarPrograma("Administracion Penitenciaria", entry.Key);
                 }
             }
         }
