@@ -1,4 +1,4 @@
-﻿    <%@ Page Title="Ingresar" Language="C#" AutoEventWireup="true" CodeBehind="Ingresar.aspx.cs" Inherits="SistemaMJP.Ingresar" %>
+﻿<%@ Page Title="Ingresar" Language="C#" AutoEventWireup="true" CodeBehind="Ingresar.aspx.cs" Inherits="SistemaMJP.Ingresar" %>
 
 <!DOCTYPE html>
 
@@ -6,10 +6,10 @@
 <head runat="server">
     <link rel="stylesheet" href="Content/css/bootstrap.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-     <link rel="stylesheet" href="Content/Site.css" />
+    <link rel="stylesheet" href="Content/Site.css" />
     <link rel="stylesheet" href="Content/Ingreso.css" />
     <script src="/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
-   
+
     <script>
         $(document).ready(function () {
             $("#txtUsuario").keydown(function () {
@@ -23,7 +23,7 @@
             });
         });
     </script>
-    
+
     <title>Inicio de Sesión</title>
 
 </head>
@@ -34,7 +34,7 @@
             <asp:ScriptManager runat="server" />
             <a href="">
                 <div id="alertAlerta" class="alert alert-danger fade in" runat="server" hidden="hidden">
-                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>
                         <asp:Label ID="labelTipoAlerta" runat="server" Text="Alerta! "></asp:Label></strong><asp:Label ID="labelAlerta" runat="server" Text="Mensaje de alerta"></asp:Label>
                 </div>

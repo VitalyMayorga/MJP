@@ -409,26 +409,35 @@ namespace SistemaMJP
                     }
                     else
                     {
-                       if (!email.IsValidEmail(txtCorreo.Text))
-                       {
-                           MsjErrorFormatEmail.Style.Add("display", "block");
-                       }
-                       else{
-                        controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
-                        controladoraU.agregarUsuarioBodega(Int32.Parse(ListBodegas.SelectedValue));
-                        Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
-                        SubBodegas = controladoraU.getSubBodegas("Administracion Penitenciaria", ListBodegas.SelectedValue);
-
-                        //Itera sobre el diccionario para relacionar al Usuario con cada SubBodega de la Bodega asignada
-                        foreach (KeyValuePair<string, int> entry in SubBodegas)
+                        if (!email.IsValidEmail(txtCorreo.Text))
                         {
-                            controladoraU.agregarUsuarioSubBodega(entry.Value);
+                            MsjErrorFormatEmail.Style.Add("display", "block");
                         }
-                        Response.Redirect("RolesPerfiles");
-                       }
-                        
-                        
-                    }                   
+                        else
+                        {
+                            controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
+                            controladoraU.agregarUsuarioBodega(Int32.Parse(ListBodegas.SelectedValue));
+                            Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
+                            SubBodegas = controladoraU.getSubBodegas("Administracion Penitenciaria", ListBodegas.SelectedValue);
+
+                            //Itera sobre el diccionario para relacionar al Usuario con cada SubBodega de la Bodega asignada
+                            foreach (KeyValuePair<string, int> entry in SubBodegas)
+                            {
+                                controladoraU.agregarUsuarioSubBodega(entry.Value);
+                            }
+                            Response.Redirect("RolesPerfiles");
+                        }
+
+                    }
+                }
+                else if (!email.IsValidEmail(txtCorreo.Text))
+                {
+                    MsjErrorFormatEmail.Style.Add("display", "block");
+                }
+                else
+                {
+                    controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));                   
+                    Response.Redirect("RolesPerfiles");
                 }
             }      
 
