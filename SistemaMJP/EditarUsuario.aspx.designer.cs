@@ -13,6 +13,15 @@ namespace SistemaMJP {
     public partial class EditarUsuario {
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// ListRoles control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,24 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox ListBoxProgramasDisponibles;
+        
+        /// <summary>
+        /// asignarPP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton asignarPP;
+        
+        /// <summary>
+        /// desAsignarPP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton desAsignarPP;
         
         /// <summary>
         /// ListBoxProgramasAsignados control.
@@ -130,6 +157,24 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.ListBox ListBoxBodegasDisponibles;
         
         /// <summary>
+        /// asignarB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton asignarB;
+        
+        /// <summary>
+        /// desAsignarB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton desAsignarB;
+        
+        /// <summary>
         /// ListBoxBodegasAsignadas control.
         /// </summary>
         /// <remarks>
@@ -173,6 +218,24 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox ListBoxSubBodegasDisponibles;
+        
+        /// <summary>
+        /// asignarSB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton asignarSB;
+        
+        /// <summary>
+        /// desAsignarSB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton desAsignarSB;
         
         /// <summary>
         /// ListBoxSubBodegasAsignadas control.

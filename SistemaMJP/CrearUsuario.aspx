@@ -3,8 +3,9 @@
     <link rel="stylesheet" href="Content/RolesyPerfiles.css" />
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
-     <asp:UpdatePanel runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">    
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server"
+     UpdateMode="Conditional">
         <ContentTemplate>
             <div class="form-horizontal">
                 <asp:LinkButton runat="server" OnClick="regresarRP"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;
@@ -79,10 +80,10 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="asignarProgramas" ><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                            <asp:LinkButton ID="asignarPP" runat="server" OnClick="asignarProgramas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
                         </div>  
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="desasignarProgramas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                            <asp:LinkButton ID="desAsignarPP" runat="server" OnClick="desasignarProgramas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
                     </div> 
 
@@ -125,10 +126,10 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="asignarBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                            <asp:LinkButton ID="asignarB" runat="server" OnClick="asignarBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
                         </div>  
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="desasignarBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                            <asp:LinkButton ID="desAsignarB" runat="server" OnClick="desasignarBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
                     </div> 
 
@@ -160,10 +161,10 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="asignarSubBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                            <asp:LinkButton ID="asignarSB" runat="server" OnClick="asignarSubBodegas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
                         </div>  
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="desasignarSubBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
+                            <asp:LinkButton ID="desAsignarSB" runat="server" OnClick="desasignarSubBodegas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 
                         </div> 
                      </div> 
 
@@ -186,5 +187,23 @@
 
              </div>    
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="asignarPP" EventName="Click"/>
+        </Triggers>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="desAsignarPP" EventName="Click"/>
+        </Triggers>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="asignarB" EventName="Click"/>
+        </Triggers>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="desAsignarB" EventName="Click"/>
+        </Triggers>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="asignarSB" EventName="Click"/>
+        </Triggers>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="desAsignarSB" EventName="Click"/>
+        </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

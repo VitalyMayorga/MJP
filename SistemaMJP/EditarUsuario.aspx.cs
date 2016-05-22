@@ -324,6 +324,10 @@ namespace SistemaMJP
                     }
 
                 }
+                else {
+                    controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(rol), nombre, apellidos);
+                    Response.Redirect("RolesPerfiles");
+                }
 
             }
 
