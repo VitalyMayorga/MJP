@@ -61,20 +61,20 @@ namespace SistemaMJP
         internal void llenarListBoxProgramas()
         {
                 Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
-                ListBoxProgramasAsignados.Items.Clear();
+                ListBoxProgramasDisponibles.Items.Clear();
                 nomPrograma = controladoraU.getProgramas();
 
                 //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
                 foreach (var item in nomPrograma)
                 {
-                    ListBoxProgramasAsignados.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                    ListBoxProgramasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
         }
 
         internal void llenarListBoxBodegas()
         {
                 Dictionary<string, int> nomBodega = new Dictionary<string, int>();
-                ListBoxBodegasAsignadas.Items.Clear();
+                ListBoxBodegasDisponibles.Items.Clear();
                 ListBodegas.Items.Clear();
                 ListBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
                 nomBodega = controladoraU.getBodegas();
@@ -82,7 +82,7 @@ namespace SistemaMJP
                 //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
                 foreach (var item in nomBodega)
                 {
-                    ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString()});
+                    ListBoxBodegasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString()});
                     ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
         }
@@ -95,7 +95,7 @@ namespace SistemaMJP
                 //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
                 foreach (var item in nomSubBodega)
                 {
-                    ListBoxSubBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                    ListBoxSubBodegasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }    
         }
 

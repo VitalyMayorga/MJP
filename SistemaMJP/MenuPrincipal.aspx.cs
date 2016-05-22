@@ -54,7 +54,7 @@ namespace SistemaMJP
                 Response.Redirect("DevolucionBajas.aspx");
 
             }
-            else if (Session["rol"].Equals("Administrador General"))
+            else if (Session["rol"].Equals("Aprobador"))
             {
                 Response.Redirect("RevisionBajas.aspx");
             }            

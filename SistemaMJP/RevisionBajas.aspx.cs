@@ -24,7 +24,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Administrador General"))
+                else if (!rol.Equals("Aprobador"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }
