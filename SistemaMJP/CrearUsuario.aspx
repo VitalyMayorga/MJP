@@ -79,7 +79,7 @@
 
                     <div class="col-md-1">
                         <div class="form-group style-flecha">
-                            <asp:LinkButton runat="server" OnClick="asignarProgramas"><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
+                            <asp:LinkButton runat="server" OnClick="asignarProgramas" ><i class="glyphicon glyphicon-chevron-right"></i></asp:LinkButton>
                         </div>  
                         <div class="form-group style-flecha">
                             <asp:LinkButton runat="server" OnClick="desasignarProgramas"><i class="glyphicon glyphicon-chevron-left"></i></asp:LinkButton> 

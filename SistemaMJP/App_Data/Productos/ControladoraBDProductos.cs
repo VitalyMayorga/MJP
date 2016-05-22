@@ -51,7 +51,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    datos.Add((reader.GetDateTime(6)).ToString());
+                    datos.Add((reader.GetDateTime(6)).ToString("dd/MM/yyyy"));
                 }
                 if (reader.IsDBNull(7))
                 {
@@ -59,7 +59,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    datos.Add((reader.GetDateTime(7)).ToString());
+                    datos.Add((reader.GetDateTime(7)).ToString("dd/MM/yyyy"));
                 }
                 if (reader.IsDBNull(8))
                 {
@@ -67,7 +67,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    datos.Add((reader.GetDateTime(8)).ToString());
+                    datos.Add((reader.GetDateTime(8)).ToString("dd/MM/yyyy"));
                 }
                 datos.Add(reader.GetString(9));
                 reader.Close();

@@ -22,7 +22,7 @@ namespace SistemaMJP
         public static string correo;
         public static string telefonos;
         public static bool nuevoProveedor = false;
-        bool invalid;
+        
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -101,12 +101,13 @@ namespace SistemaMJP
                     MsjErrorSubBodega.Style.Add("display", "none");
                     MsjErrorSubPartida.Style.Add("display", "none");
                     MsjErrorFactura.Style.Add("display", "block");
-                    MsjErrorFactura.Style.Add("display", "none");
+                    MsjErrorFecha.Style.Add("display", "none");
                     MsjErrorProveedor.Style.Add("display", "none");
                 
             }
             else if (ingresoF.Checked && fecha.Equals("")) {
-                MsjErrorFactura.Style.Add("display", "block");
+                MsjErrorFactura.Style.Add("display", "none");
+                MsjErrorFecha.Style.Add("display", "block");
                 MsjErrorProveedor.Style.Add("display", "none");
             
             }
@@ -137,6 +138,7 @@ namespace SistemaMJP
                 }
                 descripcion = "Nodifica bodega "+bodega+" para programa "+programa;
                 bitacora.registrarActividad(usuario, descripcion);
+                Ingreso_Productos.editar = false;
                 Response.Redirect("Ingreso_Productos");
 
 
@@ -205,6 +207,7 @@ namespace SistemaMJP
             {
                 formFacturas.Style.Add("display", "none");
                 formProveedor.Style.Add("display", "none");
+                formFacturaFecha.Style.Add("display", "none");
             }
         }
 
@@ -215,6 +218,7 @@ namespace SistemaMJP
             {
                 formFacturas.Style.Add("display", "block");
                 formProveedor.Style.Add("display", "block");
+                formFacturaFecha.Style.Add("display", "block");
             }
         }
         //Redirecciona al menu principal
@@ -271,7 +275,7 @@ namespace SistemaMJP
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ProveedorModal').modal('hide');</script>");
                 nuevoProveedor = true;
                 ListaProveedores.Enabled = false;
-                ListaProveedores.SelectedIndex = 1;
+                ListaProveedores.SelectedIndex = 0;
                 controladora.agregarProveedor(proveedor, correo, telefonos);
                 string descripcion = "Agregado proveedor"+proveedor;
                 string usuario = (string)Session["correoInstitucional"];

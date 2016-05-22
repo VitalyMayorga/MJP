@@ -139,17 +139,17 @@ namespace SistemaMJP
                 }
                 
                 if (!txtFechaV.Text.Equals("")) {
-                    fechaV = Convert.ToDateTime(txtFechaV.Text);
+                    fechaV = DateTime.ParseExact(txtFechaV.Text, "dd/MM/yyyy", null);
                 
                 }
                 if (!txtFechaC.Text.Equals(""))
                 {
-                    fechaC = Convert.ToDateTime(txtFechaV.Text);
+                    fechaC = DateTime.ParseExact(txtFechaC.Text, "dd/MM/yyyy", null);
 
                 }
                 if (!txtFechaG.Text.Equals(""))
                 {
-                    fechaG = Convert.ToDateTime(txtFechaV.Text);
+                    fechaG = DateTime.ParseExact(txtFechaG.Text, "dd/MM/yyyy", null);
 
                 }
                 object[] nuevoProducto = new object[6];
@@ -234,24 +234,19 @@ namespace SistemaMJP
                 string numActivo = txtNumActivo.Text;
                 string funcionario = txtFuncionario.Text;
                 string cedula = txtCedula.Text;
-                if (esActivo.Checked)
-                {
-                    activo = true;
-                }
-
                 if (!txtFechaV.Text.Equals(""))
                 {
-                    fechaV = Convert.ToDateTime(txtFechaV.Text);
+                    fechaV = DateTime.ParseExact(txtFechaV.Text, "dd/MM/yyyy", null);
 
                 }
                 if (!txtFechaC.Text.Equals(""))
                 {
-                    fechaC = Convert.ToDateTime(txtFechaV.Text);
+                    fechaC = DateTime.ParseExact(txtFechaC.Text, "dd/MM/yyyy", null);
 
                 }
                 if (!txtFechaG.Text.Equals(""))
                 {
-                    fechaG = Convert.ToDateTime(txtFechaV.Text);
+                    fechaG = DateTime.ParseExact(txtFechaG.Text, "dd/MM/yyyy", null);
 
                 }
                 object[] nuevoProducto = new object[6];
@@ -268,11 +263,11 @@ namespace SistemaMJP
                 if (!numActivo.Equals("") && correcto)
                 {
                     cantidad = 1;//Por defecto, si el producto ingresado
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " al ser activo asignado,su cantidad es 1')", true);
                     controladora.agregarActivo(numActivo, funcionario, cedula, descripcion, cantidadEmpaque);
                     string descripcionRA = "Agregado producto " + descripcion + " como activo a "+funcionario+ " cédula "+cedula;
                     string usuario = (string)Session["correoInstitucional"];
                     bitacora.registrarActividad(usuario, descripcionRA);
+                    
                 }
                 if (correcto && numFactura == null)
                 {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
@@ -302,6 +297,9 @@ namespace SistemaMJP
                     DetallesFactura.numFactura = numFactura;
                     Response.Redirect("DetallesFactura");
                 }
+                else {
+                    Response.Redirect("MenuPrincipal");
+                }
 
             }
         }
@@ -314,7 +312,9 @@ namespace SistemaMJP
             {
 
                 formActivo.Style.Add("display", "block");
-                
+                txtCantidadT.Text = "1";
+                txtCantidadT.Enabled = false;
+
                 
             }
         }
@@ -325,6 +325,8 @@ namespace SistemaMJP
             if (noActivo.Checked)
             {
                 formActivo.Style.Add("display", "none");
+                txtCantidadT.Enabled = true;
+               
             }
         }
         //Redirecciona a la pagina facturas
@@ -496,6 +498,9 @@ namespace SistemaMJP
                             MsjErrorNumActivo.Style.Add("display", "none");
                             MsjErrorCedula.Style.Add("display", "block");
                             MsjErrorFuncionario.Style.Add("display", "none");
+                        }
+                        else {
+                            valido = true;
                         }
 
                     }

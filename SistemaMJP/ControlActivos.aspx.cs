@@ -43,6 +43,7 @@ namespace SistemaMJP
 
         protected void ingresar(object sender, EventArgs e)
         {
+            Activos.editar = false;
             Response.Redirect("Activos");
 
         }
@@ -102,7 +103,7 @@ namespace SistemaMJP
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             List<Item_Grid_Activos> data = controladora.getListaActivos(bodega);
-            Object[] datos = new Object[7];
+            Object[] datos = new Object[6];
 
             foreach (Item_Grid_Activos fila in data)
             {
@@ -111,7 +112,7 @@ namespace SistemaMJP
                 datos[1] = fila.Producto;
                 datos[2] = fila.Funcionario;
                 datos[3] = fila.Cedula;
-                datos[4] = fila.Fecha;
+                datos[4] = fila.Fecha.ToString("dd/MM/yyyy");
                 datos[5] = fila.Documento;
                
 

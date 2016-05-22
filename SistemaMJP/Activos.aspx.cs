@@ -89,7 +89,7 @@ namespace SistemaMJP
             if (validar())
             {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
                 numActivo = txtNumActivo.Text;
-                DateTime fecha = Convert.ToDateTime(txtFecha.Text);
+                DateTime fecha = DateTime.ParseExact(txtFecha.Text, "dd/MM/yyyy", null); ;
                 string funcionario = txtFuncionario.Text;
                 string cedula =txtCedula.Text;
                 string documento = txtDocumento.Text;
@@ -114,11 +114,11 @@ namespace SistemaMJP
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('El número de activo ya existe')", true);
 
                     }
-                }
-                }
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Activo " + ListaActivos.SelectedItem.Text + " agregado con éxito')", true);
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Activo " + ListaActivos.SelectedItem.Text + " agregado con éxito')", true);
-
+                }
+            }
+                            
                 //Al final se limpian los campos
                 txtNumActivo.Text = "";
                 txtFecha.Text = "";
@@ -129,39 +129,7 @@ namespace SistemaMJP
 
             
         }
-        //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página DetallesFactura
-        protected void aceptarYSalir(object sender, EventArgs e)
-        {
-            if (validar())
-            {//Si todo es valido, entonces procedo a obtener los datos dados por el usuario
-                numActivo = txtNumActivo.Text;
-                DateTime fecha = Convert.ToDateTime(txtFecha.Text);
-                string funcionario = txtFuncionario.Text;
-                string cedula = txtCedula.Text;
-                string documento = txtDocumento.Text;
-
-                object[] nuevoActivo = new object[6];
-                nuevoActivo[0] = numActivo;
-                nuevoActivo[1] = fecha;
-                nuevoActivo[2] = funcionario;
-                nuevoActivo[3] = cedula;
-                nuevoActivo[4] = documento;
-                nuevoActivo[5] = Convert.ToInt32(ListaActivos.SelectedValue.ToString());
-
-                if (editar)
-                {
-                    controladora.modificarActivo(nuevoActivo);
-                    
-                }
-                else
-                {
-                    controladora.agregarActivoFinal(nuevoActivo);
-                }
-            }
-
-            Response.Redirect("ControlActivos");
-
-        }
+       
         protected void cancelar(object sender, EventArgs e)
         {
               Response.Redirect("ControlActivos");

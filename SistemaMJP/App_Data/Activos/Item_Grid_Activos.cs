@@ -13,8 +13,13 @@ namespace SistemaMJP
         private String funcionario;
         private String cedula;
         private String producto;
-        public Item_Grid_Activos(String numero,String documento,DateTime fecha,String funcionario,String cedula,String producto) { 
-        
+        public Item_Grid_Activos(String numero,String documento,DateTime fecha,String funcionario,String cedula,String producto) {
+            Numero = numero;
+            Documento = documento;
+            Fecha = fecha;
+            Funcionario = funcionario;
+            Cedula = cedula;
+            Producto = producto;
         
         }
         /*

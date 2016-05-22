@@ -55,7 +55,7 @@
                     <label class="col-md-2 control-label">Documento</label>
 
                     <div class="col-md-10">
-                        <asp:TextBox ID="txtDocumento" runat="server" placeholder="Ej: Cajas" class="form-control text-box single-line"></asp:TextBox>
+                        <asp:TextBox ID="txtDocumento" runat="server" placeholder="Documento" class="form-control text-box single-line"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrorDocumento" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe ingresar un documento</label>
@@ -82,12 +82,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
-                        </div>
-
-                    </div>
+                    
                     <div class="col-md-3">
                         <div class="BotonIngreso">
                             <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />

@@ -31,17 +31,17 @@ namespace SistemaMJP
 
         protected void ingresarBodegas(object sender, EventArgs e)
         {
-            Response.Redirect("Bodegas");
+            Response.Redirect("~/Bodegas.aspx");
         }
 
         protected void ingresarRolesPerfiles(object sender, EventArgs e)
         {
-            Response.Redirect("RolesPerfiles");
+            Response.Redirect("~/RolesPerfiles.aspx");
         }
 
         protected void regresarMP(object sender, EventArgs e)
         {
-            Response.Redirect("MenuPrincipal");
+            Response.Redirect("~/MenuPrincipal.aspx");
         }
     }
 }

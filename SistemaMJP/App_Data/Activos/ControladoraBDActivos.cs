@@ -86,8 +86,17 @@ namespace SistemaMJP
         //Metodo que se encarga de llenar los datos de la clase item grid activos y devolver dicha clase encapsulada
         private Item_Grid_Activos LoadItemGridActivos(SqlDataReader reader)
         {
+            String documento = "";
             String numero = reader.GetString(0);
-            String documento = reader.GetString(1);
+            try
+            {
+
+                documento = reader.GetString(1);
+            }
+            catch (Exception e) {
+                documento = "No asignado";
+            }
+                
             DateTime fecha = reader.GetDateTime(2);            
             String funcionario = reader.GetString(3);
             String cedula = reader.GetString(4);
@@ -176,9 +185,17 @@ namespace SistemaMJP
                 datos.Add(reader.GetString(0));
                 datos.Add(reader.GetString(1));
                 datos.Add(reader.GetString(2));
-                datos.Add(reader.GetString(3));
-                datos.Add((reader.GetDateTime(4)).ToString());
-                datos.Add(reader.GetString(5));                
+                try
+                {
+                    datos.Add(reader.GetString(3));
+                }
+                catch (Exception e)
+                {
+                    datos.Add("");
+                }
+                datos.Add((reader.GetDateTime(4)).ToString("dd/MM/yyyy"));
+                datos.Add(reader.GetString(5));
+                                               
                 reader.Close();
                 con.Close();
 

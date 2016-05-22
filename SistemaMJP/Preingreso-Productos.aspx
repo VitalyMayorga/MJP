@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Ubicación</label>
                     <div class="col-md-10">
-                        <asp:DropDownList id="ListaBodegas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarBodega" AutoPostBack="true"></asp:DropDownList>
+                        <asp:DropDownList ID="ListaBodegas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarBodega" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div style="display: none;" id="MsjErrorBodega" class="col-md-offset-2" runat="server">
@@ -28,14 +28,14 @@
                 <div class="form-group" id="Subbodega" style="display: none;" runat="server">
                     <label class="col-md-2 control-label">Departamento</label>
                     <div class="col-md-10">
-                        <asp:DropDownList id="ListaSubBodegas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarSubB" AutoPostBack="true"></asp:DropDownList>
+                        <asp:DropDownList ID="ListaSubBodegas" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarSubB" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div style="display: none;" id="MsjErrorSubBodega" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe ingresar un departamento</label>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
 
                     <div class="col-md-3 alinearDerecha">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="formFacturaFecha" runat="server">
                     <label class="col-md-2 control-label">Fecha Factura</label>
                     <div class='input-group date col-md-10' style="max-width: 320px">
 
@@ -67,21 +67,21 @@
 
 
                     </div>
-                    <div style="display: none;" id="msjErrorFecha" class="col-md-offset-2" runat="server">
+                    <div style="display: none;" id="MsjErrorFecha" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe ingresar una fecha a la factura</label>
                     </div>
                 </div>
                 <div class="form-group" id="formProveedor" runat="server">
                     <label class="col-md-2 control-label">Proveedor</label>
                     <div class="col-md-3">
-                        <asp:DropDownList id="ListaProveedores" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarProveedores" AutoPostBack="true"></asp:DropDownList>
+                        <asp:DropDownList ID="ListaProveedores" runat="server" class="form-control dropdown cmbsize" OnSelectedIndexChanged="revisarProveedores" AutoPostBack="true"></asp:DropDownList>
 
                     </div>
                     <div class="col-md-7">
                         <asp:Button ID="nuevoProveedor" class="btn btn-default" runat="server" Text="Nuevo Proveedor" data-toggle="modal" data-target="#ProveedorModal" />
 
                     </div>
-                    
+
                 </div>
                 <div class="form-group">
                     <div style="display: none;" id="MsjErrorProveedor" class="col-md-offset-2" runat="server">
@@ -118,7 +118,7 @@
                     <div class="form-group">
                         <label>Nombre</label>
                         <asp:TextBox ID="txtNombreProveedor" runat="server" placeholder="Nombre" class="form-control text-box single-line"></asp:TextBox>
-                         
+
                     </div>
                     <div class="form-group">
                         <label>Correo</label>
@@ -131,8 +131,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarProveedor"></asp:Button>
-                    <asp:Button id="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button ID="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarProveedor"></asp:Button>
+                    <asp:Button ID="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -142,7 +142,7 @@
         function openModal() {
             $('#ProveedorModal').modal('show');
         }
-</script>
+    </script>
 
     <script type="text/javascript">//Convertimos el calendario a español
         $.datepicker.regional['es'] = {
@@ -171,7 +171,7 @@
                 duration: 'fast'
             });
 
-            
+
         });
 
         var prm = Sys.WebForms.PageRequestManager.getInstance();
@@ -183,7 +183,7 @@
                 showAnim: 'slideDown',
                 duration: 'fast'
             });
-           
+
 
         });
 

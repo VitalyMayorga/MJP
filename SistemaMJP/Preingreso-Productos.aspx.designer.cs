@@ -138,5 +138,6 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorProveedor;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturas;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formProveedor;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturaFecha;
     }
 }
