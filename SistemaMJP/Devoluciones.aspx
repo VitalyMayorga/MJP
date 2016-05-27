@@ -93,12 +93,13 @@
         </ContentTemplate>
     </asp:UpdatePanel>
      <script type="text/javascript">
-        $(document).ready(function () {
+
+        $(document).ready(function () {            
             $("[id$=<%= txtProducto.ClientID %>]").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: '<%=ResolveUrl("~/Devoluciones.aspx/getProductos") %>',
-                        data: "{ 'prefix': '" + request.term + "'}",
+                        url: '<%=ResolveUrl("~/Devoluciones.aspx/getProductosBodegaProgramaSubBodega") %>',
+                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "','bodega': '" + document.getElementById('BodyContent_DropDownBodegas').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -124,12 +125,12 @@
         });
         var prm = Sys.WebForms.PageRequestManager.getInstance();
 
-        prm.add_endRequest(function () {
+        prm.add_endRequest(function () {            
             $("[id$=<%= txtProducto.ClientID %>]").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: '<%=ResolveUrl("~/Devoluciones.aspx/getProductos") %>',
-                        data: "{ 'prefix': '" + request.term + "'}",
+                        url: '<%=ResolveUrl("~/Devoluciones.aspx/getProductosBodegaProgramaSubBodega") %>',
+                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "','bodega': '" + document.getElementById('BodyContent_DropDownBodegas').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",

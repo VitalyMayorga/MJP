@@ -18,11 +18,11 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }
                 else if (Request.UrlReferrer == null)
                 {
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
                 else
                 {
@@ -34,24 +34,16 @@ namespace SistemaMJP
 
         protected void regresarMP(object sender, EventArgs e)
         {
-            Response.Redirect("MenuPrincipal");
+            Response.Redirect("MenuPrincipal.aspx");
         }
            
 
         internal void cargarDatos(){
            string datos = servicio.GetUsername((string)Session["correoInstitucional"]);
-           char[] delimiterChars = { ' ', '\t' };
+           char[] delimiterChars = {'?'};
            string[] words = datos.Split(delimiterChars); 
-           txtNombre.Text= words[0];
-           if (words.Length==3)
-           {
-               TextApellidos.Text = words[1] + ' ' + words[2];
-           }
-           else
-           {
-              TextApellidos.Text = words[1];
-           }
-           
+           txtNombre.Text= words[0];          
+           TextApellidos.Text = words[1];             
         }
 
         protected void editarInfo(object sender, EventArgs e)
@@ -106,7 +98,7 @@ namespace SistemaMJP
                 if (revisarPssword())
                 {
                     controladoraU.editarInfoUsuario((string)Session["correoInstitucional"], txtPassword.Text, txtNombre.Text, TextApellidos.Text);
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }else{
                    MsjErrortextRevisarPassword.Style.Add("display", "block");  
                 }

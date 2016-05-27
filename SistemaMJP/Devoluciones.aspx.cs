@@ -20,15 +20,15 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }
                 else if (!rol.Equals("Administrador Almacen"))
                 {
-                    Response.Redirect("DevolucionBajas");
+                    Response.Redirect("DevolucionBajas.aspx");
                 }
                 else if (Request.UrlReferrer == null)
                 {
-                    Response.Redirect("DevolucionBajas");
+                    Response.Redirect("DevolucionBajas.aspx");
                 }
                 else
                 {
@@ -39,7 +39,7 @@ namespace SistemaMJP
 
         protected void regresarDB(object sender, EventArgs e)
         {
-            Response.Redirect("DevolucionBajas");
+            Response.Redirect("DevolucionBajas.aspx");
         }
 
         protected void cagarDatos()
@@ -49,6 +49,7 @@ namespace SistemaMJP
             DropDownBodegas.Items.Clear();
             DropDownPrograma.Items.Clear();
 
+            DropDownSubBodegas.Items.Insert(0, new ListItem("--No hay SubBodegas Disponibles--", "0"));
             DropDownBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
             DropDownPrograma.Items.Insert(0, new ListItem("--Selecione el Programa Presupuestario--", "0"));
 
@@ -89,9 +90,9 @@ namespace SistemaMJP
         //Metodo que se encarga de obtener todos los productos que empiezan cn lo digitado por el usuario
         //Funcionalidad principal es mostrar sugerencias al ingresar la descripcion de un producto
         [WebMethod]
-        public static string[] getProductos(string prefix)
-        {
-            List<string> customers = ControladoraProductos.getProductos(prefix);
+        public static string[] getProductosBodegaProgramaSubBodega(string prefix,int programa, int bodega, int subBodega)
+        {            
+            List<string> customers = ControladoraProductos.getProductosBodegaProgramaSubBodega(prefix, programa, bodega, subBodega);
             return customers.ToArray();
         }
 
@@ -294,7 +295,7 @@ namespace SistemaMJP
                 }
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
-                Response.Redirect("DevolucionBajas");
+                Response.Redirect("DevolucionBajas.aspx");
             }
         }
 

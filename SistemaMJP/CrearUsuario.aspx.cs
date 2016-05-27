@@ -18,15 +18,15 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }
                 else if (!rol.Equals("Administrador General"))
                 {
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
                 else if (Request.UrlReferrer == null)
                 {
-                    Response.Redirect("RolesPerfiles");
+                    Response.Redirect("RolesPerfiles.aspx");
                 }
                 else {
                     llenarListRoles();
@@ -39,7 +39,7 @@ namespace SistemaMJP
 
         protected void regresarRP(object sender, EventArgs e)
         {
-            Response.Redirect("RolesPerfiles");
+            Response.Redirect("RolesPerfiles.aspx");
         }
 
         internal void llenarListRoles()
@@ -396,7 +396,7 @@ namespace SistemaMJP
                                      controladoraU.agregarUsuarioSubBodega(entry.Value);
                                  }
                              }
-                             Response.Redirect("RolesPerfiles");
+                             Response.Redirect("RolesPerfiles.aspx");
                          }
                      }                  
 
@@ -425,7 +425,7 @@ namespace SistemaMJP
                             {
                                 controladoraU.agregarUsuarioSubBodega(entry.Value);
                             }
-                            Response.Redirect("RolesPerfiles");
+                            Response.Redirect("RolesPerfiles.aspx");
                         }
 
                     }
@@ -437,7 +437,7 @@ namespace SistemaMJP
                 else
                 {
                     controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));                   
-                    Response.Redirect("RolesPerfiles");
+                    Response.Redirect("RolesPerfiles.aspx");
                 }
             }      
 

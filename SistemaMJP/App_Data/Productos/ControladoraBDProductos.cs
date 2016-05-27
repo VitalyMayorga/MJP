@@ -336,6 +336,40 @@ namespace SistemaMJP
             return productos;
         }
 
+        //Obtiene la lista de productos que comienzan con el prefijo dado
+        [WebMethod]
+        public static List<string> getProductosBodegaProgramaSubBodega(string prefix, int programa, int bodega, int subBodega)
+        {
+            prefix = prefix.ToLower();
+            prefix = prefix.First().ToString().ToUpper() + prefix.Substring(1);
+            List<string> productos = new List<string>();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString;
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "P_Obtener_Productos_SubBodega_Programa_Bodega";
+                    cmd.Parameters.AddWithValue("@Buscar", prefix);
+                    cmd.Parameters.AddWithValue("@programa", programa);
+                    cmd.Parameters.AddWithValue("@bodega", bodega);
+                    cmd.Parameters.AddWithValue("@subBodega", subBodega);
+                    cmd.Connection = conn;
+                    conn.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            productos.Add(string.Format("{0}", sdr["descripcion"]));
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return productos;
+        }
+
         //Metodo que se encarga de devolver la lista de usuarios que estan agregados al sistema
         internal int getProductoConCantidadMin(string descripcion)
         {

@@ -78,7 +78,7 @@ namespace SistemaMJP
                 SqlDataReader reader = cmd.ExecuteReader();
                 
                 while (reader.Read()) {
-                    nombre += reader.GetString(0) + " " + reader.GetString(1); 
+                    nombre += reader.GetString(0) + "?" + reader.GetString(1); 
                 
                 }
                 reader.Close();

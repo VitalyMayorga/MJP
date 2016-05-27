@@ -97,8 +97,8 @@
              $("[id$=<%= txtProducto.ClientID %>]").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: '<%=ResolveUrl("~/Bajas.aspx/getProductos") %>',
-                        data: "{ 'prefix': '" + request.term + "'}",
+                        url: '<%=ResolveUrl("~/Bajas.aspx/getProductosBodegaProgramaSubBodega") %>',
+                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "','bodega': '" + document.getElementById('BodyContent_DropDownBodegas').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -128,8 +128,8 @@
             $("[id$=<%= txtProducto.ClientID %>]").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: '<%=ResolveUrl("~/Bajas.aspx/getProductos") %>',
-                        data: "{ 'prefix': '" + request.term + "'}",
+                        url: '<%=ResolveUrl("~/Bajas.aspx/getProductosBodegaProgramaSubBodega") %>',
+                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "','bodega': '" + document.getElementById('BodyContent_DropDownBodegas').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",

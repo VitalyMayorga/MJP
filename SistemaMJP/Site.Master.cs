@@ -71,7 +71,7 @@ namespace SistemaMJP
             string user = servicio.GetUsername((string)(Session["correoInstitucional"]));
             if (user != null)
             {
-                nombreLabel.Text = "Bienvenido " + user;
+                nombreLabel.Text = "Bienvenido " + user.Replace("?", " ");
             }
             else
             {

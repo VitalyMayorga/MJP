@@ -16,28 +16,28 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }               
                 else if (Request.UrlReferrer == null)
                 {
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
             }
         }
 
         protected void ingresarBajas(object sender, EventArgs e)
         {
-            Response.Redirect("Bajas");
+            Response.Redirect("Bajas.aspx");
         }
 
         protected void ingresarDevoluciones(object sender, EventArgs e)
         {
-            Response.Redirect("Devoluciones");
+            Response.Redirect("Devoluciones.aspx");
         }
 
         protected void regresarMP(object sender, EventArgs e)
         {
-            Response.Redirect("MenuPrincipal");
+            Response.Redirect("MenuPrincipal.aspx");
         }
     }
 }

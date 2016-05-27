@@ -21,15 +21,15 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }
                 else if (!rol.Equals("Administrador General"))
                 {
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
                 else if (Request.UrlReferrer == null)
                 {
-                    Response.Redirect("RolesPerfiles");
+                    Response.Redirect("RolesPerfiles.aspx");
                 }
                 else
                 {
@@ -48,7 +48,7 @@ namespace SistemaMJP
 
         protected void regresarRP(object sender, EventArgs e)
         {
-            Response.Redirect("RolesPerfiles");
+            Response.Redirect("RolesPerfiles.aspx");
         }
 
         internal void llenarListRoles()
@@ -271,7 +271,7 @@ namespace SistemaMJP
                     }
                     else
                     {
-                        controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(rol), nombre, apellidos);
+                        controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(ListRoles.SelectedItem.Text), nombre, apellidos);
                         controladoraU.eliminarUsuarioPrograma(nombre, apellidos);
                         controladoraU.eliminarUsuarioBodega(nombre, apellidos); 
                         //Se llena la tabla de UsuarioPrograma
@@ -295,7 +295,7 @@ namespace SistemaMJP
                                 controladoraU.agregarUsuarioSubBodega(entry.Value);
                             }
                         }
-                        Response.Redirect("RolesPerfiles");
+                        Response.Redirect("RolesPerfiles.aspx");
 
                     }
 
@@ -308,7 +308,7 @@ namespace SistemaMJP
                     }
                     else
                     {
-                        controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(rol), nombre, apellidos);
+                        controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(ListRoles.SelectedItem.Text), nombre, apellidos);
                         controladoraU.eliminarUsuarioBodega(nombre, apellidos);
                         controladoraU.agregarUsuarioBodega(Int32.Parse(ListBodegas.SelectedValue));
                         Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
@@ -320,13 +320,16 @@ namespace SistemaMJP
                         {
                             controladoraU.agregarUsuarioSubBodega(entry.Value);
                         }
-                        Response.Redirect("RolesPerfiles");
+                        Response.Redirect("RolesPerfiles.aspx");
                     }
 
                 }
                 else {
-                    controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(rol), nombre, apellidos);
-                    Response.Redirect("RolesPerfiles");
+                    controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(ListRoles.SelectedItem.Text), nombre, apellidos);
+                    controladoraU.eliminarUsuarioBodega(nombre, apellidos);
+                    controladoraU.eliminarUsuarioPrograma(nombre, apellidos);
+                    controladoraU.eliminarUsuarioSubBodega(nombre, apellidos);
+                    Response.Redirect("RolesPerfiles.aspx");
                 }
 
             }
@@ -498,7 +501,7 @@ namespace SistemaMJP
             //Itera sobre el diccionario para obtener los programas presupuestarios disponibles y guardarlos en el listBox
             foreach (var item in nomPrograma)
             {
-                ListBoxProgramasAsignados.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                ListBoxProgramasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
             }
         }
 
@@ -514,7 +517,7 @@ namespace SistemaMJP
             //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
             foreach (var item in nomBodega)
             {
-                ListBoxBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                ListBoxBodegasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 ListBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
             }
         }
@@ -548,7 +551,7 @@ namespace SistemaMJP
                 //Itera sobre el diccionario para obtener los programas presupuestarios y guardarlos en el listBox
                 foreach (var item in nomSubBodega)
                 {
-                    ListBoxSubBodegasAsignadas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                    ListBoxSubBodegasDisponibles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }    
         }       
 

@@ -106,6 +106,12 @@ namespace SistemaMJP
             return ControladoraBDProductos.getProductos(prefix);
         }
 
+        [WebMethod]
+        public static List<string> getProductosBodegaProgramaSubBodega(string prefix, int programa, int bodega, int subBodega)
+        {
+            return ControladoraBDProductos.getProductosBodegaProgramaSubBodega(prefix, programa, bodega, subBodega);
+        }
+
         //Llama a la controladora de Productos, para obtener el id del producto con cantidad minima segun cierta descripcion
         internal int getProductoConCantidadMin(string descripcion)
         {

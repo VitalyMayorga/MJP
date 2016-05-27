@@ -52,7 +52,7 @@ namespace SistemaMJP
         }
 
         //metodo usado para obtener el correo del administrador general
-        internal List<string> obtenerCorreoAdminGeneral()
+        internal List<string> obtenerCorreosAprobador(int programa, int bodega, int subBodega)
         {
             List<string> correos = new List<string>();
             try
@@ -60,7 +60,10 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Obtener_Correos_AdminGeneral";
+                cmd.CommandText = "P_Obtener_Correos_Aprobador";
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subBodega", subBodega);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 

@@ -21,15 +21,15 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }
                 else if (!rol.Equals("Administrador General"))
                 {
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
                 else if (Request.UrlReferrer == null)
                 {
-                    Response.Redirect("Administracion");
+                    Response.Redirect("Administracion.aspx");
                 }
                 else
                 {
@@ -42,12 +42,12 @@ namespace SistemaMJP
 
         protected void regresarMA(object sender, EventArgs e)
         {
-            Response.Redirect("Administracion");
+            Response.Redirect("Administracion.aspx");
         }
 
         protected void crear(object sender, EventArgs e)
         {
-            Response.Redirect("CrearUsuario");
+            Response.Redirect("CrearUsuario.aspx");
 
         }
 
@@ -80,7 +80,7 @@ namespace SistemaMJP
             EditarUsuario.nombre = nombre;
             EditarUsuario.apellidos = apellidos;
             EditarUsuario.rol = rol;
-            Response.Redirect("EditarUsuario");
+            Response.Redirect("EditarUsuario.aspx");
         }
 
         protected void btnEliminar_Click(object sender, System.EventArgs e)
@@ -100,7 +100,7 @@ namespace SistemaMJP
                string descripcionRA = "Usuario " + nombre + " " + apellidos + " eliminado";
                string usuario = (string)Session["correoInstitucional"];
                bitacora.registrarActividad(usuario, descripcionRA);
-               Response.Redirect("Administracion");
+               Response.Redirect("Administracion.aspx");
             }
             
         }

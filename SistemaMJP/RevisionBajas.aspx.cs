@@ -22,11 +22,11 @@ namespace SistemaMJP
                 string rol = (string)Session["rol"];
                 if (Session["correoInstitucional"] == null)
                 {
-                    Response.Redirect("Ingresar");
+                    Response.Redirect("Ingresar.aspx");
                 }
                 else if (!rol.Equals("Aprobador"))
                 {
-                    Response.Redirect("MenuPrincipal");
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
                 else
                 {
@@ -39,7 +39,7 @@ namespace SistemaMJP
         //Regresa al menu principal
         protected void regresarMP(object sender, EventArgs e)
         {
-            Response.Redirect("MenuPrincipal");
+            Response.Redirect("MenuPrincipal.aspx");
         }
 
 
@@ -95,6 +95,7 @@ namespace SistemaMJP
             string descripcionRA = "Baja de " + cantidad + " " + producto + " en la bodega: " + bodega + ", subBodega: " + subBodega + " al programa presupuestario: " + programa + " Rechazada";
             string usuario = (string)Session["correoInstitucional"];
             bitacora.registrarActividad(usuario, descripcionRA);
+            Response.Redirect("RevisionBajas.aspx");
             
         }
 
@@ -126,6 +127,7 @@ namespace SistemaMJP
             string descripcionRA = "Baja de " + cantidad + " " + producto + " en la bodega: " + bodega + ", subBodega: " + subBodega + " al programa presupuestario: " + programa + " Rechazada";
             string usuario = (string)Session["correoInstitucional"];
             bitacora.registrarActividad(usuario, descripcionRA);
+            Response.Redirect("RevisionBajas.aspx");
 
         }
 
@@ -168,7 +170,7 @@ namespace SistemaMJP
 
                 tabla.Rows.Add(datos);
             }
-            Ids.Sort();
+            
             datosBaja = tabla;
             GridBajas.DataSource = datosBaja;
             GridBajas.DataBind();
