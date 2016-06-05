@@ -202,6 +202,9 @@ namespace SistemaMJP
                 txtFuncionario.Text = "";
                 txtCedula.Text = "";
                 txtNumActivo.Text = "";
+                MsjErrorNumActivo.Style.Add("display", "none");
+                MsjErrorCedula.Style.Add("display", "none");
+                MsjErrorFuncionario.Style.Add("display", "none");
 
             }
         }
