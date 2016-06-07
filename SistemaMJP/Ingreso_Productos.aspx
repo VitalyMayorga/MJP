@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso_Productos.aspx.cs" Inherits="SistemaMJP.Ingreso_Productos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
-    <asp:UpdatePanel runat="server">
+    <asp:UpdatePanel runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="form-horizontal">
                 <h3 class="Encabezado">Ingreso de Mercadería</h3>
@@ -170,6 +170,9 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnAceptar" EventName="Click"/>
+        </Triggers>
     </asp:UpdatePanel>
 
     <script type="text/javascript">//Convertimos el calendario a español

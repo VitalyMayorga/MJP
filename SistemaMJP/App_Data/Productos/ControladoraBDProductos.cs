@@ -278,6 +278,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@factura", factura);
                     cmd.Parameters.AddWithValue("@producto", producto);
                     cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@estado", "En edición");
                     cmd.Parameters.AddWithValue("@total", total);
                     if (fechaG.HasValue)
                     {
