@@ -143,6 +143,7 @@ namespace SistemaMJP
             DataTable tabla = crearTablaBajas();
             List<Item_Grid_Bajas> data = controladora.getListaBajasPendientes();
             Object[] datos = new Object[6];
+            Ids.Clear();
 
             foreach (Item_Grid_Bajas fila in data)
             {

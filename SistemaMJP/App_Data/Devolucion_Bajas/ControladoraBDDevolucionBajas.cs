@@ -171,5 +171,31 @@ namespace SistemaMJP
             Item_Grid_Bajas items = new Item_Grid_Bajas(idDevolucionBaja, idProducto, cantidad, idPrograma, idBodega, idSubBodega, justificacion);
             return items;
         }
+
+        //Metodo que se encarga de devolver la cantidad del producto introducido
+        public int cantidadProducto(string nombreProducto)
+        {
+            int id;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Cantidad_Producto";
+                cmd.Parameters.AddWithValue("@nombreProducto", nombreProducto);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+        }
     }
 }

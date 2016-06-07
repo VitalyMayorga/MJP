@@ -117,6 +117,11 @@ namespace SistemaMJP
            return controladoraBD.buscarMaximo();
         }
 
+        //Llama a la controladora de Base de datos de DevolucionBajas, para devolver la cantidad del producto introducido
+        internal int cantidadProducto(string nombreProducto)
+        {
+            return controladoraBD.cantidadProducto(nombreProducto);
+        }
 
     }
 }

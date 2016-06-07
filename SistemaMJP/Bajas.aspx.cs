@@ -283,11 +283,18 @@ namespace SistemaMJP
             }
             else
             {
-                MsjErrortextJustificacion.Style.Add("display", "none");
-                controladora.agregarDevolucionBaja("Baja", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Pendiente");
-                correo = email.obtenerCorreosAprobador(Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownBodegas.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue));
-                email.MailSender("Solicitud de baja enviada a revisión por el usuario " + usuario + ".", "Notificación de solicitud de aprobación de productos de factura", correo);
-                Response.Redirect("DevolucionBajas.aspx");
+                if ((controladora.cantidadProducto(txtProducto.Text) - Int32.Parse(TextCantidad.Text)) < 0)
+                {
+                    MsjErrorCantidadNegativa.Style.Add("display", "block");
+                }
+                else
+                {
+                    MsjErrortextJustificacion.Style.Add("display", "none");
+                    controladora.agregarDevolucionBaja("Baja", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Pendiente");
+                    correo = email.obtenerCorreosAprobador(Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownBodegas.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue));
+                    email.MailSender("Solicitud de baja enviada a revisión por el usuario " + usuario + ".", "Notificación de solicitud de aprobación de productos de factura", correo);
+                    Response.Redirect("DevolucionBajas.aspx");
+                }
             }
         }
 

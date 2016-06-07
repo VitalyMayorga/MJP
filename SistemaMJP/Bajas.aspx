@@ -68,6 +68,10 @@
                         <label class="mensajeError">Debe ingresar la cantidad para realizar la baja</label>
                         <br/> 
                     </div>
+                    <div style="display: none;" id="MsjErrorCantidadNegativa" class="col-md-offset-2" runat="server">
+                        <label class="mensajeError">La cantidad introducidad es mayor que la cantidad del producto en la bodega </label>
+                        <br/> 
+                    </div>
                     
                 </div>
 

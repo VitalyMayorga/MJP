@@ -33,8 +33,8 @@ namespace SistemaMJP
                 MsjErrorContraseña.Style.Add("display", "block");
                 txtContraseña.Text = "";
             }
-            
-            else if (servicio.Autenticar(usuario,contraseña))
+
+            else if (servicio.Autenticar(usuario, contraseña))
             {//Se guardan los datos importantes del usuario logueado en la variable Session, para su posterior uso cuando sea necesario en el programa
                 Session["username"] = servicio.GetUsername(usuario);
                 Session["rol"] = servicio.GetRol(usuario);

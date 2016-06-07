@@ -67,8 +67,7 @@
                     <div style="display: none;" id="MsjErrortextCantidad" class="col-md-offset-2" runat="server">
                         <label class="mensajeError">Debe ingresar la cantidad para realizar la devolucion</label>
                         <br/> 
-                    </div>
-                    
+                    </div>                    
                 </div>
 
                 <div class="form-group" >

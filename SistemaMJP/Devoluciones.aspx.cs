@@ -283,7 +283,7 @@ namespace SistemaMJP
             else
             {
                 MsjErrortextJustificacion.Style.Add("display", "none");
-                controladora.agregarDevolucionBaja("Devolucion", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Aceptado");
+                controladora.agregarDevolucionBaja("Devolucion", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Aceptado");                               
                 controladora.actualizarCantidadProducto(Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue), Int32.Parse(TextCantidad.Text), "Devolucion", controladora.buscarIdMaxDevolucion());
                 if (Int32.Parse(DropDownSubBodegas.SelectedValue) == 0)
                 {
@@ -295,7 +295,7 @@ namespace SistemaMJP
                 }
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
-                Response.Redirect("DevolucionBajas.aspx");
+                Response.Redirect("DevolucionBajas.aspx");                
             }
         }
 
