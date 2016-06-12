@@ -14,13 +14,14 @@ namespace SistemaMJP
     public partial class DetallesFactura : System.Web.UI.Page
     {
         private ControladoraDetalles_Producto controladora = new ControladoraDetalles_Producto();
+        private ServicioLogin servicio = new ServicioLogin();
         Bitacora bitacora = new Bitacora();
         EmailManager email = new EmailManager();
         private DataTable datosFactura;
-        public static string numFactura;
-        private static int id_factura;
-        private static int[] ids;//se guardaran los ids de los productos de la factura
-        private static int i;
+        public  string numFactura;
+        private  int id_factura;
+        private  int[] ids;//se guardaran los ids de los productos de la factura
+        private  int i;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,10 +41,33 @@ namespace SistemaMJP
                 }
                 else
                 {
+                    try
+                    {
+                        string DataString = servicio.TamperProofStringDecode(Request.QueryString["numF"], "MJP");
+                        numFactura = DataString;
+                        ViewState["numFactura"] = numFactura;
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("MenuPrincipal.aspx");
+                    }
                     labelFactura.InnerText = "Factura " + numFactura;
                     llenarDetallesProducto();
                 }
 
+            }
+            else {
+
+                id_factura = (int)ViewState["id_factura"];
+                numFactura = (string)ViewState["numFactura"];
+                try
+                {
+                    i = (int)ViewState["i"];
+                }
+                catch (Exception)
+                {
+                }
+                ids = (int[])ViewState["ids"];
             }
         }
         //Regresa al menu principal
@@ -77,7 +101,7 @@ namespace SistemaMJP
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             i = Convert.ToInt32(row.RowIndex);
-
+            ViewState["i"] = i;
             //HTMLDECODE: es necesario para leer caracteres con tilde
             String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
             if (estado.Equals("En edición"))
@@ -104,17 +128,19 @@ namespace SistemaMJP
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             i = Convert.ToInt32(row.RowIndex);
-
+            ViewState["i"] = i;
             String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
             if (estado.Equals("En edición"))
             {
                 //Se obtiene el id del producto
                 int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-                Ingreso_Productos.id_factura = id_factura;
-                Ingreso_Productos.idProducto = idProducto;
-                Ingreso_Productos.numFactura = numFactura;
-                Ingreso_Productos.editar = true;
-                Response.Redirect("Ingreso_productos");
+                //Ingreso_Productos.id_factura = id_factura;
+                //Ingreso_Productos.idProducto = idProducto;
+                //Ingreso_Productos.numFactura = numFactura;
+                //Ingreso_Productos.editar = true;
+                Response.Redirect("Ingreso_Productos.aspx?id_factura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_factura.ToString(), "MJP")) + "&numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")) + "&idProducto=" +
+                    HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idProducto.ToString(), "MJP")) +"&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("1", "MJP")));
+
 
             }
 
@@ -123,8 +149,8 @@ namespace SistemaMJP
         //Crea un nuevo producto
         protected void nuevoProducto(object sender, EventArgs e)
         {
-            Ingreso_Productos.numFactura = numFactura;
-            Ingreso_Productos.editar = false;
+            //Ingreso_Productos.numFactura = numFactura;
+            //Ingreso_Productos.editar = false;
             Response.Redirect("Ingreso_productos");
 
         }
@@ -150,6 +176,7 @@ namespace SistemaMJP
             CultureInfo crCulture = new CultureInfo("es-CR");
             DataTable tabla = crearTablaProductos();
             id_factura = controladora.obtenerIDFactura(numFactura);
+            ViewState["id_factura"] = id_factura;
             List<Item_Grid_Produtos_Factura> data = controladora.obtenerListaProductos(id_factura);
             Object[] datos = new Object[4];
             ids = new int[data.Count];
@@ -165,6 +192,7 @@ namespace SistemaMJP
 
                 tabla.Rows.Add(datos);
             }
+            ViewState["ids"] = ids;
             datosFactura = tabla;
             GridProductos.DataSource = datosFactura;
             GridProductos.DataBind();
