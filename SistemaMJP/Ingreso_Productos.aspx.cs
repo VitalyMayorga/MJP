@@ -10,15 +10,16 @@ namespace SistemaMJP
 {
     public partial class Ingreso_Productos : System.Web.UI.Page
     {
-        public static int bodega;
-        public static int subbodega;
-        public static int programa;
-        public static string numFactura;
-        public static int subpartida;
-        public static int idProducto;
-        public static int id_factura;
-        public static bool editar;
+        public  int bodega;
+        public  int subbodega;
+        public  int programa;
+        public  string numFactura;
+        public  int subpartida;
+        public  int idProducto;
+        public  int id_factura;
+        public  bool editar;
         ControladoraProductos controladora = new ControladoraProductos();
+        ServicioLogin servicio = new ServicioLogin();
         Bitacora bitacora = new Bitacora();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,12 +34,38 @@ namespace SistemaMJP
                 {
                     Response.Redirect("MenuPrincipal");
                 }
-                
-                else if (Request.UrlReferrer== null)
+
+                else if (Request.UrlReferrer == null)
                 {
                     Response.Redirect("MenuPrincipal");
                 }
-                else {
+                else
+                {//Leer los datos del URL
+                    try
+                    {
+                        
+                        string dato = servicio.TamperProofStringDecode(Request.QueryString["numFactura"], "MJP");
+                        if (!dato.Equals("noData"))
+                        {
+                            numFactura = dato;
+                        }
+                        dato = servicio.TamperProofStringDecode(Request.QueryString["editar"], "MJP");
+                        if (dato.Equals("1"))
+                        {
+                            editar = true;
+                        }
+                        else
+                        {
+                            editar = false;
+                            bodega = Convert.ToInt32(servicio.TamperProofStringDecode(Request.QueryString["bodega"], "MJP"));
+                            programa = Convert.ToInt32(servicio.TamperProofStringDecode(Request.QueryString["programa"], "MJP"));
+                            subbodega = Convert.ToInt32(servicio.TamperProofStringDecode(Request.QueryString["subbodega"], "MJP"));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("MenuPrincipal.aspx");
+                    }
                     noActivo.Checked = true;
                     //lleno la lista de subpartidas
                     ListaSubPartidas.Items.Clear();
@@ -48,18 +75,49 @@ namespace SistemaMJP
                     {
                         ListaSubPartidas.Items.Add(new ListItem { Text = nombreS.Key, Value = nombreS.Value.ToString() });
                     }
-                    if (editar) {
+                    if (editar)
+                    {
+                        try
+                        {
+                            id_factura = Convert.ToInt32(servicio.TamperProofStringDecode(Request.QueryString["id_factura"], "MJP"));
+                            idProducto = Convert.ToInt32(servicio.TamperProofStringDecode(Request.QueryString["idProducto"], "MJP"));
+                            
+                        }
+                        catch (Exception ex)
+                        {
+                            Response.Redirect("MenuPrincipal.aspx");
+                        }
                         //campos no editables
                         txtDescripcion.Enabled = false;
                         ListaSubPartidas.Enabled = false;
                         esActivo.Enabled = false;
                         noActivo.Enabled = false;
                         //La informacion del activo si fue asignada, se modifica desde la interfaz de control de activos, no desde esta
-                        
 
+                        ViewState["idProducto"] = idProducto;
+                        ViewState["id_factura"] = id_factura;
                         llenarDatosProducto();
                     }
+                   
                 }
+                ViewState["bodega"] = bodega;
+                ViewState["programa"] = programa;
+                ViewState["numFactura"] = numFactura;
+                ViewState["subbodega"] = subbodega;
+                ViewState["editar"] = editar;
+            }
+            else {
+                try { 
+                    bodega= (int)ViewState["bodega"];
+                    subbodega = (int)ViewState["subbodega"];
+                    programa = (int)ViewState["programa"];
+                    numFactura = (string)ViewState["numFactura"];
+                    subpartida = (int)ViewState["subpartida"];
+                    editar = (bool)ViewState["bodega"];
+                    idProducto = (int)ViewState["idProducto"];
+                    id_factura = (int)ViewState["id_factura"];
+                }
+                catch (Exception) { }
             }
         }
 
@@ -297,8 +355,8 @@ namespace SistemaMJP
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " agregado con éxito')", true);
                 if (numFactura != null)
                 {
-                    DetallesFactura.numFactura = numFactura;
-                    Response.Redirect("DetallesFactura");
+                    //DetallesFactura.numFactura = numFactura;
+                    Response.Redirect("DetallesFactura.aspx?numF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")));
                 }
                 else {
                     Response.Redirect("MenuPrincipal");
@@ -337,8 +395,8 @@ namespace SistemaMJP
         {
             if (editar)
             {
-                DetallesFactura.numFactura = numFactura;
-                Response.Redirect("DetallesFactura");
+                //DetallesFactura.numFactura = numFactura;
+                Response.Redirect("DetallesFactura.aspx?numF"+HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura,"MJP")));
             }
             else
             {

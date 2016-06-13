@@ -12,18 +12,19 @@ namespace SistemaMJP
     public partial class Preingreso_Productos : System.Web.UI.Page
     {
         private ControladoraProductos controladora = new ControladoraProductos();
+        private ServicioLogin servicio = new ServicioLogin();
         private EmailManager email = new EmailManager();
         Bitacora bitacora = new Bitacora();
-        public static string programa;
-        public static string subBodega;
-        public static bool tieneSubBodega;
-        public static string numFactura;
-        public static string proveedor;
-        public static string correo;
-        public static string telefonos;
-        public static bool nuevoProveedor = false;
-        
-        
+        public string programa;
+        public string valsubBodega;
+        public bool tieneSubBodega;
+        public string numFactura;
+        public string proveedor;
+        public string correo;
+        public string telefonos;
+        public bool nuevoProveedor = false;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,30 +41,55 @@ namespace SistemaMJP
                 else
                 {
                     tieneSubBodega = false;
-                    subBodega = "";
+                    valsubBodega = "";
                     llenarDatos();
                 }
+            }
+            else
+            {
+                try
+                {
+                    programa = (string)ViewState["programa"];
+                    valsubBodega = (string)ViewState["subBodega"];
+                    tieneSubBodega = (bool)ViewState["tieneSubBodega"];
+                    numFactura = (string)ViewState["numFactura"];
+                    proveedor = (string)ViewState["proveedor"];
+                    correo = (string)ViewState["correo"];
+                    telefonos = (string)ViewState["telefonos"];
+                    nuevoProveedor = (bool)ViewState["nuevoProveedor"];
+
+                }
+                catch (Exception) { 
+                }
+
             }
         }
         //Revisa si los campos necesarios fueron agregados, de ser así ingresa a la ventana de ingreso de productos
         //En otro caso, despliega los mensajes de error
         protected void aceptar(object sender, EventArgs e)
         {
-            string descripcion="";
+            string descripcion = "";
             string usuario = (string)Session["correoInstitucional"];
-            string fecha="";
+            string fecha = "";
             string bodega = ListaBodegas.Items[ListaBodegas.SelectedIndex].Text;
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
-            if (tieneSubBodega) {
-                subBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
+            ViewState["programa"] = programa;
+            if (tieneSubBodega)
+            {
+                valsubBodega = ListaSubBodegas.Items[ListaSubBodegas.SelectedIndex].Text;
+                ViewState["subBodega"] = valsubBodega;
             }
-            if (!nuevoProveedor) {
+            if (!nuevoProveedor)
+            {
                 proveedor = ListaProveedores.Items[ListaProveedores.SelectedIndex].Text;
+                ViewState["proveedor"] = proveedor;
             }
-            if (ingresoF.Checked) {
+            if (ingresoF.Checked)
+            {
                 numFactura = txtNumFactura.Text;
-                fecha =  txtFechaF.Text;
+                fecha = txtFechaF.Text;
                 numFactura = numFactura.Replace(" ", "");//Elimino espacios en blanco para saber si se digito numero factura o no
+                ViewState["numFactura"] = numFactura;
             }
             if (bodega.Equals("---Elija una bodega---"))
             {//Ocultar y mostrar mensajes de Error
@@ -72,7 +98,7 @@ namespace SistemaMJP
                 MsjErrorSubBodega.Style.Add("display", "none");
                 MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "none");
-                
+
             }
 
             else if (programa.Equals("---Elija un Programa---"))
@@ -82,34 +108,36 @@ namespace SistemaMJP
                 MsjErrorSubBodega.Style.Add("display", "none");
                 MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "none");
-                
+
             }
-            else if (tieneSubBodega && (subBodega.Equals("---Elija un Departamento---"))) { 
+            else if (tieneSubBodega && (valsubBodega.Equals("---Elija un Departamento---")))
+            {
                 //Ocultar y mostrar mensajes de Error
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "block");
                 MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "none");
-                           
+
             }
-            
+
             else if (ingresoF.Checked && numFactura.Equals(""))
             {//Ocultar y mostrar mensajes de Error
-                    MsjErrorBodega.Style.Add("display", "none");
-                    MsjErrorPrograma.Style.Add("display", "none");
-                    MsjErrorSubBodega.Style.Add("display", "none");
-                    MsjErrorSubPartida.Style.Add("display", "none");
-                    MsjErrorFactura.Style.Add("display", "block");
-                    MsjErrorFecha.Style.Add("display", "none");
-                    MsjErrorProveedor.Style.Add("display", "none");
-                
+                MsjErrorBodega.Style.Add("display", "none");
+                MsjErrorPrograma.Style.Add("display", "none");
+                MsjErrorSubBodega.Style.Add("display", "none");
+                MsjErrorSubPartida.Style.Add("display", "none");
+                MsjErrorFactura.Style.Add("display", "block");
+                MsjErrorFecha.Style.Add("display", "none");
+                MsjErrorProveedor.Style.Add("display", "none");
+
             }
-            else if (ingresoF.Checked && fecha.Equals("")) {
+            else if (ingresoF.Checked && fecha.Equals(""))
+            {
                 MsjErrorFactura.Style.Add("display", "none");
                 MsjErrorFecha.Style.Add("display", "block");
                 MsjErrorProveedor.Style.Add("display", "none");
-            
+
             }
             else if (ingresoF.Checked && !nuevoProveedor && proveedor.Equals("---Elija un Proveedor---"))
             {
@@ -120,26 +148,26 @@ namespace SistemaMJP
             {//Se envían los datos necesarios para empezar a ingresar productos
                 int idBodega = controladora.obtenerIDBodega(bodega);
 
-                Ingreso_Productos.bodega = idBodega;
-                Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
+                //Ingreso_Productos.bodega = idBodega;
+                //Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
                 int idSubBodega = 0;//Por default, subbodega 0 = No hay subbodega asignada
                 if (tieneSubBodega)
                 {
                     idSubBodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
-                    Ingreso_Productos.subbodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
+                    //Ingreso_Productos.subbodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
 
                 }
                 if (ingresoF.Checked)
                 {
-                    Ingreso_Productos.numFactura = numFactura;
-                    controladora.agregarFactura(idBodega, proveedor, Convert.ToInt32(ListaProgramas.SelectedValue), idSubBodega, numFactura,fecha);
+                    //Ingreso_Productos.numFactura = numFactura;
+                    controladora.agregarFactura(idBodega, proveedor, Convert.ToInt32(ListaProgramas.SelectedValue), idSubBodega, numFactura, fecha);
                     descripcion = "Agregada factura" + numFactura;
                     bitacora.registrarActividad(usuario, descripcion);
                 }
-                descripcion = "Nodifica bodega "+bodega+" para programa "+programa;
+                descripcion = "Nodifica bodega " + bodega + " para programa " + programa;
                 bitacora.registrarActividad(usuario, descripcion);
-                Ingreso_Productos.editar = false;
-                Response.Redirect("Ingreso_Productos");
+
+                Response.Redirect("Ingreso_Productos.aspx?bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idBodega.ToString(), "MJP")) + "&numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(ListaProgramas.SelectedValue, "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idSubBodega.ToString(), "MJP")) + "&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("0", "MJP")));
 
 
             }
@@ -169,6 +197,7 @@ namespace SistemaMJP
             {
                 MsjErrorPrograma.Style.Add("display", "none");
             }
+            ViewState["tieneSubBodega"] = tieneSubBodega;
         }
 
         //Si se selecciona la subbodega el msj de error se esconde
@@ -195,11 +224,12 @@ namespace SistemaMJP
             {
                 MsjErrorProveedor.Style.Add("display", "none");
             }
-            else {
+            else
+            {
                 proveedor = ListaProveedores.SelectedItem.Text;
             }
         }
-        
+
         //Si está seleccionado Mercaderia Inicial,esconde el div de la inserción de una factura y proveedor
         protected void rbMercaderiaI(object sender, EventArgs e)
         {
@@ -240,7 +270,7 @@ namespace SistemaMJP
             {
                 ListaProgramas.Items.Add(new ListItem { Text = nombreP.Key, Value = nombreP.Value.ToString() });
             }
-            
+
             ListaProveedores.Items.Add("---Elija un Proveedor---");
             foreach (var nombrePr in proveedores)
             {
@@ -260,7 +290,7 @@ namespace SistemaMJP
                 txtNombreProveedor.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             }
-            else if (correo.Equals("") || !email.IsValidEmail(correo) )
+            else if (correo.Equals("") || !email.IsValidEmail(correo))
             {
                 txtCorreo.Focus();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -277,13 +307,17 @@ namespace SistemaMJP
                 ListaProveedores.Enabled = false;
                 ListaProveedores.SelectedIndex = 0;
                 controladora.agregarProveedor(proveedor, correo, telefonos);
-                string descripcion = "Agregado proveedor"+proveedor;
+                string descripcion = "Agregado proveedor" + proveedor;
                 string usuario = (string)Session["correoInstitucional"];
-                bitacora.registrarActividad(usuario,descripcion);
+                bitacora.registrarActividad(usuario, descripcion);
+                ViewState["proveedor"] = proveedor;
+                ViewState["correo"] = correo;
+                ViewState["telefonos"] = telefonos;
+                ViewState["nuevoProveedor"] = nuevoProveedor;
             }
 
         }
-        
+
 
     }
 }

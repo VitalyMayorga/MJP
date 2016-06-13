@@ -13,7 +13,8 @@ namespace SistemaMJP
     public partial class Facturas1 : System.Web.UI.Page
     {
         public DataTable datosFactura;
-        private ControladoraFacturas controladora = new ControladoraFacturas();        
+        private ControladoraFacturas controladora = new ControladoraFacturas();
+        private ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,7 +42,7 @@ namespace SistemaMJP
 
         protected void ingresar(object sender, EventArgs e)
         {
-            Response.Redirect("Preingreso-Productos");
+            Response.Redirect("Preingreso-Productos.aspx");
             
         }
 
@@ -68,8 +69,8 @@ namespace SistemaMJP
             string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
             string estado = HttpUtility.HtmlDecode(GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[6].Text);
             if (!estado.Equals("En revisión")) {
-                DetallesFactura.numFactura = numFactura;
-                Response.Redirect("DetallesFactura");
+                //DetallesFactura.numFactura = numFactura;
+                Response.Redirect("DetallesFactura.aspx?numF="+HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura,"MJP")));
             }
         
         }
