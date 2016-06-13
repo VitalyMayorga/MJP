@@ -15,6 +15,7 @@ namespace SistemaMJP
         Bitacora bitacora = new Bitacora();
         public DataTable datosBaja;
         private ControladoraDevolucionBajas controladora = new ControladoraDevolucionBajas();
+        private int pageSize=10;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -50,8 +51,9 @@ namespace SistemaMJP
         */
         protected void PageIndexChanging(Object sender, GridViewPageEventArgs e)
         {
+           
             GridBajas.PageIndex = e.NewPageIndex;
-            GridBajas.DataSource = datosBaja;
+            GridBajas.DataSource = (DataTable)Session["tabla"];
             GridBajas.DataBind();
         }
 
@@ -61,6 +63,8 @@ namespace SistemaMJP
         public void aceptar(object sender, EventArgs e)
         {
             int rowindex = 0;
+            int pageIndex = 0;
+            int CantidadPorEmpaque = 0;
             string producto = "";
             string cantidad = "";
             string programa = "";
@@ -79,16 +83,19 @@ namespace SistemaMJP
             
             //Get the rowindex
             rowindex = gvr.RowIndex;
-            controladora.actualizarEstado(buscarId(rowindex), 1);
+            pageIndex = GridBajas.PageIndex;
 
+            controladora.actualizarEstado(buscarId(pageIndex * pageSize + rowindex), 1);
+
+            CantidadPorEmpaque = controladora.ObtenercantidadEmpaque(controladora.getProductoConCantidadMin(producto));
             if (gvr.Cells[4].Text.Equals("--------"))
-            {                
-                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoConCantidadMin(producto), controladora.obtenerIDPrograma(programa), 0, Int32.Parse(cantidad), "Baja", buscarId(rowindex));
+            {
+                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoConCantidadMin(producto), controladora.obtenerIDPrograma(programa), 0, (CantidadPorEmpaque * Int32.Parse(cantidad)), "Baja", buscarId(rowindex));
             }
             else
             {
                 subBodega = gvr.Cells[4].Text;
-                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoConCantidadMin(producto), controladora.obtenerIDPrograma(programa), controladora.obtenerIDSubBodega(subBodega), Int32.Parse(cantidad), "Baja", buscarId(rowindex));
+                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoConCantidadMin(producto), controladora.obtenerIDPrograma(programa), controladora.obtenerIDSubBodega(subBodega), (CantidadPorEmpaque * Int32.Parse(cantidad)), "Baja", buscarId(rowindex));
             }  
             
             Ids.RemoveAt(rowindex);
@@ -103,6 +110,7 @@ namespace SistemaMJP
         public void rechazar(object sender, EventArgs e)
         {
             int rowindex = 0;
+            int pageIndex = 0;
             string producto = "";
             string cantidad = "";
             string programa = "";
@@ -121,8 +129,9 @@ namespace SistemaMJP
 
             //Get the rowindex
             rowindex = gvr.RowIndex;
+            pageIndex = GridBajas.PageIndex;
 
-            controladora.actualizarEstado(buscarId(rowindex), 0);
+            controladora.actualizarEstado(buscarId(pageIndex * pageSize + rowindex), 0);
             Ids.RemoveAt(rowindex);
             string descripcionRA = "Baja de " + cantidad + " " + producto + " en la bodega: " + bodega + ", subBodega: " + subBodega + " al programa presupuestario: " + programa + " Rechazada";
             string usuario = (string)Session["correoInstitucional"];
@@ -195,7 +204,7 @@ namespace SistemaMJP
 
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
-            columna.ColumnName = "Cantidad";
+            columna.ColumnName = "Cantidad de Unidades";
             tabla.Columns.Add(columna);
 
             columna = new DataColumn();
@@ -218,7 +227,7 @@ namespace SistemaMJP
             columna.ColumnName = "Justificacion";
             tabla.Columns.Add(columna);
 
-
+            Session["tabla"] = tabla;
             GridBajas.DataSource = tabla;
             GridBajas.DataBind();
 

@@ -197,5 +197,33 @@ namespace SistemaMJP
 
             return id;
         }
+
+
+        //Metodo que se encarga de devolver la cantidad por empaque de un producto
+        public int cantidadEmpaque(int producto)
+        {
+            int cantidad;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Obtener_CantidadPorEmpaque";
+                cmd.Parameters.AddWithValue("@idProducto", producto);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                cantidad = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return cantidad;
+        }
+
     }
 }

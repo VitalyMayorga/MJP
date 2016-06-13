@@ -45,7 +45,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar los usuario y bodegas relacionadas a la tabla de BodegaUsuario
-        public void agregarUsuarioBodega(int bodega)
+        public void agregarUsuarioBodega(int id, int bodega)
         {
             using (TransactionScope ts = new TransactionScope())
             {
@@ -53,8 +53,7 @@ namespace SistemaMJP
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = con;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    int id = buscarMaximo();
+                    cmd.CommandType = CommandType.StoredProcedure;                    
                     con.Open();
                     cmd.CommandText = "P_Agregar_Usuario_Bodega";
                     cmd.Parameters.AddWithValue("@idUsuario", id);
@@ -72,7 +71,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar los usuarios y subBodegas relacionadas a la tabla de SubBodegaUsuario
-        public void agregarUsuarioSubBodega(int subBodega)
+        public void agregarUsuarioSubBodega(int id, int subBodega)
         {
             using (TransactionScope ts = new TransactionScope())
             {
@@ -80,8 +79,7 @@ namespace SistemaMJP
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = con;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    int id = buscarMaximo();
+                    cmd.CommandType = CommandType.StoredProcedure;                    
                     con.Open();
                     cmd.CommandText = "P_Agregar_Usuario_SubBodega";
                     cmd.Parameters.AddWithValue("@idUsuario", id);
@@ -98,7 +96,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de agregar los usuarios y programas relacionados a la tabla de UsuarioProgramaPresupuestario
-        public void agregarUsuarioPrograma(int programa)
+        public void agregarUsuarioPrograma(int id, int programa)
         {
             using (TransactionScope ts = new TransactionScope())
             {
@@ -106,8 +104,7 @@ namespace SistemaMJP
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = con;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    int id = buscarMaximo();
+                    cmd.CommandType = CommandType.StoredProcedure;                   
                     con.Open();
                     cmd.CommandText = "P_Agregar_Usuario_Programa";
                     cmd.Parameters.AddWithValue("@idUsuario", id);
@@ -392,6 +389,33 @@ namespace SistemaMJP
             }
         }
 
+        //Metodo que se encarga de obtener el id del usuario segun el correo Institucional
+        public int ObtenerIdUsuarioPorNombreApellidosRol(int idRol, string nombre, string apellidos)
+        {
+            int id;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Obtener_IdUsuario_Por_NombreApellidosRol";
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@apellidos", apellidos);
+                cmd.Parameters.AddWithValue("@idRol", idRol);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
+        }
 
     }
 }

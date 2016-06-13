@@ -123,5 +123,11 @@ namespace SistemaMJP
             return controladoraBD.cantidadProducto(nombreProducto);
         }
 
+        //Llama a la controladora de Base de datos de DevolucionBajas, para devolver la cantidad por empaque del producto introducido
+        internal int ObtenercantidadEmpaque(int producto)
+        {
+            return controladoraBD.cantidadEmpaque(producto);
+        }
+
     }
 }

@@ -60,12 +60,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label" >Cantidad: </label>
+                    <label class="col-md-2 control-label" >Cantidad de Unidades: </label>
                     <div class="col-md-10">
                         <asp:TextBox ID="TextCantidad" class="form-control text-box single-line" runat="server" placeholder="Cantidad"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextCantidad" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar la cantidad para realizar la baja</label>
+                        <label class="mensajeError">Debe ingresar la cantidad de unidades para realizar la baja</label>
                         <br/> 
                     </div>
                     <div style="display: none;" id="MsjErrorCantidadNegativa" class="col-md-offset-2" runat="server">

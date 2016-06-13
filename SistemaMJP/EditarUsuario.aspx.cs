@@ -201,6 +201,7 @@ namespace SistemaMJP
 
         protected void editar(object sender, EventArgs e)
         {
+            int idUsuario = controladoraU.ObtenerIdUsuarioPorNombreApellidosRol(controladoraU.ObtenerIdRol(rol), nombre, apellidos);
             if (ListRoles.SelectedValue == "0")
             {
                MsjErrorListRol.Style.Add("display", "block");
@@ -277,13 +278,13 @@ namespace SistemaMJP
                         //Se llena la tabla de UsuarioPrograma
                         foreach (KeyValuePair<string, int> entry in itemsPrograma)
                         {
-                            controladoraU.agregarUsuarioPrograma(entry.Value);
+                            controladoraU.agregarUsuarioPrograma(idUsuario, entry.Value);
                         }
 
                         //Se llena la tabla de UsuarioBodega
                         foreach (KeyValuePair<string, int> entry in itemsBodega)
                         {
-                            controladoraU.agregarUsuarioBodega(entry.Value);
+                            controladoraU.agregarUsuarioBodega(idUsuario, entry.Value);
                         }
 
                         if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1)
@@ -292,7 +293,7 @@ namespace SistemaMJP
                             //Se llena la tabla de UsuarioSubBodega
                             foreach (KeyValuePair<string, int> entry in itemsSubBodega)
                             {
-                                controladoraU.agregarUsuarioSubBodega(entry.Value);
+                                controladoraU.agregarUsuarioSubBodega(idUsuario, entry.Value);
                             }
                         }
                         Response.Redirect("RolesPerfiles.aspx");
@@ -309,8 +310,9 @@ namespace SistemaMJP
                     else
                     {
                         controladoraU.actualizarRolUsuario(controladoraU.ObtenerIdRol(ListRoles.SelectedItem.Text), nombre, apellidos);
+                        controladoraU.eliminarUsuarioPrograma(nombre, apellidos);
                         controladoraU.eliminarUsuarioBodega(nombre, apellidos);
-                        controladoraU.agregarUsuarioBodega(Int32.Parse(ListBodegas.SelectedValue));
+                        controladoraU.agregarUsuarioBodega(idUsuario, Int32.Parse(ListBodegas.SelectedValue));
                         Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
                         SubBodegas = controladoraU.getSubBodegas("Administracion Penitenciaria", ListBodegas.SelectedValue);
                         controladoraU.eliminarUsuarioSubBodega(nombre, apellidos);
@@ -318,7 +320,7 @@ namespace SistemaMJP
                         //Itera sobre el diccionario para relacionar al Usuario con cada SubBodega de la Bodega asignada
                         foreach (KeyValuePair<string, int> entry in SubBodegas)
                         {
-                            controladoraU.agregarUsuarioSubBodega(entry.Value);
+                            controladoraU.agregarUsuarioSubBodega(idUsuario, entry.Value);
                         }
                         Response.Redirect("RolesPerfiles.aspx");
                     }

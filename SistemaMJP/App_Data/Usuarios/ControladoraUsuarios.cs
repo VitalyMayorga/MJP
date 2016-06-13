@@ -47,21 +47,27 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de Base de datos de usuarios, para agregar la relacion entre usuarios y bodegas
-        internal void agregarUsuarioBodega(int bodega)
+        internal void agregarUsuarioBodega(int id, int bodega)
         {
-            controladoraBD.agregarUsuarioBodega(bodega);
+            controladoraBD.agregarUsuarioBodega(id, bodega);
         }
 
         //Llama a la controladora de Base de datos de usuarios, para agregar la relacion entre usuarios y subBodegas
-        internal void agregarUsuarioSubBodega(int subBodega)
+        internal void agregarUsuarioSubBodega(int id, int subBodega)
         {
-            controladoraBD.agregarUsuarioSubBodega(subBodega);
+            controladoraBD.agregarUsuarioSubBodega(id, subBodega);
         }
 
         //Llama a la controladora de Base de datos de usuarios, para agregar la relacion entre usuarios y programas
-        internal void agregarUsuarioPrograma(int programa)
+        internal void agregarUsuarioPrograma(int id, int programa)
         {
-            controladoraBD.agregarUsuarioPrograma(programa);
+            controladoraBD.agregarUsuarioPrograma(id, programa);
+        }
+
+        //Llama a la controladora de Base de datos de usuarios, para buscar el ultimo usuario que se agrego al sistema
+        internal int buscarUltimoUsuario()
+        {
+            return controladoraBD.buscarMaximo();
         }
 
         //Llama a una instancia de servicioLogin, para encriptar la contraseña
@@ -74,6 +80,12 @@ namespace SistemaMJP
         internal int ObtenerIdRol(string nombreRol)
         {
             return controladoraBD.ObtenerIdRol(nombreRol);
+        }
+
+        //Llama a la controladora de Base de datos de usuarios, para obtener el id del usuario segun el nombre, los apellidos y el rol asignado
+        internal int  ObtenerIdUsuarioPorNombreApellidosRol(int idRol, string nombre, string apellidos)
+        {
+            return controladoraBD. ObtenerIdUsuarioPorNombreApellidosRol(idRol, nombre, apellidos);
         }
 
         //Llama a la controladora de Base de datos de Usuarios, para eliminar las relaciones entre programas y usuarios
@@ -129,6 +141,8 @@ namespace SistemaMJP
         {
             controladoraBD.editarInfoUsuario(EncodePassword(correo, pass), nombre, apellidos, correo);
         }
+
+
 
     }
 }
