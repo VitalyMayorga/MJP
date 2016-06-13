@@ -12,6 +12,7 @@ namespace SistemaMJP
     public partial class RolesPerfiles : System.Web.UI.Page
     {
         Bitacora bitacora = new Bitacora();
+        private ServicioLogin servicio = new ServicioLogin();
         public DataTable datosUsuario;
         private ControladoraRolesPerfiles controladora = new ControladoraRolesPerfiles(); 
         protected void Page_Load(object sender, EventArgs e)
@@ -77,10 +78,8 @@ namespace SistemaMJP
             nombre = gvr.Cells[0].Text;
             apellidos = gvr.Cells[1].Text;
             rol = gvr.Cells[2].Text;
-            EditarUsuario.nombre = nombre;
-            EditarUsuario.apellidos = apellidos;
-            EditarUsuario.rol = rol;
-            Response.Redirect("EditarUsuario.aspx");
+            Response.Redirect("EditarUsuario.aspx?nombre=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(nombre, "MJP")) + "&apellidos=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(apellidos, "MJP")) + "&rol=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(rol, "MJP")));
+
         }
 
         protected void btnEliminar_Click(object sender, System.EventArgs e)

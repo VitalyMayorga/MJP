@@ -10,9 +10,10 @@ namespace SistemaMJP
     public partial class EditarUsuario : System.Web.UI.Page
     {
         private ControladoraUsuarios controladoraU = new ControladoraUsuarios();
+        ServicioLogin servicio = new ServicioLogin();
         public static string nombre = "";
         public static string apellidos = "";
-        public static string rol = "";
+        public static string roles = "";
          
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,6 +34,16 @@ namespace SistemaMJP
                 }
                 else
                 {
+                    try
+                    {
+                        nombre = servicio.TamperProofStringDecode(Request.QueryString["nombre"], "MJP");
+                        apellidos = servicio.TamperProofStringDecode(Request.QueryString["apellidos"], "MJP");
+                        roles = servicio.TamperProofStringDecode(Request.QueryString["rol"], "MJP");
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("MenuPrincipal.aspx");
+                    }
                     llenarListRoles();
                     InicializarListBox();
                     llenarProgramasAsignados();
@@ -42,6 +53,19 @@ namespace SistemaMJP
                     llenarSubBodegasAsignadas();
                     llenarSubBodegasDisponibles();
                 }
+
+                ViewState["nombre"] = nombre;
+                ViewState["apellidos"] = apellidos;
+                ViewState["rol"] = roles;
+            }
+            else {
+                try
+                {
+                    nombre = (string)ViewState["nombre"];
+                    apellidos = (string)ViewState["apellidos"];
+                    roles = (string)ViewState["rol"];
+                }
+                catch (Exception) { }
             }
             
         }
@@ -67,7 +91,7 @@ namespace SistemaMJP
                 {
                     ListRoles.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
-                ListRoles.SelectedIndex = controladoraU.ObtenerIdRol(rol);
+                ListRoles.SelectedIndex = controladoraU.ObtenerIdRol(roles);
             }
         }
 
@@ -201,7 +225,7 @@ namespace SistemaMJP
 
         protected void editar(object sender, EventArgs e)
         {
-            int idUsuario = controladoraU.ObtenerIdUsuarioPorNombreApellidosRol(controladoraU.ObtenerIdRol(rol), nombre, apellidos);
+            int idUsuario = controladoraU.ObtenerIdUsuarioPorNombreApellidosRol(controladoraU.ObtenerIdRol(roles), nombre, apellidos);
             if (ListRoles.SelectedValue == "0")
             {
                MsjErrorListRol.Style.Add("display", "block");
