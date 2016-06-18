@@ -148,7 +148,7 @@ namespace SistemaMJP
 
 
         //Ingresa la fecha de Recpecion definitiva de un producto
-        internal void agregarRecepcionDefinitiva(int idFactura, int idProducto,string fecha)
+        internal void agregarRecepcionDefinitiva(int idFactura,string fecha)
         {
             DateTime fechaRD = Convert.ToDateTime(fecha);
             using (TransactionScope ts = new TransactionScope())
@@ -159,10 +159,35 @@ namespace SistemaMJP
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
-                    cmd.CommandText = "P_Agregar_FechaRD_Producto";
+                    cmd.CommandText = "P_Agregar_FechaRD_Factura";
                     cmd.Parameters.AddWithValue("@factura", idFactura);
-                    cmd.Parameters.AddWithValue("@producto", idProducto);
                     cmd.Parameters.AddWithValue("@fecha", fechaRD);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+        }
+
+        //Rechaza la factura y la envía a edición
+        internal void rechazarFactura(int idFactura)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Rechazar_Factura";
+                    cmd.Parameters.AddWithValue("@factura", idFactura);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();

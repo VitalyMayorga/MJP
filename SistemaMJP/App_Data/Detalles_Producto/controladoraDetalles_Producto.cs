@@ -36,9 +36,18 @@ namespace SistemaMJP
         }
 
         //Ingresa la fecha de Recpecion definitiva de un producto
-        internal void agregarRecepcionDefinitiva(int idFactura, int idProducto, string fecha)
+        //internal void agregarRecepcionDefinitiva(int idFactura, int idProducto, string fecha)
+        //{
+        //    controladoraBD.agregarRecepcionDefinitiva(idFactura, idProducto, fecha);
+        //}
+
+        internal void aprobarFactura(int id_factura, string fecha) {
+            controladoraBD.agregarRecepcionDefinitiva(id_factura, fecha);
+        }
+
+        internal void rechazarFactura(int id_factura)
         {
-            controladoraBD.agregarRecepcionDefinitiva(idFactura, idProducto, fecha);
+            controladoraBD.rechazarFactura(id_factura);
         }
     }
 }

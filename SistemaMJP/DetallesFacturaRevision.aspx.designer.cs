@@ -40,6 +40,33 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.Button btnVolver;
         
         /// <summary>
+        /// btnAprobar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAprobar;
+        
+        /// <summary>
+        /// btnRechazar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRechazar;
+        
+        /// <summary>
+        /// justificacionRechazo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea justificacionRechazo;
+        
+        /// <summary>
         /// btnAceptarM control.
         /// </summary>
         /// <remarks>

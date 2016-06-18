@@ -50,7 +50,35 @@ namespace SistemaMJP
 
             return correos;        
         }
+        //metodo usado para obtener los correos de los bodegueros del almacen solicitado
+        internal List<string> obtenerCorreosBodegueros(string bodega)
+        {
+            List<string> correos = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Correos_Bodeguero";
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    correos.Add(reader.GetString(0));
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return correos;
+        }
         //metodo usado para obtener el correo del administrador general
         internal List<string> obtenerCorreosAprobador(int programa, int bodega, int subBodega)
         {

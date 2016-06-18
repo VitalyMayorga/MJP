@@ -10,7 +10,7 @@
                 <h3 class="Encabezado" id="labelFactura" runat="server"></h3>
                 <div class="table-responsive tablaMJP">
                     <asp:GridView ID="GridProductos" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
-                        <Columns>
+                        <%--<Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnAprobar" runat="server" class="btn btn-default" OnClick="btnAprobar_Click" ToolTip="Aprobar"><i class="glyphicon glyphicon-ok" style="color:green"></i></asp:LinkButton>
@@ -23,15 +23,20 @@
                                     <asp:LinkButton ID="btnRechazar" runat="server" class="btn btn-default" OnClick="btnRechazar_Click" ToolTip="Rechazar"><i class="glyphicon glyphicon-remove"  style="color:red"></i></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                        </Columns>
+                        </Columns>--%>
                     </asp:GridView>
                 </div>
                 <div class="form-group" style="margin-top: 2%; margin-right: 5%">
-                        <div class="col-md-10" style="text-align: right; margin-left: 7.8%">
+                        <%--<div class="col-md-10" style="text-align: right; margin-left: 7.8%">
                         <div class="BotonIngreso">
                             <asp:Button  name="btnVolver" Text="Volver" id="btnVolver"  runat="server" class="btn btn-default" OnClick="volver"></asp:Button>
-                        </div>
+                        </div>--%>
+                        <div class="row BotonIngreso" style="float:right">
+                            <asp:Button  name="btnVolver" Text="Volver" id="btnVolver"  runat="server" class="btn btn-default" OnClick="volver"  style="margin-right: 1%;margin-left:-10%"></asp:Button>
+                            <asp:Button  name="btnAprobar" Text="Aprobar" id="btnAprobar"  runat="server" class="btn btn-default" OnClick="btnAprobar_Click" style="margin-right: 1%"></asp:Button>
+                            <asp:Button  name="btnRechazar" Text="Rechazar" id="btnRechazar"  runat="server" class="btn btn-default" OnClick="btnRechazar_Click"></asp:Button>
 
+                        </div>
 
                     </div>
                 </div>
@@ -46,14 +51,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Confirmar Producto</h4>
+                    <h4 class="modal-title">Confirmar Justificación</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label id="producto"></label>
-                        
+                        <label id="producto">Justificación</label>      
+                               
                     </div>
-                    
+                    <textarea id="justificacionRechazo" runat="server" style="max-width:300px;width:300px"></textarea>    
                 </div>
                 <div class="modal-footer">
                     <asp:Button id="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptar"></asp:Button>

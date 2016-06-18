@@ -12,7 +12,8 @@ namespace SistemaMJP
     public partial class RevisionFacturas : System.Web.UI.Page
     {
         public DataTable datosFactura;
-        private ControladoraFacturas controladora = new ControladoraFacturas();  
+        private ControladoraFacturas controladora = new ControladoraFacturas();
+        ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -62,8 +63,11 @@ namespace SistemaMJP
 
 
             string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
-            DetallesFacturaRevision.numFactura = numFactura;
-            Response.Redirect("DetallesFacturaRevision");
+            string estado = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[6].Text;
+            if (estado.Equals("Pendiente de Aprobación")) {
+                Response.Redirect("DetallesFacturaRevision.aspx?numF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")));
+            
+            }
 
         }
         //Llena la grid de facturas con los datos correspondientes

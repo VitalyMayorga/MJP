@@ -14,13 +14,14 @@ namespace SistemaMJP
     public partial class DetallesFacturaRevision : System.Web.UI.Page
     {
         private ControladoraDetalles_Producto controladora = new ControladoraDetalles_Producto();
+        EmailManager email = new EmailManager();
         Bitacora bitacora = new Bitacora();
+        ServicioLogin servicio = new ServicioLogin();
         private DataTable datosFactura;
-        public static string numFactura;
-        private static int id_factura;
-        private static int tipo;//tipo 1= aceptar, tipo 2= rechazar
-        private static int[] ids;//se guardaran los ids de los productos de la factura
-        private static int i; 
+        public  string numFactura;
+        private  int id_factura;
+        private  int[] ids;//se guardaran los ids de los productos de la factura
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,10 +41,24 @@ namespace SistemaMJP
                 }
                 else
                 {
+                    try
+                    {
+                        numFactura = servicio.TamperProofStringDecode(Request.QueryString["numF"], "MJP");
+                    }
+                    catch (Exception)
+                    {
+                        Response.Redirect("MenuPrincipal");
+                    }
                     labelFactura.InnerText = "Factura " + numFactura;
                     llenarDetallesProducto();
+                    ViewState["numFactura"] = numFactura;
                 }
 
+            }
+            else {
+                numFactura = (string)ViewState["numFactura"];
+                id_factura = (int)ViewState["id_factura"];
+                ids = (int[])ViewState["ids"];
             }
 
         }
@@ -62,40 +77,44 @@ namespace SistemaMJP
         //Elimina el item seleccionado
         protected void btnRechazar_Click(object sender, EventArgs e)
         {
-            LinkButton btn = (LinkButton)sender;
-            GridViewRow row = (GridViewRow)btn.NamingContainer;
-            i = Convert.ToInt32(row.RowIndex);
+            //LinkButton btn = (LinkButton)sender;
+            //GridViewRow row = (GridViewRow)btn.NamingContainer;
+            //i = Convert.ToInt32(row.RowIndex);
 
-            //HTMLDECODE: es necesario para leer caracteres con tilde
-            String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
-            if (estado.Equals("Pendiente de aprobación"))
-            {
-                //Se obtiene el id del producto
-                int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-                String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
+            ////HTMLDECODE: es necesario para leer caracteres con tilde
+            //String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
+            //if (estado.Equals("Pendiente de aprobación"))
+            //{
+            //    //Se obtiene el id del producto
+            //    int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+            //    String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Desea rechazar el producto: " + descripcion + "?');", true);
-                tipo = 2;
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación rechazo factura: " + numFactura + "');", true);
+                
 
-            }
+            //}
         }
         //Dependiendo de si es aprobar o rechazar, modifica el estado para que se guarde el estado correspondiente del producto
         protected void aceptar(object sender, EventArgs e)
         {
-            string estado = "";
+            string justificacion = justificacionRechazo.Value;
+            if (justificacionRechazo.Value.Trim() == "")
+            {
 
-            int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-            if (tipo == 1) {//Tambien modifica la BD para que el producto ya sea visible en dicha bodega
-                
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalRD();", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación rechazo factura: " + numFactura+"');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('show');</script>");
             }
-            else if (tipo == 2) {
-                estado = "Rechazado";
-                controladora.cambiarEstadoProducto(id_factura, idProducto, estado);
-                string descripcionRA = "Producto " + GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text + " rechazado";
+            else{
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('hide');</script>");
+                List<string> bodegas = (List<string>)Session["bodegas"];
+                string bodega = bodegas[0];
+                List<string> correos = email.obtenerCorreosBodegueros(bodega);
+                controladora.rechazarFactura(id_factura);
+                email.MailSender(justificacion, "Notificación de rechazo de factura", correos);
+                string descripcionRA = "Factura: "+numFactura+" rechazado";
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
-                llenarDetallesProducto();
+                Response.Redirect("RevisionFacturas.aspx");
             }
         }
 
@@ -110,36 +129,41 @@ namespace SistemaMJP
             }
             else
             {
-                string estado = "Aprobado";
-                int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalRD').modal('hide');</script>");
-                controladora.agregarRecepcionDefinitiva(id_factura, idProducto, fecha);//Primero se agrega la fecha de RecepcionDefinitiva,por dentro agregara producto a la bodega                    
-                controladora.cambiarEstadoProducto(id_factura, idProducto, estado);
-                string descripcionRA = "Producto " + GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text + " aprobado";
+                controladora.aprobarFactura(id_factura,fecha);
+                string descripcionRA = "Factura número: " + numFactura + " Aprobada por el administrador de almacen";
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
-                llenarDetallesProducto();
+                Response.Redirect("RevisionFacturas.aspx");
+                //string estado = "Aprobado";
+                //int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+                //ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalRD').modal('hide');</script>");
+                //controladora.agregarRecepcionDefinitiva(id_factura, idProducto, fecha);//Primero se agrega la fecha de RecepcionDefinitiva,por dentro agregara producto a la bodega                    
+                //controladora.cambiarEstadoProducto(id_factura, idProducto, estado);
+                //string descripcionRA = "Producto " + GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text + " aprobado";
+                //string usuario = (string)Session["correoInstitucional"];
+                //bitacora.registrarActividad(usuario, descripcionRA);
+                //llenarDetallesProducto();
             }
         }
         //Edita el item seleccionado
         protected void btnAprobar_Click(object sender, EventArgs e)
         {
-            LinkButton btn = (LinkButton)sender;
-            GridViewRow row = (GridViewRow)btn.NamingContainer;
-            i = Convert.ToInt32(row.RowIndex);
+            //LinkButton btn = (LinkButton)sender;
+            //GridViewRow row = (GridViewRow)btn.NamingContainer;
+            //i = Convert.ToInt32(row.RowIndex);
 
-            String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
-            if (estado.Equals("Pendiente de aprobación"))
-            {
-                //Se obtiene el id del producto
-                int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-                String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
+            //String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
+            //if (estado.Equals("Pendiente de aprobación"))
+            //{
+            //    //Se obtiene el id del producto
+            //    int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
+            //    String descripcion = GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text;
+            
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalRD();", true);
+            //    tipo = 1;
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Desea aprobar el producto: " + descripcion + "?');", true);
-                tipo = 1;
-
-            }
-
+            //}
+           
 
         }
         //Regresa al menu principal
@@ -150,7 +174,7 @@ namespace SistemaMJP
         //Vuelve a la pantalla de lista de Facturas de la bodega
         protected void volver(object sender, EventArgs e)
         {
-            Response.Redirect("RevisionFacturas");
+            Response.Redirect("RevisionFacturas.aspx");
 
         }
         //Llena la grid de productos con los datos correspondientes
@@ -160,9 +184,11 @@ namespace SistemaMJP
             CultureInfo crCulture = new CultureInfo("es-CR");
             DataTable tabla = crearTablaProductos();
             id_factura = controladora.obtenerIDFactura(numFactura);
+            ViewState["id_factura"] = id_factura;
             List<Item_Grid_Produtos_Factura> data = controladora.obtenerListaProductos(id_factura);
             Object[] datos = new Object[4];
             ids = new int[data.Count];
+            ViewState["ids"] = ids;
             int contador = 0;
             foreach (Item_Grid_Produtos_Factura fila in data)
             {
