@@ -11,9 +11,10 @@ namespace SistemaMJP
     public partial class ControlActivos : System.Web.UI.Page
     {
         public DataTable datosActivos;
-        static int i;
-        static String numActivo;
+        private int i;
+        private String numActivo;
         ControladoraActivos controladora = new ControladoraActivos();
+        ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,6 +35,11 @@ namespace SistemaMJP
                 }
 
             }
+            else
+            {
+                i = (int)ViewState["i"];
+                numActivo = (String)ViewState["numActivo"];
+            }
         }
         //Regresa al menu principal
         protected void regresarMP(object sender, EventArgs e)
@@ -43,8 +49,8 @@ namespace SistemaMJP
 
         protected void ingresar(object sender, EventArgs e)
         {
-            Activos.editar = false;
-            Response.Redirect("Activos");
+            //Activos.editar = false;
+            Response.Redirect("Activos.aspx?editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("false", "MJP")));
 
         }
 
@@ -69,11 +75,12 @@ namespace SistemaMJP
 
 
             numActivo = GridActivos.Rows[i + (this.GridActivos.PageIndex * 10)].Cells[0].Text;
-            Activos.editar = true;
-            Activos.numActivo = numActivo;
-            Response.Redirect("Activos");
-            
-
+            ViewState["i"] = i;
+            ViewState["numActivo"] = numActivo;
+            //Activos.editar = true;
+            //Activos.numActivo = numActivo;
+            Response.Redirect("Activos.aspx?editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("true", "MJP")) + "&numActivo=" +
+             HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numActivo, "MJP")));
         }
 
         //Elimina el item seleccionado
@@ -85,6 +92,8 @@ namespace SistemaMJP
 
             //HTMLDECODE: es necesario para leer caracteres con tilde
             numActivo = HttpUtility.HtmlDecode(GridActivos.Rows[i + (this.GridActivos.PageIndex * 10)].Cells[0].Text);
+            ViewState["i"] = i;
+            ViewState["numActivo"] = numActivo;
             String descripcion = HttpUtility.HtmlDecode(GridActivos.Rows[i + (this.GridActivos.PageIndex * 10)].Cells[1].Text);
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Desea eliminar el activo asignado: " + descripcion + "?');", true);
                         

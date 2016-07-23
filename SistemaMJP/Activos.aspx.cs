@@ -9,10 +9,11 @@ namespace SistemaMJP
 {
     public partial class Activos : System.Web.UI.Page
     {
-        public static bool editar;
+        private bool editar;
         ControladoraActivos controladora = new ControladoraActivos();
         Bitacora bitacora = new Bitacora();
-        public static string numActivo;
+        private  string numActivo;
+        ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,10 +42,39 @@ namespace SistemaMJP
                 }
                 else
                 {
-
-                    Response.Redirect("MenuPrincipal");
+                    try
+                    {
+                        numActivo = servicio.TamperProofStringDecode(Request.QueryString["numActivo"], "MJP");
+                        string editar = servicio.TamperProofStringDecode(Request.QueryString["editar"], "MJP");
+                        if (editar.Equals("true"))
+                        {
+                            this.editar = true;
+                        }
+                        else if (editar.Equals("false"))
+                        {
+                            this.editar = false;
+                        }
+                        else
+                        {
+                            Response.Redirect("MenuPrincipal.aspx");
+                        }
+                        ViewState["numActivo"] = numActivo;
+                        ViewState["editar"] = this.editar;
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("MenuPrincipal.aspx");
+                    }
                 }
             }
+            else
+            {
+
+                numActivo = (String)ViewState["numActivo"];
+                editar = (bool)ViewState["editar"];
+
+            }
+           
         }
 
         private void llenarListaActivos() {
