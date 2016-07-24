@@ -94,6 +94,37 @@ namespace SistemaMJP
 
         }
 
+        public string GetID(string correo)
+        {
+            string nombre = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_UserID";
+                cmd.Parameters.AddWithValue("@correo", correo);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nombre += reader.GetString(0) + "?" + reader.GetString(1);
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return nombre;
+
+        }
+
         //Metodo que se encarga de devolver el rol por medio del correoInstitucional
         public string GetRol(string correo)
         {

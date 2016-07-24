@@ -47,6 +47,7 @@ namespace SistemaMJP
                     }
                     Session["bodegas"] = servicio.GetBodegas(usuario);
                 }
+                Session["userID"] = servicio.GetID(usuario);
                 Session["correoInstitucional"] = usuario;
                 Response.Redirect("MenuPrincipal.aspx");
             }

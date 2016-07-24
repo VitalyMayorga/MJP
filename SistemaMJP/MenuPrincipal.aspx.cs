@@ -37,7 +37,15 @@ namespace SistemaMJP
         }
         protected void ingresarRequisiciones(object sender, EventArgs e)
         {
-            Response.Redirect("Requisiciones.aspx");
+            if (Session["rol"].Equals("Usuarios"))
+            {
+                Response.Redirect("Requisiciones.aspx");
+
+            }
+            else if (Session["rol"].Equals("Aprobador"))
+            {
+                Response.Redirect("RevisionRequisiciones.aspx");
+            }
         }
         protected void ingresarReportes(object sender, EventArgs e)
         {

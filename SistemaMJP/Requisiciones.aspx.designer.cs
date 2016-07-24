@@ -11,5 +11,23 @@ namespace SistemaMJP {
     
     
     public partial class Requisiciones {
+        
+        /// <summary>
+        /// IngresarRequisicion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button IngresarRequisicion;
+        
+        /// <summary>
+        /// GridRequisiciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridRequisiciones;
     }
 }
