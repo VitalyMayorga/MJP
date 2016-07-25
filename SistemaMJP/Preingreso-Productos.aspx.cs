@@ -15,14 +15,14 @@ namespace SistemaMJP
         private ServicioLogin servicio = new ServicioLogin();
         private EmailManager email = new EmailManager();
         Bitacora bitacora = new Bitacora();
-        public string programa;
-        public string valsubBodega;
-        public bool tieneSubBodega;
-        public string numFactura;
-        public string proveedor;
-        public string correo;
-        public string telefonos;
-        public bool nuevoProveedor = false;
+        private string programa;
+        private string valsubBodega;
+        private bool tieneSubBodega;
+        private string numFactura;
+        private string proveedor;
+        private string correo;
+        private string telefonos;
+        private bool nuevoProveedor = false;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -59,7 +59,8 @@ namespace SistemaMJP
                     nuevoProveedor = (bool)ViewState["nuevoProveedor"];
 
                 }
-                catch (Exception) { 
+                catch (Exception) {
+                    Response.Redirect("MenuPrincipal.aspx");
                 }
 
             }
@@ -164,7 +165,7 @@ namespace SistemaMJP
                     descripcion = "Agregada factura" + numFactura;
                     bitacora.registrarActividad(usuario, descripcion);
                 }
-                descripcion = "Nodifica bodega " + bodega + " para programa " + programa;
+                descripcion = "Modifica bodega " + bodega + " para programa " + programa;
                 bitacora.registrarActividad(usuario, descripcion);
 
                 Response.Redirect("Ingreso_Productos.aspx?bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idBodega.ToString(), "MJP")) + "&numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(ListaProgramas.SelectedValue, "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idSubBodega.ToString(), "MJP")) + "&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("0", "MJP")));

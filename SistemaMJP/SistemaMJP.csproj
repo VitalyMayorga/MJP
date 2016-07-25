@@ -210,6 +210,7 @@
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Pre-ingresoRequisicion.aspx" />
     <Content Include="RevisionBajas.aspx" />
     <Content Include="RevisionFacturas.aspx" />
     <Content Include="RolesPerfiles.aspx" />
@@ -483,6 +484,13 @@
     </Compile>
     <Compile Include="PerfilUsuario.aspx.designer.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pre-ingresoRequisicion.aspx.cs">
+      <DependentUpon>Pre-ingresoRequisicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pre-ingresoRequisicion.aspx.designer.cs">
+      <DependentUpon>Pre-ingresoRequisicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Preingreso-Productos.aspx.cs">
       <DependentUpon>Preingreso-Productos.aspx</DependentUpon>

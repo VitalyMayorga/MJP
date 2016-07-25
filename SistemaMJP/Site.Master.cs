@@ -68,15 +68,22 @@ namespace SistemaMJP
         ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string user = servicio.GetUsername((string)(Session["correoInstitucional"]));
-            if (user != null)
+            if (Session["correoInstitucional"] == null)
             {
-                nombreLabel.Text = "Bienvenido " + user.Replace("?", " ");
+                Response.Redirect("Ingresar.aspx");
             }
-            else
-            {
-                nombreLabel.Text = "Bienvenido";
+            else {
+                string user = servicio.GetUsername((string)(Session["correoInstitucional"]));
+                if (user != null)
+                {
+                    nombreLabel.Text = "Bienvenido " + user.Replace("?", " ");
+                }
+                else
+                {
+                    nombreLabel.Text = "Bienvenido";
+                }
             }
+           
 
             
 
@@ -89,6 +96,7 @@ namespace SistemaMJP
             Session["rol"] = null;
             Session["programas"] = null;
             Session["bodegas"] = null;
+            Session["userID"] = null;
             Response.Redirect("~/Ingresar.aspx");
         }
 

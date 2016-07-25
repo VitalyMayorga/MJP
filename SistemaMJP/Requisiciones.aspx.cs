@@ -45,7 +45,7 @@ namespace SistemaMJP
 
         protected void ingresar(object sender, EventArgs e)
         {
-            Response.Redirect("Preingreso-Requisicion.aspx");
+            Response.Redirect("Pre-ingresoRequisicion.aspx");
 
         }
 
