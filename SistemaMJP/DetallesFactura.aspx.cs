@@ -60,6 +60,7 @@ namespace SistemaMJP
 
                 id_factura = (int)ViewState["id_factura"];
                 numFactura = (string)ViewState["numFactura"];
+                datosFactura = (DataTable)ViewState["tabla"];
                 try
                 {
                     i = (int)ViewState["i"];
@@ -193,7 +194,7 @@ namespace SistemaMJP
                 tabla.Rows.Add(datos);
             }
             ViewState["ids"] = ids;
-            datosFactura = tabla;
+            ViewState["tabla"] = tabla;
             GridProductos.DataSource = datosFactura;
             GridProductos.DataBind();
 

@@ -30,7 +30,7 @@
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnModificar" runat="server" class="btn btn-default" OnClick="btnVer_Click" ToolTip="Historial"><i class="glyphicon glyphicon-list-alt"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="btnVer" runat="server" class="btn btn-default" OnClick="btnVer_Click" ToolTip="Historial"><i class="glyphicon glyphicon-list-alt"></i></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

@@ -68,7 +68,7 @@ namespace SistemaMJP
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             int i = Convert.ToInt32(row.RowIndex);
             string numRequisicion = GridRequisiciones.Rows[i + (this.GridRequisiciones.PageIndex * 10)].Cells[0].Text;
-            Response.Redirect("DetallesRequisicion.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
+            Response.Redirect("DetallesRequisicion.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
             
 
         }

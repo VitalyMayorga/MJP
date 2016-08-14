@@ -200,6 +200,7 @@
     <Content Include="Images\seguimiento.png" />
     <Content Include="Ingresar.aspx" />
     <Content Include="Ingreso_Productos.aspx" />
+    <Content Include="Ingreso_Requisicion.aspx" />
     <Content Include="MenuPrincipal.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -470,6 +471,13 @@
     </Compile>
     <Compile Include="App_Data\Detalles_Producto\Item_Grid_Produtos_Factura.cs" />
     <Compile Include="App_Data\Activos\Item_Grid_Activos.cs" />
+    <Compile Include="Ingreso_Requisicion.aspx.cs">
+      <DependentUpon>Ingreso_Requisicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_Requisicion.aspx.designer.cs">
+      <DependentUpon>Ingreso_Requisicion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -516,6 +524,7 @@
     </Compile>
     <Compile Include="RequisicionesUsuario\ControladoraBDRequisicionesUsuario.cs" />
     <Compile Include="RequisicionesUsuario\ControladoraRequisicionesUsuario.cs" />
+    <Compile Include="RequisicionesUsuario\Item_Grid_Productos_Bodega.cs" />
     <Compile Include="RequisicionesUsuario\Item_Grid_Requisiciones.cs" />
     <Compile Include="RevisionBajas.aspx.cs">
       <DependentUpon>RevisionBajas.aspx</DependentUpon>

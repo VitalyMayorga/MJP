@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaMJP.RequisicionesUsuario;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,6 +42,26 @@ namespace SistemaMJP
         internal List<string> getUnidades() {
             return controladoraBD.getUnidades();
         
+        }
+        //Llama a la controladora de base de datos de requisiciones para obtener la cantidad del producto en la bodega
+        internal int obtenerCantidadProductoBodega(int bodega, int subbodega, string programa, string producto)
+        {
+            return controladoraBD.obtenerCantidadProductoBodega(bodega, subbodega, programa, producto);
+        }
+        //Llama a la controladora de base de datos de requisiciones para obtener las muestras de empaque por producto
+        internal List<int> obtenerCantPorEmpaque(int bodega, int subbodega, string programa, string producto)
+        {
+            return controladoraBD.obtenerCantPorEmpaque(bodega, subbodega, programa, producto);
+        }
+        //Llama a la controladora de base de datos de requisiciones para guardar un producto en una requisicion
+        internal void agregarProducto(string producto, string numRequisicion, int cantidad)
+        {
+            controladoraBD.agregarProducto(producto, numRequisicion, cantidad);
+
+        }
+
+        internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega,int subbodega,string programa,string busqueda){
+            return controladoraBD.getListaProductosBodega(bodega,subbodega,programa,busqueda);
         }
     }
 }

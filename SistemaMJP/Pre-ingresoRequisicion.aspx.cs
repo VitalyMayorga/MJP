@@ -27,7 +27,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusion Pedidos"))
+                else if (!rol.Equals("Usuario"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }
@@ -123,13 +123,10 @@ namespace SistemaMJP
             {//Se envían los datos necesarios para empezar a ingresar productos
                 int idBodega = controladora.obtenerIDBodega(bodega);
 
-                //Ingreso_Productos.bodega = idBodega;
-                //Ingreso_Productos.programa = Convert.ToInt32(ListaProgramas.SelectedValue);
                 int idSubBodega = 0;//Por default, subbodega 0 = No hay subbodega asignada
                 if (tieneSubBodega)
                 {
                     idSubBodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
-                    //Ingreso_Productos.subbodega = Convert.ToInt32(ListaSubBodegas.SelectedValue);
 
                 }
                 //Como el numero de requisicion es auto generado, en la controladora se generara y se devolvera, para luego pasarlo a la siguienta pantalla
@@ -138,7 +135,8 @@ namespace SistemaMJP
                 descripcion = "Se crea requisicion " + numRequiscion;
                 bitacora.registrarActividad(usuario, descripcion);
 
-                Response.Redirect("Ingreso_Requisicion.aspx?bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idBodega.ToString(), "MJP")) +"&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(programa, "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idSubBodega.ToString(), "MJP")) + "&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("0", "MJP")));
+                Response.Redirect("Ingreso_Requisicion.aspx?bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idBodega.ToString(), "MJP")) +"&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(programa, "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idSubBodega.ToString(), "MJP"))
+                    + "&numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequiscion, "MJP")));
 
 
             }

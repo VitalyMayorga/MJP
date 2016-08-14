@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaMJP.RequisicionesUsuario;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -165,6 +166,134 @@ namespace SistemaMJP
             }
 
             return num;
+        }
+
+        internal int obtenerCantidadProductoBodega(int bodega, int subbodega, string programa, string producto)
+        {
+            int cantidad = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Cantidad_Producto_En_Bodega";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                SqlDataReader reader = cmd.ExecuteReader();
+                cantidad = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return cantidad;
+        }
+
+        internal List<int> obtenerCantPorEmpaque(int bodega, int subbodega, string programa, string producto)
+        {
+            List<int> empaques = new List<int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Cantidad_Empaque_Producto";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    empaques.Add(reader.GetInt32(0));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return empaques;
+        }
+
+        internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega, int subbodega, string programa, string busqueda)
+        {
+            List<Item_Grid_Productos_Bodega> empaques = new List<Item_Grid_Productos_Bodega>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Lista_Productos_Bodega_Busqueda";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@busqueda", busqueda);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    empaques.Add(LoadItemGridProductos(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return empaques;
+        }
+
+        internal void agregarProducto(string producto, string numRequisicion,int cantidad)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_Producto_Requisicion";
+                    cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                    cmd.Parameters.AddWithValue("@producto", producto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+
+        //Metodo que se encarga de llenar los datos de la clase item grid productos bodega y devolver dicha clase encapsulada
+        internal Item_Grid_Productos_Bodega LoadItemGridProductos(SqlDataReader reader)
+        {
+            String nombre = reader.GetString(0);
+            String descripcion = reader.GetString(1);
+            String unidad = reader.GetString(2);
+            int id = reader.GetInt32(3);
+            Item_Grid_Productos_Bodega items = new Item_Grid_Productos_Bodega(nombre, descripcion, id, unidad);
+            return items;
         }
     }
 }
