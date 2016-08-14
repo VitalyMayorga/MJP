@@ -64,10 +64,10 @@ namespace SistemaMJP
 
             string numFactura = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[0].Text;
             string estado = GridFacturas.Rows[i + (this.GridFacturas.PageIndex * 10)].Cells[6].Text;
-            if (estado.Equals("Pendiente de Aprobación")) {
+          /*  if (estado.Equals("Pendiente de Aprobación")) {*/
                 Response.Redirect("DetallesFacturaRevision.aspx?numF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")));
             
-            }
+            //}
 
         }
         //Llena la grid de facturas con los datos correspondientes

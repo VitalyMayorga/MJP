@@ -316,6 +316,35 @@ namespace SistemaMJP
             return id;
         }
 
+        //Metodo que se encarga de devolver la lista de todas las bodegas segun un identificador de Usuario
+        public List<int> getBodegasPorIdUsuario(int idUsuario)
+        {
+            List<int> subBodega = new List<int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Bodegas_Por_IdUsuario";
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    subBodega.Add(reader.GetInt32(0));
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return subBodega;
+        }        
+
         
     }
 }

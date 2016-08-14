@@ -179,6 +179,7 @@
     <Content Include="Content\VistaPreviaFactura.css" />
     <Content Include="ControlActivos.aspx" />
     <Content Include="DetallesFactura.aspx" />
+    <Content Include="DetallesRequisicionRevision.aspx" />
     <Content Include="DetallesFacturaRevision.aspx" />
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="Devoluciones.aspx" />
@@ -213,6 +214,7 @@
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="Pre-ingresoRequisicion.aspx" />
     <Content Include="RevisionBajas.aspx" />
+    <Content Include="RevisionRequisiciones.aspx" />
     <Content Include="RevisionFacturas.aspx" />
     <Content Include="RolesPerfiles.aspx" />
     <Content Include="CrearUsuario.aspx" />
@@ -334,9 +336,15 @@
     <Compile Include="Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Detalles_Producto_Requisicion\ControladoraBDDetalles_Producto_Requisicion.cs" />
+    <Compile Include="App_Data\Detalles_Producto_Requisicion\controladoraDetalles_Producto_Requisicion.cs" />
+    <Compile Include="App_Data\Detalles_Producto_Requisicion\Item_Grid_Produtos_Requisicion.cs" />
     <Compile Include="App_Data\Devolucion_Bajas\ControladoraBDDevolucionBajas.cs" />
     <Compile Include="App_Data\Devolucion_Bajas\ControladoraDevolucionBajas.cs" />
     <Compile Include="App_Data\Devolucion_Bajas\Item_Grid_Bajas.cs" />
+    <Compile Include="App_Data\RequisicionAprobadores\ControladoraBDRequisicionAprobadores.cs" />
+    <Compile Include="App_Data\RequisicionAprobadores\ControladoraRequisicionAprobadores.cs" />
+    <Compile Include="App_Data\RequisicionAprobadores\Item_Grid_RequisicionAprobadores.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraBDRolesPerfiles.cs" />
     <Compile Include="App_Data\RolesPerfiles\ControladoraRolesPerfiles.cs" />
     <Compile Include="App_Data\Usuarios\ControladoraBDUsuarios.cs" />
@@ -407,6 +415,13 @@
     </Compile>
     <Compile Include="DetallesFactura.aspx.designer.cs">
       <DependentUpon>DetallesFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesRequisicionRevision.aspx.cs">
+      <DependentUpon>DetallesRequisicionRevision.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallesRequisicionRevision.aspx.designer.cs">
+      <DependentUpon>DetallesRequisicionRevision.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetallesFacturaRevision.aspx.cs">
       <DependentUpon>DetallesFacturaRevision.aspx</DependentUpon>
@@ -532,6 +547,13 @@
     </Compile>
     <Compile Include="RevisionBajas.aspx.designer.cs">
       <DependentUpon>RevisionBajas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RevisionRequisiciones.aspx.cs">
+      <DependentUpon>RevisionRequisiciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RevisionRequisiciones.aspx.designer.cs">
+      <DependentUpon>RevisionRequisiciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="RevisionFacturas.aspx.cs">
       <DependentUpon>RevisionFacturas.aspx</DependentUpon>

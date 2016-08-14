@@ -50,6 +50,7 @@ namespace SistemaMJP
 
             return correos;        
         }
+
         //metodo usado para obtener los correos de los bodegueros del almacen solicitado
         internal List<string> obtenerCorreosBodegueros(string bodega)
         {
@@ -79,6 +80,37 @@ namespace SistemaMJP
 
             return correos;
         }
+
+        //metodo usado para obtener los correos de los administradores del almacen solicitado
+        internal List<string> obtenerCorreosAprobadorSegunPrograma(int requisicion)
+        {
+            List<string> correos = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Correos_Requisicion_Programa";
+                cmd.Parameters.AddWithValue("@idRequisicion", requisicion);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    correos.Add(reader.GetString(0));
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return correos;
+        }
+
         //metodo usado para obtener el correo del administrador general
         internal List<string> obtenerCorreosAprobador(int programa, int bodega, int subBodega)
         {
@@ -92,6 +124,36 @@ namespace SistemaMJP
                 cmd.Parameters.AddWithValue("@programa", programa);
                 cmd.Parameters.AddWithValue("@bodega", bodega);
                 cmd.Parameters.AddWithValue("@subBodega", subBodega);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    correos.Add(reader.GetString(0));
+
+                }
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return correos;
+        }
+
+        //metodo usado para obtener el correo del administrador general
+        internal List<string> obtenerCorreoUsuarioRequisicion(int requisicion)
+        {
+            List<string> correos = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Correo_Usuario_Requisicion";
+                cmd.Parameters.AddWithValue("@idRequisicion", requisicion);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 

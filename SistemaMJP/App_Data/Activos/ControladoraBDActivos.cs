@@ -18,6 +18,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         
         }
+
         //Recibe la informacion del activo parcial para asignarlo al control de activos
         internal void agregarActivo(string numActivo,string funcionario,string cedula,int idProducto)
         {
@@ -45,9 +46,7 @@ namespace SistemaMJP
                 {
                     throw;
                 }
-
             }
-
 
         }
 
@@ -136,8 +135,8 @@ namespace SistemaMJP
 
             }
             return agregado;
-
         }
+
         //Metodo que llama ala controladora de base de datos para obtener los activos de la bodega
         internal Dictionary<string, int> getActivos(string bodega)
         {
@@ -168,6 +167,7 @@ namespace SistemaMJP
             return activos;
 
         }
+
         //Metodo que llama ala controladora de base de datos para obtener los datos del activo
         internal List<string> obtenerDatosActivo(string numActivo)
         {
@@ -198,7 +198,6 @@ namespace SistemaMJP
                                                
                 reader.Close();
                 con.Close();
-
             }
             catch (Exception)
             {
@@ -206,6 +205,7 @@ namespace SistemaMJP
             }
             return datos;
         }
+
         //Metodo que llama ala controladora de base de datos para modificar el activo
         internal void modificarActivo(object[] datos)
         {
@@ -226,7 +226,6 @@ namespace SistemaMJP
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
-
                 }
                 catch (Exception)
                 {
@@ -236,6 +235,7 @@ namespace SistemaMJP
             }
 
         }
+
         //Metodo que llama ala controladora de base de datos para eliminar el activo
         internal void eliminarActivo(string activo)
         {
@@ -252,7 +252,6 @@ namespace SistemaMJP
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
-
                 }
                 catch (Exception)
                 {
@@ -260,6 +259,58 @@ namespace SistemaMJP
                 }
 
             }
+        }
+
+        //Metodo que llama a la controladora de base de datos para obtener la cantidad de activos asignados de un producto asignados a una requisicion especifica
+        internal int obtenerCantidadActivos(int idRequisicion, int idProducto)
+        {
+            int cantidad = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Cantidad_Activo";
+                con.Open();
+                cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                cantidad = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return cantidad;
+        }
+
+        //Metodo que llama a la controladora de base de datos para revisar si un producto es o no un activo
+        internal bool esActivo(int idProducto)
+        {
+            bool activo = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Es_Activo";
+                con.Open();
+                cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                activo = reader.GetBoolean(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return activo;
         }
 
     }

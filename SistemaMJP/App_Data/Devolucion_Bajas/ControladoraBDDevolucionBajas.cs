@@ -72,7 +72,7 @@ namespace SistemaMJP
             }
         }
 
-        //Metodo que se encarga de actualizar el Rol del Usuario
+        //Metodo que se encarga de actualizar la cantidad de los productos asignados a una baja o Devolucion
         public void actualizarCantidadProducto(int idBodega, int idProducto, int idPrograma,  int idSubBodega, int cantidad, string tipo, int id)
         {
             using (TransactionScope ts = new TransactionScope())

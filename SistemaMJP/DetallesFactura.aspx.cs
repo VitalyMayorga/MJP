@@ -123,6 +123,7 @@ namespace SistemaMJP
             controladora.eliminarProducto(id_factura,idProducto);
             llenarDetallesProducto();
         }
+
         //Edita el item seleccionado
         protected void btnEditar_Click(object sender, EventArgs e)
         {
@@ -141,12 +142,9 @@ namespace SistemaMJP
                 //Ingreso_Productos.editar = true;
                 Response.Redirect("Ingreso_Productos.aspx?id_factura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_factura.ToString(), "MJP")) + "&numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")) + "&idProducto=" +
                     HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idProducto.ToString(), "MJP")) +"&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("1", "MJP")));
-
-
             }
-
-
         }
+
         //Crea un nuevo producto
         protected void nuevoProducto(object sender, EventArgs e)
         {
@@ -173,7 +171,6 @@ namespace SistemaMJP
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
         {
-
             CultureInfo crCulture = new CultureInfo("es-CR");
             DataTable tabla = crearTablaProductos();
             id_factura = controladora.obtenerIDFactura(numFactura);

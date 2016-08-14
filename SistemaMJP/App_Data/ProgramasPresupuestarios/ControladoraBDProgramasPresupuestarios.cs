@@ -100,5 +100,35 @@ namespace SistemaMJP
 
             return id;
         }
+
+        //Metodo que se encarga de devolver la lista de todos los programas segun un identificador de Usuario
+        public List<int> getProgramasPorIdUsuario(int idUsuario)
+        {
+            List<int> programas = new List<int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Programas_Por_IdUsuario";
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    programas.Add(reader.GetInt32(0));
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return programas;
+        }  
+
     }
 }

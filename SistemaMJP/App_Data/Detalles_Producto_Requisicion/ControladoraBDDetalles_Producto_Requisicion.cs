@@ -1,0 +1,143 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using System.Configuration;
+using System.Transactions;
+
+namespace SistemaMJP
+{
+    public class ControladoraBDDetalles_Producto_Requisicion
+    {
+        SqlConnection con;
+        public ControladoraBDDetalles_Producto_Requisicion()
+        {
+            con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
+
+        }
+        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
+        internal List<Item_Grid_Produtos_Requisicion> obtenerListaProductos(int id)
+        {
+            List<Item_Grid_Produtos_Requisicion> productos = new List<Item_Grid_Produtos_Requisicion>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Lista_Productos_Requisicion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    productos.Add(LoadItemGridRequisicion(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return productos;
+
+        }
+
+        //Metodo que se encarga de llenar los datos de la clase item grid facturas y devolver dicha clase encapsulada
+        internal Item_Grid_Produtos_Requisicion LoadItemGridRequisicion(SqlDataReader reader)
+        {                
+            int id = reader.GetInt32(0);
+            int producto = reader.GetInt32(1);
+            int cantidad = reader.GetInt32(2);
+            Item_Grid_Produtos_Requisicion items = new Item_Grid_Produtos_Requisicion(id, producto, cantidad);
+            return items;
+        }
+
+        //Envia una factura y sus productos a aprobacion
+        internal void cambiarEstadoRequisicion(int idRequisicion, int estado)
+        {            
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Cambiar_Estado_Requisicion";
+                    cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
+                    cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        //Metodo que se encarga de eliminar las lineas de la requisicion solicitada
+        public void eliminarProductoRequisicion(int idRequisicion, int idProducto)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Eliminar_Producto_Requisicion";
+                    cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
+                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        //Metodo que se encarga de actualizar la cantidad de los productos asignados a una requisicion
+        public void actualizarCantidadProductosRequisicion(int idBodega, int idProducto, int idPrograma, int idSubBodega, int cantidad)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Reducir_Cantidad_Producto_Requisicion";
+                    cmd.Parameters.AddWithValue("@idBodega", idBodega);
+                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                    cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
+                    cmd.Parameters.AddWithValue("@idSubBodega", idSubBodega);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+    }
+}

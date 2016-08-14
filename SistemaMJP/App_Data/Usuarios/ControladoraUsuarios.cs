@@ -141,8 +141,12 @@ namespace SistemaMJP
         {
             controladoraBD.editarInfoUsuario(EncodePassword(correo, pass), nombre, apellidos, correo);
         }
-
-
+        
+        //Llama a la controladora de Base de datos de usuarios, para devolver el nombre de un usuario segun su id 
+        internal string getNombreUsuario(int id)
+        {
+            return controladoraBD.getNombreUsuario(id);
+        }
 
     }
 }

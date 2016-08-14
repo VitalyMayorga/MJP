@@ -29,5 +29,11 @@ namespace SistemaMJP
             return controladoraBD.obtenerIDPrograma(programa);
         }
 
+        //Llama a la controladora de base de datos de bodegas para obtener la lista de todas las subBodegas asignadas a un usuario del sistema
+        internal List<int> getProgramasPorIdUsuario(int idUsuario)
+        {
+            return controladoraBD.getProgramasPorIdUsuario(idUsuario);
+        }
+
     }
 }
