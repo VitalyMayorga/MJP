@@ -192,7 +192,7 @@ namespace SistemaMJP
 
         protected void agregar(object sender, EventArgs e)
         {
-            int idUsuario = controladoraU.buscarUltimoUsuario();
+            int idUsuario = 0;
             if (txtNombre.Text == "")
             {
                 MsjErrortextNombre.Style.Add("display", "block");
@@ -376,7 +376,7 @@ namespace SistemaMJP
                          else
                          {
                              controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
-
+                             idUsuario = controladoraU.buscarUltimoUsuario();
                              //Se llena la tabla de UsuarioPrograma
                              foreach (KeyValuePair<string, int> entry in itemsPrograma)
                              {
@@ -417,6 +417,7 @@ namespace SistemaMJP
                         else
                         {
                             controladoraU.agregarUsuario(txtNombre.Text, TextApellidos.Text, txtCorreo.Text, Int32.Parse(ListRoles.SelectedValue));
+                            idUsuario = controladoraU.buscarUltimoUsuario();
                             controladoraU.agregarUsuarioBodega(idUsuario, Int32.Parse(ListBodegas.SelectedValue));
                             Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
                             SubBodegas = controladoraU.getSubBodegas("Administracion Penitenciaria", ListBodegas.SelectedValue);

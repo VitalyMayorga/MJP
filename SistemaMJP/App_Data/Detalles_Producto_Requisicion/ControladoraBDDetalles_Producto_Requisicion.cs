@@ -29,7 +29,7 @@ namespace SistemaMJP
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "P_Obtener_Lista_Productos_Requisicion";
                 con.Open();
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@idRequisicion", id);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -52,17 +52,16 @@ namespace SistemaMJP
 
         //Metodo que se encarga de llenar los datos de la clase item grid facturas y devolver dicha clase encapsulada
         internal Item_Grid_Produtos_Requisicion LoadItemGridRequisicion(SqlDataReader reader)
-        {                
-            int id = reader.GetInt32(0);
-            int producto = reader.GetInt32(1);
-            int cantidad = reader.GetInt32(2);
-            Item_Grid_Produtos_Requisicion items = new Item_Grid_Produtos_Requisicion(id, producto, cantidad);
+        {            
+            int producto = reader.GetInt32(0);
+            int cantidad = reader.GetInt32(1);
+            Item_Grid_Produtos_Requisicion items = new Item_Grid_Produtos_Requisicion(producto, cantidad);
             return items;
         }
 
         //Envia una factura y sus productos a aprobacion
         internal void cambiarEstadoRequisicion(int idRequisicion, int estado)
-        {            
+        {
             using (TransactionScope ts = new TransactionScope())
             {
                 try

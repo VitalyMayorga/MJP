@@ -16,7 +16,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         }
 
-       //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
+        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAprobador(int programa)
         {
             List<Item_Grid_RequisicionAprobadores> requisiciones = new List<Item_Grid_RequisicionAprobadores>();
@@ -25,9 +25,9 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Obtener_Lista_Requisicion_RevisionAprobador";
-                con.Open();
+                cmd.CommandText = "P_Obtener_Lista_Requisicion_RevisionAprobador";                
                 cmd.Parameters.AddWithValue("@idPrograma", programa);
+                con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -48,7 +48,7 @@ namespace SistemaMJP
 
         }
 
-       //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
+        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAlmacen(int bodega)
         {
             List<Item_Grid_RequisicionAprobadores> requisiciones = new List<Item_Grid_RequisicionAprobadores>();
@@ -58,9 +58,9 @@ namespace SistemaMJP
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "P_Obtener_Lista_Requisicion_RevisionAlmacen";
-                con.Open();                
-                SqlDataReader reader = cmd.ExecuteReader();
                 cmd.Parameters.AddWithValue("@idBodega", bodega);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();                
 
                 while (reader.Read())
                 {
@@ -89,13 +89,13 @@ namespace SistemaMJP
             int usuario = reader.GetInt32(3);
             int programa = reader.GetInt32(4);
             int bodega = reader.GetInt32(5);
-            int subBodega = reader.GetInt32(6);           
+            int subBodega = reader.GetInt32(6);
             int unidad = reader.GetInt32(7);
             String observacion = reader.GetString(8);
             Item_Grid_RequisicionAprobadores items = new Item_Grid_RequisicionAprobadores(requisicion, fecha, destino, usuario, programa, bodega, subBodega, unidad, observacion);
             return items;
         }
-        
+
         //Metodo que se encarga de obtener el nombre de un usuario,dado su id
         internal string getNombreUnidad(int id)
         {
@@ -212,7 +212,7 @@ namespace SistemaMJP
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "P_Obtener_Id_Bodega_Requisicion";
-                cmd.Parameters.AddWithValue("@numRequisicion", requisicion);
+                cmd.Parameters.AddWithValue("@idRequisicion", requisicion);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
@@ -239,7 +239,7 @@ namespace SistemaMJP
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "P_Obtener_Id_SubBodega_Requisicion";
-                cmd.Parameters.AddWithValue("@numRequisicion", requisicion);
+                cmd.Parameters.AddWithValue("@idRequisicion", requisicion);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();

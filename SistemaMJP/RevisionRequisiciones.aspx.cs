@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace SistemaMJP
 {
@@ -14,7 +15,7 @@ namespace SistemaMJP
         public DataTable datosRequisicion;
         private ControladoraRequisicionAprobadores controladora = new ControladoraRequisicionAprobadores();
         ServicioLogin servicio = new ServicioLogin();
-        private String[] observaciones;//se guardaran las observaciones de cada requisicion
+        private static List<string> observaciones = new List<string>();//se guardaran las observaciones de cada requisicion        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -74,11 +75,12 @@ namespace SistemaMJP
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             int id_row = Convert.ToInt32(row.RowIndex);
+            int pageIndex = GridRequisicion.PageIndex;
 
             //Se obtiene el id del producto            
-            String observacion = observaciones[id_row + (this.GridRequisicion.PageIndex * 10)];
+            string observacion = observaciones.ElementAt(id_row + (pageIndex * 10));
 
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObservacion('" + observacion + "');", true);
+               ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObservacion('" + observacion + "');", true);
         }
 
         //Llena la grid de facturas con los datos correspondientes
@@ -107,7 +109,6 @@ namespace SistemaMJP
                          
 
             Object[] datos = new Object[8];
-            observaciones = new string[data.Count];
             int contador = 0;
 
             foreach (Item_Grid_RequisicionAprobadores fila in data)
@@ -127,8 +128,15 @@ namespace SistemaMJP
                     datos[6] = controladora.getNombreSb(fila.SubBodega);
                 }
                 datos[7] = controladora.getNombreUnidad(fila.Unidad);
-                observaciones[contador] = fila.Observacion;
+                if (fila.Observacion == "" || fila.Observacion == null)
+                {
+                    observaciones.Add("Esta requisicion no posee ninguna observacion");
+                }else{
+                    observaciones.Add(fila.Observacion);
+                }
+                
                 tabla.Rows.Add(datos);
+                contador++;
             }
 
             datosRequisicion = tabla;

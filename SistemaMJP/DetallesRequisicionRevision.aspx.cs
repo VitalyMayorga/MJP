@@ -21,7 +21,8 @@ namespace SistemaMJP
         public  string numRequisicion;
         private int id_row;
         private  int id_requisicion;
-        private  int[] ids;//se guardaran los ids de los productos de la requisicion      
+        private  int[] ids;//se guardaran los ids de los productos de la requisicion 
+        private int[] cantidades;//se guardaran las cantidades de los productos de la requisicion 
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,6 +61,7 @@ namespace SistemaMJP
                 numRequisicion = (string)ViewState["numRequisicion"];
                 id_requisicion = (int)ViewState["id_requisicion"];
                 ids = (int[])ViewState["ids"];
+                cantidades = (int[])ViewState["cantidades"];
             }
 
         }
@@ -81,14 +83,12 @@ namespace SistemaMJP
         {
             bool activosAsignados = true;
             int indice=0;
-            LinkButton btn = (LinkButton)sender;
-            GridViewRow row = (GridViewRow)btn.NamingContainer;
-            id_row = Convert.ToInt32(row.RowIndex);
-            int cantidadActivo = Int32.Parse(GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[1].Text);
+           
             while (indice < ids.Count() && activosAsignados)
             {
                 if(controladora.esActivo(ids[indice])){
-                    if(!(controladora.obtenerCantidadActivos(id_requisicion,ids[indice])==cantidadActivo)){
+                    if (!(controladora.obtenerCantidadActivos(id_requisicion, ids[indice]) == cantidades[indice]))
+                    {
                         MsjErrorCantActivo.Style.Add("display", "block");
                         activosAsignados = false;                        
                     }
@@ -102,8 +102,10 @@ namespace SistemaMJP
                 controladora.cambiarEstadoRequisicion(id_requisicion, 0);
                 while (indice < ids.Count())
                 {
-                    controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidadActivo);                    
+                    controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[indice]);
+                    indice++;
                 }
+                Response.Redirect("RevisionRequisiciones.aspx"); 
             }
         }
 
@@ -134,7 +136,7 @@ namespace SistemaMJP
                     correos = email.obtenerCorreoUsuarioRequisicion(id_requisicion);
                     descripcionRA = "Requisicion: " + numRequisicion + " devuelta a usuario";
                 }
-                email.MailSender(justificacion, "Notificación de devolucion de requisicion", correos);
+                //email.MailSender(justificacion, "Notificación de devolucion de requisicion", correos);
                 controladora.actualizarObservacion(id_requisicion, justificacion);
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
@@ -206,15 +208,18 @@ namespace SistemaMJP
             id_requisicion = controladora.obtenerIDRequisicion(numRequisicion);
             ViewState["id_requisicion"] = id_requisicion;
             List<Item_Grid_Produtos_Requisicion> data = controladora.obtenerListaProductos(id_requisicion);
-            Object[] datos = new Object[4];
+            Object[] datos = new Object[2];
             ids = new int[data.Count];
             ViewState["ids"] = ids;
+            cantidades = new int[data.Count];
+            ViewState["cantidades"] = cantidades;
             int contador = 0;
             foreach (Item_Grid_Produtos_Requisicion fila in data)
             {
-                ids[contador] = fila.Id;
-                datos[0] = fila.Producto;
+                ids[contador] = fila.Producto;
+                datos[0] = controladora.getNombreProducto(fila.Producto);
                 datos[1] = fila.Cantidad.ToString();
+                cantidades[contador] = fila.Cantidad;
                 contador++;
 
                 tabla.Rows.Add(datos);
@@ -242,7 +247,7 @@ namespace SistemaMJP
 
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
-            columna.ColumnName = "Cantidad";
+            columna.ColumnName = "Cantidad Solicitada";
             tabla.Columns.Add(columna);            
 
             GridProductosRequisicion.DataSource = tabla;

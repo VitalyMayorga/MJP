@@ -90,7 +90,7 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Obtener_Correos_Requisicion_Programa";
+                cmd.CommandText = "P_Obtener_Correo_Requisicion_Programa";
                 cmd.Parameters.AddWithValue("@idRequisicion", requisicion);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();

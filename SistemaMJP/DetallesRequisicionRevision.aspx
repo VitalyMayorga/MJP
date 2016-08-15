@@ -12,16 +12,16 @@
                     <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" RowDataBound= "GridView_RowDataBound" Width="100%">
                                             
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField visible="true">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnEditar" runat="server" class="btn btn-default" OnClick="btnEditar_Click" ToolTip="Editar"><i class="glyphicon glyphicon-edit" style="color:black"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="btnEditar" runat="server" class="btn btn-default col1" OnClick="btnEditar_Click" ToolTip="Editar"><i class="glyphicon glyphicon-edit" style="color:black"></i></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnEliminar" runat="server" class="btn btn-default" OnClick="btnEliminar_Click" ToolTip="Eliminar"><i class="glyphicon glyphicon-trash" style="color:red"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="btnEliminar" runat="server" class="btn btn-default col1" OnClick="btnEliminar_Click" ToolTip="Eliminar"><i class="glyphicon glyphicon-trash" style="color:red"></i></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -115,6 +115,8 @@
             $('#EliminarModal').modal('show');
             document.getElementById('productoEliminar').innerHTML = value;
         }
+
+        $("td.col1").hide();
 </script>
     
     

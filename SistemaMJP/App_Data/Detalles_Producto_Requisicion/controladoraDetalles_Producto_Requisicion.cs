@@ -7,11 +7,13 @@ namespace SistemaMJP
 {
     public class ControladoraDetalles_Producto_Requisicion{
         public ControladoraActivos controladoraA;
+        public ControladoraProductos controladoraP;
         public ControladoraRequisicionAprobadores controladoraR;
         public ControladoraBDDetalles_Producto_Requisicion controladoraBD;
 
         public ControladoraDetalles_Producto_Requisicion() {
             controladoraA = new ControladoraActivos();
+            controladoraP = new ControladoraProductos();
             controladoraR = new ControladoraRequisicionAprobadores();
             controladoraBD = new ControladoraBDDetalles_Producto_Requisicion();
         }
@@ -77,6 +79,12 @@ namespace SistemaMJP
         internal void actualizarCantidadProductosRequisicion(int idBodega, int idProducto, int idPrograma, int idSubBodega, int cantidad)
         {
             controladoraBD.actualizarCantidadProductosRequisicion(idBodega, idProducto, idPrograma, idSubBodega, cantidad);
+        }
+
+        //Llama a la controladora de base de datos de productos para obtener el nombre del producto dado un id
+        internal string getNombreProducto(int id)
+        {
+            return controladoraP.getNombreProducto(id);
         }
         
     }

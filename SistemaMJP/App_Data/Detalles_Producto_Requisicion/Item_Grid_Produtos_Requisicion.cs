@@ -9,13 +9,10 @@ namespace SistemaMJP
     {
         private int producto;
         private int cantidad;
-        private int id;
-        public Item_Grid_Produtos_Requisicion(int id, int producto, int cantidad)
+        public Item_Grid_Produtos_Requisicion(int producto, int cantidad)
         {
             Producto = producto;
-            Cantidad = cantidad;           
-            Id = id;            
-                
+            Cantidad = cantidad;              
         }
         /*
          * Requiere: una Hilera con el valor nuevo
@@ -36,17 +33,7 @@ namespace SistemaMJP
         {
             get { return cantidad; }
             set { cantidad = value; }
-        }
-        /*
-        * Requiere: una Hilera con el valor nuevo
-        * Efectúa : Asigna a la variable global Id con el parámetro
-        * Retorna : El valor de la variable global Id
-        */
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        }       
         
     }
 }
