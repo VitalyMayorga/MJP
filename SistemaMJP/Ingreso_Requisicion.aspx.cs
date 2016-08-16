@@ -61,6 +61,7 @@ namespace SistemaMJP
                 ViewState["programa"] = programa;
                 ViewState["numRequisicion"] = numRequisicion;
                 ViewState["subbodega"] = subbodega;
+
             }
             else
             {
@@ -72,6 +73,7 @@ namespace SistemaMJP
                     numRequisicion = (string)ViewState["numRequisicion"];
                     tabla = (DataTable)ViewState["tabla"];
                     i = (int)ViewState["i"];
+                    producto =(string) ViewState["producto"];
                 }
                 catch (Exception) { }
             }
@@ -79,6 +81,7 @@ namespace SistemaMJP
         //Revisa la cantidad ingresada por el usuario vs lo que hay en el almacen
         protected bool validar() {
             bool correcto = false;
+            int cantSugeridaFinal=0;
             try
             {
                 int cantidad = Convert.ToInt32(txtCantidad.Text);
@@ -92,6 +95,8 @@ namespace SistemaMJP
                         MsjErrorPrograma.Style.Add("display", "block");
                     }
                     else {
+                        int residuoCercano = 99999; //Usado para recomendar siempre el empaque mas cercano                        
+                        int cantidadSugerida;
                         foreach (int empaque in empaques) {
                             int residuo = cantidad % empaque;
                             if (residuo == 0)
@@ -100,19 +105,25 @@ namespace SistemaMJP
                                 correcto = true;
                             }
                             else if(!correcto){
-                                int cantidadSugerida;
                                 if (residuo < empaque / 2) {//caso cantidad es menor al 49%
                                     cantidadSugerida = cantidad - residuo;
-                                    MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es "+cantidadSugerida;
-                                    MsjErrorPrograma.Style.Add("display", "block");
                                 }
                                 else
-                                {
+                                {//cantidad es mayor al 49%
                                     cantidadSugerida = (cantidad - residuo) + empaque;
-                                    MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantidadSugerida;
-                                    MsjErrorPrograma.Style.Add("display", "block");
+                                }
+                                if (residuo < residuoCercano)
+                                {
+                                    residuoCercano = residuo;
+                                    cantSugeridaFinal = cantidadSugerida;
                                 }
                             }
+                        }
+                        if (!correcto)
+                        {
+
+                            MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
+                            MsjErrorPrograma.Style.Add("display", "block");
                         }
                     }
                 }
@@ -140,7 +151,8 @@ namespace SistemaMJP
             String nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
             String descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
             //Se obtiene el id del producto
-            producto = nombre;           
+            producto = nombre;
+            ViewState["producto"] = producto;
             nombreProducto.InnerText = nombre;
             descripcionLabel.InnerHtml = descripcion;
             txtCantidad.Text = "";
@@ -263,6 +275,18 @@ namespace SistemaMJP
                 // Add cells
                 row.Cells.AddRange(columns.ToArray());
             }
+        }
+
+        /*
+        *  Requiere: Controladores de eventos de la interfaz.
+        *  Efectúa:  Cambia el contenido de la tabla al índice seleccionado.
+        *  Retrona:  N/A
+        */
+        protected void PageIndexChanging(Object sender, GridViewPageEventArgs e)
+        {
+            GridProductos.PageIndex = e.NewPageIndex;
+            GridProductos.DataSource = tabla;
+            GridProductos.DataBind();
         }
 
 

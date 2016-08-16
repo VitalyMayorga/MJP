@@ -179,6 +179,7 @@
     <Content Include="Content\VistaPreviaFactura.css" />
     <Content Include="ControlActivos.aspx" />
     <Content Include="DetallesFactura.aspx" />
+    <Content Include="DetallesRequisicion.aspx" />
     <Content Include="DetallesRequisicionRevision.aspx" />
     <Content Include="DetallesFacturaRevision.aspx" />
     <Content Include="DevolucionBajas.aspx" />
@@ -415,6 +416,13 @@
     </Compile>
     <Compile Include="DetallesFactura.aspx.designer.cs">
       <DependentUpon>DetallesFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesRequisicion.aspx.cs">
+      <DependentUpon>DetallesRequisicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallesRequisicion.aspx.designer.cs">
+      <DependentUpon>DetallesRequisicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetallesRequisicionRevision.aspx.cs">
       <DependentUpon>DetallesRequisicionRevision.aspx</DependentUpon>

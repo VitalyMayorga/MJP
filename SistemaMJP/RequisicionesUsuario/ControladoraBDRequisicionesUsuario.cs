@@ -228,7 +228,7 @@ namespace SistemaMJP
 
         internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega, int subbodega, string programa, string busqueda)
         {
-            List<Item_Grid_Productos_Bodega> empaques = new List<Item_Grid_Productos_Bodega>();
+            List<Item_Grid_Productos_Bodega> productos = new List<Item_Grid_Productos_Bodega>();
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -243,7 +243,7 @@ namespace SistemaMJP
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    empaques.Add(LoadItemGridProductos(reader));
+                    productos.Add(LoadItemGridProductos(reader));
 
                 }
                 reader.Close();
@@ -254,7 +254,7 @@ namespace SistemaMJP
             {
                 throw;
             }
-            return empaques;
+            return productos;
         }
 
         internal void agregarProducto(string producto, string numRequisicion,int cantidad)
@@ -294,6 +294,195 @@ namespace SistemaMJP
             int id = reader.GetInt32(3);
             Item_Grid_Productos_Bodega items = new Item_Grid_Productos_Bodega(nombre, descripcion, id, unidad);
             return items;
+        }
+
+        internal string getEstadoRequisicion(string numRequisicion)
+        {
+            string estado;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Estado_Requiscion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                estado = reader.GetString(0);
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return estado;
+
+        }
+
+        internal void eliminarProducto(string numRequisicion, string producto)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Eliminar_Producto_Requisicion";
+                    cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                    cmd.Parameters.AddWithValue("@producto", producto);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+
+        internal void eliminarRequisicion(string numRequisicion)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Eliminar_Requisicion";
+                    cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+
+        internal List<string> getDatosRequisicion(string numRequisicion)
+        {
+            List<string> datos = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Datos_Requisicion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    datos.Add(reader.GetInt32(0).ToString());//bodega
+                    datos.Add(reader.GetString(1));//programa
+                    datos.Add(reader.GetInt32(2).ToString());//subbodega
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return datos;
+        }
+
+        //Envia una requisicion y sus productos a aprobacion
+        internal void enviarAAprobacion(string numRequisicion)
+        {
+            string estado = "Pendiente Aprobación Aprobador";
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Enviar_Requisicion_Aprobacion_1";
+                    cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                    cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+
+        internal List<Item_Grid_Productos_Bodega> getListaProductosRequisicion(string numRequisicion)
+        {
+            List<Item_Grid_Productos_Bodega> productos = new List<Item_Grid_Productos_Bodega>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Productos_Requisicion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    productos.Add(LoadItemGridProductos(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return productos;
+        }
+
+        internal int obtenerIDRequisicion(string numRequisicion)
+        {
+            int cantidad = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_ID_Requisicion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                cantidad = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return cantidad;
+
         }
     }
 }

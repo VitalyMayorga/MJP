@@ -63,5 +63,44 @@ namespace SistemaMJP
         internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega,int subbodega,string programa,string busqueda){
             return controladoraBD.getListaProductosBodega(bodega,subbodega,programa,busqueda);
         }
+
+        internal string getEstadoRequisicion(string numRequisicion){
+            return controladoraBD.getEstadoRequisicion(numRequisicion);
+
+        }
+
+        internal void eliminarProducto(string numRequisicion,string producto)
+        {
+            controladoraBD.eliminarProducto(numRequisicion,producto);
+
+        }
+
+        internal void eliminarRequisicion(string numRequisicion)
+        {
+             controladoraBD.eliminarRequisicion(numRequisicion);
+
+        }
+
+        internal List<string> getDatosRequisicion(string numRequisicion)
+        {
+            return controladoraBD.getDatosRequisicion(numRequisicion);
+        }
+
+        internal void enviarAAprobacion(string numRequisicion)
+        {
+            controladoraBD.enviarAAprobacion(numRequisicion);
+
+        }
+
+        internal List<Item_Grid_Productos_Bodega> getListaProductosRequisicion(string numRequisicion)
+        {
+            return controladoraBD.getListaProductosBodega(numRequisicion);
+        }
+
+        internal int obtenerIDRequisicion(string numRequisicion)
+        {
+            return controladoraBD.obtenerIDRequisicion(numRequisicion);
+
+        }
     }
 }

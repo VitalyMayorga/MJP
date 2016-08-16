@@ -150,7 +150,8 @@ namespace SistemaMJP
         {
             //Ingreso_Productos.numFactura = numFactura;
             //Ingreso_Productos.editar = false;
-            Response.Redirect("Ingreso_productos");
+            Response.Redirect("Ingreso_Productos.aspx?numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP"))+ "&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("0", "MJP")));
+            
 
         }
         //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
