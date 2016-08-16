@@ -81,6 +81,12 @@ namespace SistemaMJP
             controladoraBD.actualizarCantidadProductosRequisicion(idBodega, idProducto, idPrograma, idSubBodega, cantidad);
         }
 
+        //Llama a la controladora de Base de datos para odificar la cantidad de un producto determinado en la requisicion
+        internal void modificarCantidadLinea(int idRequisicion, int idProducto, int cantidad)
+        {
+            controladoraBD.modificarCantidadLinea(idRequisicion, idProducto, cantidad);
+        }
+
         //Llama a la controladora de base de datos de productos para obtener el nombre del producto dado un id
         internal string getNombreProducto(int id)
         {

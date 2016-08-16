@@ -60,8 +60,9 @@ namespace SistemaMJP
             else {
                 numRequisicion = (string)ViewState["numRequisicion"];
                 id_requisicion = (int)ViewState["id_requisicion"];
+                //id_row = (int)ViewState["id_row"];
                 ids = (int[])ViewState["ids"];
-                cantidades = (int[])ViewState["cantidades"];
+                cantidades = (int[])ViewState["cantidades"];                
             }
 
         }
@@ -167,37 +168,21 @@ namespace SistemaMJP
         //Cambia el estado de la requisicion segun el rol del usuario que realizo la devolucion
         protected void aceptarEdicion(object sender, EventArgs e)
         {
-            /*string cantidad = cantidad.Value;
+            string cantidad = txtCantidad.Text;
+            int ir = Int32.Parse(idroweditar.InnerText);
             string rol = (string)Session["rol"];
-            string descripcionRA = "";
-            List<string> correos = null;
-            if (cantidad.Value.Trim() == "")
+            if (txtCantidad.Text.Trim() == "")
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación rechazo requisicion: " + numRequisicion + "');", true);
-                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('show');</script>");
+                string descripcion = GridProductosRequisicion.Rows[ir + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEdicion('Editar cantidad del producto: " + descripcion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('show');</script>");
             }
             else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('hide');</script>");
-
-                if (rol.Equals("Revision y Aprobador Almacen"))
-                {
-                    controladora.cambiarEstadoRequisicion(id_requisicion, 2);// Revisar como se obtiene el id de la requisicion
-                    correos = email.obtenerCorreosAprobadorSegunPrograma(id_requisicion);
-                    descripcionRA = "Requisicion: " + numRequisicion + " devuelta a aprobador programa";
-                }
-                else
-                {
-                    controladora.cambiarEstadoRequisicion(id_requisicion, 3);
-                    correos = email.obtenerCorreoUsuarioRequisicion(id_requisicion);
-                    descripcionRA = "Requisicion: " + numRequisicion + " devuelta a usuario";
-                }
-                //email.MailSender(justificacion, "Notificación de devolucion de requisicion", correos);
-                controladora.actualizarObservacion(id_requisicion, justificacion);
-                string usuario = (string)Session["correoInstitucional"];
-                bitacora.registrarActividad(usuario, descripcionRA);
-                Response.Redirect("RevisionRequisiciones.aspx");
-            }*/
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('hide');</script>");
+                controladora.modificarCantidadLinea(id_requisicion, ids[ir + (this.GridProductosRequisicion.PageIndex * 10)], Int32.Parse(cantidad));
+            }
+            llenarDetallesProductoRequisicion();
         } 
 
         //Redirecciona a la pantalla de editar linea
@@ -206,11 +191,13 @@ namespace SistemaMJP
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             id_row = Convert.ToInt32(row.RowIndex);
+            idroweditar.InnerText = id_row.ToString();
+            txtCantidad.Text += cantidades[id_row + (this.GridProductosRequisicion.PageIndex * 10)].ToString();
 
             //Se obtiene el id del producto            
-            String descripcion = GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
+            string descripcion = GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
 
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEditar('Editar cantidad del producto: " + descripcion + "');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEdicion('Editar cantidad del producto: " + descripcion + "');", true);
         }
 
         //Pregunta si deseaeliminar la linea seleccionada
@@ -218,8 +205,8 @@ namespace SistemaMJP
         {
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
-            id_row = Convert.ToInt32(row.RowIndex);           
-
+            id_row = Convert.ToInt32(row.RowIndex);
+            idroweliminar.InnerText = id_row.ToString();
             //Se obtiene el id del producto            
             String descripcion = GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
 
@@ -229,7 +216,8 @@ namespace SistemaMJP
         //Elimina la linea deseada de la requisicion
         protected void aceptarEliminado(object sender, EventArgs e)
         {
-            int idProducto = ids[id_row + (this.GridProductosRequisicion.PageIndex * 10)];
+            int ir = Int32.Parse(idroweliminar.InnerText);
+            int idProducto = ids[ir + (this.GridProductosRequisicion.PageIndex * 10)];
             controladora.eliminarProductoRequisicion(numRequisicion, idProducto);
             llenarDetallesProductoRequisicion();
         }
@@ -247,10 +235,12 @@ namespace SistemaMJP
             if (rol.Equals("Aprobador"))
             {
                 btnAprobador.Style.Add("display", "block");
+                GridAprobadorPrograma.Style.Add("display", "block");
             }
             else
             {
                 btnAlmacen.Style.Add("display", "block");
+                GridAprobadorAlmacen.Style.Add("display", "block");
             }            
             
             CultureInfo crCulture = new CultureInfo("es-CR");

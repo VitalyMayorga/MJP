@@ -8,7 +8,7 @@
                 <asp:LinkButton runat="server" OnClick="regresarMP" ToolTip="Menu Principal"><i class="glyphicon glyphicon-home atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton>
                 <h3 class="Encabezado" id="labelRequisicion" runat="server"></h3>
-                <div class="table-responsive tablaMJP" id="GridAprobadorPrograma" style="display: none;">
+                <div style="display: none;" id="GridAprobadorPrograma" class="table-responsive tablaMJP" runat="server">
                     <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">
                                             
                         <Columns>
@@ -29,7 +29,7 @@
                     </asp:GridView>
                 </div>
 
-                <div class="table-responsive tablaMJP" id="GridAprobadorAlmacen" style="display: none;">
+                <div style="display: none;" id="GridAprobadorAlmacen" class="table-responsive tablaMJP" runat="server">
                     <asp:GridView ID="GridProductosRequisicionAlmacen" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">                       
                     </asp:GridView>
                 </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label id="producto">Justificación</label>      
+                        <label id="producto"></label>      
                                
                     </div>
                     <textarea id="justificacionDevolucion" runat="server" style="max-width:300px;width:300px"></textarea>    
@@ -96,10 +96,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label id="linea"></label>      
+                        <label id="linea"></label> 
+                        <label id="idroweditar" style="display: none;" runat="server"></label>      
                                
                     </div>
-                    <asp:textbox id="cantidad" runat="server" style="max-width:300px;width:300px"></asp:textbox>    
+                    <div class="form-group">
+                        <label>Cantidad (Unidades)</label>
+                        <asp:TextBox ID="txtCantidad" runat="server" class="form-control text-box single-line"></asp:TextBox>
+                        <div style="display: none;" id="MsjErrorPrograma" class="col-md-offset-2" runat="server">
+                        <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
+                    </div>
+                    </div>  
                 </div>
                 <div class="modal-footer">
                     <asp:Button id="Button1" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEdicion"></asp:Button>
@@ -123,6 +130,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label id="productoEliminar"></label>
+                        <label id="idroweliminar" style="display: none;" runat="server"></label> 
                         
                     </div>
                     

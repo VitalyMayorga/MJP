@@ -94,7 +94,7 @@ namespace SistemaMJP
 
         internal List<Item_Grid_Productos_Bodega> getListaProductosRequisicion(string numRequisicion)
         {
-            return controladoraBD.getListaProductosBodega(numRequisicion);
+            return controladoraBD.getListaProductosRequisicion(numRequisicion);
         }
 
         internal int obtenerIDRequisicion(string numRequisicion)

@@ -138,5 +138,31 @@ namespace SistemaMJP
             }
         }
 
+        //Metodo que se encarga de modificar la cantidad del producto seleccionado en la requisicion
+        public void modificarCantidadLinea(int idRequisicion, int idProducto, int cantidad)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Modificar_Cantidad_Producto_Requisicion";
+                    cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
+                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
     }
 }
