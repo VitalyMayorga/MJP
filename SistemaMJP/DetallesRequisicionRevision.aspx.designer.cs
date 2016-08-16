@@ -31,6 +31,15 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.GridView GridProductosRequisicion;
         
         /// <summary>
+        /// GridProductosRequisicionAlmacen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridProductosRequisicionAlmacen;
+        
+        /// <summary>
         /// MsjErrorCantActivo control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,33 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelarR;
+        
+        /// <summary>
+        /// cantidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox cantidad;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
         /// btn_Acp control.

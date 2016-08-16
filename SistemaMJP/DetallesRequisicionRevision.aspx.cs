@@ -73,9 +73,16 @@ namespace SistemaMJP
         */
         protected void PageIndexChanging(Object sender, GridViewPageEventArgs e)
         {
-            GridProductosRequisicion.PageIndex = e.NewPageIndex;
-            GridProductosRequisicion.DataSource = datosRequisicion;
-            GridProductosRequisicion.DataBind();
+            string rol = (string)Session["rol"];
+            if(rol.Equals("Aprobador")){
+                GridProductosRequisicion.PageIndex = e.NewPageIndex;
+                GridProductosRequisicion.DataSource = datosRequisicion;
+                GridProductosRequisicion.DataBind();
+            }else{
+                GridProductosRequisicionAlmacen.PageIndex = e.NewPageIndex;
+                GridProductosRequisicionAlmacen.DataSource = datosRequisicion;
+                GridProductosRequisicionAlmacen.DataBind();
+            }
         }
 
         //Se encarga de las revisiciones previas al despacho de la requisicion
@@ -142,25 +149,68 @@ namespace SistemaMJP
                 bitacora.registrarActividad(usuario, descripcionRA);
                 Response.Redirect("RevisionRequisiciones.aspx");                
             }
-        }       
+        }
+
+        //Antes de devolver la requisicion abre el panel para escribir la observacion
+        protected void btnDevolver_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación devolucion requisicion: " + numRequisicion + "');", true);
+        }
 
         //Envia la requisicion a los aprobadores de almacen
         protected void btnAprobar_Click(object sender, EventArgs e)
         {
             controladora.cambiarEstadoRequisicion(id_requisicion, 1);
             Response.Redirect("RevisionRequisiciones.aspx");
-        }
+        }        
 
-        //Antes de devolver la requisicion abre el panel para escribir la observacion
-        protected void btnDevolver_Click(object sender, EventArgs e)
-        {            
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación devolucion requisicion: " + numRequisicion + "');", true);            
-        }
+        //Cambia el estado de la requisicion segun el rol del usuario que realizo la devolucion
+        protected void aceptarEdicion(object sender, EventArgs e)
+        {
+            /*string cantidad = cantidad.Value;
+            string rol = (string)Session["rol"];
+            string descripcionRA = "";
+            List<string> correos = null;
+            if (cantidad.Value.Trim() == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación rechazo requisicion: " + numRequisicion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('show');</script>");
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('hide');</script>");
+
+                if (rol.Equals("Revision y Aprobador Almacen"))
+                {
+                    controladora.cambiarEstadoRequisicion(id_requisicion, 2);// Revisar como se obtiene el id de la requisicion
+                    correos = email.obtenerCorreosAprobadorSegunPrograma(id_requisicion);
+                    descripcionRA = "Requisicion: " + numRequisicion + " devuelta a aprobador programa";
+                }
+                else
+                {
+                    controladora.cambiarEstadoRequisicion(id_requisicion, 3);
+                    correos = email.obtenerCorreoUsuarioRequisicion(id_requisicion);
+                    descripcionRA = "Requisicion: " + numRequisicion + " devuelta a usuario";
+                }
+                //email.MailSender(justificacion, "Notificación de devolucion de requisicion", correos);
+                controladora.actualizarObservacion(id_requisicion, justificacion);
+                string usuario = (string)Session["correoInstitucional"];
+                bitacora.registrarActividad(usuario, descripcionRA);
+                Response.Redirect("RevisionRequisiciones.aspx");
+            }*/
+        } 
 
         //Redirecciona a la pantalla de editar linea
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            id_row = Convert.ToInt32(row.RowIndex);
+
+            //Se obtiene el id del producto            
+            String descripcion = GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEditar('Editar cantidad del producto: " + descripcion + "');", true);
         }
 
         //Pregunta si deseaeliminar la linea seleccionada
@@ -225,9 +275,17 @@ namespace SistemaMJP
                 tabla.Rows.Add(datos);
             }
             datosRequisicion = tabla;
-            GridProductosRequisicion.DataSource = datosRequisicion;
-            GridProductosRequisicion.DataBind();
-
+            if (rol.Equals("Aprobador"))
+            {
+                GridProductosRequisicion.DataSource = datosRequisicion;
+                GridProductosRequisicion.DataBind();
+            }
+            else
+            {
+                GridProductosRequisicionAlmacen.DataSource = datosRequisicion;
+                GridProductosRequisicionAlmacen.DataBind();
+            }
+           
         }
 
         /**
@@ -237,6 +295,7 @@ namespace SistemaMJP
        */
         protected DataTable crearTablaProductosRequisicion()//consultar
         {
+            string rol = (string)Session["rol"];
             DataTable tabla = new DataTable();
             DataColumn columna;
 
@@ -248,10 +307,18 @@ namespace SistemaMJP
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Cantidad Solicitada";
-            tabla.Columns.Add(columna);            
+            tabla.Columns.Add(columna);
 
-            GridProductosRequisicion.DataSource = tabla;
-            GridProductosRequisicion.DataBind();
+            if (rol.Equals("Aprobador"))
+            {
+                GridProductosRequisicion.DataSource = tabla;
+                GridProductosRequisicion.DataBind();
+            }
+            else
+            {
+                GridProductosRequisicionAlmacen.DataSource = tabla;
+                GridProductosRequisicionAlmacen.DataBind();
+            }          
 
             return tabla;
         }
@@ -277,7 +344,7 @@ namespace SistemaMJP
             }
         }
 
-        protected void GridView_RowDataBound(object sender, GridViewRowEventArgs e)
+       /* protected void GridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             string rol = (string)Session["rol"];
             if (rol.Equals("Revision y Aprobador Almacen"))
@@ -285,7 +352,7 @@ namespace SistemaMJP
                e.Row.Cells[2].Visible = false;
                e.Row.Cells[3].Visible = false;
            }
-        }
+        }*/
 
     }
 }

@@ -8,8 +8,8 @@
                 <asp:LinkButton runat="server" OnClick="regresarMP" ToolTip="Menu Principal"><i class="glyphicon glyphicon-home atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton>
                 <h3 class="Encabezado" id="labelRequisicion" runat="server"></h3>
-                <div class="table-responsive tablaMJP">
-                    <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" RowDataBound= "GridView_RowDataBound" Width="100%">
+                <div class="table-responsive tablaMJP" id="GridAprobadorPrograma" style="display: none;">
+                    <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">
                                             
                         <Columns>
                             <asp:TemplateField visible="true">
@@ -28,6 +28,12 @@
                         
                     </asp:GridView>
                 </div>
+
+                <div class="table-responsive tablaMJP" id="GridAprobadorAlmacen" style="display: none;">
+                    <asp:GridView ID="GridProductosRequisicionAlmacen" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">                       
+                    </asp:GridView>
+                </div>
+
                 <div class="form-group" style="margin-top: 2%; margin-right: 5%">
 
                     <div style="display: none;" id="MsjErrorCantActivo" class="col-md-offset-2" runat="server">
@@ -79,6 +85,31 @@
         </div>
     </div>
 
+    <div id="ModalEditar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edicion de linea</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="linea"></label>      
+                               
+                    </div>
+                    <asp:textbox id="cantidad" runat="server" style="max-width:300px;width:300px"></asp:textbox>    
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="Button1" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEdicion"></asp:Button>
+                    <asp:Button id="Button2" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     
     <div id="EliminarModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -109,6 +140,11 @@
         function openModal(value) {
             $('#ModalDetalles').modal('show');
             document.getElementById('producto').innerHTML = value;
+        }
+
+        function openModalEdicion(value) {
+            $('#ModalEditar').modal('show');
+            document.getElementById('linea').innerHTML = value;
         }
 
         function openModalDelete(value) {
