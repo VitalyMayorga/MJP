@@ -39,7 +39,7 @@ namespace SistemaMJP
 
         protected void ingresarRequisiciones(object sender, EventArgs e)
         {
-            if (Session["rol"].Equals("Usuarios"))
+            if (Session["rol"].Equals("Usuario"))
             {
                 Response.Redirect("Requisiciones.aspx");
 

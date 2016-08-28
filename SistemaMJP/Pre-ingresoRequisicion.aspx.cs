@@ -50,7 +50,7 @@ namespace SistemaMJP
                 }
                 catch (Exception)
                 {
-                    Response.Redirect("MenuPrincipal.aspx");
+                    //Response.Redirect("MenuPrincipal.aspx");
                 }
 
             }
@@ -110,13 +110,12 @@ namespace SistemaMJP
                 MsjErrorUnidad.Style.Add("display", "block");
 
             }
-            else if (String.IsNullOrEmpty("destino"))
+            else if (String.IsNullOrEmpty(destino))
             {
                 MsjErrorDestino.Style.Add("display", "block");
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "none");
-                MsjErrorDestino.Style.Add("display", "none");
                 MsjErrorUnidad.Style.Add("display", "none");
             }
             else
@@ -194,7 +193,7 @@ namespace SistemaMJP
                 MsjErrorUnidad.Style.Add("display", "none");
             }
         }    
-        //Redirecciona al menu principal
+        //Redirecciona al menu requisiciones
         protected void cancelar(object sender, EventArgs e)
         {
             Response.Redirect("Requisiciones.aspx");

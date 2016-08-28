@@ -28,8 +28,8 @@ namespace SistemaMJP
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "P_Obtener_Lista_Requisicion_Por_Bodega";
                 con.Open();
-                cmd.Parameters.AddWithValue("@nombreB", bodega);
-                cmd.Parameters.AddWithValue("@usuarioID", usuarioID);
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@idUsuario", usuarioID);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -132,7 +132,7 @@ namespace SistemaMJP
         //Metodo que se encarga de generar los numeros de requisicion dependiendo de la bodega
         internal string obtenerNumReq(int bodega) {
             string num = "";
-            string prefijo = "";
+            string prefijo = obtenerPrefijo(bodega);
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -142,8 +142,15 @@ namespace SistemaMJP
                 con.Open();
                 cmd.Parameters.AddWithValue("@bodega", bodega);
                 SqlDataReader reader = cmd.ExecuteReader();
-                prefijo = reader.GetString(0);
-                num = reader.GetString(1);
+                reader.Read();
+                if (!reader.HasRows) {
+                    num = "";
+                }
+                else
+                {
+                    num = reader.GetString(1);
+
+                }
                 reader.Close();
                 con.Close();
 
@@ -167,7 +174,30 @@ namespace SistemaMJP
 
             return num;
         }
+        internal string obtenerPrefijo(int bodega) {
+            string prefijo = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Prefijo";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                prefijo = reader.GetString(0);
+                reader.Close();
+                con.Close();
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return prefijo;
+        }
         internal int obtenerCantidadProductoBodega(int bodega, int subbodega, string programa, string producto)
         {
             int cantidad = 0;

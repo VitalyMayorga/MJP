@@ -59,8 +59,9 @@ namespace SistemaMJP
                     nuevoProveedor = (bool)ViewState["nuevoProveedor"];
 
                 }
-                catch (Exception) {
-                    Response.Redirect("MenuPrincipal.aspx");
+                catch (Exception)
+                {
+                    //Response.Redirect("MenuPrincipal.aspx");
                 }
 
             }

@@ -45,10 +45,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Destino/label>
+                    <label class="col-md-2 control-label">Destino</label>
 
                     <div class="col-md-10">
-                        <asp:TextBox ID="txtDestino" runat="server" mode="Multiline" placeholder="Destino" class="form-control text-box multi-line"></asp:TextBox>
+                        <asp:TextBox ID="txtDestino" runat="server" TextMode="multiline" Wrap="true" class="form-control multi-line areaText"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrorDestino" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo">Debe ingresar un destino</label>
@@ -56,11 +56,26 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Observaciones/label>
+                    <label class="col-md-2 control-label">Observaciones</label>
 
                     <div class="col-md-10">
-                        <asp:TextBox ID="observaciones" runat="server" mode="Multiline" placeholder="Destino" class="form-control text-box multi-line"></asp:TextBox>
+                        <asp:TextBox ID="observaciones" runat="server" TextMode="multiline" Wrap="true" class="form-control multi-line areaText"></asp:TextBox>
                     </div>                    
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
+                        <div class="BotonIngreso">
+                            <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="BotonIngreso">
+                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
+                        </div>
+
+                    </div>
                 </div>
                 
             </div>

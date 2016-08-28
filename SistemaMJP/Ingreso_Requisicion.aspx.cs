@@ -256,7 +256,7 @@ namespace SistemaMJP
             return tabl;
         }
         //Pone las columnas con botones al final de la tabla
-        protected void gridRequisiciones_RowCreated(object sender, GridViewRowEventArgs e)
+        protected void gridProductos_RowCreated(object sender, GridViewRowEventArgs e)
         {
             GridViewRow row = e.Row;
             // Intitialize TableCell list
