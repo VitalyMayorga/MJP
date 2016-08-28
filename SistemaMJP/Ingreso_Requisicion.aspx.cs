@@ -82,13 +82,15 @@ namespace SistemaMJP
         protected bool validar() {
             bool correcto = false;
             int cantSugeridaFinal=0;
+            int i = 0;
             try
             {
                 int cantidad = Convert.ToInt32(txtCantidad.Text);
                 if (cantidad > 0) {//Aqui esta el algoritmo necesario para indicar cantidades sugeridas o si se puede o no hacer el pedido con la cantidad ingresada
                     MsjErrorPrograma.Style.Add("display", "none");
                     int cantidadEnBodega = controladora.obtenerCantidadProductoBodega(bodega,subbodega,programa,producto);
-                    List<int> empaques = controladora.obtenerCantPorEmpaque(bodega, subbodega, programa, producto);
+                    List<int> empaques = controladora.obtenerEmpaque(bodega, subbodega, programa, producto);
+                    List<int> cantPorEmpaque = controladora.obtenerCantPorEmpaque(bodega, subbodega, programa, producto); 
                     if (cantidad > cantidadEnBodega)
                     {
                         MensajeErrorTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
@@ -99,7 +101,7 @@ namespace SistemaMJP
                         int cantidadSugerida;
                         foreach (int empaque in empaques) {
                             int residuo = cantidad % empaque;
-                            if (residuo == 0)
+                            if (residuo == 0 && cantidad<= cantPorEmpaque[i])
                             {
                                 MsjErrorPrograma.Style.Add("display", "none");
                                 correcto = true;
@@ -118,6 +120,7 @@ namespace SistemaMJP
                                     cantSugeridaFinal = cantidadSugerida;
                                 }
                             }
+                            i++;
                         }
                         if (!correcto)
                         {

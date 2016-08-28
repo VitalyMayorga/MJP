@@ -237,7 +237,7 @@ namespace SistemaMJP
                     total = precioU * cantidad;
                     if(editar){
                         controladora.modificarProductoFactura(id_factura, idProducto, cantidadEmpaque, cantidad, total, fechaC, fechaG, fechaV);
-                        Response.Redirect("DetallesFactura");
+                        Response.Redirect("DetallesFactura.aspx?numF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")));
                     }
                     else
                     {

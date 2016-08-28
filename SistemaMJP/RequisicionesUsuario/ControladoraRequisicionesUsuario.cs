@@ -48,10 +48,16 @@ namespace SistemaMJP
         {
             return controladoraBD.obtenerCantidadProductoBodega(bodega, subbodega, programa, producto);
         }
-        //Llama a la controladora de base de datos de requisiciones para obtener las muestras de empaque por producto
+        //Llama a la controladora de base de datos de requisiciones para obtener la cantidad de las muestras de empaque por producto
         internal List<int> obtenerCantPorEmpaque(int bodega, int subbodega, string programa, string producto)
         {
             return controladoraBD.obtenerCantPorEmpaque(bodega, subbodega, programa, producto);
+        }
+
+        //Llama a la controladora de base de datos de requisiciones para obtener las muestras de empaque por producto
+        internal List<int> obtenerEmpaque(int bodega, int subbodega, string programa, string producto)
+        {
+            return controladoraBD.obtenerEmpaque(bodega, subbodega, programa, producto);
         }
         //Llama a la controladora de base de datos de requisiciones para guardar un producto en una requisicion
         internal void agregarProducto(string producto, string numRequisicion, int cantidad)

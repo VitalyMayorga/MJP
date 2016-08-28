@@ -256,6 +256,37 @@ namespace SistemaMJP
             return empaques;
         }
 
+        internal List<int> obtenerEmpaque(int bodega, int subbodega, string programa, string producto)
+        {
+            List<int> empaques = new List<int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Empaque_Producto";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    empaques.Add(reader.GetInt32(0));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return empaques;
+        }
+
         internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega, int subbodega, string programa, string busqueda)
         {
             List<Item_Grid_Productos_Bodega> productos = new List<Item_Grid_Productos_Bodega>();
