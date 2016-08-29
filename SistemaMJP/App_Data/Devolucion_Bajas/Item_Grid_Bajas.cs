@@ -9,15 +9,17 @@ namespace SistemaMJP
     {
         private int idDevolucionBaja;
         private int idProducto;
+        private int cantidadEmpaque;
         private int cantidad;
         private int idPrograma;
         private int idBodega;
         private int idSubBodega;
         private string justificacion;
-        public Item_Grid_Bajas(int idDevolucionBaja, int idProducto, int cantidad, int idPrograma, int idBodega, int idSubBodega, string justificacion)
+        public Item_Grid_Bajas(int idDevolucionBaja, int idProducto, int cantidadEmpaque, int cantidad, int idPrograma, int idBodega, int idSubBodega, string justificacion)
         {
             Id = idDevolucionBaja;
             Producto = idProducto;
+            CantidadEmpaque = cantidadEmpaque;
             Cantidad = cantidad;
             Programa = idPrograma;
             Bodega = idBodega;
@@ -26,6 +28,7 @@ namespace SistemaMJP
             
                 
         } 
+
         /*
          * Requiere: una Hilera con el valor nuevo
          * Efectúa : Asigna a la variable global numFactura con el parámetro
@@ -36,6 +39,7 @@ namespace SistemaMJP
             get { return idDevolucionBaja; }
             set { idDevolucionBaja = value; }
         }
+
         /*
          * Requiere: una Hilera con el valor nuevo
          * Efectúa : Asigna a la variable global Fecha con el parámetro
@@ -46,6 +50,18 @@ namespace SistemaMJP
             get { return idProducto; }
             set { idProducto = value; }
         }
+
+        /*
+         * Requiere: una Hilera con el valor nuevo
+         * Efectúa : Asigna a la variable global Proveedor con el parámetro
+         * Retorna : El valor de la variable global Proveedor
+         */
+        public int CantidadEmpaque
+        {
+            get { return cantidadEmpaque; }
+            set { cantidadEmpaque = value; }
+        }
+
         /*
          * Requiere: una Hilera con el valor nuevo
          * Efectúa : Asigna a la variable global Proveedor con el parámetro

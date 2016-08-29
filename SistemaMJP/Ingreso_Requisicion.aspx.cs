@@ -78,6 +78,7 @@ namespace SistemaMJP
                 catch (Exception) { }
             }
         }
+
         //Revisa la cantidad ingresada por el usuario vs lo que hay en el almacen
         protected bool validar() {
             bool correcto = false;
@@ -100,26 +101,33 @@ namespace SistemaMJP
                         int residuoCercano = 99999; //Usado para recomendar siempre el empaque mas cercano                        
                         int cantidadSugerida;
                         foreach (int empaque in empaques) {
-                            int residuo = cantidad % empaque;
-                            if (residuo == 0 && cantidad<= cantPorEmpaque[i])
-                            {
-                                MsjErrorPrograma.Style.Add("display", "none");
-                                correcto = true;
-                            }
-                            else if(!correcto){
-                                if (residuo < empaque / 2) {//caso cantidad es menor al 49%
-                                    cantidadSugerida = cantidad - residuo;
-                                }
-                                else
-                                {//cantidad es mayor al 49%
-                                    cantidadSugerida = (cantidad - residuo) + empaque;
-                                }
-                                if (residuo < residuoCercano)
+
+                            if(cantidad <= cantPorEmpaque[i]){
+
+                                int residuo = cantidad % empaque;
+                                if (residuo == 0 && cantidad <= cantPorEmpaque[i])
                                 {
-                                    residuoCercano = residuo;
-                                    cantSugeridaFinal = cantidadSugerida;
+                                    MsjErrorPrograma.Style.Add("display", "none");
+                                    correcto = true;
                                 }
+                                else if (!correcto)
+                                {
+                                    if (residuo < empaque / 2)
+                                    {//caso cantidad es menor al 49%
+                                        cantidadSugerida = cantidad - residuo;
+                                    }
+                                    else
+                                    {//cantidad es mayor al 49%
+                                        cantidadSugerida = (cantidad - residuo) + empaque;
+                                    }
+                                    if (residuo < residuoCercano)
+                                    {
+                                        residuoCercano = residuo;
+                                        cantSugeridaFinal = cantidadSugerida;
+                                    }
+                                }                                
                             }
+
                             i++;
                         }
                         if (!correcto)

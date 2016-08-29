@@ -22,19 +22,7 @@
                         <label class="mensajeError">Debe seleccionar un Programa para realizar la baja</label>
                         <br/> 
                     </div>
-                </div>            
-                 
-                <div class="form-group" id="listBodega" runat="server">
-                    <label class="col-md-2 control-label" >Bodega: </label>
-                    <div class="col-md-10">
-                        <asp:DropDownList ID = "DropDownBodegas" class="form-control dropdown cmbsize" OnSelectedIndexChanged="llenarSubBodegas" AutoPostBack="true" runat="server" >                                
-                        </asp:DropDownList>
-                    </div>
-                    <div style="display: none;" id="MsjErrorlistBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar una bodega para realizar la baja</label>
-                        <br/> 
-                    </div>
-                </div>
+                </div>  
                 
                 <div class="form-group" id="listSubBodegas" runat="server">
                     <label class="col-md-2 control-label" >SubBodega: </label>
@@ -51,10 +39,22 @@
                  <div class="form-group" id="listProducto" runat="server">
                     <label class="col-md-2 control-label" >Producto: </label>
                     <div class="col-md-10">
-                        <asp:TextBox ID="txtProducto" runat="server" placeholder="Producto" class="form-control text-box single-line"></asp:TextBox>
+                        <asp:TextBox ID="txtProducto" placeholder="Producto" Textchanged="llenarCantidades" class="form-control text-box single-line" runat="server"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextProducto" class="col-md-offset-2" runat="server">
                         <label class="mensajeError">Debe seleccionar un producto para realizar la baja</label>
+                        <br/> 
+                    </div>
+                </div>
+
+                <div class="form-group" id="listEmpaques" runat="server">
+                    <label class="col-md-2 control-label" >Cantidad por Empaque: </label>
+                    <div class="col-md-10">
+                        <asp:DropDownList ID = "DropDownEmpaques" class="form-control dropdown cmbsize" AutoPostBack="true" runat="server" >                                
+                        </asp:DropDownList>
+                    </div>
+                    <div style="display: none;" id="MsjErrorlistEmpaques" class="col-md-offset-2" runat="server">
+                        <label class="mensajeError">Debe seleccionar la cantidad de productos que vienen por empaque</label>
                         <br/> 
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                 source: function (request, response) {
                     $.ajax({
                         url: '<%=ResolveUrl("~/Bajas.aspx/getProductosBodegaProgramaSubBodega") %>',
-                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "','bodega': '" + document.getElementById('BodyContent_DropDownBodegas').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
+                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -133,7 +133,7 @@
                 source: function (request, response) {
                     $.ajax({
                         url: '<%=ResolveUrl("~/Bajas.aspx/getProductosBodegaProgramaSubBodega") %>',
-                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "','bodega': '" + document.getElementById('BodyContent_DropDownBodegas').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
+                        data: "{ 'prefix': '" + request.term + "', 'programa': '" + document.getElementById('BodyContent_DropDownPrograma').value + "', 'subBodega': '" + document.getElementById('BodyContent_DropDownSubBodegas').value + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",

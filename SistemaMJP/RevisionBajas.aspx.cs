@@ -64,8 +64,8 @@ namespace SistemaMJP
         {
             int rowindex = 0;
             int pageIndex = 0;
-            int CantidadPorEmpaque = 0;
             string producto = "";
+            string cantidadPorEmpaque = "";
             string cantidad = "";
             string programa = "";
             string bodega = "";
@@ -77,9 +77,10 @@ namespace SistemaMJP
             //Get the row that contains this button
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             producto = gvr.Cells[0].Text;
-            cantidad = gvr.Cells[1].Text;
-            programa = gvr.Cells[2].Text;
-            bodega = gvr.Cells[3].Text;                      
+            cantidadPorEmpaque = gvr.Cells[1].Text;
+            cantidad = gvr.Cells[2].Text;
+            programa = gvr.Cells[3].Text;
+            bodega = gvr.Cells[4].Text;                      
             
             //Get the rowindex
             rowindex = gvr.RowIndex;
@@ -87,15 +88,14 @@ namespace SistemaMJP
 
             controladora.actualizarEstado(buscarId(pageIndex * pageSize + rowindex), 1);
 
-            CantidadPorEmpaque = controladora.ObtenercantidadEmpaque(controladora.getProductoConCantidadMin(producto));
-            if (gvr.Cells[4].Text.Equals("--------"))
+            if (gvr.Cells[5].Text.Equals("--------"))
             {
-                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoConCantidadMin(producto), controladora.obtenerIDPrograma(programa), 0, (CantidadPorEmpaque * Int32.Parse(cantidad)), "Baja", buscarId(rowindex));
+                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoCantidadEmpaque(producto, Int32.Parse(cantidadPorEmpaque)), controladora.obtenerIDPrograma(programa), 0, (Int32.Parse(cantidadPorEmpaque) * Int32.Parse(cantidad)), "Baja", buscarId(rowindex));
             }
             else
             {
-                subBodega = gvr.Cells[4].Text;
-                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoConCantidadMin(producto), controladora.obtenerIDPrograma(programa), controladora.obtenerIDSubBodega(subBodega), (CantidadPorEmpaque * Int32.Parse(cantidad)), "Baja", buscarId(rowindex));
+                subBodega = gvr.Cells[5].Text;
+                controladora.actualizarCantidadProducto(controladora.obtenerIDBodega(bodega), controladora.getProductoCantidadEmpaque(producto, Int32.Parse(cantidadPorEmpaque)), controladora.obtenerIDPrograma(programa), controladora.obtenerIDSubBodega(subBodega), (Int32.Parse(cantidadPorEmpaque) * Int32.Parse(cantidad)), "Baja", buscarId(rowindex));
             }  
             
             Ids.RemoveAt(rowindex);
@@ -164,19 +164,20 @@ namespace SistemaMJP
 
                 Ids.Add(fila.Id);
                 datos[0] = controladora.getNombreProducto(fila.Producto);
-                datos[1] = fila.Cantidad;
-                datos[2] = controladora.getNombrePrograma(fila.Programa);
-                datos[3] = controladora.getNombreBodega(fila.Bodega);
+                datos[1] = fila.CantidadEmpaque;
+                datos[2] = fila.Cantidad;
+                datos[3] = controladora.getNombrePrograma(fila.Programa);
+                datos[4] = controladora.getNombreBodega(fila.Bodega);
                 if (fila.SubBodega == 0)
                 {//Si es 0 entonces no muestra subbodega
-                    datos[4] = "--------";
+                    datos[5] = "--------";
                 }
                 else
                 {
 
-                    datos[4] = controladora.getNombreSb(fila.SubBodega);
+                    datos[5] = controladora.getNombreSb(fila.SubBodega);
                 }
-                datos[5] = fila.Justificacion;
+                datos[6] = fila.Justificacion;
 
                 tabla.Rows.Add(datos);
             }
@@ -200,6 +201,11 @@ namespace SistemaMJP
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Producto";
+            tabla.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Cantidad por Empaque";
             tabla.Columns.Add(columna);
 
             columna = new DataColumn();

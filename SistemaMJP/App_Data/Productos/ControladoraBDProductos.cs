@@ -371,8 +371,8 @@ namespace SistemaMJP
             return productos;
         }
 
-        //Metodo que se encarga de devolver la lista de usuarios que estan agregados al sistema
-        internal int getProductoConCantidadMin(string descripcion)
+        //Metodo que se encarga de devolver el id del producto segun una cantidad de empaque y una descripcion
+        internal int getProductoCantidadEmpaque(string descripcion, int cantidadPorEmpaque)
         {
             int idProducto;
             try
@@ -380,9 +380,10 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Id_Producto_Min_Cantidad";
+                cmd.CommandText = "P_Id_Producto_Cantidad_Empaque";
                 con.Open();
                 cmd.Parameters.AddWithValue("@descripcion",descripcion);
+                cmd.Parameters.AddWithValue("@cantidadEmpaque",cantidadPorEmpaque);
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
                 idProducto = reader.GetInt32(0);

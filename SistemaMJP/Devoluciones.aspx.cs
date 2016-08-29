@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Diagnostics;
+using System.Windows;
 
 namespace SistemaMJP
 {
@@ -13,6 +14,7 @@ namespace SistemaMJP
     {
         Bitacora bitacora = new Bitacora();
         ControladoraDevolucionBajas controladora = new ControladoraDevolucionBajas();
+        private static int bodegaId;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -35,6 +37,9 @@ namespace SistemaMJP
                     cagarDatos();
                 }
             }
+            List<int> bodegas = new List<int>();
+            bodegas = controladora.getBodegasPorIdUsuario((Int32)Session["userID"]);
+            bodegaId = bodegas.ElementAt(0);
         }
 
         protected void regresarDB(object sender, EventArgs e)
@@ -43,24 +48,15 @@ namespace SistemaMJP
         }
 
         protected void cagarDatos()
-        {
-            Dictionary<string, int> nomBodega = new Dictionary<string, int>();
-            Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
-            DropDownBodegas.Items.Clear();
+        {           
+            Dictionary<string, int> nomPrograma = new Dictionary<string, int>();           
             DropDownPrograma.Items.Clear();
 
             DropDownSubBodegas.Items.Insert(0, new ListItem("--No hay SubBodegas Disponibles--", "0"));
-            DropDownBodegas.Items.Insert(0, new ListItem("--Selecione la Bodega--", "0"));
+            DropDownEmpaques.Items.Insert(0, new ListItem("--Selecione la cantidad por empaque--", "0"));
             DropDownPrograma.Items.Insert(0, new ListItem("--Selecione el Programa Presupuestario--", "0"));
-
-            nomBodega = controladora.getBodegas();
-            nomPrograma = controladora.getProgramas();
-
-            //Itera sobre el diccionario para obtener la bodega y el respectivo id y guardarlo en un dropdownlist
-            foreach (var item in nomBodega)
-            {
-                DropDownBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
-            }
+           
+            nomPrograma = controladora.getProgramas();     
 
             //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
             foreach (var item in nomPrograma)
@@ -70,14 +66,27 @@ namespace SistemaMJP
 
         }
 
-        protected void llenarSubBodegas(object sender, EventArgs e)
+        protected void llenarCantidades(object sender, EventArgs e)
         {
-            if (DropDownBodegas.SelectedValue != "0" && DropDownPrograma.SelectedValue != "0")
+            List<int> numEmpaque = new List<int>();
+            DropDownEmpaques.Items.Clear();
+
+            numEmpaque = controladora.getEmpaques(txtProducto.Text);
+            //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
+            foreach (int item in numEmpaque)
+            {
+                DropDownEmpaques.Items.Add(new ListItem { Text = item.ToString(), Value = item.ToString() });
+            }
+        }
+
+        protected void llenarSubBodegas(object sender, EventArgs e)
+        {           
+            if (DropDownPrograma.SelectedValue != "0")
             {
                 Dictionary<string, int> nomSubBodega = new Dictionary<string, int>();
                 DropDownSubBodegas.Items.Clear();
                 DropDownSubBodegas.Items.Insert(0, new ListItem("--Selecione la SubBodega--", "0"));
-                nomSubBodega = controladora.getSubBodegas(Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownBodegas.SelectedValue));
+                nomSubBodega = controladora.getSubBodegas(Int32.Parse(DropDownPrograma.SelectedValue), bodegaId);
 
                 //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
                 foreach (var item in nomSubBodega)
@@ -90,9 +99,9 @@ namespace SistemaMJP
         //Metodo que se encarga de obtener todos los productos que empiezan cn lo digitado por el usuario
         //Funcionalidad principal es mostrar sugerencias al ingresar la descripcion de un producto
         [WebMethod]
-        public static string[] getProductosBodegaProgramaSubBodega(string prefix,int programa, int bodega, int subBodega)
-        {            
-            List<string> customers = ControladoraProductos.getProductosBodegaProgramaSubBodega(prefix, programa, bodega, subBodega);
+        public static string[] getProductosBodegaProgramaSubBodega(string prefix,int programa, int subBodega)
+        {
+            List<string> customers = ControladoraProductos.getProductosBodegaProgramaSubBodega(prefix, programa, bodegaId, subBodega);
             return customers.ToArray();
         }
 
@@ -102,16 +111,7 @@ namespace SistemaMJP
             if (DropDownPrograma.SelectedValue == "0")
             {
                 MsjErrorlistPrograma.Style.Add("display", "block");
-
-                if (DropDownBodegas.SelectedValue == "0")
-                {
-                    MsjErrorlistBodega.Style.Add("display", "block");
-                }
-                else
-                {
-                    MsjErrorlistBodega.Style.Add("display", "none");
-                }
-
+                
                 if (txtProducto.Text == "")
                 {
                     MsjErrortextProducto.Style.Add("display", "block");
@@ -130,57 +130,13 @@ namespace SistemaMJP
                     MsjErrortextCantidad.Style.Add("display", "none");
                 }
 
-                if (txtJustificacion.Text == "")
+                if (DropDownEmpaques.SelectedValue == "0")
                 {
-                    MsjErrortextJustificacion.Style.Add("display", "block");
+                    MsjErrorlistEmpaques.Style.Add("display", "block");
                 }
                 else
                 {
-                    MsjErrortextJustificacion.Style.Add("display", "none");
-                }
-
-                /*if (ListRoles.SelectedValue == "0")
-                {
-                    MsjErrorListRol.Style.Add("display", "block");
-                }
-                else
-                {
-                    MsjErrorListRol.Style.Add("display", "none");
-                    if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
-                    {
-                        if (ListBodegas.SelectedValue == "0")
-                        {
-                            MsjErrorlistBodega.Style.Add("display", "block");
-                        }
-                        else
-                        {
-                            MsjErrorlistBodega.Style.Add("display", "none");
-                        }
-                    }
-                }*/
-
-            }
-            else if (DropDownBodegas.SelectedValue == "0")
-            {
-                MsjErrorlistPrograma.Style.Add("display", "none");
-                MsjErrorlistBodega.Style.Add("display", "block");
-
-                if (txtProducto.Text == "")
-                {
-                    MsjErrortextProducto.Style.Add("display", "block");
-                }
-                else
-                {
-                    MsjErrortextProducto.Style.Add("display", "none");
-                }
-
-                if (TextCantidad.Text == "")
-                {
-                    MsjErrortextCantidad.Style.Add("display", "block");
-                }
-                else
-                {
-                    MsjErrortextCantidad.Style.Add("display", "none");
+                    MsjErrorlistEmpaques.Style.Add("display", "none");
                 }
 
                 if (txtJustificacion.Text == "")
@@ -191,31 +147,11 @@ namespace SistemaMJP
                 {
                     MsjErrortextJustificacion.Style.Add("display", "none");
                 }
-
-                /*if (ListRoles.SelectedValue == "0")
-                {
-                    MsjErrorListRol.Style.Add("display", "block");
-                }
-                else
-                {
-                    MsjErrorListRol.Style.Add("display", "none");
-                    if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
-                    {
-                        if (ListBodegas.SelectedValue == "0")
-                        {
-                            MsjErrorlistBodega.Style.Add("display", "block");
-                        }
-                        else
-                        {
-                            MsjErrorlistBodega.Style.Add("display", "none");
-                        }
-                    }
-                }*/
-            }
+                
+            }           
             else if (txtProducto.Text == "")
             {
                 MsjErrorlistPrograma.Style.Add("display", "none");
-                MsjErrorlistBodega.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "block");
 
                 if (TextCantidad.Text == "")
@@ -235,47 +171,45 @@ namespace SistemaMJP
                 {
                     MsjErrortextJustificacion.Style.Add("display", "none");
                 }
-                /*if (ListRoles.SelectedValue == "0")
-                {
-                    MsjErrorListRol.Style.Add("display", "block");
-                }
-                else
-                {
-                    MsjErrorListRol.Style.Add("display", "none");
-                    if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
-                    {
-                        if (ListBodegas.SelectedValue == "0")
-                        {
-                            MsjErrorlistBodega.Style.Add("display", "block");
-                        }
-                        else
-                        {
-                            MsjErrorlistBodega.Style.Add("display", "none");
-                        }
-                    }
-                }*/
+                
             }
             else if (TextCantidad.Text == "")
             {
                 MsjErrorlistPrograma.Style.Add("display", "none");
-                MsjErrorlistBodega.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
                 MsjErrortextCantidad.Style.Add("display", "block");
 
                 if (txtJustificacion.Text == "")
                 {
-                    MsjErrortextJustificacion.Style.Add("display", "block");
+                    MsjErrortextCantidad.Style.Add("display", "block");
                 }
                 else
                 {
-                    MsjErrortextJustificacion.Style.Add("display", "none");
+                    MsjErrortextCantidad.Style.Add("display", "none");
+                }
+
+            }
+            else if (DropDownEmpaques.SelectedValue == "0")
+            {
+                MsjErrorlistPrograma.Style.Add("display", "none");
+                MsjErrortextCantidad.Style.Add("display", "none");
+                MsjErrortextProducto.Style.Add("display", "none");
+                MsjErrorlistEmpaques.Style.Add("display", "block");
+
+                if (txtJustificacion.Text == "")
+                {
+                    MsjErrorlistEmpaques.Style.Add("display", "block");
+                }
+                else
+                {
+                    MsjErrorlistEmpaques.Style.Add("display", "none");
                 }
 
             }
             else if (txtJustificacion.Text == "")
             {
                 MsjErrorlistPrograma.Style.Add("display", "none");
-                MsjErrorlistBodega.Style.Add("display", "none");
+                MsjErrorlistEmpaques.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
                 MsjErrortextCantidad.Style.Add("display", "none");
                 MsjErrortextJustificacion.Style.Add("display", "block");
@@ -283,15 +217,15 @@ namespace SistemaMJP
             else
             {
                 MsjErrortextJustificacion.Style.Add("display", "none");
-                controladora.agregarDevolucionBaja("Devolucion", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownSubBodegas.SelectedValue), "Aceptado");                               
-                controladora.actualizarCantidadProducto(Int32.Parse(DropDownBodegas.SelectedValue), controladora.getProductoConCantidadMin(txtProducto.Text), Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue), Int32.Parse(TextCantidad.Text), "Devolucion", controladora.buscarIdMaxDevolucion());
+                controladora.agregarDevolucionBaja("Devolucion", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, bodegaId, controladora.getProductoCantidadEmpaque(txtProducto.Text, Int32.Parse(DropDownEmpaques.SelectedValue)), Int32.Parse(DropDownSubBodegas.SelectedValue), "Aceptado");
+                controladora.actualizarCantidadProducto(bodegaId, controladora.getProductoCantidadEmpaque(txtProducto.Text, Int32.Parse(DropDownEmpaques.SelectedValue)), Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(DropDownSubBodegas.SelectedValue), Int32.Parse(TextCantidad.Text), "Devolucion", controladora.buscarIdMaxDevolucion());
                 if (Int32.Parse(DropDownSubBodegas.SelectedValue) == 0)
                 {
-                    descripcionRA = "Devolucion de " + TextCantidad.Text + " " + txtProducto.Text + " en la bodega: " + controladora.getNombreBodega(Int32.Parse(DropDownBodegas.SelectedValue)) + ", subBodega: -------- al programa presupuestario: " + controladora.getNombrePrograma(Int32.Parse(DropDownPrograma.SelectedValue));
+                    descripcionRA = "Devolucion de " + TextCantidad.Text + " " + txtProducto.Text + " en la bodega: " + controladora.getNombreBodega(bodegaId) + ", subBodega: -------- al programa presupuestario: " + controladora.getNombrePrograma(Int32.Parse(DropDownPrograma.SelectedValue));
                 }
                 else
                 {
-                    descripcionRA = "Devolucion de " + TextCantidad.Text + " " + txtProducto.Text + " en la bodega: " + controladora.getNombreBodega(Int32.Parse(DropDownBodegas.SelectedValue)) + ", subBodega: " + controladora.getNombreSb(Int32.Parse(DropDownSubBodegas.SelectedValue)) + "al programa presupuestario: " + controladora.getNombrePrograma(Int32.Parse(DropDownPrograma.SelectedValue));
+                    descripcionRA = "Devolucion de " + TextCantidad.Text + " " + txtProducto.Text + " en la bodega: " + controladora.getNombreBodega(bodegaId) + ", subBodega: " + controladora.getNombreSb(Int32.Parse(DropDownSubBodegas.SelectedValue)) + "al programa presupuestario: " + controladora.getNombrePrograma(Int32.Parse(DropDownPrograma.SelectedValue));
                 }
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);

@@ -143,7 +143,6 @@ namespace SistemaMJP
                 while (reader.Read())
                 {
                     bajas.Add(LoadItemGridBajas(reader));
-
                 }
                 reader.Close();
                 con.Close();
@@ -163,12 +162,13 @@ namespace SistemaMJP
         {
             int idDevolucionBaja = reader.GetInt32(0);
             int idProducto = reader.GetInt32(1);
-            int cantidad = reader.GetInt32(2);
-            int idPrograma = reader.GetInt32(3);
-            int idBodega = reader.GetInt32(4);
-            int idSubBodega = reader.GetInt32(5);
-            String justificacion = reader.GetString(6);
-            Item_Grid_Bajas items = new Item_Grid_Bajas(idDevolucionBaja, idProducto, cantidad, idPrograma, idBodega, idSubBodega, justificacion);
+            int cantidadEmpaque = reader.GetInt32(2);
+            int cantidad = reader.GetInt32(3);
+            int idPrograma = reader.GetInt32(4);
+            int idBodega = reader.GetInt32(5);
+            int idSubBodega = reader.GetInt32(6);
+            String justificacion = reader.GetString(7);
+            Item_Grid_Bajas items = new Item_Grid_Bajas(idDevolucionBaja, idProducto, cantidadEmpaque, cantidad, idPrograma, idBodega, idSubBodega, justificacion);
             return items;
         }
 
@@ -223,6 +223,37 @@ namespace SistemaMJP
             }
 
             return cantidad;
+        }
+
+        //Metodo que se encarga de devolver la lista de cantidades de empaques con el mismo nombre
+        internal List<int> getEmpaques(string descripcion)
+        {
+            List<int> empaques = new List<int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Cantidad_Empaques";
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    empaques.Add(reader.GetInt32(0));
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return empaques;
+
         }
 
     }

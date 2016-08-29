@@ -27,6 +27,7 @@ namespace SistemaMJP
         internal List<string> obtenerDatosProducto(int idF, int idP) {
             return controladoraBD.obtenerDatosProducto(idF, idP);
         }
+
         //Llama a la controladora de programas presupuestarios, para obtener el nombre de los programas en el sistema
         internal Dictionary<string, int> getProgramas()
         {
@@ -50,6 +51,7 @@ namespace SistemaMJP
         {
             return controladoraB.getSubBodegas(programa,bodega);
         }
+
         //Llama a la controladora de proveedores para insertar el proveedor
         internal void agregarProveedor(string proveedor, string correo, string telefonos) {
             controladoraP.agregarProveedor(proveedor, correo, telefonos);
@@ -59,24 +61,27 @@ namespace SistemaMJP
         internal int obtenerIDBodega(string bodega) {
             return controladoraB.obtenerIDBodega(bodega);
         }
+
         //Primero obtiene el id del proveedor,luego llama a la controladora de Facturas para agregar una factura nueva
         internal void agregarFactura(int bodega, string proveedor, int programa,int subbodega,string numF,string fecha) {
             int idProveedor = controladoraP.obtenerIDProveedor(proveedor);
-            controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF,fecha);
-        
+            controladoraF.agregarFactura(bodega, idProveedor, programa,subbodega,numF,fecha);        
         }
+
         //Recibe un objeto de datos para encapsularlo y enviar a agregar a la controladora de base de datos de productos
         internal bool agregarProducto(object[] producto) {
             EntidadProductos productoEncapsulado = new EntidadProductos(producto);
 
            return controladoraBD.agregarProducto(productoEncapsulado);
         }
+
         //Metodo que se encarga primero de obtener el id del producto en la base de datos para luego guardarlo en la tabla informacion producto
         internal void agregarProductoABodega(int bodega, string descripcion, int cantEmpaque, int programa, int subBodega, int cantidad, Nullable<DateTime> fechaG, Nullable<DateTime> fechaC, Nullable<DateTime> fechaV)
         {
             int idProducto = controladoraBD.obtenerIDProducto(descripcion, cantEmpaque);
             controladoraBD.agregarProductoABodega(bodega, idProducto, programa, subBodega, cantidad, fechaG, fechaC, fechaV);
         }
+
         //Metodo que llama la controladora de facturas, para obtener el ID de la factura
         internal int obtenerIDFactura(string factura) {
            return controladoraF.obtenerIDFactura(factura);
@@ -93,7 +98,6 @@ namespace SistemaMJP
         {
             controladoraBD.modificarProductoFactura(id_factura, idProducto, cantidad, total, fechaC, fechaG, fechaV);
         }
-
 
         //Metodo que llama ala controladora de activos para agregar el activo nuevo
         internal void agregarActivo(string numActivo, string funcionario, string cedula,string descripcion,int cantidadEmpaque) {
@@ -112,13 +116,13 @@ namespace SistemaMJP
             return ControladoraBDProductos.getProductosBodegaProgramaSubBodega(prefix, programa, bodega, subBodega);
         }
 
-        //Llama a la controladora de Productos, para obtener el id del producto con cantidad minima segun cierta descripcion
-        internal int getProductoConCantidadMin(string descripcion)
+        //Llama a la controladora de base de datos, para obtener el id del producto segun una descripcion y una cantidad por empaque
+        internal int getProductoCantidadEmpaque(string descripcion, int cantidadPorEmpaque)
         {
-            return controladoraBD.getProductoConCantidadMin(descripcion);
+            return controladoraBD.getProductoCantidadEmpaque(descripcion, cantidadPorEmpaque);
         }
 
-        //Llama a la controladora de base de datos de productos para obtener el nombre del producto dado un id
+        //Llama a la controladora de base de datos, para obtener el nombre del producto dado un id
         internal string getNombreProducto(int id)
         {
             return controladoraBD.getNombreProducto(id);
