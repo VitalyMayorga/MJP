@@ -90,7 +90,7 @@
                         <label id="nombreProducto" runat="server"></label>
                     </div>
                     <div class="form-group">
-                        <label>Descripción artículo</label>
+                        <label>Presentación empaque</label>
                     </div>
                     <div class="form-group">
                         <label id="descripcionLabel" runat="server"></label>
@@ -112,7 +112,9 @@
         </div>
     </div>
     <script type="text/javascript">
-        function openModal() {
+        function openModal(nombre, descripcion) {
+            document.getElementById('nombreProducto').innerHTML = nombre;
+            document.getElementById('descripcionLabel').innerHTML = descripcion;
             $('#AgregarProducto').modal('show');
         }
         function openModalEliminar(value) {

@@ -19,7 +19,7 @@
                 </div>
                 <h4 class="Encabezado">Requisiciones del Usuario</h4>
                 <div class="table-responsive tablaMJP">
-                    <asp:GridView ID="GridRequisiciones" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridRequisiciones_RowCreated" Width="100%">
+                    <asp:GridView ID="GridRequisiciones" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridRequisiciones_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
