@@ -105,29 +105,10 @@ namespace SistemaMJP
                         int residuoCercano = 99999; //Usado para recomendar siempre el empaque mas cercano                        
                         int cantidadSugerida;
                         foreach (int empaque in empaques) {
-<<<<<<< HEAD
-
                             if(cantidad <= cantPorEmpaque[i]){
 
                                 int residuo = cantidad % empaque;
                                 if (residuo == 0 && cantidad <= cantPorEmpaque[i])
-=======
-                            int residuo = cantidad % empaque;
-                            if (residuo == 0)
-                            {
-                                MsjErrorPrograma.Style.Add("display", "none");
-                                correcto = true;
-                            }
-                            else if(!correcto){
-                                if (residuo < empaque / 2) {//caso cantidad es menor al 49%
-                                    cantidadSugerida = cantidad - residuo;
-                                }
-                                else
-                                {//cantidad es mayor al 49%
-                                    cantidadSugerida = (cantidad - residuo) + empaque;
-                                }
-                                if (residuo < residuoCercano)
->>>>>>> origin/master
                                 {
                                     MsjErrorPrograma.Style.Add("display", "none");
                                     correcto = true;
