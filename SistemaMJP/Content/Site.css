@@ -137,12 +137,13 @@ input.selectorDeFecha{
     text-align:center;
 }
 
-.gridPF  td:nth-child(5),td:nth-child(6){
-    width: 14px;
-}
-
 .areaText{
     max-width:278px;
     max-height: 160px;
 
 }
+
+.gridPF  td:nth-child(5),td:nth-child(6){
+    width: 14px;
+}
+

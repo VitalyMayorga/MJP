@@ -20,6 +20,8 @@ namespace SistemaMJP
         private DataTable tabla;
         private string producto;
         private int i;
+        private String nombre;
+        private String descripcion;
         ControladoraRequisicionesUsuario controladora = new ControladoraRequisicionesUsuario();
         ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
@@ -74,6 +76,8 @@ namespace SistemaMJP
                     tabla = (DataTable)ViewState["tabla"];
                     i = (int)ViewState["i"];
                     producto =(string) ViewState["producto"];
+                    descripcion = (string) ViewState["descripcion"];
+                    nombre = (string)ViewState["nombre"];
                 }
                 catch (Exception) { }
             }
@@ -101,7 +105,7 @@ namespace SistemaMJP
                         int cantidadSugerida;
                         foreach (int empaque in empaques) {
                             int residuo = cantidad % empaque;
-                            if (residuo == 0 && cantidad<= cantPorEmpaque[i])
+                            if (residuo == 0)
                             {
                                 MsjErrorPrograma.Style.Add("display", "none");
                                 correcto = true;
@@ -151,15 +155,18 @@ namespace SistemaMJP
             i = Convert.ToInt32(row.RowIndex);
             ViewState["i"] = i;
             //HTMLDECODE: es necesario para leer caracteres con tilde
-            String nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
-            String descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
+            nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
+            descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
             //Se obtiene el id del producto
             producto = nombre;
             ViewState["producto"] = producto;
-            nombreProducto.InnerText = nombre;
-            descripcionLabel.InnerHtml = descripcion;
+            ViewState["descripcion"] = descripcion;
+            ViewState["nombre"] = nombre;
+            
+            //nombreProducto.Text = nombre;
+            //descripcionLabel.Text = descripcion;
             txtCantidad.Text = "";
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('"+nombre+"','"+descripcion+"');", true);
 
             
         }
@@ -175,7 +182,7 @@ namespace SistemaMJP
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
         }
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página DetallesRequisicion
@@ -190,7 +197,7 @@ namespace SistemaMJP
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
 
                
@@ -210,23 +217,40 @@ namespace SistemaMJP
             string busqueda = productoBusqueda.Text;
             if (!String.IsNullOrEmpty(busqueda))
             {
+                //se eliminan tildes
+                busqueda = busqueda.Replace("á", "a");
+                busqueda = busqueda.Replace("é", "e");
+                busqueda = busqueda.Replace("í", "i");
+                busqueda = busqueda.Replace("ó", "o");
+                busqueda = busqueda.Replace("ú", "u");
                 DataTable tablaP = crearTablaRequisiciones();
                 List<Item_Grid_Productos_Bodega> data = controladora.getListaProductosBodega(bodega,subbodega,programa,busqueda);
-                Object[] datos = new Object[3];
-                foreach (Item_Grid_Productos_Bodega fila in data)
+                Object[] datos = new Object[2];
+                if (data.Count == 0)
                 {
-                    datos[0] = fila.Nombre;
-                    datos[1] = fila.Descripcion;
-                    datos[2] = fila.Unidad;                    
-                    tabla.Rows.Add(datos);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('No existen productos que cumplan el criterio de búsqueda')", true);
+                    productoBusqueda.Text = "";
+                    GridProductos.Visible = false;
                 }
+                else {
+                    foreach (Item_Grid_Productos_Bodega fila in data)
+                    {
+                        datos[0] = fila.Nombre;
+                        datos[1] = fila.Unidad;
+                        tablaP.Rows.Add(datos);
+                    }
 
-                tabla = tablaP;
-                ViewState["tabla"] = tabla;
-                GridProductos.DataSource = tabla;
-                GridProductos.DataBind();
+                    tabla = tablaP;
+                    ViewState["tabla"] = tablaP;
+                    GridProductos.Visible = true;
+                    GridProductos.DataSource = tabla;
+                    GridProductos.DataBind();
+                }
+                
 
             }
+
+            productoBusqueda.Text = "";
         }
 
         /**
@@ -242,17 +266,12 @@ namespace SistemaMJP
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Nombre";
-            tabla.Columns.Add(columna);
-
-            columna = new DataColumn();
-            columna.DataType = System.Type.GetType("System.String");
-            columna.ColumnName = "Descripción";
-            tabla.Columns.Add(columna);
+            tabl.Columns.Add(columna);
 
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Unidad Medida";
-            tabla.Columns.Add(columna);
+            tabl.Columns.Add(columna);
 
             GridProductos.DataSource = tabl;
             GridProductos.DataBind();

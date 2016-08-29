@@ -65,7 +65,12 @@ namespace SistemaMJP
             controladoraBD.agregarProducto(producto, numRequisicion, cantidad);
 
         }
+        //Llama a la controladora de base de datos de requisiciones para guardar un producto en una requisicion
+        internal void editarProducto(string producto, string numRequisicion, int cantidad)
+        {
+            controladoraBD.editarProducto(producto, numRequisicion, cantidad);
 
+        }
         internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega,int subbodega,string programa,string busqueda){
             return controladoraBD.getListaProductosBodega(bodega,subbodega,programa,busqueda);
         }

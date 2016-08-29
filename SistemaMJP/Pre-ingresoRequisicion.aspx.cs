@@ -143,6 +143,10 @@ namespace SistemaMJP
         //Si el programa Seleccionado posee subbodegas, entonces habilita la elección de la subbodega de dicho Programa
         protected void revisarPrograma(object sender, EventArgs e)
         {
+            subbodegas();
+        }
+        private void subbodegas()
+        {
             ListaSubBodegas.Items.Clear();
             Dictionary<string, int> subbodegas = controladora.getSubBodegas(ListaProgramas.Items[ListaProgramas.SelectedIndex].Text, ListaBodegas.Items[ListaBodegas.SelectedIndex].Text);
             if (subbodegas.Count > 0)
@@ -166,8 +170,8 @@ namespace SistemaMJP
                 MsjErrorPrograma.Style.Add("display", "none");
             }
             ViewState["tieneSubBodega"] = tieneSubBodega;
-        }
 
+        }
         //Si se selecciona la subbodega el msj de error se esconde
         protected void revisarSubB(object sender, EventArgs e)
         {
@@ -179,6 +183,7 @@ namespace SistemaMJP
         //Si se selecciona la Bodega el msj de error se esconde
         protected void revisarBodega(object sender, EventArgs e)
         {
+            subbodegas();
             if (ListaBodegas.SelectedIndex != 0)
             {
                 MsjErrorBodega.Style.Add("display", "none");

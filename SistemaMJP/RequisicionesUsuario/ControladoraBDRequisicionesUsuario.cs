@@ -148,7 +148,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    num = reader.GetString(1);
+                    num = reader.GetString(0);
 
                 }
                 reader.Close();
@@ -213,6 +213,7 @@ namespace SistemaMJP
                 cmd.Parameters.AddWithValue("@programa", programa);
                 cmd.Parameters.AddWithValue("@producto", producto);
                 SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
                 cantidad = reader.GetInt32(0);
                 reader.Close();
                 con.Close();
@@ -346,14 +347,40 @@ namespace SistemaMJP
 
         }
 
+        internal void editarProducto(string producto, string numRequisicion, int cantidad)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Editar_Producto_Requisicion";
+                    cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                    cmd.Parameters.AddWithValue("@producto", producto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+        }
+
         //Metodo que se encarga de llenar los datos de la clase item grid productos bodega y devolver dicha clase encapsulada
         internal Item_Grid_Productos_Bodega LoadItemGridProductos(SqlDataReader reader)
         {
             String nombre = reader.GetString(0);
-            String descripcion = reader.GetString(1);
-            String unidad = reader.GetString(2);
-            int id = reader.GetInt32(3);
-            Item_Grid_Productos_Bodega items = new Item_Grid_Productos_Bodega(nombre, descripcion, id, unidad);
+            String unidad = reader.GetString(1);
+            Item_Grid_Productos_Bodega items = new Item_Grid_Productos_Bodega(nombre,unidad);
             return items;
         }
 
@@ -369,6 +396,7 @@ namespace SistemaMJP
                 con.Open();
                 cmd.Parameters.AddWithValue("@numReq", numRequisicion);
                 SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
                 estado = reader.GetString(0);
                 reader.Close();
                 con.Close();
@@ -479,6 +507,8 @@ namespace SistemaMJP
                     cmd.CommandText = "P_Enviar_Requisicion_Aprobacion_1";
                     cmd.Parameters.AddWithValue("@numReq", numRequisicion);
                     cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
+
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
@@ -529,10 +559,11 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Obtener_ID_Requisicion";
+                cmd.CommandText = "P_Obtener_Id_Requisicion";
                 con.Open();
-                cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                cmd.Parameters.AddWithValue("@numRequisicion", numRequisicion);
                 SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
                 cantidad = reader.GetInt32(0);
                 reader.Close();
                 con.Close();

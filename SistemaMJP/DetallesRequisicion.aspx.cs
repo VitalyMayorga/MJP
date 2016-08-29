@@ -21,6 +21,8 @@ namespace SistemaMJP
         private DataTable tabla;
         private string estado;
         private string producto;
+        private String nombre;
+        private String descripcion;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -45,14 +47,17 @@ namespace SistemaMJP
                     {
                         numRequisicion = (servicio.TamperProofStringDecode(Request.QueryString["numReq"], "MJP")).ToString();
                         estado = controladora.getEstadoRequisicion(numRequisicion);
-                        if (!estado.Equals("En edición")) {
+                        if (!estado.Equals("En edición") && !estado.Equals("Devuelto a Usuario")) {
                             btnEnviarAprobacion.Enabled = false;
+
                         }
+                        
                     }
                     catch (Exception ex)
                     {
                         Response.Redirect("MenuPrincipal.aspx");
                     }
+                    llenarDetallesProducto();
 
                 }
                 ViewState["numRequisicion"] = numRequisicion;
@@ -63,10 +68,13 @@ namespace SistemaMJP
                 try
                 {
                     numRequisicion = (string)ViewState["numRequisicion"];
-                    i = (int)ViewState["i"];
-                    tabla = (DataTable)ViewState["tabla"];
-                    eliminado = (int)ViewState["elimnado"];//0= requisicion, 1= producto
                     producto = (string)ViewState["producto"];
+                    estado = (string)ViewState["estado"];
+                    tabla = (DataTable)ViewState["tabla"];
+                    descripcion = (string)ViewState["descripcion"];
+                    nombre = (string)ViewState["nombre"];
+                    eliminado = (int)ViewState["elimnado"];//0= requisicion, 1= producto
+                    i = (int)ViewState["i"];
                 }
                 catch (Exception) { }
             }
@@ -104,7 +112,7 @@ namespace SistemaMJP
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             i = Convert.ToInt32(row.RowIndex);
             ViewState["i"] = i;
-            if (estado.Equals("En edición"))
+            if (estado.Equals("En edición") || estado.Equals("Devuelto a Usuario"))
             {
                 //Se obtiene el id del producto
                 producto = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
@@ -121,7 +129,7 @@ namespace SistemaMJP
             if (eliminado == 0)
             {
                 controladora.eliminarRequisicion(numRequisicion);
-
+                Response.Redirect("Requisiciones.aspx");
             }
             else
             {
@@ -141,15 +149,15 @@ namespace SistemaMJP
                 i = Convert.ToInt32(row.RowIndex);
                 ViewState["i"] = i;
                 //HTMLDECODE: es necesario para leer caracteres con tilde
-                String nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
-                String descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
+                 nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
+                 descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
                 //Se obtiene el id del producto
                 producto = nombre;
                 ViewState["producto"] = producto;
                 nombreProducto.InnerText = nombre;
                 descripcionLabel.InnerHtml = descripcion;
                 txtCantidad.Text = "";
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal();", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
         }
 
@@ -180,13 +188,12 @@ namespace SistemaMJP
         {
             DataTable tablaP = crearTablaRequisiciones();
             List<Item_Grid_Productos_Bodega> data = controladora.getListaProductosRequisicion(numRequisicion);
-            Object[] datos = new Object[3];
+            Object[] datos = new Object[2];
             foreach (Item_Grid_Productos_Bodega fila in data)
             {
                 datos[0] = fila.Nombre;
-                datos[1] = fila.Descripcion;
-                datos[2] = fila.Unidad;
-                tabla.Rows.Add(datos);
+                datos[1] = fila.Unidad;
+                tablaP.Rows.Add(datos);
             }
 
             tabla = tablaP;
@@ -209,17 +216,12 @@ namespace SistemaMJP
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Nombre";
-            tabla.Columns.Add(columna);
-
-            columna = new DataColumn();
-            columna.DataType = System.Type.GetType("System.String");
-            columna.ColumnName = "Descripción";
-            tabla.Columns.Add(columna);
+            tabl.Columns.Add(columna);
 
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Unidad Medida";
-            tabla.Columns.Add(columna);
+            tabl.Columns.Add(columna);
 
             GridProductos.DataSource = tabl;
             GridProductos.DataBind();
@@ -227,7 +229,7 @@ namespace SistemaMJP
         }
 
         //Pone las columnas con botones al final de la tabla
-        protected void gridRequisiciones_RowCreated(object sender, GridViewRowEventArgs e)
+        protected void gridProductos_RowCreated(object sender, GridViewRowEventArgs e)
         {
             GridViewRow row = e.Row;
             // Intitialize TableCell list
@@ -246,6 +248,97 @@ namespace SistemaMJP
                 // Add cells
                 row.Cells.AddRange(columns.ToArray());
             }
+        }
+
+        //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
+        protected void aceptar(object sender, EventArgs e)
+        {
+            if (validar())
+            {//Si todo es valido, entonces se procede a guardar el producto en la requisicion
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+                controladora.editarProducto(producto, numRequisicion, cantidad);
+
+
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            }
+        }
+
+        //Revisa la cantidad ingresada por el usuario vs lo que hay en el almacen
+        protected bool validar()
+        {
+            bool correcto = false;
+            int cantSugeridaFinal = 0;
+            int i = 0;
+            try
+            {
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+                if (cantidad > 0)
+                {//Aqui esta el algoritmo necesario para indicar cantidades sugeridas o si se puede o no hacer el pedido con la cantidad ingresada
+                    MsjErrorPrograma.Style.Add("display", "none");
+                    List<string> datos = controladora.getDatosRequisicion(numRequisicion);
+                    int cantidadEnBodega = controladora.obtenerCantidadProductoBodega(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[2]), datos[1], producto);
+                    List<int> empaques = controladora.obtenerEmpaque(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[2]), datos[1], producto);
+                    List<int> cantPorEmpaque = controladora.obtenerCantPorEmpaque(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[2]), datos[1], producto);
+                    if (cantidad > cantidadEnBodega)
+                    {
+                        MensajeErrorTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
+                        MsjErrorPrograma.Style.Add("display", "block");
+                    }
+                    else
+                    {
+                        int residuoCercano = 99999; //Usado para recomendar siempre el empaque mas cercano                        
+                        int cantidadSugerida;
+                        foreach (int empaque in empaques)
+                        {
+                            int residuo = cantidad % empaque;
+                            if (residuo == 0 && cantidad <= cantPorEmpaque[i])
+                            {
+                                MsjErrorPrograma.Style.Add("display", "none");
+                                correcto = true;
+                            }
+                            else if (!correcto)
+                            {
+                                if (residuo < empaque / 2)
+                                {//caso cantidad es menor al 49%
+                                    cantidadSugerida = cantidad - residuo;
+                                }
+                                else
+                                {//cantidad es mayor al 49%
+                                    cantidadSugerida = (cantidad - residuo) + empaque;
+                                }
+                                if (residuo < residuoCercano)
+                                {
+                                    residuoCercano = residuo;
+                                    cantSugeridaFinal = cantidadSugerida;
+                                }
+                            }
+                            i++;
+                        }
+                        if (!correcto)
+                        {
+
+                            MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
+                            MsjErrorPrograma.Style.Add("display", "block");
+                        }
+                    }
+                }
+                else
+                {
+                    MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                    MsjErrorPrograma.Style.Add("display", "block");
+                }
+            }
+            catch (Exception e)
+            {
+                MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                MsjErrorPrograma.Style.Add("display", "block");
+            }
+
+            return correcto;
+
         }
     }
 }

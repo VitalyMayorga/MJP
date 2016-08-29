@@ -8,14 +8,14 @@
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">Producto a buscar:</label>
-                    <div class="col-md-8">
+                    <div class="col-md-2">
                         <asp:Textbox id="productoBusqueda" runat="server" class="form-control text-box single-line"></asp:Textbox>
                     </div>
                     <div class="col-md-2">
-                        <asp:Button ID="btnModificar" runat="server" class="glyphicon  glyphicon glyphicon-search" OnClick="btnBuscar_Click" ToolTip="Buscar"></asp:Button>
+                        <asp:LinkButton ID="btnModificar" runat="server" class="btn btn-default" OnClick="btnBuscar_Click" ToolTip="Buscar"><i class="glyphicon glyphicon-search"></i></asp:LinkButton>
                     </div>
                 </div>
-                <div class="table-responsive tablaMJP" id="tablaProductos" runat="server" style="display: none;">
+                <div class="table-responsive tablaMJP" id="tablaProductos" runat="server">
                     <asp:GridView ID="GridProductos" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField>
@@ -28,7 +28,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
+                    <div class="alinearDerecha" style="margin-right:3%">
                         <div class="BotonIngreso">
                             <asp:Button ID="btnSalir" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
                         </div>
@@ -36,6 +36,7 @@
                     </div>
                     
                 </div>
+
             </div>
         </ContentTemplate>
         <Triggers>
@@ -53,13 +54,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label id="nombreProducto" runat="server"></label>
+                        <label id="nombreProducto"></label>
                     </div>
                     <div class="form-group">
-                        <label>Descripción artículo</label>
+                        <label>Presentación empaque</label>
                     </div>
                     <div class="form-group">
-                        <label id="descripcionLabel" runat="server"></label>
+                        <label id="descripcionLabel"></label>
                     </div>
                     <div class="form-group">
                         <label>Cantidad (Unidades)</label>
@@ -79,7 +80,9 @@
         </div>
     </div>
     <script type="text/javascript">
-        function openModal() {
+        function openModal(nombre, descripcion) {
+            document.getElementById('nombreProducto').innerHTML = nombre;
+            document.getElementById('descripcionLabel').innerHTML = descripcion;
             $('#AgregarProducto').modal('show');
         }
 </script>
