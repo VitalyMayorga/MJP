@@ -88,6 +88,7 @@ namespace SistemaMJP
        {
            List<int> numEmpaque = new List<int>();
            DropDownEmpaques.Items.Clear();
+           DropDownEmpaques.Items.Insert(0, new ListItem("--Selecione la cantidad por empaque--", "0"));
 
            numEmpaque = controladora.getEmpaques(txtProducto.Text);
            //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist

@@ -38,11 +38,14 @@
 
                  <div class="form-group" id="listProducto" runat="server">
                     <label class="col-md-2 control-label" >Producto: </label>
-                    <div class="col-md-10">
-                        <asp:TextBox ID="txtProducto" placeholder="Producto" Textchanged="llenarCantidades" class="form-control text-box single-line" runat="server"></asp:TextBox>
+                    <div class="col-md-3">
+                        <asp:TextBox ID="txtProducto" placeholder="Producto" class="form-control text-box single-line" runat="server"></asp:TextBox>
                     </div>
-                    <div style="display: none;" id="MsjErrortextProducto" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un producto para realizar la baja</label>
+                     <div class="col-md-3">
+                        <asp:Button ID="btnEmpaques" class="btn btn-default" runat="server" Text="Actualizar" OnClick="llenarCantidades"/>
+                   </div>
+                          <div style="display: none;" id="MsjErrortextProducto" class="col-md-offset-2" runat="server">
+                        <label class="mensajeError">Debe escribir el producto para realizar la baja</label>
                         <br/> 
                     </div>
                 </div>

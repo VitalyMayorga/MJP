@@ -91,6 +91,8 @@ namespace SistemaMJP
         {
             bool activosAsignados = true;
             int indice=0;
+            string descripcionRA = "";
+            string usuario = (string)Session["correoInstitucional"];
            
             while (indice < ids.Count() && activosAsignados)
             {
@@ -112,7 +114,9 @@ namespace SistemaMJP
                 {
                     controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[indice]);
                     indice++;
-                }
+                }                
+                descripcionRA = "Requisicion: " + numRequisicion + " despachada";
+                bitacora.registrarActividad(usuario, descripcionRA);
                 Response.Redirect("RevisionRequisiciones.aspx"); 
             }
         }
@@ -122,6 +126,7 @@ namespace SistemaMJP
         {
             string justificacion = justificacionDevolucion.Value;
             string rol = (string)Session["rol"];
+            string usuario = (string)Session["correoInstitucional"];
             string descripcionRA = "";
             List<string> correos = null;
             if (justificacionDevolucion.Value.Trim() == "")
@@ -146,7 +151,6 @@ namespace SistemaMJP
                 }
                 //email.MailSender(justificacion, "Notificación de devolucion de requisicion", correos);
                 controladora.actualizarObservacion(id_requisicion, justificacion);
-                string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
                 Response.Redirect("RevisionRequisiciones.aspx");                
             }
@@ -170,7 +174,9 @@ namespace SistemaMJP
         {
             string cantidad = txtCantidad.Text;
             int ir = Int32.Parse(idroweditar.InnerText);
+            string descripcionRA = "";
             string rol = (string)Session["rol"];
+            string usuario = (string)Session["correoInstitucional"];
             if (txtCantidad.Text.Trim() == "")
             {
                 string descripcion = GridProductosRequisicion.Rows[ir + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
@@ -181,7 +187,9 @@ namespace SistemaMJP
             {
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('hide');</script>");
                 controladora.modificarCantidadLinea(id_requisicion, ids[ir + (this.GridProductosRequisicion.PageIndex * 10)], Int32.Parse(cantidad));
-            }
+            }            
+            descripcionRA = "Requisicion: " + numRequisicion + " editada";
+            bitacora.registrarActividad(usuario, descripcionRA);
             llenarDetallesProductoRequisicion();
         } 
 

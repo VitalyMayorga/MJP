@@ -21,7 +21,7 @@ html, body, #container {
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input[type="text"],
 input[type="password"] {
-    max-width: 280px;
+    max-width: 290px;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -49,7 +49,7 @@ input[type="password"] {
 }
 
 .cmbsize {
-    max-width: 280px;
+    max-width: 290px;
 }
 
 .msjErroneo {
