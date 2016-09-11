@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SistemaMJP.RequisicionesUsuario;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +13,7 @@ namespace SistemaMJP
     public partial class Requisiciones : System.Web.UI.Page
     {
         public DataTable requisiciones;
+        public DataTable seguimiento;
         ControladoraRequisicionesUsuario controladora = new ControladoraRequisicionesUsuario();
         private ServicioLogin servicio = new ServicioLogin();
         protected void Page_Load(object sender, EventArgs e)
@@ -35,6 +38,7 @@ namespace SistemaMJP
             }
             else {
                 requisiciones = (DataTable)ViewState["tabla"];
+                seguimiento = (DataTable)ViewState["tabla2"];
             }
         }
         //Regresa al menu principal
@@ -76,14 +80,28 @@ namespace SistemaMJP
         //Obtiene el id de la requisicion y se abre un modal con la tabla del historico de dicha requisicion
         protected void btnVer_Click(object sender, EventArgs e)
         {
+            
+            DataTable tabla = crearTablaTrack();
             //Aqui se debe de abrir el modal con el historico de la requisicion seleccionada
             LinkButton btn = (LinkButton)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             int i = Convert.ToInt32(row.RowIndex);
             string numRequisicion = GridRequisiciones.Rows[i + (this.GridRequisiciones.PageIndex * 10)].Cells[0].Text;
+            List<Item_Grid_Tracking> track = controladora.getTracking(numRequisicion);
+            Object[] datos = new Object[2];
+            foreach (Item_Grid_Tracking dato in track) {
+                datos[0] = dato.Fecha.ToString("MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture);
+                datos[1] = dato.Estado;
+                tabla.Rows.Add(datos);
+            }
 
+            trackingGrid.DataSource = tabla;
+            ViewState["tabla2"] = tabla;
+            trackingGrid.DataBind();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('" + numRequisicion + "');", true);
+            upModal.Update();
         }
-
+        
         //Llena la grid de facturas con los datos correspondientes
         internal void llenarRequisiciones()
         {
@@ -147,6 +165,32 @@ namespace SistemaMJP
 
             GridRequisiciones.DataSource = tabla;
             GridRequisiciones.DataBind();
+
+            return tabla;
+        }
+
+        /**
+       * Requiere: n/a
+       * Efectua: Crea la DataTable para desplegar.
+       * retorna:  un dato del tipo DataTable con la estructura para consultar.
+       */
+        protected DataTable crearTablaTrack()//consultar
+        {
+            DataTable tabla = new DataTable();
+            DataColumn columna;
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Fecha";
+            tabla.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Estado";
+            tabla.Columns.Add(columna);
+
+            trackingGrid.DataSource = tabla;
+            trackingGrid.DataBind();
 
             return tabla;
         }

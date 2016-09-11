@@ -10,9 +10,11 @@ namespace SistemaMJP
     {
         ControladoraBDRequisicionesUsuario controladoraBD;
         ControladoraBodegas controladoraB;
+        ControladoraRequisicionAprobadores controladoraR;
         public ControladoraRequisicionesUsuario() { 
             controladoraBD = new ControladoraBDRequisicionesUsuario();
             controladoraB = new ControladoraBodegas();
+            controladoraR = new ControladoraRequisicionAprobadores();
         }
 
         //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid
@@ -112,6 +114,12 @@ namespace SistemaMJP
         {
             return controladoraBD.obtenerIDRequisicion(numRequisicion);
 
+        }
+
+        internal List<Item_Grid_Tracking> getTracking(string numRequisicion)
+        {
+            
+            return controladoraBD.getTracking(numRequisicion);
         }
     }
 }
