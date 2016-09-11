@@ -24,7 +24,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (rol.Equals("Inclusion Pedidos") || rol.Equals("Administrador Almacen"))
+                else if (rol.Equals("Inclusión Pedidos") || rol.Equals("Administrador Almacen"))
                 {
                     llenarActivos();
                 }
@@ -37,8 +37,14 @@ namespace SistemaMJP
             }
             else
             {
-                i = (int)ViewState["i"];
-                numActivo = (String)ViewState["numActivo"];
+               try {
+                   numActivo = (String)ViewState["numActivo"];
+                    i = (int)ViewState["i"];                    
+               }
+               catch (Exception)
+               {
+                  
+               }
             }
         }
         //Regresa al menu principal

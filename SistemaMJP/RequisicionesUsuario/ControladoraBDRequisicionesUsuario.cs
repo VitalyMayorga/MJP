@@ -492,7 +492,7 @@ namespace SistemaMJP
             return datos;
         }
 
-        //Envia una requisicion y sus productos a aprobacion
+        //Envia una requisicion y sus productos a Aprobación
         internal void enviarAAprobacion(string numRequisicion)
         {
             string estado = "Pendiente Aprobación Aprobador";

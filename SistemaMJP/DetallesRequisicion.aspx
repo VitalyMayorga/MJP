@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-1" style="margin-left: 0.5%;">
                         <div class="BotonIngreso">
-                            <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" id="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar"></asp:Button>
+                            <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a Aprobación" id="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar"></asp:Button>
                         </div>
 
 

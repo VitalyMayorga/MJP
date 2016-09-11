@@ -25,7 +25,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Aprobador") && !rol.Equals("Revision y Aprobador Almacen"))
+                else if (!rol.Equals("Aprobador") && !rol.Equals("Revisión y Aprobador Almacen"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }

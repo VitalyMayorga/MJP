@@ -25,7 +25,7 @@ namespace SistemaMJP
         internal void eliminarProducto(int idFactura, int idProducto) {
             controladoraBD.eliminarProducto(idFactura, idProducto);
         }
-        //Envia una factura a aprobacion
+        //Envia una factura a Aprobación
         internal void enviarAAprobacion(int idFactura) {
             controladoraBD.enviarAAprobacion(idFactura);
         

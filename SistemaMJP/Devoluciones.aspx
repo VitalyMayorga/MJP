@@ -10,7 +10,7 @@
                 <asp:LinkButton runat="server" OnClick="regresarDB"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton> 
 
-                <h3 class="Encabezado">Realizar devolucion de Producto</h3>
+                <h3 class="Encabezado">Realizar Devolución de Producto</h3>
                 
                  <div class="form-group" id="listPrograma" runat="server">
                     <label class="col-md-2 control-label" >Programa presupuestario: </label>
@@ -19,7 +19,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistPrograma" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un Programa para realizar la devolucion</label>
+                        <label class="mensajeError">Debe seleccionar un Programa para realizar la Devolución</label>
                         <br/> 
                     </div>
                 </div> 
@@ -31,7 +31,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistSubBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar una subBodega para realizar la devolucion</label>
+                        <label class="mensajeError">Debe seleccionar una subBodega para realizar la Devolución</label>
                         <br/> 
                     </div>
                 </div>                           
@@ -45,7 +45,7 @@
                         <asp:Button ID="btnEmpaques" class="btn btn-default" runat="server" Text="Actualizar" OnClick="llenarCantidades"/>
                    </div>
                     <div style="display: none;" id="MsjErrortextProducto" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un producto para realizar la devolucion</label>
+                        <label class="mensajeError">Debe seleccionar un producto para realizar la Devolución</label>
                         <br/> 
                     </div>
                 </div>
@@ -74,12 +74,12 @@
                 </div>                
 
                 <div class="form-group" >
-                    <label class="col-md-2 control-label" >Justificacion: </label>
+                    <label class="col-md-2 control-label" >Justificación: </label>
                     <div class="col-md-10">
                         <asp:TextBox ID="txtJustificacion" class="form-control text-box single-line" runat="server" placeholder="Justificacion"></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextJustificacion" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Ingrese una justificacion para realizar la devolucion</label>
+                        <label class="mensajeError">Ingrese una justificación para realizar la Devolución</label>
                         <br/> 
                     </div>
                    

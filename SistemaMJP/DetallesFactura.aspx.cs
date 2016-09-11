@@ -31,7 +31,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusion Pedidos"))
+                else if (!rol.Equals("Inclusión Pedidos"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }
@@ -154,12 +154,12 @@ namespace SistemaMJP
             
 
         }
-        //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
-        //Este botón solo está disponible si la factura estaba anteriormente en modo aprobación
+        //Cambia el estado de la factura a pendiente de Aprobación, así como todos los productos
+        //Este botón solo está disponible si la factura estaba anteriormente en modo Aprobación
         protected void btnEnviar(object sender, EventArgs e)
         {
             controladora.enviarAAprobacion(id_factura);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a aprobación.\n Cuando sea revisada por el administrador, su estado será Finalizado')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a Aprobación.\n Cuando sea revisada por el administrador, su estado será Finalizado')", true);
             llenarDetallesProducto();
             string descripcionRA = "Factura" + numFactura + " enviada a revisión";
             string usuario = (string)Session["correoInstitucional"];
@@ -167,7 +167,7 @@ namespace SistemaMJP
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             List<string> correos = email.obtenerCorreosAdminAlmacen(bodega);
-            email.MailSender("Nueva factura enviada a revisión por el usuario " + usuario + ".\nNúmero de factura " + numFactura + ".", "Notificación de solicitud de aprobación de productos de factura", correos);
+            email.MailSender("Nueva factura enviada a revisión por el usuario " + usuario + ".\nNúmero de factura " + numFactura + ".", "Notificación de solicitud de Aprobación de productos de factura", correos);
         }
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()

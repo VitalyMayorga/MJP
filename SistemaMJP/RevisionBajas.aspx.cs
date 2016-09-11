@@ -157,7 +157,7 @@ namespace SistemaMJP
             foreach (Item_Grid_Bajas fila in data)
             {
                 /*                     
-                    Ademas ver que hago con la justificacion que es gigante,
+                    Ademas ver que hago con la Justificación que es gigante,
                     podria ser un boton y que cuando se le da click o 
                     se le pasa por encima lo muestr.
                 */
@@ -230,7 +230,7 @@ namespace SistemaMJP
 
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
-            columna.ColumnName = "Justificacion";
+            columna.ColumnName = "Justificación";
             tabla.Columns.Add(columna);
 
             Session["tabla"] = tabla;

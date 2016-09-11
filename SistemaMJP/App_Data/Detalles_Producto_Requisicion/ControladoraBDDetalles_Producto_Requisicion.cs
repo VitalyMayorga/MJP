@@ -59,7 +59,7 @@ namespace SistemaMJP
             return items;
         }
 
-        //Envia una factura y sus productos a aprobacion
+        //Envia una factura y sus productos a Aprobación
         internal void cambiarEstadoRequisicion(int idRequisicion, int estado)
         {
             using (TransactionScope ts = new TransactionScope())

@@ -21,10 +21,10 @@
         <div class="form-group1">
             <div class="form-group2">
                 <div class="LabelMenu">
-                    <label class="control-label">Administracion</label></div>
+                    <label class="control-label">Administración</label></div>
                 <div class="BotonMenu">
                     <asp:ImageButton ID="imagebutton1" runat="server" Height="109px" Width="133px"
-                        AlternateText="Administracion"
+                        AlternateText="Administración"
                         ImageAlign="middle"
                         ImageUrl="/Images/admin.png"
                         OnClick="ingresarMenuAdministracion" />
@@ -70,7 +70,7 @@
 
             <div class="form-group2">
                 <div class="LabelMenu">
-                    <label class="control-label">Devolucion/Baja
+                    <label class="control-label">Devolución/Baja
                         <br />
                         Mercaderia</label></div>
                 <div class="BotonMenu">

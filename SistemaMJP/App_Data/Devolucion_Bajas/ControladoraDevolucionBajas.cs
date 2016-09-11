@@ -92,7 +92,7 @@ namespace SistemaMJP
             return controladoraP.getProductoCantidadEmpaque(descripcion, cantidadPorEmpaque);
         }
 
-        //Llama a la controladora de base de datos, para actualizar el estado de la devolucion
+        //Llama a la controladora de base de datos, para actualizar el estado de la Devolución
         internal void actualizarEstado(int idDevolucion, int aceptado)
         {
             controladoraBD.actualizarEstado(idDevolucion, aceptado);
@@ -104,7 +104,7 @@ namespace SistemaMJP
             controladoraBD.actualizarCantidadProducto(idBodega, idProducto, idPrograma, idSubBodega, cantidad, tipo, id);
         }
 
-        //Llama a la controladora de base de datos, para agregar una Baja o Devolucion
+        //Llama a la controladora de base de datos, para agregar una Baja o Devolución
         internal void agregarDevolucionBaja(string tipo, int idPrograma, int cantidad, string justificacion, int idBodega, int idProducto, int idSubBodega, string estado)
         {
             controladoraBD.agregarDevolucionBaja(tipo, idPrograma, cantidad, justificacion, idBodega, idProducto, idSubBodega, estado);
@@ -117,7 +117,7 @@ namespace SistemaMJP
 
         }
 
-        //Llama a la controladora de base de datos, para actualizar el estado de la devolucion
+        //Llama a la controladora de base de datos, para actualizar el estado de la Devolución
         internal int buscarIdMaxDevolucion()
         {
            return controladoraBD.buscarMaximo();

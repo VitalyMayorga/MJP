@@ -23,7 +23,7 @@ namespace SistemaMJP
 
         protected void ingresarFacturas(object sender, EventArgs e)
         {
-            if (Session["rol"].Equals("Inclusion Pedidos")) {
+            if (Session["rol"].Equals("Inclusión Pedidos")) {
                 Response.Redirect("Facturas.aspx");
             
             }
@@ -44,7 +44,7 @@ namespace SistemaMJP
                 Response.Redirect("Requisiciones.aspx");
 
             }
-            else if (Session["rol"].Equals("Aprobador") || Session["rol"].Equals("Revision y Aprobador Almacen"))
+            else if (Session["rol"].Equals("Aprobador") || Session["rol"].Equals("Revisión y Aprobador Almacen"))
             {
                 Response.Redirect("RevisionRequisiciones.aspx");
             }
