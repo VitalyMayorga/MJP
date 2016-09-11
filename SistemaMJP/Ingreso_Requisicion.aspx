@@ -30,11 +30,18 @@
                 <div class="form-group">
                     <div class="alinearDerecha" style="margin-right:3%">
                         <div class="BotonIngreso">
-                            <asp:Button ID="btnSalir" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
                         </div>
 
                     </div>
                     
+                </div>
+
+                <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                    <div class="row" style="text-align: right;">
+                            <asp:Button ID="btnSalir" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
+
+                    </div>
+
                 </div>
 
             </div>
@@ -65,7 +72,7 @@
                     <div class="form-group">
                         <label>Cantidad (Unidades)</label>
                         <asp:TextBox ID="txtCantidad" runat="server" placeholder="Ej:10" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorPrograma" class="col-md-offset-2" runat="server">
+                        <div style="display: none;" id="MsjErrorPrograma" runat="server">
                         <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
                     </div>
                     </div>

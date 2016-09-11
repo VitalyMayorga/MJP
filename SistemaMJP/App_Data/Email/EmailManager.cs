@@ -111,7 +111,7 @@ namespace SistemaMJP
             return correos;
         }
 
-        //metodo usado para obtener el correo del administrador general
+        //metodo usado para obtener el correos de las personas de programa presupuestario
         internal List<string> obtenerCorreosAprobador(int programa, int bodega, int subBodega)
         {
             List<string> correos = new List<string>();

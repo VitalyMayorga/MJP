@@ -147,3 +147,22 @@ input.selectorDeFecha{
     width: 14px;
 }
 
+.gridsFormat2 th {
+    text-align: center;
+    background-color: #9393C5;
+    font-size: 15px;
+
+}
+
+.gridsFormat2 td {
+    padding:0 15px;    
+    text-align:center;
+}
+
+.gridPReq td:nth-child(3){
+    width: 14px;
+}
+
+.gridPReq td:nth-child(4){
+    width: 14px;
+}

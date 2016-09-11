@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetallesRequisicion.aspx.cs" Inherits="SistemaMJP.DetallesRequisicion" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
@@ -18,7 +19,7 @@
                 </div>
                 <h4 class="Encabezado">Productos de la requisición</h4>
                 <div class="table-responsive tablaMJP">
-                    <asp:GridView ID="GridProductos" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
+                    <asp:GridView ID="GridProductos" class="gridsFormat gridPReq" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -35,19 +36,14 @@
                         </Columns>
                     </asp:GridView>
                 </div>
-                <div class="form-group" style="margin-top: 2%; margin-right: 5%">
-                    <div class="col-md-10" style="text-align: right; margin-left: 7.8%">
-                        <div class="BotonIngreso">
-                            <asp:Button type="submit" name="btnEliminarRequisicion" Text="Eliminar requisición" id="btnEliminarReq" class="btn btn-default" runat="server" OnClick="btnEliminar"></asp:Button>
-                        </div>
-                    </div>
-                    <div class="col-md-1" style="margin-left: 0.5%;">
-                        <div class="BotonIngreso">
-                            <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" id="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar"></asp:Button>
-                        </div>
 
 
+                <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                    <div class="row" style="text-align: right;">
+                        <asp:Button type="submit" name="btnEliminarRequisicion" Text="Eliminar requisición" ID="btnEliminarReq" class="btn btn-default" runat="server" OnClick="btnEliminar"></asp:Button>
+                        <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" ID="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar"></asp:Button>
                     </div>
+
                 </div>
 
             </div>
@@ -65,13 +61,13 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label id="productoEliminar"></label>
-                        
+
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEliminado"></asp:Button>
-                    <asp:Button id="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button ID="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEliminado"></asp:Button>
+                    <asp:Button ID="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -87,25 +83,25 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label id="nombreProducto" runat="server"></label>
+                        <label id="nombreProducto"></label>
                     </div>
                     <div class="form-group">
                         <label>Presentación empaque</label>
                     </div>
                     <div class="form-group">
-                        <label id="descripcionLabel" runat="server"></label>
+                        <label id="descripcionLabel"></label>
                     </div>
                     <div class="form-group">
                         <label>Cantidad (Unidades)</label>
                         <asp:TextBox ID="txtCantidad" runat="server" placeholder="Ej:10" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorPrograma" class="col-md-offset-2" runat="server">
-                        <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
-                    </div>
+                        <div style="display: none;" id="MsjErrorPrograma" runat="server">
+                            <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAceptar" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptar"></asp:Button>
-                    <asp:Button id="btnCancelar" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button ID="btnAceptar" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptar"></asp:Button>
+                    <asp:Button ID="btnCancelar" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -121,5 +117,5 @@
             $('#EliminarModal').modal('show');
             document.getElementById('productoEliminar').innerHTML = value;
         }
-</script>
+    </script>
 </asp:Content>

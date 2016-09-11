@@ -549,6 +549,7 @@
     <Compile Include="RequisicionesUsuario\ControladoraRequisicionesUsuario.cs" />
     <Compile Include="RequisicionesUsuario\Item_Grid_Productos_Bodega.cs" />
     <Compile Include="RequisicionesUsuario\Item_Grid_Requisiciones.cs" />
+    <Compile Include="RequisicionesUsuario\Item_Grid_Tracking.cs" />
     <Compile Include="RevisionBajas.aspx.cs">
       <DependentUpon>RevisionBajas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -154,8 +154,6 @@ namespace SistemaMJP
                 //Se obtiene el id del producto
                 producto = nombre;
                 ViewState["producto"] = producto;
-                nombreProducto.InnerText = nombre;
-                descripcionLabel.InnerHtml = descripcion;
                 txtCantidad.Text = "";
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
@@ -180,7 +178,8 @@ namespace SistemaMJP
             bitacora.registrarActividad(usuario, descripcionRA);
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
-            List<string> correos = email.obtenerCorreosAprobadorSegunPrograma(controladora.obtenerIDRequisicion(numRequisicion));
+            List<string> datosReq = controladora.getDatosRequisicion(numRequisicion);
+            List<string> correos = email.obtenerCorreosAprobador(Convert.ToInt32(datosReq[1]),Convert.ToInt32(datosReq[0]),Convert.ToInt32(datosReq[2]));
             email.MailSender("Nueva requisición enviada a revisión por el usuario " + usuario + ".\nRequisición " + numRequisicion + ".", "Notificación de solicitud de aprobación de requisición", correos);
         }
         //Llena la grid de productos con los datos correspondientes
