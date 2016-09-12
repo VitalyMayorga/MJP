@@ -228,7 +228,7 @@ namespace SistemaMJP
                     MsjErrortextJustificacion.Style.Add("display", "none");
                     controladora.agregarDevolucionBaja("Baja", Int32.Parse(DropDownPrograma.SelectedValue), Int32.Parse(TextCantidad.Text), txtJustificacion.Text, bodegaId, controladora.getProductoCantidadEmpaque(txtProducto.Text, Int32.Parse(DropDownEmpaques.SelectedValue)), Int32.Parse(DropDownSubBodegas.SelectedValue), "Pendiente");
                     correo = email.obtenerCorreosAprobador(Int32.Parse(DropDownPrograma.SelectedValue), bodegaId, Int32.Parse(DropDownSubBodegas.SelectedValue));
-                    email.MailSender("Solicitud de baja enviada a revisión por el usuario " + usuario + ".", "Notificación de solicitud de aprobación de productos de factura", correo);
+                    email.MailSender("Solicitud de baja enviada a revisión por el usuario " + usuario + ".", "Notificación de solicitud de Aprobación de productos de factura", correo);
                     Response.Redirect("DevolucionBajas.aspx");
                 }
             }

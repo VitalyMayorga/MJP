@@ -33,7 +33,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Aprobador") && !rol.Equals("Revision y Aprobador Almacen"))
+                else if (!rol.Equals("Aprobador") && !rol.Equals("Revisión y Aprobador Almacen"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }
@@ -121,7 +121,7 @@ namespace SistemaMJP
             }
         }
 
-        //Cambia el estado de la requisicion segun el rol del usuario que realizo la devolucion
+        //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
         protected void aceptarDevolucion(object sender, EventArgs e)
         {
             string justificacion = justificacionDevolucion.Value;
@@ -137,7 +137,7 @@ namespace SistemaMJP
             else{
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetalles').modal('hide');</script>");
                 
-                if (rol.Equals("Revision y Aprobador Almacen"))
+                if (rol.Equals("Revisión y Aprobador Almacen"))
                 {
                     controladora.cambiarEstadoRequisicion(id_requisicion, 2);// Revisar como se obtiene el id de la requisicion
                     correos = email.obtenerCorreosAprobadorSegunPrograma(id_requisicion);
@@ -149,7 +149,7 @@ namespace SistemaMJP
                     correos = email.obtenerCorreoUsuarioRequisicion(id_requisicion);
                     descripcionRA = "Requisicion: " + numRequisicion + " devuelta a usuario";
                 }
-                //email.MailSender(justificacion, "Notificación de devolucion de requisicion", correos);
+                //email.MailSender(Justificación, "Notificación de devolución de requisicion", correos);
                 controladora.actualizarObservacion(id_requisicion, justificacion);
                 bitacora.registrarActividad(usuario, descripcionRA);
                 Response.Redirect("RevisionRequisiciones.aspx");                
@@ -159,7 +159,7 @@ namespace SistemaMJP
         //Antes de devolver la requisicion abre el panel para escribir la observacion
         protected void btnDevolver_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación devolucion requisicion: " + numRequisicion + "');", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación devolución requisicion: " + numRequisicion + "');", true);
         }
 
         //Envia la requisicion a los aprobadores de almacen
@@ -169,7 +169,7 @@ namespace SistemaMJP
             Response.Redirect("RevisionRequisiciones.aspx");
         }        
 
-        //Cambia el estado de la requisicion segun el rol del usuario que realizo la devolucion
+        //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
         protected void aceptarEdicion(object sender, EventArgs e)
         {
             string cantidad = txtCantidad.Text;
@@ -345,7 +345,7 @@ namespace SistemaMJP
        /* protected void GridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             string rol = (string)Session["rol"];
-            if (rol.Equals("Revision y Aprobador Almacen"))
+            if (rol.Equals("Revisión y Aprobador Almacen"))
             {
                e.Row.Cells[2].Visible = false;
                e.Row.Cells[3].Visible = false;

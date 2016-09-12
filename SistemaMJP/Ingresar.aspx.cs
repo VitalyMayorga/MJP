@@ -39,7 +39,7 @@ namespace SistemaMJP
                 Session["username"] = servicio.GetUsername(usuario);
                 Session["rol"] = servicio.GetRol(usuario);
                 if (!Session["rol"].Equals("Administrador General")) {//Solo el AdminGeneral no posee bodegas ni programas presupuestarios, ya que su labor es crear cuentas
-                    if (!Session["rol"].Equals("Inclusion Pedidos") && !Session["rol"].Equals("Administrador Almacen"))
+                    if (!Session["rol"].Equals("Inclusión Pedidos") && !Session["rol"].Equals("Administrador Almacen"))
                     {
                         Session["programas"] = servicio.GetProgramasPresupuestarios(usuario);
                     

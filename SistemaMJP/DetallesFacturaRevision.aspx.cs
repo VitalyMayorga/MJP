@@ -83,7 +83,7 @@ namespace SistemaMJP
 
             ////HTMLDECODE: es necesario para leer caracteres con tilde
             //String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
-            //if (estado.Equals("Pendiente de aprobación"))
+            //if (estado.Equals("Pendiente de Aprobación"))
             //{
             //    //Se obtiene el id del producto
             //    int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
@@ -153,7 +153,7 @@ namespace SistemaMJP
             //i = Convert.ToInt32(row.RowIndex);
 
             //String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
-            //if (estado.Equals("Pendiente de aprobación"))
+            //if (estado.Equals("Pendiente de Aprobación"))
             //{
             //    //Se obtiene el id del producto
             //    int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];

@@ -16,7 +16,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         }             
 
-        //Metodo que se encarga de agregar una Devolucion o Baja al sistema
+        //Metodo que se encarga de agregar una Devolución o Baja al sistema
         public void agregarDevolucionBaja(string tipo, int idPrograma, int cantidad, string justificacion, int idBodega, int idProducto, int idSubBodega, string estado)
         {
             using (TransactionScope ts = new TransactionScope())
@@ -47,7 +47,7 @@ namespace SistemaMJP
             }
         }
 
-        //Metodo que se encarga de actualizar el estado de una devolucion
+        //Metodo que se encarga de actualizar el estado de una Devolución
         public void actualizarEstado(int idDevolucion, int aceptado)
         {
             using (TransactionScope ts = new TransactionScope())
@@ -72,7 +72,7 @@ namespace SistemaMJP
             }
         }
 
-        //Metodo que se encarga de actualizar la cantidad de los productos asignados a una baja o Devolucion
+        //Metodo que se encarga de actualizar la cantidad de los productos asignados a una baja o Devolución
         public void actualizarCantidadProducto(int idBodega, int idProducto, int idPrograma,  int idSubBodega, int cantidad, string tipo, int id)
         {
             using (TransactionScope ts = new TransactionScope())

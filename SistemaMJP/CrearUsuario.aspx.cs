@@ -103,7 +103,7 @@ namespace SistemaMJP
         {
             ListBoxSubBodegasAsignadas.Items.Clear();
             ListBoxSubBodegasDisponibles.Items.Clear();
-            if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1)
+            if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
             {                
                 Dictionary<string, int> items = new Dictionary<string, int>();
 
@@ -114,7 +114,7 @@ namespace SistemaMJP
 
                 foreach (KeyValuePair<string, int> entry in items)
                 {
-                    revisarPrograma("Administracion Penitenciaria", entry.Key);
+                    revisarPrograma("Administración Penitenciaria", entry.Key);
                 }
 
             }            
@@ -222,7 +222,7 @@ namespace SistemaMJP
                 else
                 {
                     MsjErrorListRol.Style.Add("display", "none");
-                    if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
+                    if (ListRoles.SelectedItem.Text == "Inclusión Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
                     {
                         if (ListBodegas.SelectedValue == "0")
                         {
@@ -257,7 +257,7 @@ namespace SistemaMJP
                 else
                 {
                     MsjErrorListRol.Style.Add("display", "none");
-                    if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
+                    if (ListRoles.SelectedItem.Text == "Inclusión Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
                     {
                         if (ListBodegas.SelectedValue == "0")
                         {
@@ -283,7 +283,7 @@ namespace SistemaMJP
                 else
                 {
                     MsjErrorListRol.Style.Add("display", "none");
-                    if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
+                    if (ListRoles.SelectedItem.Text == "Inclusión Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
                     {
                         if (ListBodegas.SelectedValue == "0")
                         {
@@ -306,7 +306,7 @@ namespace SistemaMJP
             else
             {
                 MsjErrorListRol.Style.Add("display", "none");
-                if (ListRoles.SelectedItem.Text == "Usuario" || ListRoles.SelectedItem.Text == "Aprobador" || ListRoles.SelectedItem.Text == "Consulta" || ListRoles.SelectedItem.Text == "Revision y Aprobador Almacen")
+                if (ListRoles.SelectedItem.Text == "Usuario" || ListRoles.SelectedItem.Text == "Aprobador" || ListRoles.SelectedItem.Text == "Consulta" || ListRoles.SelectedItem.Text == "Revisión y Aprobador Almacen")
                 {
                    
                      Dictionary<string, int> itemsPrograma = new Dictionary<string, int>();
@@ -361,7 +361,7 @@ namespace SistemaMJP
                              MsjErrorListBoxSubBodega.Style.Add("display", "none");
                          }
                      }
-                     else if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1 && itemsSubBodega.Count < 1)
+                     else if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1 && itemsSubBodega.Count < 1)
                      {
                          MsjErrorListBoxPrograma.Style.Add("display", "none");
                          MsjErrorListBoxBodegas.Style.Add("display", "none");
@@ -389,7 +389,7 @@ namespace SistemaMJP
                                  controladoraU.agregarUsuarioBodega(idUsuario, entry.Value);
                              }
 
-                             if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administracion Penitenciaria")) != -1)
+                             if (ListBoxProgramasAsignados.Items.IndexOf(ListBoxProgramasAsignados.Items.FindByText("Administración Penitenciaria")) != -1)
                              {
                                  //Se llena la tabla de UsuarioSubBodega
                                  foreach (KeyValuePair<string, int> entry in itemsSubBodega)
@@ -402,7 +402,7 @@ namespace SistemaMJP
                      }                  
 
                 }
-                else if (ListRoles.SelectedItem.Text == "Inclusion Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
+                else if (ListRoles.SelectedItem.Text == "Inclusión Pedidos" || ListRoles.SelectedItem.Text == "Administrador Almacen")
                 {
                     if (ListBodegas.SelectedValue == "0")
                     {
@@ -420,7 +420,7 @@ namespace SistemaMJP
                             idUsuario = controladoraU.buscarUltimoUsuario();
                             controladoraU.agregarUsuarioBodega(idUsuario, Int32.Parse(ListBodegas.SelectedValue));
                             Dictionary<string, int> SubBodegas = new Dictionary<string, int>();
-                            SubBodegas = controladoraU.getSubBodegas("Administracion Penitenciaria", ListBodegas.SelectedValue);
+                            SubBodegas = controladoraU.getSubBodegas("Administración Penitenciaria", ListBodegas.SelectedValue);
 
                             //Itera sobre el diccionario para relacionar al Usuario con cada SubBodega de la Bodega asignada
                             foreach (KeyValuePair<string, int> entry in SubBodegas)
@@ -448,7 +448,7 @@ namespace SistemaMJP
         protected void mostrarListBox(object sender, EventArgs e)
         {
             llenarListBoxSubBodegas();
-            if (ListRoles.SelectedItem.Text=="Usuario" || ListRoles.SelectedItem.Text=="Aprobador" || ListRoles.SelectedItem.Text =="Consulta" || ListRoles.SelectedItem.Text == "Revision y Aprobador Almacen")
+            if (ListRoles.SelectedItem.Text=="Usuario" || ListRoles.SelectedItem.Text=="Aprobador" || ListRoles.SelectedItem.Text =="Consulta" || ListRoles.SelectedItem.Text == "Revisión y Aprobador Almacen")
             {
                 labelPrograma.Style.Add("display", "block");
                 listBoxPrograma.Style.Add("display", "block");
@@ -458,7 +458,7 @@ namespace SistemaMJP
                 listBoxSubBodegas.Style.Add("display", "block");
                 listBodega.Style.Add("display", "none");
             }
-            else if (ListRoles.SelectedItem.Text=="Inclusion Pedidos" || ListRoles.SelectedItem.Text=="Administrador Almacen")
+            else if (ListRoles.SelectedItem.Text=="Inclusión Pedidos" || ListRoles.SelectedItem.Text=="Administrador Almacen")
             {
                 labelPrograma.Style.Add("display", "none");
                 listBoxPrograma.Style.Add("display", "none");

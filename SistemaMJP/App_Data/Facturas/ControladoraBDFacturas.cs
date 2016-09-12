@@ -47,7 +47,7 @@ namespace SistemaMJP
 
         }
 
-        //Metodo que se encarga de devolver la lista de Facturas para revision o revisadas en el sistema
+        //Metodo que se encarga de devolver la lista de Facturas para Revisión o revisadas en el sistema
         internal List<Item_Grid_Facturas> getListaFacturasAdmin(string bodega)
         {
             List<Item_Grid_Facturas> facturas = new List<Item_Grid_Facturas>();

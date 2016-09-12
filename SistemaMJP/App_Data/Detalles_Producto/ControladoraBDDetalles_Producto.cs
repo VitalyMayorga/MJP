@@ -90,10 +90,10 @@ namespace SistemaMJP
 
 
         }
-        //Envia una factura y sus productos a aprobacion
+        //Envia una factura y sus productos a Aprobación
         internal void enviarAAprobacion(int idFactura)
         {
-            string estado = "Pendiente de aprobación";
+            string estado = "Pendiente de Aprobación";
             using (TransactionScope ts = new TransactionScope())
             {
                 try

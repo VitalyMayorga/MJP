@@ -30,7 +30,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (!rol.Equals("Inclusion Pedidos"))
+                else if (!rol.Equals("Inclusión Pedidos"))
                 {
                     Response.Redirect("MenuPrincipal");
                 }

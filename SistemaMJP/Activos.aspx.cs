@@ -23,7 +23,7 @@ namespace SistemaMJP
                 {
                     Response.Redirect("Ingresar");
                 }
-                else if (rol.Equals("Inclusion Pedidos") || rol.Equals("Administrador Almacen"))
+                else if (rol.Equals("Inclusión Pedidos") || rol.Equals("Administrador Almacen"))
                 {
                     llenarListaActivos();
 
@@ -69,10 +69,12 @@ namespace SistemaMJP
             }
             else
             {
-
-                numActivo = (String)ViewState["numActivo"];
-                editar = (bool)ViewState["editar"];
-
+                try{
+                    numActivo = (String)ViewState["numActivo"];
+                    editar = (bool)ViewState["editar"];
+                }
+                catch { 
+                }
             }
            
         }
