@@ -47,11 +47,12 @@ namespace SistemaMJP
                     {
                         numRequisicion = (servicio.TamperProofStringDecode(Request.QueryString["numReq"], "MJP")).ToString();
                         estado = controladora.getEstadoRequisicion(numRequisicion);
-                        if (!estado.Equals("En edición") && !estado.Equals("Devuelto a Usuario")) {
+                        if (!estado.Equals("En edición") && !estado.Equals("Devuelto a Usuario"))
+                        {
                             btnEnviarAprobacion.Enabled = false;
 
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -149,13 +150,11 @@ namespace SistemaMJP
                 i = Convert.ToInt32(row.RowIndex);
                 ViewState["i"] = i;
                 //HTMLDECODE: es necesario para leer caracteres con tilde
-                 nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
-                 descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
+                nombre = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
+                descripcion = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[1].Text);
                 //Se obtiene el id del producto
                 producto = nombre;
                 ViewState["producto"] = producto;
-                nombreProducto.InnerText = nombre;
-                descripcionLabel.InnerHtml = descripcion;
                 txtCantidad.Text = "";
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
@@ -168,19 +167,18 @@ namespace SistemaMJP
             Response.Redirect("Ingreso_Requisicion.aspx?bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[0], "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[1], "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[2], "MJP"))
                     + "&numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
         }
-        //Cambia el estado de la factura a pendiente de Aprobación, así como todos los productos
-        //Este botón solo está disponible si la factura estaba anteriormente en modo Aprobación
+        //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
+        //Este botón solo está disponible si la factura estaba anteriormente en modo aprobación
         protected void btnEnviar(object sender, EventArgs e)
         {
             controladora.enviarAAprobacion(numRequisicion);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Requisición enviada a Aprobación.\n Puede seguir el histórico del estado de la requisción en el menú requisiciones')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Requisición enviada a aprobación.\n Puede seguir el histórico del estado de la requisción en el menú requisiciones')", true);
             llenarDetallesProducto();
-            string descripcionRA = "Requisición " + numRequisicion + " enviada a Aprobación programa";
+            string descripcionRA = "Requisición " + numRequisicion + " enviada a aprobacion programa";
             string usuario = (string)Session["correoInstitucional"];
             bitacora.registrarActividad(usuario, descripcionRA);
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
-<<<<<<< HEAD
             List<string> datosReq = controladora.getDatosRequisicion(numRequisicion);
             try
             {
@@ -189,16 +187,12 @@ namespace SistemaMJP
 
 
             }
-            catch (Exception ex) {
-            
+            catch (Exception ex)
+            {
+
             }
 
-         }
-=======
-            List<string> correos = email.obtenerCorreosAprobadorSegunPrograma(controladora.obtenerIDRequisicion(numRequisicion));
-            email.MailSender("Nueva requisición enviada a revisión por el usuario " + usuario + ".\nRequisición " + numRequisicion + ".", "Notificación de solicitud de Aprobación de requisición", correos);
         }
->>>>>>> f93d5e27488589ad2b566fe8533bc9c4a1c1a17e
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
         {
