@@ -73,6 +73,7 @@ namespace SistemaMJP
                     cmd.CommandText = "P_Cambiar_Estado_Requisicion";
                     cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
                     cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
