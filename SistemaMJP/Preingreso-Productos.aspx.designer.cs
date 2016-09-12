@@ -76,43 +76,31 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorSubBodega;
         
         /// <summary>
-        /// txtSubPartida control.
+        /// ingresoF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListaSubPartidas;
-        protected global::System.Web.UI.WebControls.DropDownList ListaProveedores;
-        /// <summary>
-        /// MsjErrorSubPartida control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorSubPartida;
+        protected global::System.Web.UI.WebControls.RadioButton ingresoF;
         
         /// <summary>
-        /// IngresoFactura control.
+        /// mercaderiaI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton IngresoFactura;
-
-        protected global::System.Web.UI.WebControls.RadioButton ingresoF;
         protected global::System.Web.UI.WebControls.RadioButton mercaderiaI;
         
         /// <summary>
-        /// InventarioInicial control.
+        /// formFacturas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton InventarioInicial;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturas;
         
         /// <summary>
         /// txtNumFactura control.
@@ -122,10 +110,7 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumFactura;
-        protected global::System.Web.UI.WebControls.TextBox txtNombreProveedor;
-        protected global::System.Web.UI.WebControls.TextBox txtCorreo;
-        protected global::System.Web.UI.WebControls.TextBox txtTelefonos;
-        protected global::System.Web.UI.WebControls.TextBox txtFechaF;
+        
         /// <summary>
         /// MsjErrorFactura control.
         /// </summary>
@@ -134,10 +119,122 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFactura;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFecha;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorProveedor;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturas;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formProveedor;
+        
+        /// <summary>
+        /// formFacturaFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl formFacturaFecha;
+        
+        /// <summary>
+        /// txtFechaF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaF;
+        
+        /// <summary>
+        /// MsjErrorFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorFecha;
+        
+        /// <summary>
+        /// formProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formProveedor;
+        
+        /// <summary>
+        /// ListaProveedores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ListaProveedores;
+        
+        /// <summary>
+        /// MsjErrorProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorProveedor;
+        
+        /// <summary>
+        /// btnAceptar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        
+        /// <summary>
+        /// txtNombreProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreProveedor;
+        
+        /// <summary>
+        /// txtCorreo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCorreo;
+        
+        /// <summary>
+        /// txtTelefonos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelefonos;
+        
+        /// <summary>
+        /// btnAceptarM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarM;
+        
+        /// <summary>
+        /// btnCancelarM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarM;
     }
 }

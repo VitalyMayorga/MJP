@@ -41,7 +41,7 @@
                 <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
                     <div class="row" style="text-align: right;">
                         <asp:Button type="submit" name="btnEliminarRequisicion" Text="Eliminar requisición" ID="btnEliminarReq" class="btn btn-default" runat="server" OnClick="btnEliminar"></asp:Button>
-                        <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" ID="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar"></asp:Button>
+                        <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" ID="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar" style="margin-left:2%"></asp:Button>
                     </div>
 
                 </div>

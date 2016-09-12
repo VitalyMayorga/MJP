@@ -159,10 +159,18 @@ input.selectorDeFecha{
     text-align:center;
 }
 
-.gridPReq td:nth-child(3){
+.gridPReq td:nth-child(5){
     width: 14px;
 }
 
 .gridPReq td:nth-child(4){
+    width: 14px;
+}
+
+.gridF td:nth-child(8){
+    width: 14px;
+}
+
+.gridProductos td:nth-child(4){
     width: 14px;
 }

@@ -88,20 +88,15 @@
                         <label class="msjErroneo">Debe elegir un Proveedor</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
-                        </div>
 
-                    </div>
-                    <div class="col-md-3">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
-                        </div>
+                <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                    <div class="row" style="text-align: right;">
+                        <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
+                        <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" Style="margin-left: 2%" />
 
                     </div>
                 </div>
+
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

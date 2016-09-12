@@ -147,27 +147,16 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
-                        <div class="BotonIngreso">
+                <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                    <div class="row" style="text-align: right;">
                             <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
-                        </div>
+                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" style="margin-left:2%"/>
+                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" style="margin-left:2%" />
 
                     </div>
-                    <div class="col-md-1">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnAyS" class="btn btn-default" runat="server" Text="Aceptar y Salir" OnClick="aceptarYSalir" />
-                        </div>
 
-                    </div>
-                    <div class="col-md-3">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
-                        </div>
-
-                    </div>
                 </div>
+                
             </div>
         </ContentTemplate>
         <Triggers>

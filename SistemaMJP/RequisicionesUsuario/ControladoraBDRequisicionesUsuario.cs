@@ -383,7 +383,14 @@ namespace SistemaMJP
         {
             String nombre = reader.GetString(0);
             String unidad = reader.GetString(1);
-            Item_Grid_Productos_Bodega items = new Item_Grid_Productos_Bodega(nombre,unidad);
+            int cantidad = 0;
+
+            try
+            {
+                cantidad = reader.GetInt32(2);
+            }
+            catch (Exception ex) { }
+            Item_Grid_Productos_Bodega items = new Item_Grid_Productos_Bodega(nombre,unidad,cantidad);
             return items;
         }
         //Metodo que se encarga de obtener el estado actual de la requisicion
@@ -498,7 +505,7 @@ namespace SistemaMJP
         //Envia una requisicion y sus productos a aprobacion
         internal void enviarAAprobacion(string numRequisicion)
         {
-            string estado = "Pendiente Aprobación Aprobador";
+            string estado = "Pendiente Aprobación Programa";
             using (TransactionScope ts = new TransactionScope())
             {
                 try

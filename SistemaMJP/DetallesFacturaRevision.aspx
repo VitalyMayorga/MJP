@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetallesFacturaRevision.aspx.cs" Inherits="SistemaMJP.DetallesFacturaRevision" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
@@ -27,19 +28,19 @@
                     </asp:GridView>
                 </div>
                 <div class="form-group" style="margin-top: 2%; margin-right: 5%">
-                        <%--<div class="col-md-10" style="text-align: right; margin-left: 7.8%">
+                    <%--<div class="col-md-10" style="text-align: right; margin-left: 7.8%">
                         <div class="BotonIngreso">
                             <asp:Button  name="btnVolver" Text="Volver" id="btnVolver"  runat="server" class="btn btn-default" OnClick="volver"></asp:Button>
                         </div>--%>
-                        <div class="row BotonIngreso" style="float:right">
-                            <asp:Button  name="btnVolver" Text="Volver" id="btnVolver"  runat="server" class="btn btn-default" OnClick="volver"  style="margin-right: 1%;margin-left:-10%"></asp:Button>
-                            <asp:Button  name="btnAprobar" Text="Aprobar" id="btnAprobar"  runat="server" class="btn btn-default" OnClick="btnAprobar_Click" style="margin-right: 1%"></asp:Button>
-                            <asp:Button  name="btnRechazar" Text="Rechazar" id="btnRechazar"  runat="server" class="btn btn-default" OnClick="btnRechazar_Click"></asp:Button>
-
-                        </div>
+                    <div class="row" style="float: right">
+                        <asp:Button name="btnVolver" Text="Volver" ID="btnVolver" runat="server" class="btn btn-default" OnClick="volver" Style="margin-right: 1%; margin-left: -10%"></asp:Button>
+                        <asp:Button name="btnAprobar" Text="Aprobar" ID="btnAprobar" runat="server" class="btn btn-default" OnClick="btnAprobar_Click" Style="margin-right: 1%"></asp:Button>
+                        <asp:Button name="btnRechazar" Text="Rechazar" ID="btnRechazar" runat="server" class="btn btn-default" OnClick="btnRechazar_Click"></asp:Button>
 
                     </div>
+
                 </div>
+            </div>
 
             </div>
         </ContentTemplate>
@@ -55,14 +56,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label id="producto">Justificación</label>      
-                               
+                        <label id="producto">Justificación</label>
+
                     </div>
-                    <textarea id="justificacionRechazo" runat="server" style="max-width:300px;width:300px"></textarea>    
+                    <textarea id="justificacionRechazo" runat="server" style="max-width: 300px; width: 300px"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptar"></asp:Button>
-                    <asp:Button id="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button ID="btnAceptarM" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptar"></asp:Button>
+                    <asp:Button ID="btnCancelarM" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -81,17 +82,17 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Fecha Recepción Definitiva</label>
-                        
+
                     </div>
                     <div class="form-group">
                         <asp:TextBox runat="server" ID="txtFecha" class="form-control text-box single-line"></asp:TextBox>
-                        
+
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAP" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarAprobado"></asp:Button>
-                    <asp:Button id="btnC" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button ID="btnAP" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarAprobado"></asp:Button>
+                    <asp:Button ID="btnC" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -112,40 +113,27 @@
                 duration: 'fast'
             });
         }
-</script>
-     <script type="text/javascript">//Convertimos el calendario a español
-         $.datepicker.regional['es'] = {
-             closeText: 'Cerrar',
-             prevText: '<Ant',
-             nextText: 'Sig>',
-             currentText: 'Hoy',
-             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-             monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-             dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-             dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-             dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-             weekHeader: 'Sm',
-             dateFormat: 'dd/mm/yy',
-             firstDay: 1,
-             isRTL: false,
-             showMonthAfterYear: false,
-             yearSuffix: ''
-         };
-         $.datepicker.setDefaults($.datepicker.regional['es']);
-         $(document).ready(function () {
-             $("#<%= txtFecha.ClientID %>").datepicker({
-                showmonth: true,
-                autoSize: true,
-                showAnim: 'slideDown',
-                duration: 'fast'
-            });
-            
-
-        });
-
-        var prm = Sys.WebForms.PageRequestManager.getInstance();
-
-        prm.add_endRequest(function () {
+    </script>
+    <script type="text/javascript">//Convertimos el calendario a español
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '<Ant',
+            nextText: 'Sig>',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        $(document).ready(function () {
             $("#<%= txtFecha.ClientID %>").datepicker({
                 showmonth: true,
                 autoSize: true,
@@ -156,6 +144,19 @@
 
         });
 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        prm.add_endRequest(function () {
+            $("#<%= txtFecha.ClientID %>").datepicker({
+                 showmonth: true,
+                 autoSize: true,
+                 showAnim: 'slideDown',
+                 duration: 'fast'
+             });
+
+
+         });
+
     </script>
-    
+
 </asp:Content>

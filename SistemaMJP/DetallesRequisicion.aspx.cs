@@ -179,19 +179,29 @@ namespace SistemaMJP
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             List<string> datosReq = controladora.getDatosRequisicion(numRequisicion);
-            List<string> correos = email.obtenerCorreosAprobador(Convert.ToInt32(datosReq[1]),Convert.ToInt32(datosReq[0]),Convert.ToInt32(datosReq[2]));
-            email.MailSender("Nueva requisición enviada a revisión por el usuario " + usuario + ".\nRequisición " + numRequisicion + ".", "Notificación de solicitud de aprobación de requisición", correos);
-        }
+            try
+            {
+                List<string> correos = email.obtenerCorreosAprobador(Convert.ToInt32(datosReq[1]), Convert.ToInt32(datosReq[0]), Convert.ToInt32(datosReq[2]));
+                email.MailSender("Nueva requisición enviada a revisión por el usuario " + usuario + ".\nRequisición " + numRequisicion + ".", "Notificación de solicitud de aprobación de requisición", correos);
+
+
+            }
+            catch (Exception ex) {
+            
+            }
+
+         }
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
         {
             DataTable tablaP = crearTablaRequisiciones();
             List<Item_Grid_Productos_Bodega> data = controladora.getListaProductosRequisicion(numRequisicion);
-            Object[] datos = new Object[2];
+            Object[] datos = new Object[3];
             foreach (Item_Grid_Productos_Bodega fila in data)
             {
                 datos[0] = fila.Nombre;
                 datos[1] = fila.Unidad;
+                datos[2] = fila.Cantidad;
                 tablaP.Rows.Add(datos);
             }
 
@@ -220,6 +230,11 @@ namespace SistemaMJP
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Unidad Medida";
+            tabl.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Cantidad";
             tabl.Columns.Add(columna);
 
             GridProductos.DataSource = tabl;

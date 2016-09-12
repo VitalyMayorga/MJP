@@ -9,11 +9,12 @@ namespace SistemaMJP.RequisicionesUsuario
     {
         private String nombre;
         private String unidad;
-        public Item_Grid_Productos_Bodega(String nombre, String unidad)
+        private int cantidad;
+        public Item_Grid_Productos_Bodega(String nombre, String unidad,int cantidad)
         {
             Nombre = nombre;
             Unidad = unidad;
-            
+            Cantidad = cantidad;
                 
         }
         /*
@@ -35,6 +36,17 @@ namespace SistemaMJP.RequisicionesUsuario
         public String Unidad {
             get { return unidad; } 
             set { unidad = value;}
+        }
+
+        /*
+         * Requiere: una Hilera con el valor nuevo
+         * Efectúa : Asigna a la variable global Cantidad con el parámetro
+         * Retorna : El valor de la variable global Cantidad
+         * */
+        public int Cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
         }
     }
 }

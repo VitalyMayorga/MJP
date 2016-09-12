@@ -173,6 +173,7 @@ namespace SistemaMJP
             //nombreProducto.Text = nombre;
             //descripcionLabel.Text = descripcion;
             txtCantidad.Text = "";
+            MsjErrorPrograma.Style.Add("display", "none");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('"+nombre+"','"+descripcion+"');", true);
 
             
@@ -184,7 +185,7 @@ namespace SistemaMJP
             {//Si todo es valido, entonces se procede a guardar el producto en la requisicion
                 int cantidad = Convert.ToInt32(txtCantidad.Text);
                 controladora.agregarProducto(producto, numRequisicion, cantidad);
-
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#AgregarProducto').modal('hide');</script>");
 
             }
             else

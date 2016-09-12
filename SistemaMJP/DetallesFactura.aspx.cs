@@ -79,10 +79,8 @@ namespace SistemaMJP
         //Crea una vista Previa de la factura con los productos ingresados.
         protected void vistaPrevia(object sender, EventArgs e)
         {
-            FacturaVistaPrevia.idFactura = id_factura;
-            Response.Redirect("FacturaVistaPrevia");
-            //Se debe encargar de generar una vista previa imprimible de la factura
-
+            Response.Redirect("FacturaVistaPrevia.aspx?id_factura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_factura.ToString(), "MJP")));
+            
         }
 
         /*
@@ -155,19 +153,25 @@ namespace SistemaMJP
 
         }
         //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
-        //Este botón solo está disponible si la factura estaba anteriormente en modo aprobación
+        //Este botón solo está disponible si la factura estaba anteriormente en modo edicion
         protected void btnEnviar(object sender, EventArgs e)
         {
-            controladora.enviarAAprobacion(id_factura);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a aprobación.\n Cuando sea revisada por el administrador, su estado será Finalizado')", true);
-            llenarDetallesProducto();
-            string descripcionRA = "Factura" + numFactura + " enviada a revisión";
-            string usuario = (string)Session["correoInstitucional"];
-            bitacora.registrarActividad(usuario, descripcionRA);
-            List<string> bodegas = (List<string>)Session["bodegas"];
-            string bodega = bodegas[0];
-            List<string> correos = email.obtenerCorreosAdminAlmacen(bodega);
-            email.MailSender("Nueva factura enviada a revisión por el usuario " + usuario + ".\nNúmero de factura " + numFactura + ".", "Notificación de solicitud de aprobación de productos de factura", correos);
+
+            String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
+            if (estado.Equals("En edición"))
+            {
+                controladora.enviarAAprobacion(id_factura);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a aprobación.\n Cuando sea revisada por el administrador, su estado será Finalizado')", true);
+                llenarDetallesProducto();
+                string descripcionRA = "Factura" + numFactura + " enviada a revisión";
+                string usuario = (string)Session["correoInstitucional"];
+                bitacora.registrarActividad(usuario, descripcionRA);
+                List<string> bodegas = (List<string>)Session["bodegas"];
+                string bodega = bodegas[0];
+                List<string> correos = email.obtenerCorreosAdminAlmacen(bodega);
+                email.MailSender("Nueva factura enviada a revisión por el usuario " + usuario + ".\nNúmero de factura " + numFactura + ".", "Notificación de solicitud de aprobación de productos de factura", correos);
+
+            }
         }
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
@@ -193,6 +197,7 @@ namespace SistemaMJP
             }
             ViewState["ids"] = ids;
             ViewState["tabla"] = tabla;
+            datosFactura = tabla;
             GridProductos.DataSource = datosFactura;
             GridProductos.DataBind();
 

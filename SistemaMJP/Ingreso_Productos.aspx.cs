@@ -226,7 +226,8 @@ namespace SistemaMJP
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " al ser activo asignado,su cantidad es 1')", true);
                     controladora.agregarActivo(numActivo, funcionario, cedula,descripcion,cantidadEmpaque);
                 }
-                if (correcto && numFactura==null) {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
+                if (correcto && String.IsNullOrEmpty(numFactura))
+                {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
                     controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
                     string descripcionRA = "Agregado producto " + descripcion+" a la bodega";
                     string usuario = (string)Session["correoInstitucional"];
@@ -330,7 +331,7 @@ namespace SistemaMJP
                     bitacora.registrarActividad(usuario, descripcionRA);
                     
                 }
-                if (correcto && numFactura == null)
+                if (correcto && String.IsNullOrEmpty(numFactura))
                 {//Si se ingreso el producto de mercaderia inicial,se procede a guardar el producto en la tabla Informacion producto
                     controladora.agregarProductoABodega(bodega, descripcion, cantidadEmpaque, programa, subbodega, cantidad, fechaC, fechaG, fechaV);
                     string descripcionRA = "Agregado producto " + descripcion + " a la bodega";
@@ -353,7 +354,7 @@ namespace SistemaMJP
                 }
 
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Producto " + descripcion + " agregado con éxito')", true);
-                if (numFactura != null)
+                if (!String.IsNullOrEmpty(numFactura))
                 {
                     //DetallesFactura.numFactura = numFactura;
                     Response.Redirect("DetallesFactura.aspx?numF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")));

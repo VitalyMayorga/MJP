@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="table-responsive tablaMJP" id="tablaProductos" runat="server">
-                    <asp:GridView ID="GridProductos" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
+                    <asp:GridView ID="GridProductos" class="gridsFormat gridProductos" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -90,6 +90,7 @@
         function openModal(nombre, descripcion) {
             document.getElementById('nombreProducto').innerHTML = nombre;
             document.getElementById('descripcionLabel').innerHTML = descripcion;
+            $("#txtCantidad").val("");
             $('#AgregarProducto').modal('show');
         }
 </script>

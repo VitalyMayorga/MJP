@@ -98,7 +98,6 @@ namespace SistemaMJP
                 MsjErrorBodega.Style.Add("display", "block");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "none");
-                MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "none");
 
             }
@@ -108,7 +107,6 @@ namespace SistemaMJP
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "block");
                 MsjErrorSubBodega.Style.Add("display", "none");
-                MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "none");
 
             }
@@ -118,7 +116,6 @@ namespace SistemaMJP
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "block");
-                MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "none");
 
             }
@@ -128,7 +125,6 @@ namespace SistemaMJP
                 MsjErrorBodega.Style.Add("display", "none");
                 MsjErrorPrograma.Style.Add("display", "none");
                 MsjErrorSubBodega.Style.Add("display", "none");
-                MsjErrorSubPartida.Style.Add("display", "none");
                 MsjErrorFactura.Style.Add("display", "block");
                 MsjErrorFecha.Style.Add("display", "none");
                 MsjErrorProveedor.Style.Add("display", "none");
