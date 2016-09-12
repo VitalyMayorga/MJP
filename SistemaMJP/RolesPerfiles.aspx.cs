@@ -77,7 +77,7 @@ namespace SistemaMJP
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             nombre = gvr.Cells[0].Text;
             apellidos = gvr.Cells[1].Text;
-            rol = gvr.Cells[2].Text;
+            rol = HttpUtility.HtmlDecode(gvr.Cells[2].Text);
             Response.Redirect("EditarUsuario.aspx?nombre=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(nombre, "MJP")) + "&apellidos=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(apellidos, "MJP")) + "&rol=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(rol, "MJP")));
 
         }
