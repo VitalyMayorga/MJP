@@ -65,6 +65,7 @@ namespace SistemaMJP
             string bodega = ListaBodegas.Items[ListaBodegas.SelectedIndex].Text;
             string unidad = ListaUnidadSol.Items[ListaUnidadSol.SelectedIndex].Text;
             string destino = txtDestino.Text;
+            observacion = observaciones.Text;
             programa = ListaProgramas.Items[ListaProgramas.SelectedIndex].Text;
             ViewState["programa"] = programa;
             if (tieneSubBodega)

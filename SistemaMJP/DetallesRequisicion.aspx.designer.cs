@@ -13,13 +13,13 @@ namespace SistemaMJP {
     public partial class DetallesRequisicion {
         
         /// <summary>
-        /// labelFactura control.
+        /// labelReq control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelFactura;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelReq;
         
         /// <summary>
         /// btnNuevoProducto control.
@@ -29,6 +29,24 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNuevoProducto;
+        
+        /// <summary>
+        /// labelDest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelDest;
+        
+        /// <summary>
+        /// labelObs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelObs;
         
         /// <summary>
         /// GridProductos control.
@@ -74,6 +92,24 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelarM;
+        
+        /// <summary>
+        /// nombreProducto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl nombreProducto;
+        
+        /// <summary>
+        /// descripcionLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl descripcionLabel;
         
         /// <summary>
         /// txtCantidad control.

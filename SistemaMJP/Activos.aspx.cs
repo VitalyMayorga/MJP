@@ -25,23 +25,6 @@ namespace SistemaMJP
                 }
                 else if (rol.Equals("Inclusión Pedidos") || rol.Equals("Administrador Almacen"))
                 {
-                    llenarListaActivos();
-
-                    if (editar)
-                    {
-                        //campos no editables
-                        ListaActivos.Enabled = false;
-                        txtNumActivo.Enabled = false;
-                        llenarDatosActivo();
-                    }
-                }
-
-                else if (Request.UrlReferrer == null)
-                {
-                    Response.Redirect("MenuPrincipal");
-                }
-                else
-                {
                     try
                     {
                         numActivo = servicio.TamperProofStringDecode(Request.QueryString["numActivo"], "MJP");
@@ -65,6 +48,20 @@ namespace SistemaMJP
                     {
                         Response.Redirect("MenuPrincipal.aspx");
                     }
+                    llenarListaActivos();
+                    llenarListaRequisiciones();
+                    if (this.editar)
+                    {
+                        //campos no editables
+                        ListaActivos.Enabled = false;
+                        txtNumActivo.Enabled = false;
+                        llenarDatosActivo();
+                    }
+                }
+
+                else if (Request.UrlReferrer == null)
+                {
+                    Response.Redirect("MenuPrincipal");
                 }
             }
             else
@@ -91,6 +88,18 @@ namespace SistemaMJP
             }
         
         }
+        //Obtiene la lista de requisiciones de una bodega y lo muestra en el combobox de requisiciones
+        private void llenarListaRequisiciones() {
+            ListaRequisiciones.Items.Clear();
+            List<string> bodegas = (List<string>)Session["bodegas"];
+            string bodega = bodegas[0];
+            Dictionary<string, int> activos = controladora.getRequisicionesBodega(bodega);
+            ListaRequisiciones.Items.Add("---Elija una Requisición---");
+            foreach (var nombreS in activos)
+            {
+                ListaRequisiciones.Items.Add(new ListItem { Text = nombreS.Key, Value = nombreS.Value.ToString() });
+            }
+        }
 
         //Si se selecciona un Activo el msj de error se esconde
         protected void revisarActivo(object sender, EventArgs e)
@@ -111,7 +120,11 @@ namespace SistemaMJP
             txtDocumento.Text = datos[3];
             txtFecha.Text = datos[4];
             ListaActivos.Items.FindByText(datos[5]).Selected = true;
+            if (!datos[6].Equals("NA")) {
+                ListaRequisiciones.Items.FindByValue(datos[6]).Selected = true;
 
+            }
+            
         }
 
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
@@ -125,15 +138,18 @@ namespace SistemaMJP
                 string funcionario = txtFuncionario.Text;
                 string cedula =txtCedula.Text;
                 string documento = txtDocumento.Text;
-                                
-                object[] nuevoActivo = new object[6];
+                int idReq=0;
+                if(ListaRequisiciones.SelectedIndex!=0){
+                    idReq = Convert.ToInt32(ListaRequisiciones.SelectedValue.ToString());
+                }                
+                object[] nuevoActivo = new object[7];
                 nuevoActivo[0] = numActivo;
                 nuevoActivo[1] = fecha;
                 nuevoActivo[2] = funcionario;
                 nuevoActivo[3] = cedula;
                 nuevoActivo[4] = documento;
                 nuevoActivo[5] = Convert.ToInt32(ListaActivos.SelectedValue.ToString());
-                              
+                nuevoActivo[6] = idReq;
                 if (editar)
                 {
                     controladora.modificarActivo(nuevoActivo);
@@ -142,12 +158,16 @@ namespace SistemaMJP
                 else
                 {
                     int resultado = controladora.agregarActivoFinal(nuevoActivo);
-                    if (resultado == 0) {
+                    if (resultado == 0)
+                    {
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('El número de activo ya existe')", true);
 
                     }
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Activo " + ListaActivos.SelectedItem.Text + " agregado con éxito')", true);
+                    else {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Activo " + ListaActivos.SelectedItem.Text + " agregado con éxito')", true);
 
+                    }
+                    
                 }
             }
                             

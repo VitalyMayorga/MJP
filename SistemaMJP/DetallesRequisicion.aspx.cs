@@ -50,6 +50,8 @@ namespace SistemaMJP
                         if (!estado.Equals("En edición") && !estado.Equals("Devuelto a Usuario"))
                         {
                             btnEnviarAprobacion.Enabled = false;
+                            btnEliminarReq.Enabled = false;
+                            btnNuevoProducto.Enabled = false;
 
                         }
 
@@ -211,7 +213,10 @@ namespace SistemaMJP
             ViewState["tabla"] = tabla;
             GridProductos.DataSource = tabla;
             GridProductos.DataBind();
-
+            List<String> requisicionInfo = controladora.getRequisicionInfo(numRequisicion);
+            labelReq.InnerText = "Requisición " + numRequisicion;
+            labelDest.Text = requisicionInfo[0];
+            labelObs.Text = requisicionInfo[1];
         }
 
         /**

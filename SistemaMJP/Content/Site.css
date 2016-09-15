@@ -174,3 +174,19 @@ input.selectorDeFecha{
 .gridProductos td:nth-child(4){
     width: 14px;
 }
+
+.gridActivos td:nth-child(7) {
+    width: 14px;
+}
+
+.gridActivos td:nth-child(8) {
+    width: 14px;
+}
+
+.gridDR td:nth-child(4) {
+    width: 14px;
+}
+
+.gridDR td:nth-child(5) {
+    width: 14px;
+}

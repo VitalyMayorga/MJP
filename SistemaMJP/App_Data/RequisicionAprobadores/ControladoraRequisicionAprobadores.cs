@@ -20,11 +20,16 @@ namespace SistemaMJP
         }
 
         //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de programa
-        internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAprobador(int subBodega)
+        internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAprobador(int programa)
         {
-            return controladoraBD.getListaRequisicionAprobador(subBodega);
+            return controladoraBD.getListaRequisicionAprobador(programa);
         }
 
+        //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de programa
+        internal List<Item_Grid_Requisiciones_Finalizadas> getRequisicionesFinalizadas(int programa)
+        {
+            return controladoraBD.getRequisicionesFinalizadas(programa);
+        }
         //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de almacen
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAlmacen(int subBodega)
         {

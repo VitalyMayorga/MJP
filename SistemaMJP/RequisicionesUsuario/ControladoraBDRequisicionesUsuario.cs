@@ -624,6 +624,39 @@ namespace SistemaMJP
             return items;
         }
 
-        
+        //Obtiene los datos de la requisicion que se especifica (destino,observaciones)
+        internal List<String> getRequisicionInfo(string numRequisicion)
+        {
+            List<String> lista = new List<String>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Info_Req";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                lista.Add(reader.GetString(0));
+                if (!reader.IsDBNull(1))
+                {
+                    lista.Add(reader.GetString(1));
+
+                }
+                else {
+                    lista.Add("");
+                }
+                
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return lista;
+        }
     }
 }

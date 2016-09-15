@@ -47,7 +47,47 @@ namespace SistemaMJP
             return requisiciones;
 
         }
+        //Metodo que se encarga de devolver la lista de Requisiciones Finalizadas por programa
+        internal List<Item_Grid_Requisiciones_Finalizadas> getRequisicionesFinalizadas(int programa)
+        {
+            List<Item_Grid_Requisiciones_Finalizadas> requisiciones = new List<Item_Grid_Requisiciones_Finalizadas>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Lista_Requisicion_RevisionAprobador_Finalizadas";
+                cmd.Parameters.AddWithValue("@idPrograma", programa);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    requisiciones.Add(LoadItemGridTracking(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return requisiciones;
+
+        }
+
+        //Metodo que se encarga de llenar los datos de la clase item grid tracking y devolver dicha clase encapsulada
+        internal Item_Grid_Requisiciones_Finalizadas LoadItemGridTracking(SqlDataReader reader)
+        {
+            String requisicion = reader.GetString(0); 
+            DateTime fecha = reader.GetDateTime(1);
+            String estado = reader.GetString(2);
+            Item_Grid_Requisiciones_Finalizadas items = new Item_Grid_Requisiciones_Finalizadas(requisicion,fecha, estado);
+            return items;
+        }
         //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAlmacen(int bodega)
         {
