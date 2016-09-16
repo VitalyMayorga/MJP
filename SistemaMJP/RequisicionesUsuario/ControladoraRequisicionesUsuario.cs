@@ -121,5 +121,10 @@ namespace SistemaMJP
             
             return controladoraBD.getTracking(numRequisicion);
         }
+
+        internal List<String> getRequisicionInfo(string numRequisicion) {
+            return controladoraBD.getRequisicionInfo(numRequisicion);
+        
+        }
     }
 }

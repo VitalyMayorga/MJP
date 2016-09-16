@@ -29,7 +29,6 @@
                     </asp:GridView>
                 </div>
 
-
                 <div style="display: none;" id="GridDespacho" class="table-responsive tablaMJP" runat="server">
                    <h3 class="Encabezado">Requisiciones Despachadas</h3>
                      <asp:GridView ID="GridRequisicionDespacho" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChangingDespacho" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
@@ -52,6 +51,13 @@
                     </asp:GridView>
                 </div>
 
+                <div id="btnReqFinalizadas" runat="server" style="display: none;">
+                    <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                        <div class="row" style="text-align: right;">
+                            <asp:Button ID="btnVer" class="btn btn-default" runat="server" Text="Ver Requisiciones Finalizadas" OnClick="verRequisiciones" />
+                        </div>
+                    </div>               
+                </div>
 
             </div>
         </ContentTemplate>
@@ -80,10 +86,38 @@
 
         </div>
     </div>
+    <div id="seguimientoReq" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Requisiciones Finalizadas</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="table-responsive tablaMJP" id="divItems">
+                        <asp:GridView ID="trackingGrid" class="gridsFormat2" runat="server" Width="100%">
+                        </asp:GridView>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnCancelar" runat="server" class="btn btn-default" data-dismiss="modal" Text="Salir"></asp:Button>
+                </div>
+            </div>
+                 </ContentTemplate>
+        </asp:UpdatePanel>
+        </div>
+    </div>
     <script type="text/javascript">       
         function openModalObservacion(value) {
             $('#InfoModal').modal('show');
             document.getElementById('observacion').innerHTML = value;
+        }
+        function openModal() {
+            $('#seguimientoReq').modal('show');
         }
 </script>
     

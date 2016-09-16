@@ -501,6 +501,7 @@
     <Compile Include="Ingreso_Requisicion.aspx.designer.cs">
       <DependentUpon>Ingreso_Requisicion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\RequisicionAprobadores\Item_Grid_Requisiciones_Finalizadas.cs" />
     <Compile Include="MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

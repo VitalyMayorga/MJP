@@ -74,21 +74,20 @@
                         <label class="msjErroneo">Debe ingresar una fecha</label>
                     </div>
                 </div>
-                
+                 <h4 class="Encabezado">Opcional</h4>
                 <div class="form-group">
-                    <div class="col-md-offset-1 col-md-2 alinearDerecha">
-                        <div class="BotonIngreso">
+                <label class="col-md-2 control-label">Requisición</label>
+                    <div class="col-md-10">
+                        <asp:DropDownList id="ListaRequisiciones" runat="server" class="form-control dropdown cmbsize" AutoPostBack="true"></asp:DropDownList>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                    <div class="row" style="text-align: right;">
                             <asp:Button ID="btnAceptar" class="btn btn-default" runat="server" Text="Aceptar" OnClick="aceptar" />
-                        </div>
+                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" style="margin-left:2%" Text="Cancelar" OnClick="cancelar" />
 
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="BotonIngreso">
-                            <asp:Button ID="btnCancelar" class="btn btn-default" runat="server" Text="Cancelar" OnClick="cancelar" />
-                        </div>
 
-                    </div>
                 </div>
             </div>
         </ContentTemplate>

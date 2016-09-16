@@ -123,6 +123,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@fecha", datos[1]);
                     cmd.Parameters.AddWithValue("@documento", datos[4]);
                     cmd.Parameters.AddWithValue("@producto", datos[5]);
+                    cmd.Parameters.AddWithValue("@requisicion", datos[6]);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
@@ -137,7 +138,7 @@ namespace SistemaMJP
             return agregado;
         }
 
-        //Metodo que llama ala controladora de base de datos para obtener los activos de la bodega
+        //Metodo que llama ala  base de datos para obtener los activos de la bodega
         internal Dictionary<string, int> getActivos(string bodega)
         {
             Dictionary<string, int> activos = new Dictionary<string,int>();
@@ -167,8 +168,37 @@ namespace SistemaMJP
             return activos;
 
         }
+        //Metodo que llama a la  base de datos para obtener las requisiciones de la bodega
+        internal Dictionary<string, int> getRequisicionesBodega(string bodega)
+        {
+            Dictionary<string, int> activos = new Dictionary<string, int>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Requisiciones_Por_Bodega_Activas";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-        //Metodo que llama ala controladora de base de datos para obtener los datos del activo
+                while (reader.Read())
+                {
+                    activos.Add(reader.GetString(0), reader.GetInt32(1));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return activos;
+
+        }
+        //Metodo que llama ala  base de datos para obtener los datos del activo
         internal List<string> obtenerDatosActivo(string numActivo)
         {
             List<string> datos = new List<string>();
@@ -195,6 +225,14 @@ namespace SistemaMJP
                 }
                 datos.Add((reader.GetDateTime(4)).ToString("dd/MM/yyyy"));
                 datos.Add(reader.GetString(5));
+                if (reader.IsDBNull(6)) {
+                    datos.Add("NA");
+                }
+                else
+                {
+                    datos.Add(reader.GetInt32(6).ToString());
+
+                }
                                                
                 reader.Close();
                 con.Close();
@@ -206,7 +244,7 @@ namespace SistemaMJP
             return datos;
         }
 
-        //Metodo que llama ala controladora de base de datos para modificar el activo
+        //Metodo que llama a la  base de datos para modificar el activo
         internal void modificarActivo(object[] datos)
         {
             using (TransactionScope ts = new TransactionScope())
@@ -223,6 +261,10 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@cedula", datos[3]);
                     cmd.Parameters.AddWithValue("@fecha", datos[1]);
                     cmd.Parameters.AddWithValue("@documento", datos[4]);
+                    if((int)datos[6]!=0){
+                        cmd.Parameters.AddWithValue("@requisicion", datos[6]);
+                    
+                    }
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();

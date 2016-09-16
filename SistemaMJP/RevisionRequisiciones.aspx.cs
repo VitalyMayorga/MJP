@@ -14,6 +14,7 @@ namespace SistemaMJP
     {
         public DataTable datosRequisicion;
         public DataTable datosRequisiciondespacho;
+        private DataTable seguimiento;
         private ControladoraRequisicionAprobadores controladora = new ControladoraRequisicionAprobadores();
         ServicioLogin servicio = new ServicioLogin();
         private List<string> observaciones = new List<string>();//se guardaran las observaciones de cada requisicion        
@@ -32,12 +33,16 @@ namespace SistemaMJP
                 }
                 else
                 {
+                    if (rol.Equals("Aprobador"))
+                    {
+                        btnReqFinalizadas.Style.Add("display", "block");
+                    }
                     llenarRequisicion();
                 }
             }
-            else
-            {
-                observaciones = (List<string>)ViewState["observaciones"];                
+            else {
+                observaciones = (List<string>)ViewState["observaciones"]; 
+                seguimiento = (DataTable)ViewState["tabla2"];
             }
         }
 
@@ -86,7 +91,7 @@ namespace SistemaMJP
             
         }
 
-        //Pregunta si deseaeliminar la linea seleccionada
+        //Muestra las observaciones de la requisicion
         protected void btnVer_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
@@ -100,7 +105,7 @@ namespace SistemaMJP
                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObservacion('" + observacion + "');", true);
         }
 
-        //Llena la grid de facturas con los datos correspondientes
+        //Llena la grid con las requisiciones correspondientes
         internal void llenarRequisicion()
         {            
             List<Item_Grid_RequisicionAprobadores> data = null;
@@ -251,6 +256,73 @@ namespace SistemaMJP
                 // Add cells
                 row.Cells.AddRange(columns.ToArray());
             }
+        }
+
+        //Obtiene las requisiciones que ya han sido finalizadas
+        protected void verRequisiciones(object sender, EventArgs e)
+        {
+            List<int> datos_usuario = controladora.getProgramasPorIdUsuario((Int32)Session["userID"]);
+            DataTable tabla = crearTablaTrack();
+            //Aqui se debe de abrir el modal con el historico de la requisicion seleccionada
+            List<Item_Grid_Requisiciones_Finalizadas> track = null;
+            int i  = 0;
+            foreach(int id in datos_usuario){
+                if(i==0){
+                    track = controladora.getRequisicionesFinalizadas(id);
+                }
+                else
+                {
+                    track.AddRange(controladora.getRequisicionesFinalizadas(id));
+                }
+                i++;
+            }
+            Object[] datos = new Object[3];
+            foreach (Item_Grid_Requisiciones_Finalizadas dato in track)
+            {
+                datos[0] = dato.Requisicion;
+                datos[1] = dato.Fecha.ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                datos[2] = dato.Estado;
+                tabla.Rows.Add(datos);
+            }
+
+            trackingGrid.DataSource = tabla;
+            ViewState["tabla2"] = tabla;
+            trackingGrid.DataBind();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal();", true);
+            upModal.Update();
+        }
+
+        /**
+      * Requiere: n/a
+      * Efectua: Crea la DataTable para desplegar.
+      * retorna:  un dato del tipo DataTable con la estructura para consultar.
+      */
+        protected DataTable crearTablaTrack()//consultar
+        {
+            DataTable tabla = new DataTable();
+            DataColumn columna;
+
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Requisición";
+            tabla.Columns.Add(columna);
+
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Fecha";
+            tabla.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Estado";
+            tabla.Columns.Add(columna);
+
+            trackingGrid.DataSource = tabla;
+            trackingGrid.DataBind();
+
+            return tabla;
         }
 
     }

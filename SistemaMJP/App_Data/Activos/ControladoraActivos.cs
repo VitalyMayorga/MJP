@@ -33,7 +33,12 @@ namespace SistemaMJP
             return controladoraBD.getActivos(bodega);
         
         }
+        //Metodo que llama a la controladora de base de datos para obtener las requisiciones de la bodega (no aceptadas en destino o rechazadas)
+        internal Dictionary<string, int> getRequisicionesBodega(string bodega)
+        {
+            return controladoraBD.getRequisicionesBodega(bodega);
 
+        }
         //Metodo que llama a la controladora de base de datos para obtener los datos del activo
         internal List<string> obtenerDatosActivo(string numActivo) {
             return controladoraBD.obtenerDatosActivo(numActivo);

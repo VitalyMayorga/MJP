@@ -8,7 +8,7 @@
             <div class="form-horizontal">
                 <asp:LinkButton runat="server" OnClick="regresarMP" ToolTip="Menu Principal"><i class="glyphicon glyphicon-home atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton>
-                <h3 class="Encabezado" id="labelFactura" runat="server"></h3>
+                <h3 class="Encabezado" id="labelReq" runat="server"></h3>
                 <div class="form-group">
                     <div class="col-md-1" style="margin-left: 3%;">
                         <div class="BotonIngreso">
@@ -18,8 +18,19 @@
                     </div>
                 </div>
                 <h4 class="Encabezado">Productos de la requisición</h4>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Destino</label>
+                    <asp:Label ID="labelDest" runat="server" class="control-label" style="text-align:left"></asp:Label>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Observaciones</label>
+                    <asp:Label ID="labelObs" runat="server" class="control-label" style="text-align:left"></asp:Label>
+                </div>
                 <div class="table-responsive tablaMJP">
-                    <asp:GridView ID="GridProductos" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
+                    <asp:GridView ID="GridProductos" class="gridsFormat gridDR" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -39,11 +50,8 @@
                 <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
                     <div class="row" style="text-align: right;">
                         <asp:Button type="submit" name="btnEliminarRequisicion" Text="Eliminar requisición" ID="btnEliminarReq" class="btn btn-default" runat="server" OnClick="btnEliminar"></asp:Button>
-<<<<<<< HEAD
-                        <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" ID="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar" style="margin-left:2%"></asp:Button>
-=======
                         <asp:Button type="submit" name="btnEnviarAprobacion" Text="Enviar a aprobación" ID="btnEnviarAprobacion" class="btn btn-default" runat="server" OnClick="btnEnviar" Style="margin-left: 2%"></asp:Button>
->>>>>>> f93d5e27488589ad2b566fe8533bc9c4a1c1a17e
+
                     </div>
                 </div>
 
