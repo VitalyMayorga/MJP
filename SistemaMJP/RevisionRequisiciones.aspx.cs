@@ -13,9 +13,10 @@ namespace SistemaMJP
     public partial class RevisionRequisiciones : System.Web.UI.Page
     {
         public DataTable datosRequisicion;
+        public DataTable datosRequisiciondespacho;
         private ControladoraRequisicionAprobadores controladora = new ControladoraRequisicionAprobadores();
         ServicioLogin servicio = new ServicioLogin();
-        private static List<string> observaciones = new List<string>();//se guardaran las observaciones de cada requisicion        
+        private List<string> observaciones = new List<string>();//se guardaran las observaciones de cada requisicion        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,6 +35,10 @@ namespace SistemaMJP
                     llenarRequisicion();
                 }
             }
+            else
+            {
+                observaciones = (List<string>)ViewState["observaciones"];                
+            }
         }
 
         //Regresa al menu principal
@@ -41,7 +46,6 @@ namespace SistemaMJP
         {
             Response.Redirect("MenuPrincipal");
         }
-
         
         /*
         *  Requiere: Controladores de eventos de la interfaz.
@@ -55,17 +59,30 @@ namespace SistemaMJP
             GridRequisicion.DataBind();
         }
 
+        /*
+        *  Requiere: Controladores de eventos de la interfaz.
+        *  Efectúa:  Cambia el contenido de la tabla de las requisiciones despachadas al índice seleccionado.
+        *  Retrona:  N/A
+        */
+        protected void PageIndexChangingDespacho(Object sender, GridViewPageEventArgs e)
+        {
+            GridRequisicionDespacho.PageIndex = e.NewPageIndex;
+            GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
+            GridRequisicionDespacho.DataBind();
+        }
+
         //Obtiene el id de la factura seleccionada y redirecciona a la pantalla DetallesFactura
         protected void btnDetalles_Click(object sender, EventArgs e)
         {
-            LinkButton btn = (LinkButton)sender;
+            LinkButton btn = (LinkButton)sender;            
+            string buttonId = btn.ID;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             int i = Convert.ToInt32(row.RowIndex);
 
             string numRequisicion = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[0].Text;
             //string estado = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[6].Text;
-            
-            Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
+
+            Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&btn=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(buttonId, "MJP")));
             
         }
 
@@ -85,10 +102,9 @@ namespace SistemaMJP
 
         //Llena la grid de facturas con los datos correspondientes
         internal void llenarRequisicion()
-        {
-            CultureInfo crCulture = new CultureInfo("es-CR");
-            DataTable tabla = crearTablaRequisicion();
+        {            
             List<Item_Grid_RequisicionAprobadores> data = null;
+            List<Item_Grid_RequisicionAprobadores> data2 = null;
             List<int> datos_usuario= null;
             string rol = (string)Session["rol"];
             
@@ -96,18 +112,32 @@ namespace SistemaMJP
                     datos_usuario = controladora.getProgramasPorIdUsuario((Int32)Session["userID"]);
                     foreach (int element in datos_usuario)
                      {                                       
-                        data = controladora.getListaRequisicionAprobador(element);
+                        data.AddRange(controladora.getListaRequisicionAprobador(element));
                      }
                   
                 }else{
+                    GridDespacho.Style.Add("display", "block");
                     datos_usuario = controladora.getBodegasPorIdUsuario((Int32)Session["userID"]);
                     foreach (int element in datos_usuario)
                      {   
-                        data = controladora.getListaRequisicionAlmacen(element);
-                     }
-                }
-                         
+                        data.AddRange(controladora.getListaRequisicionAlmacen(element));
+                        data2.AddRange(controladora.getListaRequisicionDespachada(element));
+                     }                    
+                }               
 
+                datosRequisicion = llenarTablas(data);
+                GridRequisicion.DataSource = datosRequisicion;
+                GridRequisicion.DataBind();
+
+                datosRequisiciondespacho = llenarTablas(data2);
+                GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
+                GridRequisicionDespacho.DataBind();
+        }
+
+        private DataTable llenarTablas(List<Item_Grid_RequisicionAprobadores> data)        {
+
+            CultureInfo crCulture = new CultureInfo("es-CR");
+            DataTable tabla = crearTablaRequisicion();
             Object[] datos = new Object[8];
             int contador = 0;
 
@@ -118,7 +148,7 @@ namespace SistemaMJP
                 datos[2] = fila.Destino;
                 datos[3] = controladora.getNombreUsuario(fila.Usuario);
                 datos[4] = controladora.getNombrePrograma(fila.Programa);
-                datos[5] = controladora.getNombreBodega(fila.Bodega); 
+                datos[5] = controladora.getNombreBodega(fila.Bodega);
                 if (fila.SubBodega == 0)
                 {//Si es 0 entonces no muestra subbodega
                     datos[6] = "--------";
@@ -131,17 +161,19 @@ namespace SistemaMJP
                 if (fila.Observacion == "" || fila.Observacion == null)
                 {
                     observaciones.Add("Esta requisicion no posee ninguna observacion");
-                }else{
-                    observaciones.Add(fila.Observacion);
+                    ViewState["observaciones"] = observaciones;
                 }
-                
+                else
+                {
+                    observaciones.Add(fila.Observacion);
+                    ViewState["observaciones"] = observaciones;
+                }
+
                 tabla.Rows.Add(datos);
                 contador++;
             }
 
-            datosRequisicion = tabla;
-            GridRequisicion.DataSource = datosRequisicion;
-            GridRequisicion.DataBind();
+            return tabla;
         }
 
         /**

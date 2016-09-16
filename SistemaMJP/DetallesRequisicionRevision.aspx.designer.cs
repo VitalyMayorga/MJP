@@ -67,6 +67,15 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorCantActivo;
         
         /// <summary>
+        /// btn_devolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btn_devolver;
+        
+        /// <summary>
         /// btnDevolver control.
         /// </summary>
         /// <remarks>
@@ -76,13 +85,13 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.Button btnDevolver;
         
         /// <summary>
-        /// btnAprobador control.
+        /// btn_aprobar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btnAprobador;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btn_aprobar;
         
         /// <summary>
         /// btnAprobar control.
@@ -94,13 +103,31 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.Button btnAprobar;
         
         /// <summary>
-        /// btnAlmacen control.
+        /// btn_rechazar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btnAlmacen;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btn_rechazar;
+        
+        /// <summary>
+        /// btnRechazar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRechazar;
+        
+        /// <summary>
+        /// btn_despachar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btn_despachar;
         
         /// <summary>
         /// btnDespachar control.
@@ -121,22 +148,22 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea justificacionDevolucion;
         
         /// <summary>
-        /// btnAceptarR control.
+        /// btnAceptarJD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptarR;
+        protected global::System.Web.UI.WebControls.Button btnAceptarJD;
         
         /// <summary>
-        /// btnCancelarR control.
+        /// btnCancelarJD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarR;
+        protected global::System.Web.UI.WebControls.Button btnCancelarJD;
         
         /// <summary>
         /// idroweditar control.
@@ -157,13 +184,13 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.TextBox txtCantidad;
         
         /// <summary>
-        /// MsjErrorPrograma control.
+        /// MsjErrorcantidad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorPrograma;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorcantidad;
         
         /// <summary>
         /// MensajeErrorTxt control.
@@ -175,22 +202,22 @@ namespace SistemaMJP {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl MensajeErrorTxt;
         
         /// <summary>
-        /// Button1 control.
+        /// btnAceptarEdicion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnAceptarEdicion;
         
         /// <summary>
-        /// Button2 control.
+        /// btnCancelarEdicion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnCancelarEdicion;
         
         /// <summary>
         /// idroweliminar control.
@@ -218,5 +245,140 @@ namespace SistemaMJP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Can;
+        
+        /// <summary>
+        /// justificacionRechazo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea justificacionRechazo;
+        
+        /// <summary>
+        /// btnAceptarJR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarJR;
+        
+        /// <summary>
+        /// btnCancelarJR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarJR;
+        
+        /// <summary>
+        /// idRequisicion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl idRequisicion;
+        
+        /// <summary>
+        /// txtPlaca control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPlaca;
+        
+        /// <summary>
+        /// MsjErrorPlaca control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorPlaca;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label2;
+        
+        /// <summary>
+        /// txtConductor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConductor;
+        
+        /// <summary>
+        /// MsjErrorConductor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorConductor;
+        
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label3;
+        
+        /// <summary>
+        /// txtDestinatario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDestinatario;
+        
+        /// <summary>
+        /// MsjErrorDestinatario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjErrorDestinatario;
+        
+        /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label4;
+        
+        /// <summary>
+        /// btnAceptarInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarInfo;
+        
+        /// <summary>
+        /// btnCancelarInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarInfo;
     }
 }

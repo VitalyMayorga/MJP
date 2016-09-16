@@ -47,6 +47,18 @@ namespace SistemaMJP
             return controladoraR.obtenerIDSubBodegaRequisicion(requisicion);
         }
 
+        //Llama a la controladora de base de datos de requisiciones para actualizar la informacion de despacho de la requisicion
+        internal void actualizarInfoDespacho(int idRequisicion)
+        {
+            controladoraR.actualizarInfoDespacho(idRequisicion);
+        }
+
+        //Llama a la controladora de base de datos de requisiciones para agregar la informacion de despacho de la requisicion 
+        internal void agregarInfoDespacho(int idRequisicion, string placa, string nomConductor, string destinatario)
+        {
+            controladoraR.agregarInfoDespacho(idRequisicion, placa, nomConductor, destinatario);
+        }
+
         //Metodo que llama a la controladora de activos para obtenar la cantidad de activos de un determinado producto asignados a una requisicion
         internal int obtenerCantidadActivos(int idRequisicion, int idProducto)
         {

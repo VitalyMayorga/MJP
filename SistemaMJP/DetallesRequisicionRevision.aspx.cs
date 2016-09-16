@@ -19,6 +19,7 @@ namespace SistemaMJP
         ServicioLogin servicio = new ServicioLogin();
         private DataTable datosRequisicion;
         public  string numRequisicion;
+        public string btnId;
         private int id_row;
         private  int id_requisicion;
         private  int[] ids;//se guardaran los ids de los productos de la requisicion 
@@ -46,6 +47,7 @@ namespace SistemaMJP
                     try
                     {
                         numRequisicion = servicio.TamperProofStringDecode(Request.QueryString["numR"], "MJP");
+                        btnId = servicio.TamperProofStringDecode(Request.QueryString["btn"], "MJP");
                     }
                     catch (Exception)
                     {
@@ -54,11 +56,13 @@ namespace SistemaMJP
                     labelRequisicion.InnerText = "Requisicion " + numRequisicion;
                     llenarDetallesProductoRequisicion();
                     ViewState["numRequisicion"] = numRequisicion;
+                    ViewState["btnId"] = btnId;
                 }
 
             }
             else {
                 numRequisicion = (string)ViewState["numRequisicion"];
+                btnId = (string)ViewState["btnId"];
                 id_requisicion = (int)ViewState["id_requisicion"];
                 //id_row = (int)ViewState["id_row"];
                 ids = (int[])ViewState["ids"];
@@ -91,8 +95,6 @@ namespace SistemaMJP
         {
             bool activosAsignados = true;
             int indice=0;
-            string descripcionRA = "";
-            string usuario = (string)Session["correoInstitucional"];
            
             while (indice < ids.Count() && activosAsignados)
             {
@@ -108,18 +110,26 @@ namespace SistemaMJP
 
             if (activosAsignados)
             {
-                indice = 0;
-                controladora.cambiarEstadoRequisicion(id_requisicion, 0);
-                while (indice < ids.Count())
-                {
-                    controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[indice]);
-                    indice++;
-                }                
-                descripcionRA = "Requisicion: " + numRequisicion + " despachada";
-                bitacora.registrarActividad(usuario, descripcionRA);
-                Response.Redirect("RevisionRequisiciones.aspx"); 
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalCompletarInfo('Datos de despacho de la requisicion: " + numRequisicion + "');", true); 
             }
         }
+
+         //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
+        protected void aceptarDespacho(object sender, EventArgs e)
+        {
+            string descripcionRA = "";
+            string usuario = (string)Session["correoInstitucional"];
+            string placa = txtPlaca.Text;
+            string nomConductor = txtConductor.Text;
+            string destinatario = txtDestinatario.Text;
+                        
+            controladora.cambiarEstadoRequisicion(id_requisicion, 3);
+            controladora.agregarInfoDespacho(id_requisicion, placa, nomConductor, destinatario);      
+            descripcionRA = "Requisicion: " + numRequisicion + " despachada";
+            bitacora.registrarActividad(usuario, descripcionRA);
+            Response.Redirect("RevisionRequisiciones.aspx"); 
+        }
+
 
         //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
         protected void aceptarDevolucion(object sender, EventArgs e)
@@ -139,13 +149,13 @@ namespace SistemaMJP
                 
                 if (rol.Equals("Revisión y Aprobador Almacen"))
                 {
-                    controladora.cambiarEstadoRequisicion(id_requisicion, 2);// Revisar como se obtiene el id de la requisicion
+                    controladora.cambiarEstadoRequisicion(id_requisicion, 2);
                     correos = email.obtenerCorreosAprobadorSegunPrograma(id_requisicion);
                     descripcionRA = "Requisicion: " + numRequisicion + " devuelta a aprobador programa";
                 }
                 else
                 {
-                    controladora.cambiarEstadoRequisicion(id_requisicion, 3);
+                    controladora.cambiarEstadoRequisicion(id_requisicion, 5);
                     correos = email.obtenerCorreoUsuarioRequisicion(id_requisicion);
                     descripcionRA = "Requisicion: " + numRequisicion + " devuelta a usuario";
                 }
@@ -162,10 +172,60 @@ namespace SistemaMJP
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('Justificación devolución requisicion: " + numRequisicion + "');", true);
         }
 
+        //Cambia el estado de la requisicion a rechazado
+        protected void aceptarRechazo(object sender, EventArgs e)
+        {
+            string justificacion = justificacionRechazo.Value;
+            string usuario = (string)Session["correoInstitucional"];
+            string descripcionRA = "";
+            
+            if (justificacionRechazo.Value.Trim() == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalRechazo('Justificación rechazo requisicion: " + numRequisicion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetallesRechazo').modal('show');</script>");
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetallesRechazo').modal('hide');</script>");
+                controladora.cambiarEstadoRequisicion(id_requisicion, 4);
+                
+                controladora.actualizarObservacion(id_requisicion, justificacion);
+                descripcionRA = "Requisicion: " + numRequisicion + " rechazada en destino";
+                bitacora.registrarActividad(usuario, descripcionRA);
+                Response.Redirect("RevisionRequisiciones.aspx");
+            }
+        }
+
+        //Antes de devolver la requisicion abre el panel para escribir la observacion
+        protected void btnRechazar_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalRechazo('Justificación rechazo requisicion: " + numRequisicion + "');", true);
+        }
+
         //Envia la requisicion a los aprobadores de almacen
         protected void btnAprobar_Click(object sender, EventArgs e)
         {
-            controladora.cambiarEstadoRequisicion(id_requisicion, 1);
+            int indice = 0;
+            string usuario = (string)Session["correoInstitucional"];
+            string descripcionRA = "";
+
+            if (btnId != "btnDetallesDespacho")
+            {
+                controladora.cambiarEstadoRequisicion(id_requisicion, 1);
+            }
+            else{
+                controladora.cambiarEstadoRequisicion(id_requisicion, 0);
+                controladora.actualizarInfoDespacho(id_requisicion);
+
+                while (indice < ids.Count())
+                {
+                    controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[indice]);
+                    indice++;
+                }
+                descripcionRA = "Requisicion: " + numRequisicion + " acepatada en destino";
+                bitacora.registrarActividad(usuario, descripcionRA);
+            }           
+            
             Response.Redirect("RevisionRequisiciones.aspx");
         }        
 
@@ -242,12 +302,25 @@ namespace SistemaMJP
             string rol = (string)Session["rol"];
             if (rol.Equals("Aprobador"))
             {
-                btnAprobador.Style.Add("display", "block");
+                btn_aprobar.Style.Add("display", "block");
                 GridAprobadorPrograma.Style.Add("display", "block");
             }
             else
             {
-                btnAlmacen.Style.Add("display", "block");
+                if (btnId != "btnDetallesDespacho")
+                {
+                    btn_rechazar.Style.Add("display", "none");
+                    btn_aprobar.Style.Add("display", "none");
+                    btn_despachar.Style.Add("display", "block");
+                    btn_devolver.Style.Add("display", "block");
+                }
+                else{
+                    btn_rechazar.Style.Add("display", "block");
+                    btn_aprobar.Style.Add("display", "block");
+                    btn_despachar.Style.Add("display", "none");
+                    btn_devolver.Style.Add("display", "none");
+                }
+                
                 GridAprobadorAlmacen.Style.Add("display", "block");
             }            
             
@@ -341,16 +414,6 @@ namespace SistemaMJP
                 row.Cells.AddRange(columns.ToArray());
             }
         }
-
-       /* protected void GridView_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            string rol = (string)Session["rol"];
-            if (rol.Equals("Revisión y Aprobador Almacen"))
-            {
-               e.Row.Cells[2].Visible = false;
-               e.Row.Cells[3].Visible = false;
-           }
-        }*/
 
     }
 }

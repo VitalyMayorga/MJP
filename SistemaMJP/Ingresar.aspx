@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="Content/Site.css" />
     <link rel="stylesheet" href="Content/Ingreso.css" />
     <script src="/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
-
     <script>
+
         $(document).ready(function () {
             $("#txtUsuario").keydown(function () {
                 $("#MsjErrorUsuario").css('display', 'none');

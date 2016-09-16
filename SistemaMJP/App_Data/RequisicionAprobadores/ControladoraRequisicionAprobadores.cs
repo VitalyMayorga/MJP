@@ -19,16 +19,22 @@ namespace SistemaMJP
             controladoraP = new ControladoraProgramasPresupuestarios();
         }
 
-        //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de programa
+        //Llama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de programa
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAprobador(int subBodega)
         {
             return controladoraBD.getListaRequisicionAprobador(subBodega);
         }
 
-        //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de almacen
-        internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAlmacen(int subBodega)
+        //Llama a la controladoraBD de requisiciones para obtener la  lista con los item del grid para el aprobador de almacen
+        internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAlmacen(int bodega)
         {
-            return controladoraBD.getListaRequisicionAlmacen(subBodega);
+            return controladoraBD.getListaRequisicionAlmacen(bodega);
+        }
+
+        //Llama a la controladoraBD para obtener las requisiciones despachadas
+        internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionDespachada(int bodega)
+        {
+            return controladoraBD.getListaRequisicionDespachada(bodega);
         } 
 
         //Llama a la controladora de Base de datos de requisicion Aprobadores, para devolver el nombre de una unidad solicitante segun su id 
@@ -65,6 +71,18 @@ namespace SistemaMJP
         internal int obtenerIDSubBodegaRequisicion(int requisicion)
         {
             return controladoraBD.obtenerIDSubBodegaRequisicion(requisicion);
+        }
+
+        //Llama a la controladora de base de datos para actualizar la informacion de despacho de la requisicion
+        internal void actualizarInfoDespacho(int idRequisicion)
+        {
+            controladoraBD.actualizarInfoDespacho(idRequisicion);
+        }
+
+        //Llama a la controladora de base de datos para agregar la informacion de despacho de la requisicion 
+        internal void agregarInfoDespacho(int idRequisicion, string placa, string nomConductor, string destinatario)
+        {
+            controladoraBD.agregarInfoDespacho(idRequisicion, placa, nomConductor, destinatario);
         }
 
         //Llama a la controladora de programas presupuestarios para obtener el nombre de un programa dado un id

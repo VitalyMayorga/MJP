@@ -22,6 +22,24 @@ namespace SistemaMJP {
         protected global::System.Web.UI.WebControls.GridView GridRequisicion;
         
         /// <summary>
+        /// GridDespacho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GridDespacho;
+        
+        /// <summary>
+        /// GridRequisicionDespacho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridRequisicionDespacho;
+        
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>

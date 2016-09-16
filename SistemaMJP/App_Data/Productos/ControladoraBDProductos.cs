@@ -17,6 +17,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         
         }
+
         //Obtiene los datos de un producto de una factura en especifico
         internal List<string> obtenerDatosProducto(int idF, int idP)
         {
@@ -80,6 +81,7 @@ namespace SistemaMJP
 
             return datos;
         }
+
         //Metodo que se encarga de devolver la lista de todas las supartidas en el sistema
         public Dictionary<string, int> getSubPartidas()
         {
@@ -109,6 +111,7 @@ namespace SistemaMJP
             return programa;
 
         }
+
         //Recibe el producto encapsulado y procede a guardarlo en la BD
         internal bool agregarProducto(EntidadProductos producto) {
             int valor = 0;
@@ -143,9 +146,9 @@ namespace SistemaMJP
                 }
 
             }
-            return agregado;
-        
+            return agregado;        
         }
+
         //Metodo que se encarga de del producto buscado en el sistema
         public int obtenerIDProducto(string descripcion, int cantidad)
         {
@@ -214,8 +217,6 @@ namespace SistemaMJP
                 }
 
             }
-            
-
         }
 
         //Recibe la informacion del producto para asignarlo a la Factura correspondiente.
@@ -259,8 +260,6 @@ namespace SistemaMJP
                 }
 
             }
-
-
         }
 
         //Recibe la informacion del producto modificado para asignarlo a la Factura correspondiente.

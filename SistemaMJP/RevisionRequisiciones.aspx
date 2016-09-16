@@ -14,20 +14,44 @@
                          <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnObservacion" runat="server" class="btn btn-default" OnClick="btnVer_Click" ToolTip="Ver Observacion"><i class="glyphicon glyphicon-info-sign" style="color:black"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="btnObservacionAlmacen" runat="server" class="btn btn-default" OnClick="btnVer_Click" ToolTip="Ver Observacion"><i class="glyphicon glyphicon-info-sign" style="color:black"></i></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>                          
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnDetalles" runat="server" class="btn btn-default" OnClick="btnDetalles_Click" ToolTip="Ver Detalles"><i class="glyphicon glyphicon-edit"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="btnDetallesAlmacen" runat="server" class="btn btn-default" OnClick="btnDetalles_Click" ToolTip="Ver Detalles"><i class="glyphicon glyphicon-edit"></i></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                         
                     </asp:GridView>
                 </div>
+
+
+                <div style="display: none;" id="GridDespacho" class="table-responsive tablaMJP" runat="server">
+                   <h3 class="Encabezado">Requisiciones Despachadas</h3>
+                     <asp:GridView ID="GridRequisicionDespacho" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChangingDespacho" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
+                        
+                         <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnObservacionDespacho" runat="server" class="btn btn-default" OnClick="btnVer_Click" ToolTip="Ver Observacion"><i class="glyphicon glyphicon-info-sign" style="color:black"></i></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>                          
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnDetallesDespacho" runat="server" class="btn btn-default" OnClick="btnDetalles_Click" ToolTip="Ver Detalles"><i class="glyphicon glyphicon-edit"></i></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        
+                    </asp:GridView>
+                </div>
+
 
             </div>
         </ContentTemplate>

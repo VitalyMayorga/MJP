@@ -42,13 +42,17 @@
                     </div>                        
                     
                     <div class="row BotonIngreso" style="float:right">
-                            <asp:Button  name="btnDevolver" Text="Devolver" id="btnDevolver"  runat="server" class="btn btn-default" OnClick="btnDevolver_Click"  style="margin-right: 1%;margin-left:-10%"></asp:Button>
-                            
-                            <div class="form-group" style="display: none;" id="btnAprobador" runat="server">
+                            <div class="form-group" style="display: block;" id="btn_devolver" runat="server">
+                                <asp:Button  name="btnDevolver" Text="Devolver" id="btnDevolver"  runat="server" class="btn btn-default" OnClick="btnDevolver_Click"  style="margin-right: 1%;margin-left:-10%"></asp:Button>
+                            </div>
+                            <div class="form-group" style="display: none;" id="btn_aprobar" runat="server">
                                 <asp:Button  name="btnAprobar" Text="Aprobar" id="btnAprobar"  runat="server" class="btn btn-default" OnClick="btnAprobar_Click" style="margin-right: 1%"></asp:Button>
                             </div>
+                            <div class="form-group" style="display: none;" id="btn_rechazar" runat="server">
+                                <asp:Button  name="btnRechazar" Text="Rechazar" id="btnRechazar"  runat="server" class="btn btn-default" OnClick="btnRechazar_Click" style="margin-right: 1%"></asp:Button>
+                            </div>
 
-                            <div class="form-group" style="display: none;" id="btnAlmacen" runat="server">
+                            <div class="form-group" style="display: none;" id="btn_despachar" runat="server">
                                 <asp:Button  name="btnDespachar" Text="Despachar" id="btnDespachar"  runat="server" class="btn btn-default" OnClick="btnDespachar_Click"></asp:Button>
                             </div>
                         </div>
@@ -77,8 +81,8 @@
                     <textarea id="justificacionDevolucion" runat="server" style="max-width:300px;width:300px"></textarea>    
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAceptarR" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarDevolucion"></asp:Button>
-                    <asp:Button id="btnCancelarR" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button id="btnAceptarJD" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarDevolucion"></asp:Button>
+                    <asp:Button id="btnCancelarJD" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -103,14 +107,14 @@
                     <div class="form-group">
                         <label>Cantidad (Unidades)</label>
                         <asp:TextBox ID="txtCantidad" runat="server" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorPrograma" class="col-md-offset-2" runat="server">
+                        <div style="display: none;" id="MsjErrorcantidad" class="col-md-offset-2" runat="server">
                         <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
                     </div>
                     </div>  
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="Button1" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEdicion"></asp:Button>
-                    <asp:Button id="Button2" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                    <asp:Button id="btnAceptarEdicion" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEdicion"></asp:Button>
+                    <asp:Button id="btnCancelarEdicion" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -143,6 +147,75 @@
 
         </div>
     </div>
+
+    <div id="ModalDetallesRechazo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Justificación del Rechazo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="requisicion"></label>      
+                               
+                    </div>
+                    <textarea id="justificacionRechazo" runat="server" style="max-width:300px;width:300px"></textarea>    
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="btnAceptarJR" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarRechazo"></asp:Button>
+                    <asp:Button id="btnCancelarJR" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="ModalInfoDespacho" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Datos de Despacho</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="texto"></label> 
+                        <label id="idRequisicion" style="display: none;" runat="server"></label>      
+                               
+                    </div>
+                    <div class="form-group">
+                        <label>Placa del Automobil</label>
+                        <asp:TextBox ID="txtPlaca" runat="server" class="form-control text-box single-line"></asp:TextBox>
+                        <div style="display: none;" id="MsjErrorPlaca" class="col-md-offset-2" runat="server">
+                            <label class="msjErroneo" id="Label2" runat="server"></label>
+                        </div>
+
+                        <label>Conductor Designado</label>
+                        <asp:TextBox ID="txtConductor" runat="server" class="form-control text-box single-line"></asp:TextBox>
+                        <div style="display: none;" id="MsjErrorConductor" class="col-md-offset-2" runat="server">
+                            <label class="msjErroneo" id="Label3" runat="server"></label>
+                        </div>
+
+                        <label>Destinatario</label>
+                        <asp:TextBox ID="txtDestinatario" runat="server" class="form-control text-box single-line"></asp:TextBox>
+                        <div style="display: none;" id="MsjErrorDestinatario" class="col-md-offset-2" runat="server">
+                            <label class="msjErroneo" id="Label4" runat="server"></label>
+                        </div>
+                    </div>  
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="btnAceptarInfo" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarInfoDespacho"></asp:Button>
+                    <asp:Button id="btnCancelarInfo" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     
     <script type="text/javascript">
         function openModal(value) {
@@ -158,6 +231,16 @@
         function openModalDelete(value) {
             $('#EliminarModal').modal('show');
             document.getElementById('productoEliminar').innerHTML = value;
+        }
+
+        function openModalRechazo(value) {
+            $('#ModalDetallesRechazo').modal('show');
+            document.getElementById('requisicion').innerHTML = value;
+        }
+
+        function openModalCompletarInfo(value) {
+            $('#ModalInfoDespacho').modal('show');
+            document.getElementById('texto').innerHTML = value;
         }
 
         $("td.col1").hide();

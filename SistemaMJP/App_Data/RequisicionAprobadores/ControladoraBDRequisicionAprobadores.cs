@@ -16,7 +16,7 @@ namespace SistemaMJP
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
         }
 
-        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
+        //Metodo que se encarga de devolver la lista de requisiciones en espara de ser aprobadas por el aprobador de programa
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAprobador(int programa)
         {
             List<Item_Grid_RequisicionAprobadores> requisiciones = new List<Item_Grid_RequisicionAprobadores>();
@@ -48,7 +48,7 @@ namespace SistemaMJP
 
         }
 
-        //Metodo que se encarga de devolver la lista de Programas presupuestarios en el sistema
+        //Metodo que se encarga de devolver la lista de requisiciones en espara de ser aprobadas por el aprobador de almacen
         internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionAlmacen(int bodega)
         {
             List<Item_Grid_RequisicionAprobadores> requisiciones = new List<Item_Grid_RequisicionAprobadores>();
@@ -61,6 +61,38 @@ namespace SistemaMJP
                 cmd.Parameters.AddWithValue("@idBodega", bodega);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();                
+
+                while (reader.Read())
+                {
+                    requisiciones.Add(LoadItemGridRequisiciones(reader));
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return requisiciones;
+
+        }
+
+        //Metodo que se encarga de devolver la lista de requisiciones despachadas, aceptadas o rechazadas
+        internal List<Item_Grid_RequisicionAprobadores> getListaRequisicionDespachada(int bodega)
+        {
+            List<Item_Grid_RequisicionAprobadores> requisiciones = new List<Item_Grid_RequisicionAprobadores>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Lista_Requisicion_Despachada";
+                cmd.Parameters.AddWithValue("@idBodega", bodega);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -150,8 +182,8 @@ namespace SistemaMJP
             return id;
         }
 
-        //Metodo que se encarga de eliminar las lineas de la requisicion solicitada
-        public void actualizarObservacion(int idRequisicion, string observacion)
+        //Metodo que se encarga de actualizar las observaciones de la requisicion especificada
+        internal void actualizarObservacion(int idRequisicion, string observacion)
         {
             using (TransactionScope ts = new TransactionScope())
             {
@@ -254,6 +286,61 @@ namespace SistemaMJP
             }
 
             return id;
+        }
+
+        //Metodo que se encarga de actualizar la fecha de entrega de la requisicion despachada
+        internal void actualizarInfoDespacho(int idRequisicion)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Actualizar_InfoDespacho";
+                    cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
+                    cmd.Parameters.AddWithValue("@fechaRecibido", DateTime.Today.ToString("d"));
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        //Metodo que guarda la informacion de despacho de la requisicion
+        internal void agregarInfoDespacho(int idRequisicion, string placa, string nomConductor, string destinatario)
+        {           
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Agregar_InfoDespacho";
+                    cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
+                    cmd.Parameters.AddWithValue("@fechaDespacho", DateTime.Today.ToString("d"));
+                    cmd.Parameters.AddWithValue("@placa", placa);
+                    cmd.Parameters.AddWithValue("@nomConductor", nomConductor);
+                    cmd.Parameters.AddWithValue("@destinatario", destinatario);
+
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
         }
 
     }
