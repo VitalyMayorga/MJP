@@ -107,7 +107,7 @@
                     <asp:Button ID="btnCancelar" runat="server" class="btn btn-default" data-dismiss="modal" Text="Salir"></asp:Button>
                 </div>
             </div>
-                 </ContentTemplate>
+        </ContentTemplate>
         </asp:UpdatePanel>
         </div>
     </div>

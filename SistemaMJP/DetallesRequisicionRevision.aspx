@@ -209,7 +209,7 @@
                     </div>  
                 </div>
                 <div class="modal-footer">
-                    <asp:Button id="btnAceptarInfo" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarInfoDespacho"></asp:Button>
+                    <asp:Button id="btnAceptarInfo" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarDespacho"></asp:Button>
                     <asp:Button id="btnCancelarInfo" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>

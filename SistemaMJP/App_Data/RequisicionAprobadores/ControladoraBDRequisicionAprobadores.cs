@@ -25,7 +25,7 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Obtener_Lista_Requisicion_RevisionAprobador";                
+                cmd.CommandText = "P_Obtener_Lista_Requisicion_RevisionPrograma";                
                 cmd.Parameters.AddWithValue("@idPrograma", programa);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();

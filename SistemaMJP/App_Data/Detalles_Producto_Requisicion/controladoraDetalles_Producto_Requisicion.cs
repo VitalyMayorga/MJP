@@ -10,12 +10,14 @@ namespace SistemaMJP
         public ControladoraProductos controladoraP;
         public ControladoraRequisicionAprobadores controladoraR;
         public ControladoraBDDetalles_Producto_Requisicion controladoraBD;
+        public ControladoraRequisicionesUsuario controladoraRU;
 
         public ControladoraDetalles_Producto_Requisicion() {
             controladoraA = new ControladoraActivos();
             controladoraP = new ControladoraProductos();
             controladoraR = new ControladoraRequisicionAprobadores();
             controladoraBD = new ControladoraBDDetalles_Producto_Requisicion();
+            controladoraRU = new ControladoraRequisicionesUsuario();
         }
 
         //Llama a la controladora de requisiciones para obtener el ID de la requisicion
@@ -104,6 +106,18 @@ namespace SistemaMJP
         {
             return controladoraP.getNombreProducto(id);
         }
-        
+
+        //Llama a la controladora de base de datos de requisiciones usuario para obtener los datos de la requisicion
+        internal List<string> getDatosRequisicion(string numRequisicion)
+        {
+            return controladoraRU.getDatosRequisicion(numRequisicion);
+        }
+
+        //Llama a la controladora de base de datos de requisiciones usuario para obtener la cantidad del producto en la bodega
+        internal int obtenerCantidadProductoBodega(int bodega, int subbodega, string programa, string producto)
+        {
+            return controladoraRU.obtenerCantidadProductoBodega(bodega, subbodega, programa, producto);
+        }
+
     }
 }

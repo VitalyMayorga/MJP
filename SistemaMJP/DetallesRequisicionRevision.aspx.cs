@@ -328,8 +328,16 @@ namespace SistemaMJP
             DataTable tabla = crearTablaProductosRequisicion();
             id_requisicion = controladora.obtenerIDRequisicion(numRequisicion);
             ViewState["id_requisicion"] = id_requisicion;
+            List<string> dato = controladora.getDatosRequisicion(numRequisicion);
             List<Item_Grid_Produtos_Requisicion> data = controladora.obtenerListaProductos(id_requisicion);
-            Object[] datos = new Object[2];
+            Object[] datos;
+            if (rol.Equals("Aprobador"))
+            {
+                datos = new Object[3];
+            }else{
+                datos = new Object[2];
+            }
+
             ids = new int[data.Count];
             ViewState["ids"] = ids;
             cantidades = new int[data.Count];
@@ -340,6 +348,16 @@ namespace SistemaMJP
                 ids[contador] = fila.Producto;
                 datos[0] = controladora.getNombreProducto(fila.Producto);
                 datos[1] = fila.Cantidad.ToString();
+                if (rol.Equals("Aprobador"))
+                {
+                    string cantTotal= controladora.obtenerCantidadProductoBodega(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], controladora.getNombreProducto(fila.Producto)).ToString();
+                    if(cantTotal!=null){
+                        datos[2] = cantTotal;
+                    }else{
+                        datos[2] = "0";
+                    }
+                    
+                }
                 cantidades[contador] = fila.Cantidad;
                 contador++;
 
@@ -382,6 +400,11 @@ namespace SistemaMJP
 
             if (rol.Equals("Aprobador"))
             {
+                columna = new DataColumn();
+                columna.DataType = System.Type.GetType("System.String");
+                columna.ColumnName = "Cantidad Total en Almacen";
+                tabla.Columns.Add(columna);
+                
                 GridProductosRequisicion.DataSource = tabla;
                 GridProductosRequisicion.DataBind();
             }

@@ -17,7 +17,8 @@ namespace SistemaMJP
         private DataTable seguimiento;
         private ControladoraRequisicionAprobadores controladora = new ControladoraRequisicionAprobadores();
         ServicioLogin servicio = new ServicioLogin();
-        private List<string> observaciones = new List<string>();//se guardaran las observaciones de cada requisicion        
+        private List<string> observaciones = new List<string>();//se guardaran las observaciones de cada requisicion
+        private List<string> observacionesDespacho = new List<string>();//se guardaran las observaciones de cada requisicion   
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,7 +42,8 @@ namespace SistemaMJP
                 }
             }
             else {
-                observaciones = (List<string>)ViewState["observaciones"]; 
+                observaciones = (List<string>)ViewState["observaciones"];
+                observacionesDespacho = (List<string>)ViewState["observacionesDespacho"]; 
                 seguimiento = (DataTable)ViewState["tabla2"];
             }
         }
@@ -95,21 +97,28 @@ namespace SistemaMJP
         protected void btnVer_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
+            string buttonId = btn.ID;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             int id_row = Convert.ToInt32(row.RowIndex);
-            int pageIndex = GridRequisicion.PageIndex;
-
-            //Se obtiene el id del producto            
-            string observacion = observaciones.ElementAt(id_row + (pageIndex * 10));
-
+           int pageIndex;
+           string observacion;
+           if (buttonId == "btnObservacionAlmacen"){
+                pageIndex = GridRequisicion.PageIndex;
+                //Se obtiene el id del producto            
+                observacion = observaciones.ElementAt(id_row + (pageIndex * 10));
+            }else{
+                pageIndex = GridRequisicionDespacho.PageIndex;
+                //Se obtiene el id del producto            
+                observacion = observacionesDespacho.ElementAt(id_row + (pageIndex * 10));
+            }
                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObservacion('" + observacion + "');", true);
         }
 
         //Llena la grid con las requisiciones correspondientes
         internal void llenarRequisicion()
-        {            
-            List<Item_Grid_RequisicionAprobadores> data = null;
-            List<Item_Grid_RequisicionAprobadores> data2 = null;
+        {
+            List<Item_Grid_RequisicionAprobadores> data = new List<Item_Grid_RequisicionAprobadores>();
+            List<Item_Grid_RequisicionAprobadores> data2 = new List<Item_Grid_RequisicionAprobadores>();
             List<int> datos_usuario= null;
             string rol = (string)Session["rol"];
             
@@ -130,16 +139,19 @@ namespace SistemaMJP
                      }                    
                 }               
 
-                datosRequisicion = llenarTablas(data);
+                datosRequisicion = llenarTablas(data,true);
                 GridRequisicion.DataSource = datosRequisicion;
                 GridRequisicion.DataBind();
 
-                datosRequisiciondespacho = llenarTablas(data2);
-                GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
-                GridRequisicionDespacho.DataBind();
+                if (!rol.Equals("Aprobador"))
+                {
+                    datosRequisiciondespacho = llenarTablas(data2,false);
+                    GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
+                    GridRequisicionDespacho.DataBind();
+                }
         }
 
-        private DataTable llenarTablas(List<Item_Grid_RequisicionAprobadores> data)        {
+        private DataTable llenarTablas(List<Item_Grid_RequisicionAprobadores> data, bool aprobador)        {
 
             CultureInfo crCulture = new CultureInfo("es-CR");
             DataTable tabla = crearTablaRequisicion();
@@ -165,13 +177,26 @@ namespace SistemaMJP
                 datos[7] = controladora.getNombreUnidad(fila.Unidad);
                 if (fila.Observacion == "" || fila.Observacion == null)
                 {
-                    observaciones.Add("Esta requisicion no posee ninguna observacion");
-                    ViewState["observaciones"] = observaciones;
+                   if (aprobador){
+                       observaciones.Add("Esta requisicion no posee ninguna observacion");
+                       ViewState["observaciones"] = observaciones;
+                   }else{
+                       observacionesDespacho.Add("Esta requisicion no posee ninguna observacion");
+                       ViewState["observacionesDespacho"] = observacionesDespacho;
+                   }                    
                 }
                 else
                 {
-                    observaciones.Add(fila.Observacion);
-                    ViewState["observaciones"] = observaciones;
+                    if (aprobador)
+                    {
+                        observaciones.Add(fila.Observacion);
+                        ViewState["observaciones"] = observaciones;
+                    }
+                    else
+                    {
+                        observacionesDespacho.Add(fila.Observacion);
+                        ViewState["observacionesDespacho"] = observacionesDespacho;
+                    }                    
                 }
 
                 tabla.Rows.Add(datos);
