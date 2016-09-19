@@ -162,7 +162,14 @@ namespace SistemaMJP
             int bodega = reader.GetInt32(5);
             int subBodega = reader.GetInt32(6);
             int unidad = reader.GetInt32(7);
-            String observacion = reader.GetString(8);
+            String observacion;
+            if (reader.IsDBNull(8))
+            {
+                observacion = "";
+            }
+            else {
+                 observacion = reader.GetString(8);
+            }
             Item_Grid_RequisicionAprobadores items = new Item_Grid_RequisicionAprobadores(requisicion, fecha, destino, usuario, programa, bodega, subBodega, unidad, observacion);
             return items;
         }
@@ -365,7 +372,7 @@ namespace SistemaMJP
                     con.Open();
                     cmd.CommandText = "P_Agregar_InfoDespacho";
                     cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
-                    cmd.Parameters.AddWithValue("@fechaDespacho", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@fechaDespacho", DateTime.Now);
                     cmd.Parameters.AddWithValue("@placa", placa);
                     cmd.Parameters.AddWithValue("@nomConductor", nomConductor);
                     cmd.Parameters.AddWithValue("@destinatario", destinatario);

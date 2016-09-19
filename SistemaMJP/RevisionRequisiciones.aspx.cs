@@ -159,7 +159,7 @@ namespace SistemaMJP
                 GridRequisicion.DataSource = datosRequisicion;
                 GridRequisicion.DataBind();
                 GridRequisicion.Dispose();
-                if (datosRequisiciondespacho.Rows.Count > 0)
+                if (!rol.Equals("Aprobador") && datosRequisiciondespacho.Rows.Count > 0)
                 {
                     GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
                     GridRequisicionDespacho.DataBind();

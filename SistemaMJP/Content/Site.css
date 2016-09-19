@@ -143,10 +143,12 @@ input.selectorDeFecha{
 
 }
 
-.gridPF  td:nth-child(5),td:nth-child(6){
+.gridPF  td:nth-child(5){
     width: 14px;
 }
-
+.gridPF td:nth-child(6) {
+    width: 14px;
+}
 .gridsFormat2 th {
     text-align: center;
     background-color: #9393C5;

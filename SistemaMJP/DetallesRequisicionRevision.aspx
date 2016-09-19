@@ -9,7 +9,7 @@
     margin-left: 2%;"></i></asp:LinkButton>
                 <h3 class="Encabezado" id="labelRequisicion" runat="server"></h3>
                 <div style="display: none;" id="GridAprobadorPrograma" class="table-responsive tablaMJP" runat="server">
-                    <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">
+                    <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="100%">
                                             
                         <Columns>
                             <asp:TemplateField visible="true">
@@ -34,7 +34,7 @@
                     </asp:GridView>
                 </div>
 
-                <div class="form-group" style="margin-top: 2%; margin-right: 5%">
+                <div class="form-group" style="margin-top: 2%; margin-right: 0%">
 
                     <div style="display: none;" id="MsjErrorCantActivo" class="col-md-offset-2" runat="server">
                         <label class="mensajeError">Existen activos que aun no estan relacionados con esta requisicion, favor completar esta informacion antes de continuar</label>
@@ -42,11 +42,9 @@
                     </div>                        
 
                     
-                    <div class="BotonIngreso" style="float:left">
-                        <div class="form-group" style="display: none;" id="btn_boleta" runat="server">
+                        <div class="row form-group" style="display: none;margin-left: 3%;" id="btn_boleta" runat="server">
                             <asp:Button type="submit" name="btnBoleta" Text="Boleta" id="btnBoleta"  runat="server" class="btn btn-default" OnClick="btnBoleta_Click"  style="margin-left: 1%; margin-right:-10%"></asp:Button>
                         </div>
-                    </div>
 
                     <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
                         <div class="row" style="float:right; display: inline-flex;">

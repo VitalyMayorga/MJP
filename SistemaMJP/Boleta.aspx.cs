@@ -65,8 +65,33 @@ namespace SistemaMJP
             {
                 throw;
             }
-           
-            TextObject fechaT = (TextObject)reportdocument.ReportDefinition.Sections["Section2"].ReportObjects["fecha"];
+            try
+            {//Segmento que trae los datos a mostrar en la vista previa de la factura no relacionados con los productos
+                //numFactura,proveedor,fecha inclusion
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Fecha_Despacho";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numReq);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                if (reader.HasRows)
+                {
+                    fecha = reader.GetDateTime(0);
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            
+            catch (Exception)
+            {
+                throw;
+            }
+            
+            TextObject fechaT = (TextObject)reportdocument.ReportDefinition.Sections["Section2"].ReportObjects["Fecha"];
             fechaT.Text = fecha.ToString("dd/MM/yyyy");
 
             //CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader;

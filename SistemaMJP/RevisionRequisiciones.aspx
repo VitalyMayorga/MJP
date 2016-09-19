@@ -33,7 +33,7 @@
                 </div>
 
                 <div style="display: none;" id="GridDespacho" class="table-responsive tablaMJP" runat="server">
-                   <h3 class="Encabezado">Requisiciones Despachadas</h3>
+                   <h3 class="Encabezado" style="margin-left:0%">Requisiciones Despachadas</h3>
                      <asp:GridView ID="GridRequisicionDespacho" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChangingDespacho" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
                         
                          <Columns>
