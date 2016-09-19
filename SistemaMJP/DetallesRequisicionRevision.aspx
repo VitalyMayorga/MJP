@@ -40,22 +40,25 @@
                         <label class="mensajeError">Existen activos que aun no estan relacionados con esta requisicion, favor completar esta informacion antes de continuar</label>
                         <br/> 
                     </div>                        
-                    
-                    <div class="row BotonIngreso" style="float:right">
-                            <div class="form-group" style="display: block;" id="btn_devolver" runat="server">
+                    <div class="form-group" style="margin-top: 2%; margin-right: 4%;">
+                        <div class="row" style="float:right;display: inline-flex;">
+                            <div style="display: block;" id="btn_devolver" runat="server">
                                 <asp:Button  name="btnDevolver" Text="Devolver" id="btnDevolver"  runat="server" class="btn btn-default" OnClick="btnDevolver_Click"  style="margin-right: 1%;margin-left:-10%"></asp:Button>
                             </div>
-                            <div class="form-group" style="display: none;" id="btn_aprobar" runat="server">
+                            <div  style="display: none;" id="btn_aprobar" runat="server">
                                 <asp:Button  name="btnAprobar" Text="Aprobar" id="btnAprobar"  runat="server" class="btn btn-default" OnClick="btnAprobar_Click" style="margin-right: 1%"></asp:Button>
                             </div>
-                            <div class="form-group" style="display: none;" id="btn_rechazar" runat="server">
+                            <div style="display: none;" id="btn_rechazar" runat="server">
                                 <asp:Button  name="btnRechazar" Text="Rechazar" id="btnRechazar"  runat="server" class="btn btn-default" OnClick="btnRechazar_Click" style="margin-right: 1%"></asp:Button>
                             </div>
 
-                            <div class="form-group" style="display: none;" id="btn_despachar" runat="server">
-                                <asp:Button  name="btnDespachar" Text="Despachar" id="btnDespachar"  runat="server" class="btn btn-default" OnClick="btnDespachar_Click"></asp:Button>
+                            <div  style="display: none;" id="btn_despachar" runat="server">
+                                <asp:Button  name="btnDespachar" Text="Despachar" id="btnDespachar"  runat="server" class="btn btn-default" OnClick="btnDespachar_Click" ></asp:Button>
                             </div>
                         </div>
+                    
+                </div>
+                    
 
                 </div>
             </div>
@@ -189,7 +192,7 @@
                                
                     </div>
                     <div class="form-group">
-                        <label>Placa del Automobil</label>
+                        <label>Placa del Automóvil</label>
                         <asp:TextBox ID="txtPlaca" runat="server" class="form-control text-box single-line"></asp:TextBox>
                         <div style="display: none;" id="MsjErrorPlaca" class="col-md-offset-2" runat="server">
                             <label class="msjErroneo" id="Label2" runat="server"></label>

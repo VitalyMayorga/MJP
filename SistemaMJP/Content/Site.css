@@ -190,3 +190,7 @@ input.selectorDeFecha{
 .gridDR td:nth-child(5) {
     width: 14px;
 }
+
+.gridProductosBusqueda td:nth-child(3){
+    width: 14px;
+}

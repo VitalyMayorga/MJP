@@ -115,7 +115,7 @@ namespace SistemaMJP
                                 }
                                 else if (!correcto)
                                 {
-                                    if (residuo < empaque / 2)
+                                    if (residuo < empaque / 2 && (cantidad-residuo)!=0)
                                     {//caso cantidad es menor al 49%
                                         cantidadSugerida = cantidad - residuo;
                                     }
@@ -135,7 +135,6 @@ namespace SistemaMJP
                         }
                         if (!correcto)
                         {
-
                             MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
                             MsjErrorPrograma.Style.Add("display", "block");
                         }
@@ -151,7 +150,7 @@ namespace SistemaMJP
                 MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
                 MsjErrorPrograma.Style.Add("display", "block");
             }
-
+            
             return correcto;
         
         }
@@ -175,7 +174,7 @@ namespace SistemaMJP
             txtCantidad.Text = "";
             MsjErrorPrograma.Style.Add("display", "none");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModal('"+nombre+"','"+descripcion+"');", true);
-
+            upModal.Update();
             
         }
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y se mantiene en la página para nuevo ingreso de productos
@@ -185,13 +184,16 @@ namespace SistemaMJP
             {//Si todo es valido, entonces se procede a guardar el producto en la requisicion
                 int cantidad = Convert.ToInt32(txtCantidad.Text);
                 controladora.agregarProducto(producto, numRequisicion, cantidad);
-                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#AgregarProducto').modal('hide');</script>");
+                //ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#AgregarProducto').modal('hide');</script>");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#AgregarProducto').modal('hide');", true);
 
             }
             else
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
+            upModal.Update();
+
         }
         //Revisa que los datos proporcionados estén correctos,de ser así los inserta y redirecciona a la página DetallesRequisicion
         protected void aceptarYSalir(object sender, EventArgs e)

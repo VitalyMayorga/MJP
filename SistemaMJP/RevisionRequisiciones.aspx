@@ -2,13 +2,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
+        
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
             <div class="form-horizontal">
                 <asp:LinkButton runat="server" OnClick="regresarMP"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton> 
                 <h3 class="Encabezado">Requisiciones Pendientes de Usuario</h3>
                 <div class="table-responsive tablaMJP">
+
                     <asp:GridView ID="GridRequisicion" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
                         
                          <Columns>

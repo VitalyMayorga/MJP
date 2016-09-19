@@ -42,9 +42,20 @@ namespace SistemaMJP
                 }
             }
             else {
-                observaciones = (List<string>)ViewState["observaciones"];
-                observacionesDespacho = (List<string>)ViewState["observacionesDespacho"]; 
-                seguimiento = (DataTable)ViewState["tabla2"];
+                try
+                {
+
+                    observaciones = (List<string>)ViewState["observaciones"];
+                    observacionesDespacho = (List<string>)ViewState["observacionesDespacho"];
+                    seguimiento = (DataTable)ViewState["tabla2"];
+                    datosRequisicion = (DataTable)ViewState["tablaDR"];
+                    GridRequisicion.DataSource = datosRequisicion;
+                    GridRequisicion.DataBind();
+                    datosRequisiciondespacho = (DataTable)ViewState["tablaDD"];
+                }
+                catch (Exception ex) { 
+                
+                }
             }
         }
 
@@ -78,7 +89,6 @@ namespace SistemaMJP
             GridRequisicionDespacho.DataBind();
         }
 
-        //Obtiene el id de la factura seleccionada y redirecciona a la pantalla DetallesFactura
         protected void btnDetalles_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;            
@@ -140,15 +150,21 @@ namespace SistemaMJP
                 }               
 
                 datosRequisicion = llenarTablas(data,true);
-                GridRequisicion.DataSource = datosRequisicion;
-                GridRequisicion.DataBind();
-
+                ViewState["tablaDR"] = datosRequisicion;
                 if (!rol.Equals("Aprobador"))
                 {
-                    datosRequisiciondespacho = llenarTablas(data2,false);
+                    datosRequisiciondespacho = llenarTablas(data2, false);
+                    ViewState["tablaDD"] = datosRequisiciondespacho;
+                }
+                GridRequisicion.DataSource = datosRequisicion;
+                GridRequisicion.DataBind();
+                GridRequisicion.Dispose();
+                if (datosRequisiciondespacho.Rows.Count > 0)
+                {
                     GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
                     GridRequisicionDespacho.DataBind();
                 }
+                UpdatePanel1.Update();
         }
 
         private DataTable llenarTablas(List<Item_Grid_RequisicionAprobadores> data, bool aprobador)        {
