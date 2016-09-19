@@ -347,7 +347,7 @@ namespace SistemaMJP
                     con.Open();
                     cmd.CommandText = "P_Actualizar_InfoDespacho";
                     cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
-                    cmd.Parameters.AddWithValue("@fechaRecibido", DateTime.Today.ToString("d"));
+                    cmd.Parameters.AddWithValue("@fechaRecibido", DateTime.Now);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();
@@ -376,7 +376,7 @@ namespace SistemaMJP
                     cmd.Parameters.AddWithValue("@placa", placa);
                     cmd.Parameters.AddWithValue("@nomConductor", nomConductor);
                     cmd.Parameters.AddWithValue("@destinatario", destinatario);
-
+                    
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();

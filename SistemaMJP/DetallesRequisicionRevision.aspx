@@ -101,32 +101,35 @@
 
     <div id="ModalEditar" class="modal fade" role="dialog">
         <div class="modal-dialog">
+            
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edicion de linea</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label id="linea"></label> 
-                        <label id="idroweditar" style="display: none;" runat="server"></label>      
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edicion de linea</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                           <label id="linea"></label> 
+                            <label id="idroweditar" style="display: none;" runat="server"></label>
+                            <label id="nombreP" style="display: none;" runat="server"></label>        
                                
+                        </div>
+                        <div class="form-group">
+                            <label>Cantidad (Unidades)</label>
+                            <asp:TextBox ID="txtCantidad" runat="server" class="form-control text-box single-line"></asp:TextBox>
+                            <div style="display: none;" id="MsjErrorcantidad" class="col-md-offset-2" runat="server">
+                                <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
+                            </div>
+                        </div>  
                     </div>
-                    <div class="form-group">
-                        <label>Cantidad (Unidades)</label>
-                        <asp:TextBox ID="txtCantidad" runat="server" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorcantidad" class="col-md-offset-2" runat="server">
-                        <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
+                    <div class="modal-footer">
+                        <asp:Button id="btnAceptarEdicion" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEdicion"></asp:Button>
+                        <asp:Button id="btnCancelarEdicion" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                     </div>
-                    </div>  
                 </div>
-                <div class="modal-footer">
-                    <asp:Button id="btnAceptarEdicion" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarEdicion"></asp:Button>
-                    <asp:Button id="btnCancelarEdicion" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
-                </div>
-            </div>
+
 
         </div>
     </div>

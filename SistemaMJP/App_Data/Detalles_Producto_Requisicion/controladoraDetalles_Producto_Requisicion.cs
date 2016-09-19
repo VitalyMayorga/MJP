@@ -119,5 +119,17 @@ namespace SistemaMJP
             return controladoraRU.obtenerCantidadProductoBodega(bodega, subbodega, programa, producto);
         }
 
+        //Llama a la controladora de base de datos de requisiciones usuario para obtener las muestras de empaque por producto
+        internal List<int> obtenerEmpaque(int bodega, int subbodega, string programa, string producto)
+        {
+            return controladoraRU.obtenerEmpaque(bodega, subbodega, programa, producto);
+        }
+
+        //Llama a la controladora de base de datos de requisiciones usuario para obtener la cantidad de las muestras de empaque por producto
+        internal List<int> obtenerCantPorEmpaque(int bodega, int subbodega, string programa, string producto)
+        {
+            return controladoraRU.obtenerCantPorEmpaque(bodega, subbodega, programa, producto);
+        }
+
     }
 }

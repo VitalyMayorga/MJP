@@ -95,8 +95,17 @@ namespace SistemaMJP
             string buttonId = btn.ID;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             int i = Convert.ToInt32(row.RowIndex);
+            string numRequisicion;
+            if (buttonId == "btnDetallesAlmacen")
+            {
+                numRequisicion = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[0].Text;
+            }
+            else
+            {
+                numRequisicion = GridRequisicionDespacho.Rows[i + (this.GridRequisicionDespacho.PageIndex * 10)].Cells[0].Text;
+            }
 
-            string numRequisicion = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[0].Text;
+           
             //string estado = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[6].Text;
 
             Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&btn=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(buttonId, "MJP")));

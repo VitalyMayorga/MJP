@@ -18,8 +18,8 @@ namespace SistemaMJP
         Bitacora bitacora = new Bitacora();
         ServicioLogin servicio = new ServicioLogin();
         private DataTable datosRequisicion;
-        public  string numRequisicion;
-        public string btnId;
+        private  string numRequisicion;
+        private string btnId;
         private int id_row;
         private  int id_requisicion;
         private  int[] ids;//se guardaran los ids de los productos de la requisicion 
@@ -239,24 +239,33 @@ namespace SistemaMJP
         protected void aceptarEdicion(object sender, EventArgs e)
         {
             string cantidad = txtCantidad.Text;
+            string descripcion = nombreP.InnerText;
             int ir = Int32.Parse(idroweditar.InnerText);
             string descripcionRA = "";
             string rol = (string)Session["rol"];
             string usuario = (string)Session["correoInstitucional"];
-            if (txtCantidad.Text.Trim() == "")
-            {
-                string descripcion = GridProductosRequisicion.Rows[ir + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEdicion('Editar cantidad del producto: " + descripcion + "');", true);
-                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('show');</script>");
+
+            if (validar(descripcion))
+            {//Si todo es valido, entonces se procede a guardar el producto en la requisicion
+                if (txtCantidad.Text.Trim() == "")
+                {
+                    //string descrip = GridProductosRequisicion.Rows[ir + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEdicion('Editar cantidad del producto: " + descripcion + "');", true);
+                    ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('show');</script>");
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('hide');</script>");
+                    controladora.modificarCantidadLinea(id_requisicion, ids[ir + (this.GridProductosRequisicion.PageIndex * 10)], Int32.Parse(cantidad));
+                }
+                descripcionRA = "Requisicion: " + numRequisicion + " editada";
+                bitacora.registrarActividad(usuario, descripcionRA);
+                llenarDetallesProductoRequisicion();
             }
             else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalEditar').modal('hide');</script>");
-                controladora.modificarCantidadLinea(id_requisicion, ids[ir + (this.GridProductosRequisicion.PageIndex * 10)], Int32.Parse(cantidad));
-            }            
-            descripcionRA = "Requisicion: " + numRequisicion + " editada";
-            bitacora.registrarActividad(usuario, descripcionRA);
-            llenarDetallesProductoRequisicion();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEdicion('Editar cantidad del producto: " + descripcion + "');", true);
+            }
         } 
 
         //Redirecciona a la pantalla de editar linea
@@ -266,12 +275,14 @@ namespace SistemaMJP
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             id_row = Convert.ToInt32(row.RowIndex);
             idroweditar.InnerText = id_row.ToString();
-            txtCantidad.Text += cantidades[id_row + (this.GridProductosRequisicion.PageIndex * 10)].ToString();
+            txtCantidad.Text = cantidades[id_row + (this.GridProductosRequisicion.PageIndex * 10)].ToString();
 
             //Se obtiene el id del producto            
-            string descripcion = GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
+            String descripcion = GridProductosRequisicion.Rows[id_row + (this.GridProductosRequisicion.PageIndex * 10)].Cells[0].Text;
+            nombreP.InnerText = descripcion;
 
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEdicion('Editar cantidad del producto: " + descripcion + "');", true);
+           
         }
 
         //Pregunta si deseaeliminar la linea seleccionada
@@ -300,7 +311,89 @@ namespace SistemaMJP
         protected void regresarMP(object sender, EventArgs e)
         {
             Response.Redirect("MenuPrincipal");
-        }        
+        }
+
+        //Revisa la cantidad ingresada por el usuario vs lo que hay en el almacen
+        protected bool validar(string descripcion)
+        {
+            List<string> dato = controladora.getDatosRequisicion(numRequisicion);
+            bool correcto = false;
+            int cantSugeridaFinal = 0;
+            int i = 0;
+            try
+            {
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+                if (cantidad > 0)
+                {//Aqui esta el algoritmo necesario para indicar cantidades sugeridas o si se puede o no hacer el pedido con la cantidad ingresada
+                    MsjErrorcantidad.Style.Add("display", "none");
+                    int cantidadEnBodega = controladora.obtenerCantidadProductoBodega(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], descripcion);
+                    List<int> empaques = controladora.obtenerEmpaque(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], descripcion);
+                    List<int> cantPorEmpaque = controladora.obtenerCantPorEmpaque(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], descripcion);
+                    if (cantidad > cantidadEnBodega)
+                    {
+                        MensajeErrorTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
+                        MsjErrorcantidad.Style.Add("display", "block");
+                    }
+                    else
+                    {
+                        int residuoCercano = 99999; //Usado para recomendar siempre el empaque mas cercano                        
+                        int cantidadSugerida;
+                        foreach (int empaque in empaques)
+                        {
+                            if (cantidad <= cantPorEmpaque[i])
+                            {
+
+                                int residuo = cantidad % empaque;
+                                if (residuo == 0 && cantidad <= cantPorEmpaque[i])
+                                {
+                                    MsjErrorcantidad.Style.Add("display", "none");
+                                    correcto = true;
+                                }
+                                else if (!correcto)
+                                {
+                                    if (residuo < empaque / 2 && (cantidad - residuo) != 0)
+                                    {//caso cantidad es menor al 49%
+                                        cantidadSugerida = cantidad - residuo;
+                                    }
+                                    else
+                                    {//cantidad es mayor al 49%
+                                        cantidadSugerida = (cantidad - residuo) + empaque;
+                                    }
+                                    if (residuo < residuoCercano)
+                                    {
+                                        residuoCercano = residuo;
+                                        cantSugeridaFinal = cantidadSugerida;
+                                    }
+                                }
+                            }
+
+                            i++;
+                        }
+                        if (!correcto)
+                        {
+                            MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
+                            MsjErrorcantidad.Style.Add("display", "block");
+                        }
+                    }
+                }
+                else
+                {
+                    MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                    MsjErrorcantidad.Style.Add("display", "block");
+                }
+            }
+            catch (Exception e)
+            {
+                MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                MsjErrorcantidad.Style.Add("display", "block");
+            }
+
+            return correcto;
+
+        }
+
+
+
 
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProductoRequisicion()
@@ -309,7 +402,6 @@ namespace SistemaMJP
             if (rol.Equals("Aprobador"))
             {
                 btn_aprobar.Style.Add("display", "block");
-                btn_boleta.Style.Add("display", "block");//solo de prueba, mientras se arregla el otro bug
                 GridAprobadorPrograma.Style.Add("display", "block");
             }
             else
