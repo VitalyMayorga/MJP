@@ -11,12 +11,17 @@ namespace SistemaMJP
         ControladoraBDRequisicionesUsuario controladoraBD;
         ControladoraBodegas controladoraB;
         ControladoraRequisicionAprobadores controladoraR;
+        ControladoraProgramasPresupuestarios controladoraP;
         public ControladoraRequisicionesUsuario() { 
             controladoraBD = new ControladoraBDRequisicionesUsuario();
             controladoraB = new ControladoraBodegas();
             controladoraR = new ControladoraRequisicionAprobadores();
+            controladoraP = new ControladoraProgramasPresupuestarios();
         }
-
+        //Llama a la controladora de programa presupuestario para obtener el ID del programa
+        internal int obtenerIDPrograma(string programa){
+            return controladoraP.obtenerIDPrograma(programa);
+        }
         //LLama a la controladoraBD de requisiciones para obtener la  lista con los item del grid
         internal List<Item_Grid_Requisiciones> getListaRequisiciones(string bodega,int usuario)
         {

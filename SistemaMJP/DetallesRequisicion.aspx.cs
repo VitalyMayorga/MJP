@@ -182,6 +182,7 @@ namespace SistemaMJP
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             List<string> datosReq = controladora.getDatosRequisicion(numRequisicion);
+            int idPrograma = controladora.obtenerIDPrograma(datosReq[1]);
             try
             {
                 List<string> correos = email.obtenerCorreosAprobador(Convert.ToInt32(datosReq[1]), Convert.ToInt32(datosReq[0]), Convert.ToInt32(datosReq[2]));
@@ -193,6 +194,10 @@ namespace SistemaMJP
             {
 
             }
+
+            btnEnviarAprobacion.Enabled = false;
+            btnEliminarReq.Enabled = false;
+            btnNuevoProducto.Enabled = false;
 
         }
         //Llena la grid de productos con los datos correspondientes

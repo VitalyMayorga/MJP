@@ -365,7 +365,7 @@ namespace SistemaMJP
                     con.Open();
                     cmd.CommandText = "P_Agregar_InfoDespacho";
                     cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
-                    cmd.Parameters.AddWithValue("@fechaDespacho", DateTime.Today.ToString("d"));
+                    cmd.Parameters.AddWithValue("@fechaDespacho", DateTime.Now.ToString());
                     cmd.Parameters.AddWithValue("@placa", placa);
                     cmd.Parameters.AddWithValue("@nomConductor", nomConductor);
                     cmd.Parameters.AddWithValue("@destinatario", destinatario);

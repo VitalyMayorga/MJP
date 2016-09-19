@@ -21,13 +21,13 @@
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">Destino</label>
-                    <asp:Label ID="labelDest" runat="server" class="control-label" style="text-align:left"></asp:Label>
+                    <asp:Label ID="labelDest" runat="server" style="text-align:left"></asp:Label>
 
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">Observaciones</label>
-                    <asp:Label ID="labelObs" runat="server" class="control-label" style="text-align:left"></asp:Label>
+                    <asp:Label ID="labelObs" runat="server" style="text-align:left"></asp:Label>
                 </div>
                 <div class="table-responsive tablaMJP">
                     <asp:GridView ID="GridProductos" class="gridsFormat gridDR" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductos_RowCreated" Width="100%">
