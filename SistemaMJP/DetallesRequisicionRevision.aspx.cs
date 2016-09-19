@@ -90,6 +90,12 @@ namespace SistemaMJP
             }
         }
 
+        //Crea la Boleta con los productos de la requisicion
+        protected void btnBoleta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Boleta.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
+        }
+
         //Se encarga de las revisiciones previas al despacho de la requisicion
         protected void btnDespachar_Click(object sender, EventArgs e)
         {
@@ -303,6 +309,7 @@ namespace SistemaMJP
             if (rol.Equals("Aprobador"))
             {
                 btn_aprobar.Style.Add("display", "block");
+                btn_boleta.Style.Add("display", "block");//solo de prueba, mientras se arregla el otro bug
                 GridAprobadorPrograma.Style.Add("display", "block");
             }
             else
@@ -311,12 +318,14 @@ namespace SistemaMJP
                 {
                     btn_rechazar.Style.Add("display", "none");
                     btn_aprobar.Style.Add("display", "none");
+                    btn_boleta.Style.Add("display", "block");
                     btn_despachar.Style.Add("display", "block");
                     btn_devolver.Style.Add("display", "block");
                 }
                 else{
                     btn_rechazar.Style.Add("display", "block");
                     btn_aprobar.Style.Add("display", "block");
+                    btn_boleta.Style.Add("display", "none");
                     btn_despachar.Style.Add("display", "none");
                     btn_devolver.Style.Add("display", "none");
                 }

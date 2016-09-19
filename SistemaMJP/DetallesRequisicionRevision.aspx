@@ -41,6 +41,12 @@
                         <br/> 
                     </div>                        
                     
+                    <div class="BotonIngreso" style="float:left">
+                        <div class="form-group" style="display: none;" id="btn_boleta" runat="server">
+                            <asp:Button type="submit" name="btnBoleta" Text="Boleta" id="btnBoleta"  runat="server" class="btn btn-default" OnClick="btnBoleta_Click"  style="margin-left: 1%; margin-right:-10%"></asp:Button>
+                        </div>
+                    </div>
+
                     <div class="row BotonIngreso" style="float:right">
                             <div class="form-group" style="display: block;" id="btn_devolver" runat="server">
                                 <asp:Button  name="btnDevolver" Text="Devolver" id="btnDevolver"  runat="server" class="btn btn-default" OnClick="btnDevolver_Click"  style="margin-right: 1%;margin-left:-10%"></asp:Button>

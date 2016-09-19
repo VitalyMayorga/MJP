@@ -185,6 +185,7 @@
     <Content Include="DevolucionBajas.aspx" />
     <Content Include="Devoluciones.aspx" />
     <Content Include="Facturas.aspx" />
+    <Content Include="Boleta.aspx" />
     <Content Include="FacturaVistaPrevia.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\admin.png" />
@@ -222,6 +223,17 @@
     <Content Include="EditarUsuario.aspx" />
     <Content Include="DatosFacturaAgregada.xsc">
       <DependentUpon>DatosFacturaAgregada.xsd</DependentUpon>
+    </Content>
+    <Content Include="Boleta_DataSet.xsc">
+      <DependentUpon>Boleta_DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Boleta_DataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Boleta_DataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Boleta_DataSet.xss">
+      <DependentUpon>Boleta_DataSet.xsd</DependentUpon>
     </Content>
     <None Include="DatosFacturaAgregada.xsd">
       <SubType>Designer</SubType>
@@ -377,6 +389,17 @@
     <Compile Include="Bodegas.aspx.designer.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Boleta_DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Boleta_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Boleta_Reporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Boleta_Reporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -460,6 +483,13 @@
     </Compile>
     <Compile Include="Facturas.aspx.designer.cs">
       <DependentUpon>Facturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boleta.aspx.cs">
+      <DependentUpon>Boleta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boleta.aspx.designer.cs">
+      <DependentUpon>Boleta.aspx</DependentUpon>
     </Compile>
     <Compile Include="FacturaVistaPrevia.aspx.cs">
       <DependentUpon>FacturaVistaPrevia.aspx</DependentUpon>
@@ -627,6 +657,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Boleta_Reporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Boleta_Reporte.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Factura_vista_previa.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Factura_vista_previa.cs</LastGenOutput>

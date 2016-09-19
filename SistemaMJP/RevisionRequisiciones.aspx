@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
-    <asp:UpdatePanel runat="server">
+    <asp:UpdatePanel id="PanelGrids" runat="server">
         <ContentTemplate>
             <div class="form-horizontal">
                 <asp:LinkButton runat="server" OnClick="regresarMP"><i class="glyphicon glyphicon-circle-arrow-left atras" style="font-size: 35px;

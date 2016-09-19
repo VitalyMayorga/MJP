@@ -149,6 +149,7 @@ namespace SistemaMJP
                     GridRequisicionDespacho.DataSource = datosRequisiciondespacho;
                     GridRequisicionDespacho.DataBind();
                 }
+                //PanelGrids.Update();
         }
 
         private DataTable llenarTablas(List<Item_Grid_RequisicionAprobadores> data, bool aprobador)        {
