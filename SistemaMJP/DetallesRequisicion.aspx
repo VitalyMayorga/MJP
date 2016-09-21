@@ -118,8 +118,8 @@
     </div>
     <script type="text/javascript">
         function openModal(nombre, descripcion) {
-            document.getElementById('nombreProducto').innerHTML = nombre;
-            document.getElementById('descripcionLabel').innerHTML = descripcion;
+            $('#nombreProducto').val(nombre);
+            $('#descripcionLabel').val(descripcion);
             $('#AgregarProducto').modal('show');
         }
         function openModalEliminar(value) {

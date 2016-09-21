@@ -210,6 +210,7 @@ namespace SistemaMJP
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('" + nombre + "','" + descripcion + "');", true);
             }
 
+            upModal.Update();
                
         }
 
