@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <div class="form-group1">
+        <%--<div class="form-group1">
             <div class="form-group2">
                 <div class="LabelMenu">
                     <label class="control-label">Seguimiento Requisiciones</label>
@@ -108,7 +108,7 @@
                         OnClick="ingresarSeguimiento" />
                 </div>
             </div>
-        </div>
+        </div>--%>
     </div>
 </asp:Content>
 

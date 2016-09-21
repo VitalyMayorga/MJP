@@ -76,7 +76,7 @@ namespace SistemaMJP
                     tabla = (DataTable)ViewState["tabla"];
                     descripcion = (string)ViewState["descripcion"];
                     nombre = (string)ViewState["nombre"];
-                    eliminado = (int)ViewState["elimnado"];//0= requisicion, 1= producto
+                    eliminado = (int)ViewState["eliminado"];//0= requisicion, 1= producto
                     i = (int)ViewState["i"];
                 }
                 catch (Exception) { }
@@ -92,7 +92,7 @@ namespace SistemaMJP
         protected void btnEliminar(object sender, EventArgs e)
         {
             eliminado = 0;
-            ViewState["elimnado"] = eliminado;
+            ViewState["eliminado"] = eliminado;
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEliminar('Desea eliminar la requisición?');", true);
 
         }
@@ -121,6 +121,7 @@ namespace SistemaMJP
                 producto = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[0].Text);
                 ViewState["producto"] = producto;
                 eliminado = 1;
+                ViewState["eliminado"] = eliminado;
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalEliminar('Desea eliminar el producto: " + producto + "?');", true);
 
 
@@ -174,8 +175,7 @@ namespace SistemaMJP
         protected void btnEnviar(object sender, EventArgs e)
         {
             controladora.enviarAAprobacion(numRequisicion);
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Requisición enviada a aprobación.\n Puede seguir el histórico del estado de la requisción en el menú requisiciones')", true);
-            llenarDetallesProducto();
+             llenarDetallesProducto();
             string descripcionRA = "Requisición " + numRequisicion + " enviada a aprobacion programa";
             string usuario = (string)Session["correoInstitucional"];
             bitacora.registrarActividad(usuario, descripcionRA);
@@ -198,7 +198,8 @@ namespace SistemaMJP
             btnEnviarAprobacion.Enabled = false;
             btnEliminarReq.Enabled = false;
             btnNuevoProducto.Enabled = false;
-
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Requisición enviada a aprobación.\\n Puede seguir el histórico del estado de la requisción en el menú requisiciones')", true);
+           
         }
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()
@@ -283,7 +284,8 @@ namespace SistemaMJP
             {//Si todo es valido, entonces se procede a guardar el producto en la requisicion
                 int cantidad = Convert.ToInt32(txtCantidad.Text);
                 controladora.editarProducto(producto, numRequisicion, cantidad);
-
+                llenarDetallesProducto();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#AgregarProducto').modal('hide');", true);
 
             }
             else
@@ -294,7 +296,7 @@ namespace SistemaMJP
 
         //Revisa la cantidad ingresada por el usuario vs lo que hay en el almacen
         protected bool validar()
-        {
+        {            
             bool correcto = false;
             int cantSugeridaFinal = 0;
             int i = 0;
@@ -319,33 +321,37 @@ namespace SistemaMJP
                         int cantidadSugerida;
                         foreach (int empaque in empaques)
                         {
-                            int residuo = cantidad % empaque;
-                            if (residuo == 0 && cantidad <= cantPorEmpaque[i])
+                            if (cantidad <= cantPorEmpaque[i])
                             {
-                                MsjErrorPrograma.Style.Add("display", "none");
-                                correcto = true;
-                            }
-                            else if (!correcto)
-                            {
-                                if (residuo < empaque / 2)
-                                {//caso cantidad es menor al 49%
-                                    cantidadSugerida = cantidad - residuo;
-                                }
-                                else
-                                {//cantidad es mayor al 49%
-                                    cantidadSugerida = (cantidad - residuo) + empaque;
-                                }
-                                if (residuo < residuoCercano)
+
+                                int residuo = cantidad % empaque;
+                                if (residuo == 0 && cantidad <= cantPorEmpaque[i])
                                 {
-                                    residuoCercano = residuo;
-                                    cantSugeridaFinal = cantidadSugerida;
+                                    MsjErrorPrograma.Style.Add("display", "none");
+                                    correcto = true;
+                                }
+                                else if (!correcto)
+                                {
+                                    if (residuo < empaque / 2 && (cantidad - residuo) != 0)
+                                    {//caso cantidad es menor al 49%
+                                        cantidadSugerida = cantidad - residuo;
+                                    }
+                                    else
+                                    {//cantidad es mayor al 49%
+                                        cantidadSugerida = (cantidad - residuo) + empaque;
+                                    }
+                                    if (residuo < residuoCercano)
+                                    {
+                                        residuoCercano = residuo;
+                                        cantSugeridaFinal = cantidadSugerida;
+                                    }
                                 }
                             }
+
                             i++;
                         }
                         if (!correcto)
                         {
-
                             MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
                             MsjErrorPrograma.Style.Add("display", "block");
                         }
@@ -364,7 +370,7 @@ namespace SistemaMJP
             }
 
             return correcto;
-
+        
         }
     }
 }

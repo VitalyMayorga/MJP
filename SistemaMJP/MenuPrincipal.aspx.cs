@@ -73,10 +73,10 @@ namespace SistemaMJP
             }            
         }
 
-        protected void ingresarSeguimiento(object sender, EventArgs e)
-        {
-            Response.Redirect("Seguimiento.aspx");
-        }
+        //protected void ingresarSeguimiento(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("Seguimiento.aspx");
+        //}
 
     }
 }
