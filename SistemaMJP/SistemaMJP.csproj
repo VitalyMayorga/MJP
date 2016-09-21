@@ -161,6 +161,7 @@
     <Content Include="Administracion.aspx" />
     <Content Include="Bajas.aspx" />
     <Content Include="Bodegas.aspx" />
+    <Content Include="ProductosRequisicion.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Bodegas.css" />
     <Content Include="Content\bootstrap.css" />
@@ -388,6 +389,19 @@
     </Compile>
     <Compile Include="Bodegas.aspx.designer.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boleta_Productos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Boleta_Productos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProductosRequisicion.aspx.cs">
+      <DependentUpon>ProductosRequisicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductosRequisicion.aspx.designer.cs">
+      <DependentUpon>ProductosRequisicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Boleta_DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -657,6 +671,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Boleta_Productos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Boleta_Productos.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boleta_Reporte.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Boleta_Reporte.cs</LastGenOutput>

@@ -335,7 +335,7 @@ namespace SistemaMJP
         }
 
         //Metodo que se encarga de actualizar la fecha de entrega de la requisicion despachada
-        internal void actualizarInfoDespacho(int idRequisicion)
+        internal void actualizarInfoDespacho(int idRequisicion, DateTime fecha, string persona)
         {
             using (TransactionScope ts = new TransactionScope())
             {
@@ -347,7 +347,8 @@ namespace SistemaMJP
                     con.Open();
                     cmd.CommandText = "P_Actualizar_InfoDespacho";
                     cmd.Parameters.AddWithValue("@idRequisicion", idRequisicion);
-                    cmd.Parameters.AddWithValue("@fechaRecibido", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@fechaRecibido", fecha);
+                    cmd.Parameters.AddWithValue("@personaRecibe", persona);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     ts.Complete();

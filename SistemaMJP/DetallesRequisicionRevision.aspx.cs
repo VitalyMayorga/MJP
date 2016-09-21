@@ -20,6 +20,7 @@ namespace SistemaMJP
         private DataTable datosRequisicion;
         private  string numRequisicion;
         private string btnId;
+        private string unidad;
         private int id_row;
         private  int id_requisicion;
         private  int[] ids;//se guardaran los ids de los productos de la requisicion 
@@ -48,6 +49,10 @@ namespace SistemaMJP
                     {
                         numRequisicion = servicio.TamperProofStringDecode(Request.QueryString["numR"], "MJP");
                         btnId = servicio.TamperProofStringDecode(Request.QueryString["btn"], "MJP");
+                        if (btnId == "btnDetallesAlmacen")
+                        {
+                            unidad = servicio.TamperProofStringDecode(Request.QueryString["unidad"], "MJP");
+                        }
                     }
                     catch (Exception)
                     {
@@ -57,12 +62,14 @@ namespace SistemaMJP
                     llenarDetallesProductoRequisicion();
                     ViewState["numRequisicion"] = numRequisicion;
                     ViewState["btnId"] = btnId;
+                    ViewState["unidad"] = unidad;
                 }
 
             }
             else {
                 numRequisicion = (string)ViewState["numRequisicion"];
                 btnId = (string)ViewState["btnId"];
+                unidad = (string)ViewState["unidad"];
                 id_requisicion = (int)ViewState["id_requisicion"];
                 //id_row = (int)ViewState["id_row"];
                 ids = (int[])ViewState["ids"];
@@ -93,7 +100,7 @@ namespace SistemaMJP
         //Crea la Boleta con los productos de la requisicion
         protected void btnBoleta_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Boleta.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
+            Response.Redirect("ProductosRequisicion.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
         }
 
         //Se encarga de las revisiciones previas al despacho de la requisicion
@@ -127,12 +134,13 @@ namespace SistemaMJP
             string usuario = (string)Session["correoInstitucional"];
             string placa = txtPlaca.Text;
             string nomConductor = txtConductor.Text;
-            string destinatario = txtDestinatario.Text;
+            string destinatario = unidad;
                         
             controladora.cambiarEstadoRequisicion(id_requisicion, 3);
             controladora.agregarInfoDespacho(id_requisicion, placa, nomConductor, destinatario);      
             descripcionRA = "Requisicion: " + numRequisicion + " despachada";
             bitacora.registrarActividad(usuario, descripcionRA);
+            Response.Redirect("Boleta.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&idReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_requisicion.ToString(), "MJP")));
             Response.Redirect("RevisionRequisiciones.aspx"); 
         }
 
@@ -212,6 +220,8 @@ namespace SistemaMJP
         protected void btnAprobar_Click(object sender, EventArgs e)
         {
             int indice = 0;
+            DateTime fechaRecibido = DateTime.Now;
+            string personaRecibe = "";
             string usuario = (string)Session["correoInstitucional"];
             string descripcionRA = "";
 
@@ -221,7 +231,7 @@ namespace SistemaMJP
             }
             else{
                 controladora.cambiarEstadoRequisicion(id_requisicion, 0);
-                controladora.actualizarInfoDespacho(id_requisicion);
+                controladora.actualizarInfoDespacho(id_requisicion, fechaRecibido, personaRecibe);
 
                 while (indice < ids.Count())
                 {

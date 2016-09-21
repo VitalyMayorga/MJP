@@ -10,7 +10,7 @@
 namespace SistemaMJP {
     
     
-    public partial class Boleta {
+    public partial class ProductosRequisicion {
         
         /// <summary>
         /// form1 control.

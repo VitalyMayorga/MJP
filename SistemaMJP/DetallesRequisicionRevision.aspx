@@ -214,11 +214,6 @@
                             <label class="msjErroneo" id="Label3" runat="server"></label>
                         </div>
 
-                        <label>Destinatario</label>
-                        <asp:TextBox ID="txtDestinatario" runat="server" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorDestinatario" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo" id="Label4" runat="server"></label>
-                        </div>
                     </div>  
                 </div>
                 <div class="modal-footer">

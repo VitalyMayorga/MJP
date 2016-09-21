@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Boleta.aspx.cs" Inherits="SistemaMJP.Boleta" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductosRequisicion.aspx.cs" Inherits="SistemaMJP.ProductosRequisicion" %>
 
 <%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
 

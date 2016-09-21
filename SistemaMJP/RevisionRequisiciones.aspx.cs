@@ -99,16 +99,20 @@ namespace SistemaMJP
             if (buttonId == "btnDetallesAlmacen")
             {
                 numRequisicion = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[0].Text;
+                string unidad = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[7].Text;
+                Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&btn=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(buttonId, "MJP")) + "&unidad=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(unidad, "MJP")));                
+               
             }
             else
             {
                 numRequisicion = GridRequisicionDespacho.Rows[i + (this.GridRequisicionDespacho.PageIndex * 10)].Cells[0].Text;
+                Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&btn=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(buttonId, "MJP")));
+
             }
 
            
             //string estado = GridRequisicion.Rows[i + (this.GridRequisicion.PageIndex * 10)].Cells[6].Text;
 
-            Response.Redirect("DetallesRequisicionRevision.aspx?numR=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&btn=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(buttonId, "MJP")));
             
         }
 

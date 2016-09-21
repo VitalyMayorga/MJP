@@ -83,9 +83,9 @@ namespace SistemaMJP
         }
 
         //Llama a la controladora de base de datos para actualizar la informacion de despacho de la requisicion
-        internal void actualizarInfoDespacho(int idRequisicion)
+        internal void actualizarInfoDespacho(int idRequisicion, DateTime fecha, string persona)
         {
-            controladoraBD.actualizarInfoDespacho(idRequisicion);
+            controladoraBD.actualizarInfoDespacho(idRequisicion, fecha, persona);
         }
 
         //Llama a la controladora de base de datos para agregar la informacion de despacho de la requisicion 
