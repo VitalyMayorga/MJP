@@ -30,7 +30,7 @@
                 </div>
 
                 <div style="display: none;" id="GridAprobadorAlmacen" class="table-responsive tablaMJP" runat="server">
-                    <asp:GridView ID="GridProductosRequisicionAlmacen" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">                       
+                    <asp:GridView ID="GridProductosRequisicionAlmacen" class="gridsFormat gridDRA" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">                       
                     </asp:GridView>
                 </div>
 

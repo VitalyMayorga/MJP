@@ -165,5 +165,81 @@ namespace SistemaMJP
             }
         }
 
+        //llama a la base de datos  para obtener la cantidad de producto en salida
+        public int obtenerCantidadProductoSalida(int bodega, int subbodega, string programa, string producto)
+        {
+            int cantidad = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Cantidad_Salida_Producto";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.HasRows) {
+                        cantidad = reader.GetInt32(0);
+
+                    }
+                    
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return cantidad;
+        }
+
+
+        //llama a la base de datos  para obtener la cantidad de producto en transaccion (aprobado en programa)
+        public int obtenerCantidadTransaccion(int bodega, int subbodega, string programa, string producto)
+        {
+            int cantidad = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Cantidad_Producto_Transaccion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@subbodega", subbodega);
+                cmd.Parameters.AddWithValue("@programa", programa);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        cantidad = reader.GetInt32(0);
+
+                    }
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return cantidad;
+        }
+
     }
 }

@@ -444,7 +444,7 @@ namespace SistemaMJP
             Object[] datos;
             if (rol.Equals("Aprobador"))
             {
-                datos = new Object[3];
+                datos = new Object[5];
             }else{
                 datos = new Object[2];
             }
@@ -461,12 +461,18 @@ namespace SistemaMJP
                 datos[1] = fila.Cantidad.ToString();
                 if (rol.Equals("Aprobador"))
                 {
-                    string cantTotal= controladora.obtenerCantidadProductoBodega(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], controladora.getNombreProducto(fila.Producto)).ToString();
+                    string cantTotal = controladora.obtenerCantidadProductoBodega(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], datos[0].ToString()).ToString();
                     if(cantTotal!=null){
                         datos[2] = cantTotal;
                     }else{
                         datos[2] = "0";
                     }
+
+                    //Obtiene las cantidades de salida y en transaccion
+                    int cantSalida = controladora.obtenerCantidadProductoSalida(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], datos[0].ToString());
+                    datos[3] = (cantSalida - fila.Cantidad).ToString();
+                    datos[4] = controladora.obtenerCantidadTransaccion(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], datos[0].ToString()).ToString();
+                    
                     
                 }
                 cantidades[contador] = fila.Cantidad;
@@ -509,13 +515,25 @@ namespace SistemaMJP
             columna.ColumnName = "Cantidad Solicitada";
             tabla.Columns.Add(columna);
 
+            
+
             if (rol.Equals("Aprobador"))
             {
                 columna = new DataColumn();
                 columna.DataType = System.Type.GetType("System.String");
                 columna.ColumnName = "Cantidad Total en Almacen";
                 tabla.Columns.Add(columna);
-                
+
+                columna = new DataColumn();
+                columna.DataType = System.Type.GetType("System.String");
+                columna.ColumnName = "Cantidad Salida";
+                tabla.Columns.Add(columna);
+
+                columna = new DataColumn();
+                columna.DataType = System.Type.GetType("System.String");
+                columna.ColumnName = "Cantidad Transacción";
+                tabla.Columns.Add(columna);
+
                 GridProductosRequisicion.DataSource = tabla;
                 GridProductosRequisicion.DataBind();
             }

@@ -196,3 +196,11 @@ input.selectorDeFecha{
 .gridProductosBusqueda td:nth-child(3){
     width: 14px;
 }
+
+.gridDRA td:nth-child(6) {
+    width: 14px;
+}
+
+.gridDRA td:nth-child(7) {
+    width: 14px;
+}
