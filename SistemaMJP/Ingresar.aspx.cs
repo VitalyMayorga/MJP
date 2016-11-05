@@ -10,6 +10,7 @@ namespace SistemaMJP
     public partial class Ingresar : System.Web.UI.Page
     {
         ServicioLogin servicio = new ServicioLogin();
+        EmailManager email = new EmailManager();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -57,6 +58,38 @@ namespace SistemaMJP
                 MsjErrorUsuario.Style.Add("display", "none");
                 
             }
+            
+        }
+
+        //Restablece la contraseña si el usuario esta dado
+        protected void restablecer(object sender, EventArgs e) {
+            try
+            {
+                string correo = txtUsuario.Text;
+                if (!String.IsNullOrEmpty(correo))
+                {
+                    if (!String.IsNullOrEmpty(servicio.GetUsername(correo)))
+                    {
+
+                        Random random = new Random();
+                        int randomNumber = random.Next(0, 100);
+                        Response.Cookies["value"].Value = randomNumber.ToString();
+                        Response.Cookies["value"].Expires = DateTime.Now.AddDays(1);
+                        string data1 = servicio.TamperProofStringEncode(correo, "MJP");
+                        string data2 = servicio.TamperProofStringEncode(randomNumber.ToString(), "MJP");
+                        string msjCorreo = "Este es un correo automático para restablecer la contraseña, si usted no pidió restablecer la contraseña,ignore este mensaje\n\nPara cambiar la contraseña, ingrese al siguiente link:\n http://localhost:62386/Restablecer_contraseña.aspx?usuario=" + data1 + "&val=" + data2 + "";
+                        List<string> lista = new List<string>();
+                        lista.Add(correo);
+                        email.MailSender(msjCorreo, "Restablecer contraseña", lista);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "alert('Se ha enviado un correo para restablecer la contraseña')", true);
+                    }
+                }
+
+            }
+            catch (Exception ex) {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "alert('Usuario incorrecto')", true);
+            }
+            
             
         }
     }

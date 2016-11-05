@@ -6,6 +6,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Data;
 using System.Data.SqlClient;
+using System.Transactions;
 
 namespace SistemaMJP
 {
@@ -93,7 +94,28 @@ namespace SistemaMJP
             return nombre;
 
         }
-
+        public void restablecerContraseña(string pwd,string correo) {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.CommandText = "P_Restablecer_Contraseña";
+                    cmd.Parameters.AddWithValue("@correo", correo);
+                    cmd.Parameters.AddWithValue("@pwd", pwd);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ts.Complete();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
         public int GetID(string correo)
         {
             int id = 0;

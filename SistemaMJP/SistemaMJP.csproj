@@ -216,6 +216,7 @@
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
     <Content Include="Pre-ingresoRequisicion.aspx" />
+    <Content Include="Restablecer_contraseña.aspx" />
     <Content Include="RevisionBajas.aspx" />
     <Content Include="RevisionRequisiciones.aspx" />
     <Content Include="RevisionFacturas.aspx" />
@@ -595,6 +596,13 @@
     <Compile Include="RequisicionesUsuario\Item_Grid_Productos_Bodega.cs" />
     <Compile Include="RequisicionesUsuario\Item_Grid_Requisiciones.cs" />
     <Compile Include="RequisicionesUsuario\Item_Grid_Tracking.cs" />
+    <Compile Include="Restablecer_contraseña.aspx.cs">
+      <DependentUpon>Restablecer_contraseña.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restablecer_contraseña.aspx.designer.cs">
+      <DependentUpon>Restablecer_contraseña.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RevisionBajas.aspx.cs">
       <DependentUpon>RevisionBajas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

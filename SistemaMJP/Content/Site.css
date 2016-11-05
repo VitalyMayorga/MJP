@@ -204,3 +204,8 @@ input.selectorDeFecha{
 .gridDRA td:nth-child(7) {
     width: 14px;
 }
+
+.recoverPWD {
+    color: #337ab7;
+    text-decoration: underline;
+}
