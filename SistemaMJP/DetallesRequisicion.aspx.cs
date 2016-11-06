@@ -88,7 +88,7 @@ namespace SistemaMJP
         {
             Response.Redirect("MenuPrincipal");
         }
-        //Crea una vista Previa de la factura con los productos ingresados.
+        //Elimina la requisicion del sistema.
         protected void btnEliminar(object sender, EventArgs e)
         {
             eliminado = 0;
@@ -170,15 +170,26 @@ namespace SistemaMJP
             Response.Redirect("Ingreso_Requisicion.aspx?bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[0], "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[1], "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[2], "MJP"))
                     + "&numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
         }
-        //Cambia el estado de la factura a pendiente de aprobación, así como todos los productos
-        //Este botón solo está disponible si la factura estaba anteriormente en modo aprobación
+        //Envía la requisición a aprobar por el aprobador del programa presupuestario respectivo
         protected void btnEnviar(object sender, EventArgs e)
         {
+            if (estado.Equals("Devuelto a Usuario"))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObs('Nueva observación para requisicion: " + numRequisicion + "');", true);
+
+            }
+            else {
+                enviarReqAprobacion();
+            }
+           
+        }
+        //Metodo que envía la requisición a aprobación
+        private void enviarReqAprobacion() {
             controladora.enviarAAprobacion(numRequisicion);
-             llenarDetallesProducto();
+            llenarDetallesProducto();
             string descripcionRA = "Requisición " + numRequisicion + " enviada a aprobacion programa";
             string usuario = (string)Session["correoInstitucional"];
-            bitacora.registrarActividad(usuario, descripcionRA);
+            bitacora.registrarActividad(usuario, descripcionRA);//Registra este envío a aprobación en la bitácora
             List<string> bodegas = (List<string>)Session["bodegas"];
             string bodega = bodegas[0];
             List<string> datosReq = controladora.getDatosRequisicion(numRequisicion);
@@ -200,6 +211,25 @@ namespace SistemaMJP
             btnNuevoProducto.Enabled = false;
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Requisición enviada a aprobación.\\n Puede seguir el histórico del estado de la requisción en el menú requisiciones')", true);
            
+        }
+
+        //Cambia el estado de la requisicion a rechazado
+        protected void enviarAAprobar(object sender, EventArgs e)
+        {
+            string justificacion = nuevaObservacion.Value;
+            string usuario = (string)Session["correoInstitucional"];
+
+            if (nuevaObservacion.Value.Trim() == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObs('Nueva observación para requisicion: " + numRequisicion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('show');</script>");
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('hide');</script>");
+                controladora.actualizarObservacion(controladora.obtenerIDRequisicion(numRequisicion), justificacion);
+                enviarReqAprobacion();
+            }
         }
         //Llena la grid de productos con los datos correspondientes
         internal void llenarDetallesProducto()

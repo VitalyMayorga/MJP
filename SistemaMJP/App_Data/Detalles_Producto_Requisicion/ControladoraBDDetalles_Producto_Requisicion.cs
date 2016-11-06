@@ -139,6 +139,35 @@ namespace SistemaMJP
             }
         }
 
+        internal bool productoNoRebajado(string idProd, string numReq)
+        {
+            bool rebajado = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Producto_Fue_Rebajado";
+                con.Open();
+                cmd.Parameters.AddWithValue("@producto", idProd);
+                cmd.Parameters.AddWithValue("@numReq", numReq);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Read();
+                if (reader.HasRows) {
+                    rebajado = true;
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rebajado;
+        }
+
         //Metodo que se encarga de modificar la cantidad del producto seleccionado en la requisicion
         public void modificarCantidadLinea(int idRequisicion, int idProducto, int cantidad)
         {
@@ -201,7 +230,38 @@ namespace SistemaMJP
 
             return cantidad;
         }
+        public string obtenerEstadoRequisicion(string numReq) {
+            string estado = "";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Estado_Requiscion";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numReq", numReq);
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        estado = reader.GetString(0);
+
+                    }
+
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return estado;
+        
+        }
 
         //llama a la base de datos  para obtener la cantidad de producto en transaccion (aprobado en programa)
         public int obtenerCantidadTransaccion(int bodega, int subbodega, string programa, string producto)

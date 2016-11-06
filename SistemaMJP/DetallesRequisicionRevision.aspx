@@ -30,7 +30,14 @@
                 </div>
 
                 <div style="display: none;" id="GridAprobadorAlmacen" class="table-responsive tablaMJP" runat="server">
-                    <asp:GridView ID="GridProductosRequisicionAlmacen" class="gridsFormat gridDRA" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="50%">                       
+                    <asp:GridView ID="GridProductosRequisicionAlmacen" class="gridsFormat gridDRAR" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicionAlmacen_RowCreated" Width="50%">                       
+                    <Columns>
+                            <asp:TemplateField visible="true">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnAceptarProducto" runat="server" class="btn btn-default col1" OnClick="btnAceptarProducto" ToolTip="Aprobar"><i class="glyphicon glyphicon-ok" style="color:black"></i></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
                     </asp:GridView>
                 </div>
 
@@ -56,7 +63,7 @@
                                 <asp:Button  name="btnAprobar" Text="Aprobar" id="btnAprobar"  runat="server" class="btn btn-default" OnClick="btnAprobar_Click" style="margin-right: 1%"></asp:Button>
                             </div>
                             <div style="display: none;" id="btn_rechazar" runat="server">
-                                <asp:Button  name="btnRechazar" Text="Rechazar" id="btnRechazar"  runat="server" class="btn btn-default" OnClick="btnRechazar_Click" style="margin-right: 1%"></asp:Button>
+                                <asp:Button  name="btnRechazar" Text="Rechazar" id="btnRechazar"  runat="server" class="btn btn-default" OnClick="btnRechazar_Click" style="margin-right: 1%;margin-left:5%"></asp:Button>
                             </div>
 
                             <div  style="display: none;" id="btn_despachar" runat="server">
@@ -107,7 +114,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Edicion de linea</h4>
+                        <h4 class="modal-title">Edición de linea</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -224,8 +231,35 @@
 
         </div>
     </div>
-    
+    <div id="ModalNuevaObservacion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nueva observación para aprobación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="requisicionObs"></label>      
+                               
+                    </div>
+                    <textarea id="nuevaObservacion" runat="server" style="max-width:300px;width:300px"></textarea>    
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="Button1" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="enviarAAprobar"></asp:Button>
+                    <asp:Button id="Button2" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <script type="text/javascript">
+        function openModalObsv(value) {
+            $('#ModalNuevaObservacion').modal('show');
+            document.getElementById('requisicionObs').innerHTML = value;
+        }
         function openModal(value) {
             $('#ModalDetalles').modal('show');
             document.getElementById('producto').innerHTML = value;

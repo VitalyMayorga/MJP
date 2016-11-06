@@ -143,5 +143,12 @@ namespace SistemaMJP
             return controladoraBD.obtenerCantidadTransaccion(bodega, subbodega, programa, producto);
         }
 
+        internal string obtenerEstadoRequisicion(string numeroReq) {
+            return controladoraBD.obtenerEstadoRequisicion(numeroReq);
+        }
+
+        internal bool productoNoRebajado(string idProd, string numReq) {
+            return controladoraBD.productoNoRebajado(idProd, numReq);
+        }
     }
 }

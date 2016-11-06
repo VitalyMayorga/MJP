@@ -12,7 +12,7 @@
                 <h3 class="Encabezado">Requisiciones Pendientes de Usuario</h3>
                 <div class="table-responsive tablaMJP">
 
-                    <asp:GridView ID="GridRequisicion" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
+                    <asp:GridView ID="GridRequisicion" class="gridsFormat gridRU" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
                         
                          <Columns>
                             <asp:TemplateField>
@@ -34,7 +34,7 @@
 
                 <div style="display: none;" id="GridDespacho" class="table-responsive tablaMJP" runat="server">
                    <h3 class="Encabezado" style="margin-left:0%">Requisiciones Despachadas</h3>
-                     <asp:GridView ID="GridRequisicionDespacho" class="gridsFormat gridF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChangingDespacho" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
+                     <asp:GridView ID="GridRequisicionDespacho" class="gridsFormat gridRU" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChangingDespacho" OnRowCreated="gridRequisicion_RowCreated" Width="100%">
                         
                          <Columns>
                             <asp:TemplateField>
