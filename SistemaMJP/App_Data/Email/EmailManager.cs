@@ -228,16 +228,17 @@ namespace SistemaMJP
         public void MailSender(string informacion, string subject, List<string> correos)
         {
             //Por ahora esta configurado para correos hotmail, esto lo tendrá q cambiar los de TI para configurar el SMTP del MJP
-            //foreach (string correo in correos)
-            //{
-            /*MailMessage o = new MailMessage("jvitaly_93@hotmail.com", "jvitaly.93@gmail.com", subject, informacion);
-            NetworkCredential netCred = new NetworkCredential("primolo_0418@hotmail.com", "PRRasdf2512");//Usar credenciales de alguna cuenta hotmail para probar
-            SmtpClient smtpobj = new SmtpClient("smtp.live.com", 587);
-            smtpobj.EnableSsl = true;
-            smtpobj.Credentials = netCred;
-            smtpobj.Send(o);*/
+            foreach (string correo in correos)
+            {
+                //from,to,subject,body
+                MailMessage o = new MailMessage("jvitaly_93@hotmail.com","jvitaly.93@gmail.com" , subject, informacion);
+                NetworkCredential netCred = new NetworkCredential("primolo_0418@hotmail.com", "PRRasdf2512");//Usar credenciales de alguna cuenta hotmail para probar
+                SmtpClient smtpobj = new SmtpClient("smtp.live.com", 587);
+                smtpobj.EnableSsl = true;
+                smtpobj.Credentials = netCred;
+                smtpobj.Send(o);
 
-            //}
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace SistemaMJP
         private  int id_requisicion;
         private  int[] ids;//se guardaran los ids de los productos de la requisicion 
         private int[] cantidades;//se guardaran las cantidades de los productos de la requisicion 
-        
+        private bool rechazado;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -63,6 +63,7 @@ namespace SistemaMJP
                     ViewState["numRequisicion"] = numRequisicion;
                     ViewState["btnId"] = btnId;
                     ViewState["unidad"] = unidad;
+                    ViewState["rechazo"] = false;
                 }
 
             }
@@ -73,7 +74,8 @@ namespace SistemaMJP
                 id_requisicion = (int)ViewState["id_requisicion"];
                 //id_row = (int)ViewState["id_row"];
                 ids = (int[])ViewState["ids"];
-                cantidades = (int[])ViewState["cantidades"];                
+                cantidades = (int[])ViewState["cantidades"];
+                rechazado = (bool)ViewState["rechazo"];
             }
 
         }
@@ -192,10 +194,10 @@ namespace SistemaMJP
             string justificacion = justificacionRechazo.Value;
             string usuario = (string)Session["correoInstitucional"];
             string descripcionRA = "";
-            
+            ViewState["rechazo"] = true;
             if (justificacionRechazo.Value.Trim() == "")
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalRechazo('Justificación rechazo requisicion: " + numRequisicion + "');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalRechazo('Justificación rechazo requisición: " + numRequisicion + "');", true);
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalDetallesRechazo').modal('show');</script>");
             }
             else
@@ -227,7 +229,8 @@ namespace SistemaMJP
 
             if (btnId != "btnDetallesDespacho")
             {
-                controladora.cambiarEstadoRequisicion(id_requisicion, 1);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObsv('Nueva observación de requisicion: " + numRequisicion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('show');</script>");
             }
             else{
                 controladora.cambiarEstadoRequisicion(id_requisicion, 0);
@@ -240,11 +243,31 @@ namespace SistemaMJP
                 }
                 descripcionRA = "Requisicion: " + numRequisicion + " acepatada en destino";
                 bitacora.registrarActividad(usuario, descripcionRA);
+                Response.Redirect("RevisionRequisiciones.aspx");
             }           
             
-            Response.Redirect("RevisionRequisiciones.aspx");
+            
         }        
 
+        //Cambia el estado de la requisicion a rechazado
+        protected void enviarAAprobar(object sender, EventArgs e)
+        {
+            string justificacion = nuevaObservacion.Value;
+            string usuario = (string)Session["correoInstitucional"];
+
+            if (nuevaObservacion.Value.Trim() == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalObs('Nueva observación para Requisición: " + numRequisicion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('show');</script>");
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('hide');</script>");
+                controladora.actualizarObservacion(controladora.obtenerIDRequisicion(numRequisicion), justificacion);
+                controladora.cambiarEstadoRequisicion(id_requisicion, 1);
+            }
+            Response.Redirect("RevisionRequisiciones.aspx");
+        }
         //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
         protected void aceptarEdicion(object sender, EventArgs e)
         {
@@ -430,6 +453,12 @@ namespace SistemaMJP
                     btn_boleta.Style.Add("display", "none");
                     btn_despachar.Style.Add("display", "none");
                     btn_devolver.Style.Add("display", "none");
+                    string estado = controladora.obtenerEstadoRequisicion(numRequisicion);
+                    if (!estado.Equals("Despachada")) {
+
+                        btn_rechazar.Style.Add("display", "none");
+                        btn_aprobar.Style.Add("display", "none");
+                    }
                 }
                 
                 GridAprobadorAlmacen.Style.Add("display", "block");
@@ -444,7 +473,7 @@ namespace SistemaMJP
             Object[] datos;
             if (rol.Equals("Aprobador"))
             {
-                datos = new Object[3];
+                datos = new Object[5];
             }else{
                 datos = new Object[2];
             }
@@ -461,12 +490,18 @@ namespace SistemaMJP
                 datos[1] = fila.Cantidad.ToString();
                 if (rol.Equals("Aprobador"))
                 {
-                    string cantTotal= controladora.obtenerCantidadProductoBodega(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], controladora.getNombreProducto(fila.Producto)).ToString();
+                    string cantTotal = controladora.obtenerCantidadProductoBodega(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], datos[0].ToString()).ToString();
                     if(cantTotal!=null){
                         datos[2] = cantTotal;
                     }else{
                         datos[2] = "0";
                     }
+
+                    //Obtiene las cantidades de salida y en transaccion
+                    int cantSalida = controladora.obtenerCantidadProductoSalida(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], datos[0].ToString());
+                    datos[3] = (cantSalida - fila.Cantidad).ToString();
+                    datos[4] = controladora.obtenerCantidadTransaccion(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], datos[0].ToString()).ToString();
+                    
                     
                 }
                 cantidades[contador] = fila.Cantidad;
@@ -509,13 +544,25 @@ namespace SistemaMJP
             columna.ColumnName = "Cantidad Solicitada";
             tabla.Columns.Add(columna);
 
+            
+
             if (rol.Equals("Aprobador"))
             {
                 columna = new DataColumn();
                 columna.DataType = System.Type.GetType("System.String");
                 columna.ColumnName = "Cantidad Total en Almacen";
                 tabla.Columns.Add(columna);
-                
+
+                columna = new DataColumn();
+                columna.DataType = System.Type.GetType("System.String");
+                columna.ColumnName = "Cantidad Salida";
+                tabla.Columns.Add(columna);
+
+                columna = new DataColumn();
+                columna.DataType = System.Type.GetType("System.String");
+                columna.ColumnName = "Cantidad Transacción";
+                tabla.Columns.Add(columna);
+
                 GridProductosRequisicion.DataSource = tabla;
                 GridProductosRequisicion.DataBind();
             }
@@ -528,6 +575,25 @@ namespace SistemaMJP
             return tabla;
         }
 
+        //Metodo que se encarga de aceptar los productos de la requisicion, cuando es un rechazo parcial
+        protected void btnAceptarProducto(object sender, EventArgs e) {
+            string estado = controladora.obtenerEstadoRequisicion(numRequisicion);
+            if (estado.Equals("Rechazada en Destino") && !controladora.productoNoRebajado(HttpUtility.HtmlDecode(GridProductosRequisicionAlmacen.Rows[id_row + (this.GridProductosRequisicionAlmacen.PageIndex * 10)].Cells[0].Text), numRequisicion))
+            {//Si el producto fue rechazado
+                LinkButton btn = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)btn.NamingContainer;
+                id_row = Convert.ToInt32(row.RowIndex);
+                idroweditar.InnerText = id_row.ToString();
+                int cantidadProducto = cantidades[id_row + (this.GridProductosRequisicionAlmacen.PageIndex * 10)];
+                string descripcion = "Producto " + HttpUtility.HtmlDecode(GridProductosRequisicionAlmacen.Rows[id_row + (this.GridProductosRequisicionAlmacen.PageIndex * 10)].Cells[0].Text)+" aprobado de la requisición "+numRequisicion;
+                string usuario = (string)Session["correoInstitucional"];
+                bitacora.registrarActividad(usuario, descripcion);
+                controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[id_row + (this.GridProductosRequisicionAlmacen.PageIndex * 10)], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[id_row + (this.GridProductosRequisicionAlmacen.PageIndex * 10)]);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "alert('Producto " + HttpUtility.HtmlDecode(GridProductosRequisicionAlmacen.Rows[id_row + (this.GridProductosRequisicionAlmacen.PageIndex * 10)].Cells[0].Text) + " rebajado del almacén')", true);
+            }
+
+
+        }
         protected void gridProductosRequisicion_RowCreated(object sender, GridViewRowEventArgs e)
         {
             GridViewRow row = e.Row;
@@ -536,6 +602,27 @@ namespace SistemaMJP
             if (e.Row.RowType != DataControlRowType.Pager)
             {
                 foreach (DataControlField column in GridProductosRequisicion.Columns)
+                {
+                    //Get the first Cell /Column
+                    TableCell cell = row.Cells[0];
+                    // Then Remove it after
+                    row.Cells.Remove(cell);
+                    //And Add it to the List Collections
+                    columns.Add(cell);
+                }
+                // Add cells
+                row.Cells.AddRange(columns.ToArray());
+            }
+        }
+
+        protected void gridProductosRequisicionAlmacen_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            GridViewRow row = e.Row;
+            // Intitialize TableCell list
+            List<TableCell> columns = new List<TableCell>();
+            if (e.Row.RowType != DataControlRowType.Pager)
+            {
+                foreach (DataControlField column in GridProductosRequisicionAlmacen.Columns)
                 {
                     //Get the first Cell /Column
                     TableCell cell = row.Cells[0];

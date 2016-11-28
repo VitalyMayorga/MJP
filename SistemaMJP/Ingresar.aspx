@@ -63,7 +63,8 @@
                     <label class="msjErroneo">Debe ingresar una contraseña</label>
                 </div>
                 <div class="col-md-offset-5">
-                    <a>Olvidé la contraseña</a>
+                    <asp:LinkButton runat="server" OnClick="restablecer" class="content-label recoverPWD" ID="nombreLabel">Olvidé la contraseña</asp:LinkButton>
+                    
                 </div>
                 <div style="display: none;" id="MsjErrorLogin" class="col-md-offset-4" runat="server">
                     <label class="msjErroneo2">Usuario/Contraseña inválidos</label>

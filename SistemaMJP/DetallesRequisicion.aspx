@@ -116,7 +116,36 @@
 
         </div>
     </div>
+
+    <div id="ModalNuevaObservacion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nueva observación para aprobación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="requisicion"></label>      
+                               
+                    </div>
+                    <textarea id="nuevaObservacion" runat="server" style="max-width:300px;width:300px"></textarea>    
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="btnAceptarJR" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="enviarAAprobar"></asp:Button>
+                    <asp:Button id="btnCancelarJR" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <script type="text/javascript">
+        function openModalObs(value) {
+            $('#ModalNuevaObservacion').modal('show');
+            document.getElementById('requisicion').innerHTML = value;
+        }
         function openModal(nombre, descripcion) {
             $('#nombreProducto').val(nombre);
             $('#descripcionLabel').val(descripcion);

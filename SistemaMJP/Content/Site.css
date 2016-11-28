@@ -196,3 +196,28 @@ input.selectorDeFecha{
 .gridProductosBusqueda td:nth-child(3){
     width: 14px;
 }
+
+.gridDRA td:nth-child(6) {
+    width: 14px;
+}
+
+.gridDRA td:nth-child(7) {
+    width: 14px;
+}
+
+.recoverPWD {
+    color: #337ab7;
+    text-decoration: underline;
+}
+
+.gridRU td:nth-child(9){
+    width: 14px;
+}
+
+.gridRU td:nth-child(10){
+    width: 14px;
+}
+
+.gridDRAR td:nth-child(3){
+    width: 14px;
+}

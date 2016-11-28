@@ -86,50 +86,54 @@ namespace SistemaMJP
             controladoraBD.editarProducto(producto, numRequisicion, cantidad);
 
         }
-
+        //Llama a a la controladora de base de datos para obtener los productos de la bodega
         internal List<Item_Grid_Productos_Bodega> getListaProductosBodega(int bodega,int subbodega,string programa,string busqueda){
             return controladoraBD.getListaProductosBodega(bodega,subbodega,programa,busqueda);
         }
-
+        //Llama a la controladora de base de datos para obtener el estado de la requisicion
         internal string getEstadoRequisicion(string numRequisicion){
             return controladoraBD.getEstadoRequisicion(numRequisicion);
 
         }
-
+        //Llama a la controladora de base de datos para eliminar un producto de una requisicion
         internal void eliminarProducto(string numRequisicion,string producto)
         {
             controladoraBD.eliminarProducto(numRequisicion,producto);
 
         }
-
+        //Llama a la controladora de base de datos para eliminar la requisicion
         internal void eliminarRequisicion(string numRequisicion)
         {
              controladoraBD.eliminarRequisicion(numRequisicion);
 
         }
-
+        //Llama a la controladora de base de datos para obtener los datos de la requisicion
         internal List<string> getDatosRequisicion(string numRequisicion)
         {
             return controladoraBD.getDatosRequisicion(numRequisicion);
         }
-
+        //Llama a la controladora de base de datos para enviar la requisicion a aprobacion
         internal void enviarAAprobacion(string numRequisicion)
         {
             controladoraBD.enviarAAprobacion(numRequisicion);
 
         }
-
+        //Llama a la controladora de base de datos para obtener la lista de productos de la requisicion
         internal List<Item_Grid_Productos_Bodega> getListaProductosRequisicion(string numRequisicion)
         {
             return controladoraBD.getListaProductosRequisicion(numRequisicion);
         }
-
+        //Llama a la controladora de base de datos para obtener el num de requisicion
         internal int obtenerIDRequisicion(string numRequisicion)
         {
             return controladoraBD.obtenerIDRequisicion(numRequisicion);
 
         }
-
+        //Llama a la controladora de aprobadores para actualizar la observacion de la requisicion
+        internal void actualizarObservacion(int id_req, string observacion) {
+            controladoraR.actualizarObservacion(id_req, observacion);
+        }
+        //Llama a la controladora de base de datos para obtener el seguimiento de la requisicion
         internal List<Item_Grid_Tracking> getTracking(string numRequisicion)
         {
             
