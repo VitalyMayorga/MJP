@@ -161,6 +161,8 @@
     <Content Include="Administracion.aspx" />
     <Content Include="Bajas.aspx" />
     <Content Include="Bodegas.aspx" />
+    <Content Include="ReporteArticulosGeneral.aspx" />
+    <Content Include="ReporteExistencia.aspx" />
     <Content Include="ProductosRequisicion.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Bodegas.css" />
@@ -293,6 +295,50 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Tabla_Existencias.xsc">
+      <DependentUpon>Tabla_Existencias.xsd</DependentUpon>
+    </Content>
+    <Content Include="Tabla_Articulos_General.xsc">
+      <DependentUpon>Tabla_Articulos_General.xsd</DependentUpon>
+    </Content>
+    <None Include="Tabla_Articulos_General.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabla_Articulos_General.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Tabla_Articulos_General.xss">
+      <DependentUpon>Tabla_Articulos_General.xsd</DependentUpon>
+    </Content>
+    <Content Include="Tabla_Articulos_SubPartida_Destino.xsc">
+      <DependentUpon>Tabla_Articulos_SubPartida_Destino.xsd</DependentUpon>
+    </Content>
+    <None Include="Tabla_Articulos_SubPartida_Destino.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabla_Articulos_SubPartida_Destino.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Tabla_Articulos_SubPartida_Destino.xss">
+      <DependentUpon>Tabla_Articulos_SubPartida_Destino.xsd</DependentUpon>
+    </Content>
+    <None Include="Tabla_Existencias.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabla_Existencias.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Tabla_Existencias.xss">
+      <DependentUpon>Tabla_Existencias.xsd</DependentUpon>
+    </Content>
+    <Content Include="Tabla_Requisiciones.xsc">
+      <DependentUpon>Tabla_Requisiciones.xsd</DependentUpon>
+    </Content>
+    <None Include="Tabla_Requisiciones.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabla_Requisiciones.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Tabla_Requisiciones.xss">
+      <DependentUpon>Tabla_Requisiciones.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -390,11 +436,37 @@
     <Compile Include="Bodegas.aspx.designer.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReporteArticulosGeneral.aspx.cs">
+      <DependentUpon>ReporteArticulosGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteArticulosGeneral.aspx.designer.cs">
+      <DependentUpon>ReporteArticulosGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteExistencia.aspx.cs">
+      <DependentUpon>ReporteExistencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteExistencia.aspx.designer.cs">
+      <DependentUpon>ReporteExistencia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Boleta_Productos.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Boleta_Productos.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporte_Articulos_General.cs">
+      <DependentUpon>Reporte_Articulos_General.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reporte_Existencias.cs">
+      <DependentUpon>Reporte_Existencias.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ProductosRequisicion.aspx.cs">
       <DependentUpon>ProductosRequisicion.aspx</DependentUpon>
@@ -638,6 +710,26 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Tabla_Articulos_General.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabla_Articulos_General.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Tabla_Articulos_SubPartida_Destino.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabla_Articulos_SubPartida_Destino.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Tabla_Existencias.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabla_Existencias.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Tabla_Requisiciones.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabla_Requisiciones.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -674,6 +766,14 @@
     <EmbeddedResource Include="Boleta_Productos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Boleta_Productos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_Articulos_General.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Articulos_General.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_Existencias.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Existencias.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Boleta_Reporte.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
