@@ -161,6 +161,7 @@
     <Content Include="Administracion.aspx" />
     <Content Include="Bajas.aspx" />
     <Content Include="Bodegas.aspx" />
+    <Content Include="ReporteArticulosDestinoSubPartida.aspx" />
     <Content Include="ReporteArticulosGeneral.aspx" />
     <Content Include="ReporteExistencia.aspx" />
     <Content Include="ProductosRequisicion.aspx" />
@@ -437,6 +438,13 @@
     <Compile Include="Bodegas.aspx.designer.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReporteArticulosDestinoSubPartida.aspx.cs">
+      <DependentUpon>ReporteArticulosDestinoSubPartida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteArticulosDestinoSubPartida.aspx.designer.cs">
+      <DependentUpon>ReporteArticulosDestinoSubPartida.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteArticulosGeneral.aspx.cs">
       <DependentUpon>ReporteArticulosGeneral.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -456,6 +464,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Boleta_Productos.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporte_Articulos_Destino_SubPartida.cs">
+      <DependentUpon>Reporte_Articulos_Destino_SubPartida.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reporte_Articulos_General.cs">
       <DependentUpon>Reporte_Articulos_General.rpt</DependentUpon>
@@ -774,6 +788,10 @@
     <EmbeddedResource Include="Boleta_Productos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Boleta_Productos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_Articulos_Destino_SubPartida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Articulos_Destino_SubPartida.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte_Articulos_General.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

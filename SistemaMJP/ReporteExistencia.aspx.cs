@@ -43,7 +43,7 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_reporte_existencias";
+                cmd.CommandText = "P_Reporte_existencias";
                 con.Open();
                 cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
                 SqlDataReader reader = cmd.ExecuteReader();
