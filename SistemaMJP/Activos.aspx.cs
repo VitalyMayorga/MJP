@@ -27,10 +27,10 @@ namespace SistemaMJP
                 {
                     try
                     {
-                        numActivo = servicio.TamperProofStringDecode(Request.QueryString["numActivo"], "MJP");
                         string editar = servicio.TamperProofStringDecode(Request.QueryString["editar"], "MJP");
                         if (editar.Equals("true"))
                         {
+                            numActivo = servicio.TamperProofStringDecode(Request.QueryString["numActivo"], "MJP");
                             this.editar = true;
                         }
                         else if (editar.Equals("false"))
