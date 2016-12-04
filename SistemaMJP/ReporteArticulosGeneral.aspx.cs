@@ -33,10 +33,10 @@ namespace SistemaMJP
             t.Columns.Add("Numero Requisicion", Type.GetType("System.String"));
             t.Columns.Add("Descripcion", Type.GetType("System.String"));
             t.Columns.Add("Destino", Type.GetType("System.String"));
-            t.Columns.Add("Cantidad", Type.GetType("System.String"));            
+            t.Columns.Add("Cantidad", Type.GetType("System.String"));
             t.Columns.Add("PrecioUnitario", Type.GetType("System.String"));
             t.Columns.Add("PrecioTotal", Type.GetType("System.String"));
-            
+
             DataRow r;
 
             SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConexionSistemaInventario"].ConnectionString);
@@ -56,12 +56,12 @@ namespace SistemaMJP
                     r["NumeroRequisicion"] = reader.GetString(1);
                     r["Descripcion"] = reader.GetString(2);
                     r["Destino"] = reader.GetString(3);
-                    r["Cantidad"] = reader.GetInt32(4).ToString();                   
+                    r["Cantidad"] = reader.GetInt32(4).ToString();
                     r["PrecioUnitario"] = reader.GetDecimal(5).ToString();
                     r["PrecioTotal"] = reader.GetDecimal(6).ToString();
                     t.Rows.Add(r);
                 }
-                
+
                 reader.Close();
                 con.Close();
 
@@ -71,7 +71,7 @@ namespace SistemaMJP
                 throw;
             }
 
-            
+
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -90,8 +90,8 @@ namespace SistemaMJP
             catch (Exception)
             {
                 throw;
-            }  
-            
+            }
+
             TextObject fechaFinalT = (TextObject)reportdocument.ReportDefinition.Sections["Section2"].ReportObjects["Fecha2"];
             fechaFinalT.Text = fechaF.ToString("dd/MM/yyyy");
 
@@ -109,3 +109,4 @@ namespace SistemaMJP
             CrystalReportViewer1.RefreshReport();
         }
     }
+}

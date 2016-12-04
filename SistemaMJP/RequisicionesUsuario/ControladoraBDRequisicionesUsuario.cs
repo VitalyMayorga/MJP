@@ -591,6 +591,7 @@ namespace SistemaMJP
         {
             List<Item_Grid_Tracking> track = new List<Item_Grid_Tracking>();
             int id = obtenerIDRequisicion(numRequisicion);
+            String persona = obtenerPersonaQueRecibe(id);
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -602,7 +603,7 @@ namespace SistemaMJP
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    track.Add(LoadItemGridTracking(reader));
+                    track.Add(LoadItemGridTracking(reader,persona));
 
                 }
                 reader.Close();
@@ -615,12 +616,39 @@ namespace SistemaMJP
             }
             return track;
         }
+
+        internal String obtenerPersonaQueRecibe(int numRequisicion) {
+            String persona = "N/A";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Persona_Recibe";
+                con.Open();
+                cmd.Parameters.AddWithValue("@id", numRequisicion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                if (reader.HasRows) {
+                    persona = reader.GetString(0);
+                
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return persona;
+        }
         //Metodo que se encarga de llenar los datos de la clase item grid tracking y devolver dicha clase encapsulada
-        internal Item_Grid_Tracking LoadItemGridTracking(SqlDataReader reader)
+        internal Item_Grid_Tracking LoadItemGridTracking(SqlDataReader reader,String persona)
         {
             DateTime fecha = reader.GetDateTime(0);
             String estado = reader.GetString(1);
-            Item_Grid_Tracking items = new Item_Grid_Tracking(fecha, estado);
+            Item_Grid_Tracking items = new Item_Grid_Tracking(fecha, estado,persona);
             return items;
         }
 

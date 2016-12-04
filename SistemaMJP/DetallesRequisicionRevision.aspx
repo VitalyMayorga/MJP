@@ -8,6 +8,7 @@
                 <asp:LinkButton runat="server" OnClick="regresarMP" ToolTip="Menu Principal"><i class="glyphicon glyphicon-home atras" style="font-size: 35px;
     margin-left: 2%;"></i></asp:LinkButton>
                 <h3 class="Encabezado" id="labelRequisicion" runat="server"></h3>
+                <h4 class="Encabezado" id="EstadoReq" runat="server"></h4>
                 <div style="display: none;" id="GridAprobadorPrograma" class="table-responsive tablaMJP" runat="server">
                     <asp:GridView ID="GridProductosRequisicion" class="gridsFormat gridPF" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="PageIndexChanging" OnRowCreated="gridProductosRequisicion_RowCreated" Width="100%">
                                             
@@ -44,7 +45,7 @@
                 <div class="form-group" style="margin-top: 2%; margin-right: 0%">
 
                     <div style="display: none;" id="MsjErrorCantActivo" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Existen activos que aun no estan relacionados con esta requisicion, favor completar esta informacion antes de continuar</label>
+                        <label class="mensajeError">Existen activos que aún no estan relacionados con esta requisición, favor completar esta información antes de continuar</label>
                         <br/> 
                     </div>                        
 
@@ -211,21 +212,60 @@
                     <div class="form-group">
                         <label>Placa del Automóvil</label>
                         <asp:TextBox ID="txtPlaca" runat="server" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorPlaca" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo" id="Label2" runat="server"></label>
-                        </div>
-
+                        
                         <label>Conductor Designado</label>
                         <asp:TextBox ID="txtConductor" runat="server" class="form-control text-box single-line"></asp:TextBox>
-                        <div style="display: none;" id="MsjErrorConductor" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo" id="Label3" runat="server"></label>
-                        </div>
+                        
 
                     </div>  
+                     <div class="form-group"> 
+                        <div style="display: none;" id="MsjErrorDespacho" class="col-md-offset-2" runat="server">
+                            <label class="msjErroneo" id="Label1" runat="server">Favor rellenar todos los datos</label>
+                        </div>
+                    </div> 
                 </div>
                 <div class="modal-footer">
                     <asp:Button id="btnAceptarInfo" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarDespacho"></asp:Button>
                     <asp:Button id="btnCancelarInfo" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="ModalAceptacionRequisicion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Datos finales requisición</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="texto1"></label> 
+                        <label id="requisicionAp" style="display: none;" runat="server"></label>      
+                               
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha recibido</label>
+                         <asp:TextBox type='text' ID="txtFecha" class="form-control" runat="server"></asp:TextBox>
+                        
+                        <label>Persona que recibe</label>
+                        <asp:TextBox ID="txtPersona" runat="server" class="form-control text-box single-line"></asp:TextBox>
+                        
+
+                    </div> 
+                    <div class="form-group"> 
+                        <div style="display: none;" id="MsjErrorRecibido" class="col-md-offset-2" runat="server">
+                            <label class="msjErroneo" id="Label5" runat="server">Favor rellenar los datos</label>
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="btnAceptarRecibo" runat="server" class="btn btn-default" UseSubmitBehavior="false" Text="Aceptar" OnClick="aceptarRecibido"></asp:Button>
+                    <asp:Button id="btnCancelarRecibo" runat="server" class="btn btn-default" data-dismiss="modal" Text="Cancelar"></asp:Button>
                 </div>
             </div>
 
@@ -284,8 +324,52 @@
             $('#ModalInfoDespacho').modal('show');
             document.getElementById('texto').innerHTML = value;
         }
-
+        function openModalAceptacionRequisicion(value) {
+            $('#ModalAceptacionRequisicion').modal('show');
+            document.getElementById('texto1').innerHTML = value;
+        }
         $("td.col1").hide();
+
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '<Ant',
+            nextText: 'Sig>',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        $(document).ready(function () {
+            $("#<%= txtFecha.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+
+        });
+
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+            prm.add_endRequest(function () {
+                $("#<%= txtFecha.ClientID %>").datepicker({
+                showmonth: true,
+                autoSize: true,
+                showAnim: 'slideDown',
+                duration: 'fast'
+            });
+
+        });
 </script>
     
     
