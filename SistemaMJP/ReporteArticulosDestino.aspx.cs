@@ -11,11 +11,10 @@ using CrystalDecisions.ReportSource;
 using CrystalDecisions.CrystalReports.Engine;
 namespace SistemaMJP
 {
-    public partial class ReporteArticulosDestinoSubPartida : System.Web.UI.Page
+    public partial class ReporteArticulosDestino : System.Web.UI.Page
     {
         private string idPrograma;
         private string programa;
-        private string codigo;
         private string destino;
         private DateTime fechaF;
         private string fechaI;
@@ -24,18 +23,17 @@ namespace SistemaMJP
         {
             string DataString = servicio.TamperProofStringDecode(Request.QueryString["idPrograma"], "MJP");
             string DataString2 = servicio.TamperProofStringDecode(Request.QueryString["programa"], "MJP");
-            string DataString3 = servicio.TamperProofStringDecode(Request.QueryString["subPartida"], "MJP");
             string DataString4 = servicio.TamperProofStringDecode(Request.QueryString["destino"], "MJP");
             idPrograma = DataString;
             programa = DataString2;
-            codigo = DataString3;
             destino = DataString4;
             CultureInfo crCulture = new CultureInfo("es-CR");
             ReportDocument reportdocument = new ReportDocument();
-            reportdocument.Load(Server.MapPath("~/Reporte_Articulos_Destino_SubPartida.rpt"));
+            reportdocument.Load(Server.MapPath("~/Reporte_Articulos_Destino.rpt"));
             Tabla_Existencias ds = new Tabla_Existencias();
             DataTable t = ds.Tables.Add("Items");           
             t.Columns.Add("Numero Requisicion", Type.GetType("System.String"));
+            t.Columns.Add("SubPartida", Type.GetType("System.String")); 
             t.Columns.Add("Descripcion", Type.GetType("System.String"));           
             t.Columns.Add("Cantidad", Type.GetType("System.String"));            
             t.Columns.Add("PrecioUnitario", Type.GetType("System.String"));
@@ -49,20 +47,20 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Reporte_Articulos_Destino_SubPartida";
+                cmd.CommandText = "P_Reporte_Requisicion";
                 con.Open();
                 cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
-                cmd.Parameters.AddWithValue("@codigo", codigo);
                 cmd.Parameters.AddWithValue("@destino", destino);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     r = t.NewRow();                    
                     r["NumeroRequisicion"] = reader.GetString(0);
-                    r["Descripcion"] = reader.GetString(1);                   
-                    r["Cantidad"] = reader.GetInt32(2).ToString();                   
-                    r["PrecioUnitario"] = reader.GetDecimal(3).ToString();
-                    r["PrecioTotal"] = reader.GetDecimal(4).ToString();
+                    r["SubPartida"] = reader.GetString(1);   
+                    r["Descripcion"] = reader.GetString(2);                   
+                    r["Cantidad"] = reader.GetInt32(3).ToString();                   
+                    r["PrecioUnitario"] = reader.GetDecimal(4).ToString();
+                    r["PrecioTotal"] = reader.GetDecimal(5).ToString();
                     t.Rows.Add(r);
                 }
                 
@@ -81,10 +79,9 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Fecha_Inicial_Reporte_SubPartida_Destino";
+                cmd.CommandText = "P_Fecha_Inicial_Reporte_Requisicion";
                 con.Open();
                 cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
-                cmd.Parameters.AddWithValue("@codigo", codigo);
                 cmd.Parameters.AddWithValue("@destino", destino);
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
@@ -106,9 +103,6 @@ namespace SistemaMJP
 
             TextObject programaT = (TextObject)reportdocument.ReportDefinition.Sections["Section2"].ReportObjects["Programa"];
             programaT.Text = programa;
-
-            TextObject subPartidaT = (TextObject)reportdocument.ReportDefinition.Sections["Section1"].ReportObjects["SubPartida"];
-            subPartidaT.Text = codigo;
 
             TextObject destinoT = (TextObject)reportdocument.ReportDefinition.Sections["Section1"].ReportObjects["Destino"];
             destinoT.Text = destino;

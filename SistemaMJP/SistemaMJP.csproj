@@ -161,6 +161,7 @@
     <Content Include="Administracion.aspx" />
     <Content Include="Bajas.aspx" />
     <Content Include="Bodegas.aspx" />
+    <Content Include="ReporteArticulosDestino.aspx" />
     <Content Include="ReporteArticulosDestinoSubPartida.aspx" />
     <Content Include="ReporteArticulosGeneral.aspx" />
     <Content Include="ReporteExistencia.aspx" />
@@ -303,6 +304,17 @@
     <Content Include="Tabla_Articulos_General.xsc">
       <DependentUpon>Tabla_Articulos_General.xsd</DependentUpon>
     </Content>
+    <Content Include="Tabla_Articulos_Destino.xsc">
+      <DependentUpon>Tabla_Articulos_Destino.xsd</DependentUpon>
+    </Content>
+    <None Include="Tabla_Articulos_Destino.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabla_Articulos_Destino.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Tabla_Articulos_Destino.xss">
+      <DependentUpon>Tabla_Articulos_Destino.xsd</DependentUpon>
+    </Content>
     <None Include="Tabla_Articulos_General.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -438,6 +450,13 @@
     <Compile Include="Bodegas.aspx.designer.cs">
       <DependentUpon>Bodegas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReporteArticulosDestino.aspx.cs">
+      <DependentUpon>ReporteArticulosDestino.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteArticulosDestino.aspx.designer.cs">
+      <DependentUpon>ReporteArticulosDestino.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteArticulosDestinoSubPartida.aspx.cs">
       <DependentUpon>ReporteArticulosDestinoSubPartida.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -464,6 +483,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Boleta_Productos.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporte_Articulos_Destino.cs">
+      <DependentUpon>Reporte_Articulos_Destino.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reporte_Articulos_Destino_SubPartida.cs">
       <DependentUpon>Reporte_Articulos_Destino_SubPartida.rpt</DependentUpon>
@@ -732,6 +757,11 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Tabla_Articulos_Destino.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabla_Articulos_Destino.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Tabla_Articulos_General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -788,6 +818,10 @@
     <EmbeddedResource Include="Boleta_Productos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Boleta_Productos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_Articulos_Destino.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Articulos_Destino.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte_Articulos_Destino_SubPartida.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
