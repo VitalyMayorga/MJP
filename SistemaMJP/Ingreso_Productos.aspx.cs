@@ -366,31 +366,6 @@ namespace SistemaMJP
             }
         }
         
-        //Si está seleccionado es activo, habilita la inserción de datos del activo
-        protected void rbSi(object sender, EventArgs e)
-        {
-            validar();
-            if (esActivo.Checked)
-            {
-
-                formActivo.Style.Add("display", "block");
-                txtCantidadT.Text = "1";
-                txtCantidadT.Enabled = false;
-
-                
-            }
-        }
-        //Si está seleccionado no activo,esconde el div de la inserción de activos
-        protected void rbNo(object sender, EventArgs e)
-        {
-            validar();
-            if (noActivo.Checked)
-            {
-                formActivo.Style.Add("display", "none");
-                txtCantidadT.Enabled = true;
-               
-            }
-        }
         //Redirecciona a la pagina facturas
         protected void cancelar(object sender, EventArgs e)
         {

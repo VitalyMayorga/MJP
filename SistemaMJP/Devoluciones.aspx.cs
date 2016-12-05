@@ -34,7 +34,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    cagarDatos();
+                    cargarDatos();
                 }
             }
             List<int> bodegas = new List<int>();
@@ -47,7 +47,7 @@ namespace SistemaMJP
             Response.Redirect("DevolucionBajas.aspx");
         }
 
-        protected void cagarDatos()
+        protected void cargarDatos()
         {           
             Dictionary<string, int> nomPrograma = new Dictionary<string, int>();           
             DropDownPrograma.Items.Clear();
@@ -79,7 +79,7 @@ namespace SistemaMJP
                 DropDownEmpaques.Items.Add(new ListItem { Text = item.ToString(), Value = item.ToString() });
             }
         }
-
+        
         protected void llenarSubBodegas(object sender, EventArgs e)
         {           
             if (DropDownPrograma.SelectedValue != "0")
@@ -89,11 +89,19 @@ namespace SistemaMJP
                 DropDownSubBodegas.Items.Insert(0, new ListItem("--Selecione la SubBodega--", "0"));
                 nomSubBodega = controladora.getSubBodegas(Int32.Parse(DropDownPrograma.SelectedValue), bodegaId);
 
-                //Itera sobre el diccionario para obtener el programa y su respectivo id y guardarlo en un dropdownlist
+                //Itera sobre el diccionario para obtener la subbodega y su respectivo id y guardarlo en un dropdownlist
                 foreach (var item in nomSubBodega)
                 {
                     DropDownSubBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
                 }
+                if (DropDownSubBodegas.Items.Count < 2)
+                {
+                    listSubBodegas.Style.Add("display", "none");
+                }
+                else {
+                    listSubBodegas.Style.Add("display", "block");
+                }
+                
             }
         }
 
@@ -149,9 +157,13 @@ namespace SistemaMJP
                     MsjErrortextJustificacion.Style.Add("display", "none");
                 }
                 
-            }           
+            }
+            else if (DropDownSubBodegas.Items.Count > 1 && DropDownSubBodegas.SelectedValue.Equals("0")) {
+                MsjErrorlistSubBodega.Style.Add("display", "block");
+            }
             else if (txtProducto.Text == "")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "block");
 
@@ -172,10 +184,11 @@ namespace SistemaMJP
                 {
                     MsjErrortextJustificacion.Style.Add("display", "none");
                 }
-                
+
             }
             else if (TextCantidad.Text == "")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
                 MsjErrortextCantidad.Style.Add("display", "block");
@@ -192,6 +205,7 @@ namespace SistemaMJP
             }
             else if (DropDownEmpaques.SelectedValue == "0")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrortextCantidad.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
@@ -209,6 +223,7 @@ namespace SistemaMJP
             }
             else if (txtJustificacion.Text == "")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrorlistEmpaques.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
@@ -230,7 +245,7 @@ namespace SistemaMJP
                 }
                 string usuario = (string)Session["correoInstitucional"];
                 bitacora.registrarActividad(usuario, descripcionRA);
-                Response.Redirect("DevolucionBajas.aspx");                
+                Response.Redirect("DevolucionBajas.aspx");
             }
         }
 

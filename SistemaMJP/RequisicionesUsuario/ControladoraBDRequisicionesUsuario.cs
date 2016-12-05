@@ -629,7 +629,7 @@ namespace SistemaMJP
                 cmd.Parameters.AddWithValue("@id", numRequisicion);
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
-                if (reader.HasRows) {
+                if (reader.HasRows && !reader.IsDBNull(0)) {
                     persona = reader.GetString(0);
                 
                 }

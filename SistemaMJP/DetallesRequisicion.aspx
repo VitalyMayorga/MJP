@@ -104,7 +104,7 @@
                         <label>Cantidad (Unidades)</label>
                         <asp:TextBox ID="txtCantidad" runat="server" placeholder="Ej:10" class="form-control text-box single-line"></asp:TextBox>
                         <div style="display: none;" id="MsjErrorPrograma" class="col-md-offset-2" runat="server">
-                            <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
+                            <label class="msjErroneo" id="msjErroneoTxt" runat="server"></label>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorListRol" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un Rol para el usuario</label>
+                        <label class="msjErroneo">Debe seleccionar un Rol para el usuario</label>
                         <br/> 
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                                    
                  </div>  
                 <div style="display: none; margin-left:25%;" id="MsjErrorListBoxPrograma" class="form-group col-md-offset-2" runat="server">
-                    <label class="mensajeError">Debe asignar al menos un Programa al Usuario</label>
+                    <label class="msjErroneo">Debe asignar al menos un Programa al Usuario</label>
                     <br/> 
                 </div>              
                  
@@ -65,7 +65,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar una bodega para el usuario</label>
+                        <label class="msjErroneo">Debe seleccionar una bodega para el usuario</label>
                         <br/> 
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                             
                 </div>
                 <div style="display: none; margin-left:25%;" id="MsjErrorListBoxBodegas" class="form-group col-md-offset-2" runat="server">
-                    <label class="mensajeError">Debe asignar al menos una Bodega al Usuario</label>
+                    <label class="msjErroneo">Debe asignar al menos una Bodega al Usuario</label>
                     <br/> 
                  </div>
                            
@@ -135,7 +135,7 @@
                                    
                 </div>
                 <div style="display: none; margin-left:25%;" id="MsjErrorListBoxSubBodega" class="form-group col-md-offset-2" runat="server">
-                    <label class="mensajeError">Debe asignar al menos una SubBodega al Usuario</label>
+                    <label class="msjErroneo">Debe asignar al menos una SubBodega al Usuario</label>
                     <br/> 
                 </div>
 

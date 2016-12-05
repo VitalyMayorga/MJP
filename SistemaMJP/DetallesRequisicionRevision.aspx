@@ -45,7 +45,7 @@
                 <div class="form-group" style="margin-top: 2%; margin-right: 0%">
 
                     <div style="display: none;" id="MsjErrorCantActivo" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Existen activos que aún no estan relacionados con esta requisición, favor completar esta información antes de continuar</label>
+                        <label class="msjErroneo">Existen activos que aún no estan relacionados con esta requisición, favor completar esta información antes de continuar</label>
                         <br/> 
                     </div>                        
 
@@ -128,7 +128,7 @@
                             <label>Cantidad (Unidades)</label>
                             <asp:TextBox ID="txtCantidad" runat="server" class="form-control text-box single-line"></asp:TextBox>
                             <div style="display: none;" id="MsjErrorcantidad" class="col-md-offset-2" runat="server">
-                                <label class="msjErroneo" id="MensajeErrorTxt" runat="server"></label>
+                                <label class="msjErroneo" id="msjErroneoTxt" runat="server"></label>
                             </div>
                         </div>  
                     </div>

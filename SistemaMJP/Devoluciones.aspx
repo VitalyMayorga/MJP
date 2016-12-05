@@ -19,19 +19,19 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistPrograma" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un Programa para realizar la Devolución</label>
+                        <label class="msjErroneo">Debe seleccionar un Programa para realizar la Devolución</label>
                         <br/> 
                     </div>
                 </div> 
                 
-                <div class="form-group" id="listSubBodegas" runat="server">
+                <div class="form-group" id="listSubBodegas" style="display: block;" runat="server">
                     <label class="col-md-2 control-label" >SubBodega: </label>
                     <div class="col-md-10">
                         <asp:DropDownList ID = "DropDownSubBodegas" class="form-control dropdown cmbsize" runat="server" >                                
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistSubBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar una subBodega para realizar la Devolución</label>
+                        <label class="msjErroneo">Debe seleccionar una subBodega para realizar la Devolución</label>
                         <br/> 
                     </div>
                 </div>                           
@@ -45,7 +45,7 @@
                         <asp:Button ID="btnEmpaques" class="btn btn-default" runat="server" Text="Actualizar" OnClick="llenarCantidades"/>
                    </div>
                     <div style="display: none;" id="MsjErrortextProducto" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un producto para realizar la Devolución</label>
+                        <label class="msjErroneo">Debe seleccionar un producto para realizar la Devolución</label>
                         <br/> 
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistEmpaques" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar la cantidad de productos que vienen por empaque</label>
+                        <label class="msjErroneo">Debe seleccionar la cantidad de productos que vienen por empaque</label>
                         <br/> 
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <asp:TextBox ID="TextCantidad" class="form-control text-box single-line" runat="server" placeholder="Cantidad"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextCantidad" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar la cantidad de empaques a devolver</label>
+                        <label class="msjErroneo">Debe ingresar la cantidad de empaques a devolver</label>
                         <br/> 
                     </div>                    
                 </div>                
@@ -79,7 +79,7 @@
                         <asp:TextBox ID="txtJustificacion" class="form-control text-box single-line" runat="server" placeholder="Justificacion"></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextJustificacion" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Ingrese una justificación para realizar la Devolución</label>
+                        <label class="msjErroneo">Ingrese una justificación para realizar la Devolución</label>
                         <br/> 
                     </div>
                    

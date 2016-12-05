@@ -15,7 +15,7 @@
                         <asp:TextBox ID="txtNombre" class="form-control text-box single-line" runat="server" ></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextNombre" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Este campo no puede estar vacio</label>
+                        <label class="msjErroneo">Este campo no puede estar vacio</label>
                         <br/> 
                     </div>
                     
@@ -27,7 +27,7 @@
                         <asp:TextBox ID="TextApellidos" class="form-control text-box single-line" runat="server" ></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextApellidos" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Este campo no puede estar vacio</label>
+                        <label class="msjErroneo">Este campo no puede estar vacio</label>
                         <br/> 
                     </div>
                     
@@ -39,7 +39,7 @@
                         <asp:TextBox ID="txtPassword" TextMode="password" class="form-control text-box single-line" runat="server" ></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextPassword" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Ingrese una contraseña valida</label>
+                        <label class="msjErroneo">Ingrese una contraseña valida</label>
                         <br/> 
                     </div>
                    
@@ -51,7 +51,7 @@
                         <asp:TextBox ID="txtPassword2" TextMode="password" class="form-control text-box single-line" runat="server" ></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextRevisarPassword" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">El texto ingresado no coincide con el anterior, favor revisar la contraseña</label>
+                        <label class="msjErroneo">El texto ingresado no coincide con el anterior, favor revisar la contraseña</label>
                         <br/> 
                     </div>
                    

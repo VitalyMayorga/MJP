@@ -60,10 +60,7 @@ namespace SistemaMJP
                     }
                     labelRequisicion.InnerText = "Requisicion " + numRequisicion;
                     String estado = controladora.obtenerEstadoRequisicion(numRequisicion);
-                    if (estado.Equals("Despachada"))
-                    {
-                        Response.Redirect("RevisionRequisiciones.aspx");
-                    }
+                    
                     EstadoReq.InnerText = "Estado de la requisición: " + estado;
                     llenarDetallesProductoRequisicion();
                     ViewState["numRequisicion"] = numRequisicion;
@@ -366,7 +363,7 @@ namespace SistemaMJP
                     List<int> cantPorEmpaque = controladora.obtenerCantPorEmpaque(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], descripcion);
                     if (cantidad > cantidadEnBodega)
                     {
-                        MensajeErrorTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
+                        msjErroneoTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
                         MsjErrorcantidad.Style.Add("display", "block");
                     }
                     else
@@ -406,20 +403,20 @@ namespace SistemaMJP
                         }
                         if (!correcto)
                         {
-                            MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
+                            msjErroneoTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
                             MsjErrorcantidad.Style.Add("display", "block");
                         }
                     }
                 }
                 else
                 {
-                    MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                    msjErroneoTxt.InnerText = "Cantidad ingresada no es válida";
                     MsjErrorcantidad.Style.Add("display", "block");
                 }
             }
             catch (Exception e)
             {
-                MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                msjErroneoTxt.InnerText = "Cantidad ingresada no es válida";
                 MsjErrorcantidad.Style.Add("display", "block");
             }
 
