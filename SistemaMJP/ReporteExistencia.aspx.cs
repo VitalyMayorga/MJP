@@ -25,7 +25,7 @@ namespace SistemaMJP
             programa = DataString2;
             CultureInfo crCulture = new CultureInfo("es-CR");
             ReportDocument reportdocument = new ReportDocument();
-            reportdocument.Load(Server.MapPath("~/Reporte_Existencia.rpt"));
+            reportdocument.Load(Server.MapPath("~/Reporte_Existencias.rpt"));
             Tabla_Existencias ds = new Tabla_Existencias();
             DataTable t = ds.Tables.Add("Items");
             t.Columns.Add("SubPartida", Type.GetType("System.String"));
@@ -66,8 +66,9 @@ namespace SistemaMJP
             catch (Exception)
             {
                 throw;
-            }  
-            
+            }
+
+            fecha = DateTime.Now;
             TextObject fechaT = (TextObject)reportdocument.ReportDefinition.Sections["Section2"].ReportObjects["Fecha"];
             fechaT.Text = fecha.ToString("dd/MM/yyyy");
 

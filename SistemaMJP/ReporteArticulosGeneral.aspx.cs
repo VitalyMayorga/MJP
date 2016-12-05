@@ -30,7 +30,7 @@ namespace SistemaMJP
             Tabla_Existencias ds = new Tabla_Existencias();
             DataTable t = ds.Tables.Add("Items");
             t.Columns.Add("SubPartida", Type.GetType("System.String"));
-            t.Columns.Add("Numero Requisicion", Type.GetType("System.String"));
+            t.Columns.Add("NumeroRequisicion", Type.GetType("System.String"));
             t.Columns.Add("Descripcion", Type.GetType("System.String"));
             t.Columns.Add("Destino", Type.GetType("System.String"));
             t.Columns.Add("Cantidad", Type.GetType("System.String"));            
@@ -45,7 +45,7 @@ namespace SistemaMJP
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "P_Reporte_Articulos_Generales";
+                cmd.CommandText = "P_Reporte_Articulos_General";
                 con.Open();
                 cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -82,7 +82,7 @@ namespace SistemaMJP
                 cmd.Parameters.AddWithValue("@idPrograma", idPrograma);
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
-                fechaI = reader.GetString(0);
+                fechaI = reader.GetDateTime(0).ToString().Substring(0, 10);
                 reader.Close();
                 con.Close();
 
@@ -90,8 +90,9 @@ namespace SistemaMJP
             catch (Exception)
             {
                 throw;
-            }  
-            
+            }
+
+            fechaF = DateTime.Now;
             TextObject fechaFinalT = (TextObject)reportdocument.ReportDefinition.Sections["Section2"].ReportObjects["Fecha2"];
             fechaFinalT.Text = fechaF.ToString("dd/MM/yyyy");
 
@@ -109,3 +110,4 @@ namespace SistemaMJP
             CrystalReportViewer1.RefreshReport();
         }
     }
+}

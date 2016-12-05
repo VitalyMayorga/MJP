@@ -148,5 +148,11 @@ namespace SistemaMJP
             return controladoraBD.getNombreUsuario(id);
         }
 
+        //Llama a la controladora de Base de datos de usuarios, para devolver el nombre de un usuario segun su id 
+        internal int ObtenerIdUsuarioPorCorreo(string correo)
+        {
+            return controladoraBD.ObtenerIdUsuarioPorCorreo(correo);
+        }
+
     }
 }

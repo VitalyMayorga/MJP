@@ -389,7 +389,7 @@ namespace SistemaMJP
             }
         }
 
-        //Metodo que se encarga de obtener el id del usuario segun el correo Institucional
+        //Metodo que se encarga de obtener el id del usuario segun el nombre, apellido y id del Rol
         public int ObtenerIdUsuarioPorNombreApellidosRol(int idRol, string nombre, string apellidos)
         {
             int id;
@@ -442,6 +442,32 @@ namespace SistemaMJP
             }
 
             return nombre;
+        }
+
+        //Metodo que se encarga de obtener el id del usuario segun el correo Institucional
+        public int ObtenerIdUsuarioPorCorreo(string correo)
+        {
+            int id;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.CommandText = "P_Obtener_IdUsuario_Por_Correo";
+                cmd.Parameters.AddWithValue("@correo", correo);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                id = reader.GetInt32(0);
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return id;
         }
 
     }
