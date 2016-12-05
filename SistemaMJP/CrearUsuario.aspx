@@ -18,7 +18,7 @@
                         <asp:TextBox ID="txtNombre" class="form-control text-box single-line" runat="server" placeholder="Nombre de Usuario"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextNombre" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar el Nombre del Usuario</label>
+                        <label class="msjErroneo">Debe ingresar el Nombre del Usuario</label>
                         <br/> 
                     </div>
                     
@@ -30,7 +30,7 @@
                         <asp:TextBox ID="TextApellidos" class="form-control text-box single-line" runat="server" placeholder="Apellidos del usuario"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextApellidos" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar los Apellidos del Usuario</label>
+                        <label class="msjErroneo">Debe ingresar los Apellidos del Usuario</label>
                         <br/> 
                     </div>
                     
@@ -42,11 +42,11 @@
                         <asp:TextBox ID="txtCorreo" class="form-control text-box single-line" runat="server" placeholder="Correo Institucional"></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextCorreo" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar el correo Institucional</label>
+                        <label class="msjErroneo">Debe ingresar el correo Institucional</label>
                         <br/> 
                     </div>
                     <div style="display: none;" id="MsjErrorFormatEmail" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Formato de correo institucional invalido</label>
+                        <label class="msjErroneo">Formato de correo institucional invalido</label>
                         <br/> 
                     </div>
                    
@@ -59,7 +59,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorListRol" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un Rol para el usuario</label>
+                        <label class="msjErroneo">Debe seleccionar un Rol para el usuario</label>
                         <br/> 
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                                    
                  </div>  
                 <div style="display: none; margin-left:25%;" id="MsjErrorListBoxPrograma" class="form-group col-md-offset-2" runat="server">
-                    <label class="mensajeError">Debe asignar al menos un Programa al Usuario</label>
+                    <label class="msjErroneo">Debe asignar al menos un Programa al Usuario</label>
                     <br/> 
                 </div>              
                  
@@ -105,7 +105,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar una bodega para el usuario</label>
+                        <label class="msjErroneo">Debe seleccionar una bodega para el usuario</label>
                         <br/> 
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             
                 </div>
                 <div style="display: none; margin-left:25%;" id="MsjErrorListBoxBodegas" class="form-group col-md-offset-2" runat="server">
-                    <label class="mensajeError">Debe asignar al menos una Bodega al Usuario</label>
+                    <label class="msjErroneo">Debe asignar al menos una Bodega al Usuario</label>
                     <br/> 
                  </div>
                            
@@ -175,7 +175,7 @@
                                    
                 </div>
                 <div style="display: none; margin-left:25%;" id="MsjErrorListBoxSubBodega" class="form-group col-md-offset-2" runat="server">
-                    <label class="mensajeError">Debe asignar al menos una SubBodega al Usuario</label>
+                    <label class="msjErroneo">Debe asignar al menos una SubBodega al Usuario</label>
                     <br/> 
                 </div>
 

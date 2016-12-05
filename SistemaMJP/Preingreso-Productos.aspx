@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="form-horizontal">
+            <div class="form-horizontal" style="margin-bottom:5%">
                 <h3 class="Encabezado">Ingreso de Mercadería</h3>
                 <div class="form-group">
                     <label class="col-md-2 control-label">Ubicación</label>

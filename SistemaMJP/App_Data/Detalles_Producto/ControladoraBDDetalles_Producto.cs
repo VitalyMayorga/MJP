@@ -50,6 +50,37 @@ namespace SistemaMJP
 
         }
 
+        //Obtiene la bodega,programa y subbodega de una factura
+        internal String[] obtenerDatosFactura(string numFactura)
+        {
+            String[] datos = new String[3];
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "P_Obtener_Datos_Factura";
+                con.Open();
+                cmd.Parameters.AddWithValue("@numFactura", numFactura);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    datos[0]= reader.GetInt32(0).ToString();
+                    datos[1] = reader.GetInt32(1).ToString();
+                    datos[2] = reader.GetInt32(2).ToString();
+                }
+                reader.Close();
+                con.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return datos;
+        }
+
         //Metodo que se encarga de llenar los datos de la clase item grid facturas y devolver dicha clase encapsulada
         internal Item_Grid_Produtos_Factura LoadItemGridFacturas(SqlDataReader reader)
         {

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
     <asp:UpdatePanel runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div class="form-horizontal">
+            <div class="form-horizontal" style="margin-bottom:10%">
                 <h3 class="Encabezado">Ingreso de Mercadería</h3>
 
                 <div class="form-group">
@@ -74,11 +74,11 @@
                 <div class="form-group">
 
                     <div class="col-md-3 alinearDerecha">
-                        <asp:RadioButton ID="noActivo" runat="server" GroupName="tipoP" OnCheckedChanged="rbNo" AutoPostBack="true" />
+                        <asp:RadioButton ID="noActivo" runat="server" GroupName="tipoP" AutoPostBack="true" />
                         <label class="control-label" for="noActivo">No es un Activo</label>
                     </div>
                     <div class="col-md-5">
-                        <asp:RadioButton ID="esActivo" runat="server" GroupName="tipoP" OnCheckedChanged="rbSi" AutoPostBack="true" />
+                        <asp:RadioButton ID="esActivo" runat="server" GroupName="tipoP" AutoPostBack="true" />
                         <label class="control-label" for="esActivo">Es un Activo</label>
                     </div>
                 </div>

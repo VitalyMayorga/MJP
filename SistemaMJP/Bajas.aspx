@@ -19,7 +19,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistPrograma" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar un Programa para realizar la baja</label>
+                        <label class="msjErroneo">Debe seleccionar un Programa para realizar la baja</label>
                         <br/> 
                     </div>
                 </div>  
@@ -31,7 +31,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistSubBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar una subBodega para realizar la baja</label>
+                        <label class="msjErroneo">Debe seleccionar una subBodega para realizar la baja</label>
                         <br/> 
                     </div>
                 </div>                           
@@ -45,7 +45,7 @@
                         <asp:Button ID="btnEmpaques" class="btn btn-default" runat="server" Text="Actualizar" OnClick="llenarCantidades"/>
                    </div>
                           <div style="display: none;" id="MsjErrortextProducto" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe escribir el producto para realizar la baja</label>
+                        <label class="msjErroneo">Debe escribir el producto para realizar la baja</label>
                         <br/> 
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorlistEmpaques" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe seleccionar la cantidad de productos que vienen por empaque</label>
+                        <label class="msjErroneo">Debe seleccionar la cantidad de productos que vienen por empaque</label>
                         <br/> 
                     </div>
                 </div>
@@ -68,11 +68,11 @@
                         <asp:TextBox ID="TextCantidad" class="form-control text-box single-line" runat="server" placeholder="Cantidad"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextCantidad" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar la cantidad de unidades para realizar la baja</label>
+                        <label class="msjErroneo">Debe ingresar la cantidad de unidades para realizar la baja</label>
                         <br/> 
                     </div>
                     <div style="display: none;" id="MsjErrorCantidadNegativa" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">La cantidad introducidad es mayor que la cantidad del producto en la bodega </label>
+                        <label class="msjErroneo">La cantidad introducidad es mayor que la cantidad del producto en la bodega </label>
                         <br/> 
                     </div>
                     
@@ -84,7 +84,7 @@
                         <asp:TextBox ID="txtJustificacion" class="form-control text-box single-line" runat="server" placeholder="justificacion"></asp:TextBox>           
                     </div>
                     <div style="display: none;" id="MsjErrortextJustificacion" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Ingrese una justificación para realizar la baja</label>
+                        <label class="msjErroneo">Ingrese una justificación para realizar la baja</label>
                         <br/> 
                     </div>
                    

@@ -88,10 +88,17 @@ namespace SistemaMJP
             int i = Convert.ToInt32(row.RowIndex);
             string numRequisicion = GridRequisiciones.Rows[i + (this.GridRequisiciones.PageIndex * 10)].Cells[0].Text;
             List<Item_Grid_Tracking> track = controladora.getTracking(numRequisicion);
-            Object[] datos = new Object[2];
+            Object[] datos = new Object[3];
             foreach (Item_Grid_Tracking dato in track) {
                 datos[0] = dato.Fecha.ToString("MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture);
                 datos[1] = dato.Estado;
+                if (!dato.Estado.Equals("Aceptada en Destino"))
+                {
+                    datos[2] = "N/A";
+                }
+                else {
+                    datos[2] = dato.Persona;
+                }
                 tabla.Rows.Add(datos);
             }
 
@@ -187,6 +194,11 @@ namespace SistemaMJP
             columna = new DataColumn();
             columna.DataType = System.Type.GetType("System.String");
             columna.ColumnName = "Estado";
+            tabla.Columns.Add(columna);
+
+            columna = new DataColumn();
+            columna.DataType = System.Type.GetType("System.String");
+            columna.ColumnName = "Persona que recibe";
             tabla.Columns.Add(columna);
 
             trackingGrid.DataSource = tabla;

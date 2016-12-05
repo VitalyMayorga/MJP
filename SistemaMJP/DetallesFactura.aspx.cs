@@ -134,21 +134,19 @@ namespace SistemaMJP
             {
                 //Se obtiene el id del producto
                 int idProducto = ids[i + (this.GridProductos.PageIndex * 10)];
-                //Ingreso_Productos.id_factura = id_factura;
-                //Ingreso_Productos.idProducto = idProducto;
-                //Ingreso_Productos.numFactura = numFactura;
-                //Ingreso_Productos.editar = true;
+                String[] datos = controladora.obtenerDatosFactura(numFactura);
                 Response.Redirect("Ingreso_Productos.aspx?id_factura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_factura.ToString(), "MJP")) + "&numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP")) + "&idProducto=" +
-                    HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idProducto.ToString(), "MJP")) +"&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("1", "MJP")));
+                    HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idProducto.ToString(), "MJP")) +"&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("1", "MJP"))+
+                    "&bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[0], "MJP"))+ "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[1], "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[2], "MJP")));
             }
         }
 
         //Crea un nuevo producto
         protected void nuevoProducto(object sender, EventArgs e)
-        {
-            //Ingreso_Productos.numFactura = numFactura;
-            //Ingreso_Productos.editar = false;
-            Response.Redirect("Ingreso_Productos.aspx?numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP"))+ "&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("0", "MJP")));
+        {    
+            String[] datos = controladora.obtenerDatosFactura(numFactura);
+            Response.Redirect("Ingreso_Productos.aspx?numFactura=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numFactura, "MJP"))+ "&editar=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode("0", "MJP"))+
+                    "&bodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[0], "MJP"))+ "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[1], "MJP")) + "&subbodega=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(datos[2], "MJP")));
             
 
         }

@@ -342,7 +342,7 @@ namespace SistemaMJP
                     List<int> cantPorEmpaque = controladora.obtenerCantPorEmpaque(Convert.ToInt32(datos[0]), Convert.ToInt32(datos[2]), datos[1], producto);
                     if (cantidad > cantidadEnBodega)
                     {
-                        MensajeErrorTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
+                        msjErroneoTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
                         MsjErrorPrograma.Style.Add("display", "block");
                     }
                     else
@@ -382,20 +382,20 @@ namespace SistemaMJP
                         }
                         if (!correcto)
                         {
-                            MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
+                            msjErroneoTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
                             MsjErrorPrograma.Style.Add("display", "block");
                         }
                     }
                 }
                 else
                 {
-                    MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                    msjErroneoTxt.InnerText = "Cantidad ingresada no es válida";
                     MsjErrorPrograma.Style.Add("display", "block");
                 }
             }
             catch (Exception e)
             {
-                MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                msjErroneoTxt.InnerText = "Cantidad ingresada no es válida";
                 MsjErrorPrograma.Style.Add("display", "block");
             }
 

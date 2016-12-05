@@ -59,6 +59,9 @@ namespace SistemaMJP
                         Response.Redirect("MenuPrincipal");
                     }
                     labelRequisicion.InnerText = "Requisicion " + numRequisicion;
+                    String estado = controladora.obtenerEstadoRequisicion(numRequisicion);
+                    
+                    EstadoReq.InnerText = "Estado de la requisición: " + estado;
                     llenarDetallesProductoRequisicion();
                     ViewState["numRequisicion"] = numRequisicion;
                     ViewState["btnId"] = btnId;
@@ -103,6 +106,7 @@ namespace SistemaMJP
         protected void btnBoleta_Click(object sender, EventArgs e)
         {
             Response.Redirect("ProductosRequisicion.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")));
+              
         }
 
         //Se encarga de las revisiciones previas al despacho de la requisicion
@@ -129,7 +133,7 @@ namespace SistemaMJP
             }
         }
 
-         //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
+         //Despacha una requisicon, cambiando su estado a despachado
         protected void aceptarDespacho(object sender, EventArgs e)
         {
             string descripcionRA = "";
@@ -137,13 +141,20 @@ namespace SistemaMJP
             string placa = txtPlaca.Text;
             string nomConductor = txtConductor.Text;
             string destinatario = unidad;
-                        
-            controladora.cambiarEstadoRequisicion(id_requisicion, 3);
-            controladora.agregarInfoDespacho(id_requisicion, placa, nomConductor, destinatario);      
-            descripcionRA = "Requisicion: " + numRequisicion + " despachada";
-            bitacora.registrarActividad(usuario, descripcionRA);
-            Response.Redirect("Boleta.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&idReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_requisicion.ToString(), "MJP")));
-            Response.Redirect("RevisionRequisiciones.aspx"); 
+            
+            if(String.IsNullOrEmpty(placa) || String.IsNullOrEmpty(nomConductor) || String.IsNullOrEmpty(destinatario)){
+                MsjErrorRecibido.Style.Add("display", "block");
+                ClientScript.RegisterStartupScript(GetType(), "Show", "<script> $('#ModalInfoDespacho').modal('show');</script>");
+            }
+            else{
+                MsjErrorDespacho.Style.Add("display","none");
+                controladora.cambiarEstadoRequisicion(id_requisicion, 3);
+                controladora.agregarInfoDespacho(id_requisicion, placa, nomConductor, destinatario);      
+                descripcionRA = "Requisicion: " + numRequisicion + " despachada";
+                bitacora.registrarActividad(usuario, descripcionRA);
+                Response.Redirect("Boleta.aspx?numReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(numRequisicion, "MJP")) + "&idReq=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(id_requisicion.ToString(), "MJP")));
+          
+            } 
         }
 
 
@@ -221,11 +232,8 @@ namespace SistemaMJP
         //Envia la requisicion a los aprobadores de almacen
         protected void btnAprobar_Click(object sender, EventArgs e)
         {
-            int indice = 0;
             DateTime fechaRecibido = DateTime.Now;
-            string personaRecibe = "";
             string usuario = (string)Session["correoInstitucional"];
-            string descripcionRA = "";
 
             if (btnId != "btnDetallesDespacho")
             {
@@ -233,17 +241,8 @@ namespace SistemaMJP
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('show');</script>");
             }
             else{
-                controladora.cambiarEstadoRequisicion(id_requisicion, 0);
-                controladora.actualizarInfoDespacho(id_requisicion, fechaRecibido, personaRecibe);
-
-                while (indice < ids.Count())
-                {
-                    controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[indice]);
-                    indice++;
-                }
-                descripcionRA = "Requisicion: " + numRequisicion + " acepatada en destino";
-                bitacora.registrarActividad(usuario, descripcionRA);
-                Response.Redirect("RevisionRequisiciones.aspx");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Pop", "openModalAceptacionRequisicion('Datos aprobación para requisición: " + numRequisicion + "');", true);
+                ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalAceptacionRequisicion').modal('show');</script>");
             }           
             
             
@@ -265,8 +264,8 @@ namespace SistemaMJP
                 ClientScript.RegisterStartupScript(GetType(), "Hide", "<script> $('#ModalNuevaObservacion').modal('hide');</script>");
                 controladora.actualizarObservacion(controladora.obtenerIDRequisicion(numRequisicion), justificacion);
                 controladora.cambiarEstadoRequisicion(id_requisicion, 1);
+                Response.Redirect("RevisionRequisiciones.aspx");
             }
-            Response.Redirect("RevisionRequisiciones.aspx");
         }
         //Cambia el estado de la requisicion segun el rol del usuario que realizo la Devolución
         protected void aceptarEdicion(object sender, EventArgs e)
@@ -364,7 +363,7 @@ namespace SistemaMJP
                     List<int> cantPorEmpaque = controladora.obtenerCantPorEmpaque(Convert.ToInt32(dato[0]), Convert.ToInt32(dato[2]), dato[1], descripcion);
                     if (cantidad > cantidadEnBodega)
                     {
-                        MensajeErrorTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
+                        msjErroneoTxt.InnerText = "Cantidad ingresada sobrepasa la cantidad en almacén";
                         MsjErrorcantidad.Style.Add("display", "block");
                     }
                     else
@@ -404,20 +403,20 @@ namespace SistemaMJP
                         }
                         if (!correcto)
                         {
-                            MensajeErrorTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
+                            msjErroneoTxt.InnerText = "Cantidad ingresada no cumple con requisitos, cantidad sugerida es " + cantSugeridaFinal;
                             MsjErrorcantidad.Style.Add("display", "block");
                         }
                     }
                 }
                 else
                 {
-                    MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                    msjErroneoTxt.InnerText = "Cantidad ingresada no es válida";
                     MsjErrorcantidad.Style.Add("display", "block");
                 }
             }
             catch (Exception e)
             {
-                MensajeErrorTxt.InnerText = "Cantidad ingresada no es válida";
+                msjErroneoTxt.InnerText = "Cantidad ingresada no es válida";
                 MsjErrorcantidad.Style.Add("display", "block");
             }
 
@@ -593,6 +592,33 @@ namespace SistemaMJP
             }
 
 
+        }
+        //Metodo que se encarga de aceptar una requisicion si todos los datos fueron proporcionados en el modal
+        protected void aceptarRecibido(object sender, EventArgs e)
+        {
+            string fecha = txtFecha.Text;
+            string usuario = (string)Session["correoInstitucional"];
+            string personaRecibe = txtPersona.Text;
+            if (String.IsNullOrEmpty(fecha) || String.IsNullOrEmpty(personaRecibe))
+            {
+                MsjErrorRecibido.Style.Add("display", "block");
+                ClientScript.RegisterStartupScript(GetType(), "Show", "<script> $('#ModalAceptacionRequisicion').modal('show');</script>");
+            }
+            else {
+                MsjErrorRecibido.Style.Add("display", "none");
+                int indice = 0;
+                controladora.cambiarEstadoRequisicion(id_requisicion, 0);
+                controladora.actualizarInfoDespacho(id_requisicion, Convert.ToDateTime(fecha), personaRecibe);
+
+                while (indice < ids.Count())
+                {
+                    controladora.actualizarCantidadProductosRequisicion(controladora.obtenerIDBodegaRequisicion(id_requisicion), ids[indice], controladora.obtenerIDProgramaRequisicion(id_requisicion), controladora.obtenerIDSubBodegaRequisicion(id_requisicion), cantidades[indice]);
+                    indice++;
+                }
+                string descripcionRA = "Requisicion: " + numRequisicion + " acepatada en destino";
+                bitacora.registrarActividad(usuario, descripcionRA);
+                Response.Redirect("RevisionRequisiciones.aspx"); 
+            }
         }
         protected void gridProductosRequisicion_RowCreated(object sender, GridViewRowEventArgs e)
         {

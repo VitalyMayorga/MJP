@@ -30,7 +30,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    cagarDatos();
+                    cargarDatos();
                 }
             }
                 
@@ -41,7 +41,7 @@ namespace SistemaMJP
             Response.Redirect("Administracion.aspx");
         }
        
-        protected void cagarDatos()
+        protected void cargarDatos()
         {
             Dictionary<string, int> nomBodega = new Dictionary<string, int>();
             Dictionary<string, int> nomPrograma = new Dictionary<string, int>();

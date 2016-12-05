@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,7 +34,7 @@ namespace SistemaMJP
                 }
                 else
                 {
-                    cagarDatos();
+                    cargarDatos();
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace SistemaMJP
             Response.Redirect("DevolucionBajas.aspx");
         }
 
-        protected void cagarDatos()
+        protected void cargarDatos()
         {
             Dictionary<string, int> nomPrograma = new Dictionary<string, int>();
             List<int> bodegas = new List<int>();
@@ -80,6 +80,13 @@ namespace SistemaMJP
                 foreach (var item in nomSubBodega)
                 {
                     DropDownSubBodegas.Items.Add(new ListItem { Text = item.Key, Value = item.Value.ToString() });
+                }
+                if (DropDownSubBodegas.Items.Count < 2)
+                {
+                    listSubBodegas.Style.Add("display", "none");
+                }
+                else {
+                    listSubBodegas.Style.Add("display", "block");
                 }
             }
         }
@@ -152,8 +159,13 @@ namespace SistemaMJP
                 }
 
             }
+            else if (DropDownSubBodegas.Items.Count > 1 && DropDownSubBodegas.SelectedValue.Equals("0"))
+            {
+                MsjErrorlistSubBodega.Style.Add("display", "block");
+            }
             else if (txtProducto.Text == "")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "block");
 
@@ -178,6 +190,7 @@ namespace SistemaMJP
             }
             else if (TextCantidad.Text == "")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
                 MsjErrortextCantidad.Style.Add("display", "block");
@@ -194,6 +207,7 @@ namespace SistemaMJP
             }
             else if (DropDownEmpaques.SelectedValue == "0")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrortextCantidad.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");
@@ -211,6 +225,7 @@ namespace SistemaMJP
             }
             else if (txtJustificacion.Text == "")
             {
+                MsjErrorlistSubBodega.Style.Add("display", "none");
                 MsjErrorlistPrograma.Style.Add("display", "none");
                 MsjErrorlistEmpaques.Style.Add("display", "none");
                 MsjErrortextProducto.Style.Add("display", "none");

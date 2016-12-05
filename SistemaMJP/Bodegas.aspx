@@ -29,7 +29,7 @@
                         <asp:TextBox ID="txtBodega" class="form-control text-box single-line" runat="server" placeholder="Bodega"></asp:TextBox>
                     </div>
                     <div style="display: none;" id="MsjErrortextBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar el nombre de la Bodega</label>
+                        <label class="msjErroneo">Debe ingresar el nombre de la Bodega</label>
                             <br/> 
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorListProgramas" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe elegir un programa</label>
+                        <label class="msjErroneo">Debe elegir un programa</label>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorListBodegas" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe elegir una Bodega</label>
+                        <label class="msjErroneo">Debe elegir una Bodega</label>
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@
                         <asp:TextBox ID="txtSubBodega" class="form-control text-box single-line" runat="server" placeholder="SubBodega" ></asp:TextBox>     
                     </div>
                         <div style="display: none;" id="MsjErrortextSubBodega" class="col-md-offset-2" runat="server">
-                        <label class="mensajeError">Debe ingresar el nombre de la SubBodega</label>
+                        <label class="msjErroneo">Debe ingresar el nombre de la SubBodega</label>
                     </div>                        
                 </div>
                                      

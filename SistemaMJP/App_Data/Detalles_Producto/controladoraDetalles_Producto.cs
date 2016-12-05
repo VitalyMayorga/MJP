@@ -49,5 +49,9 @@ namespace SistemaMJP
         {
             controladoraBD.rechazarFactura(id_factura);
         }
+        //Obtiene la bodega,programa y subbodega de una factura
+        internal String[] obtenerDatosFactura(string numFactura) {
+            return controladoraBD.obtenerDatosFactura(numFactura);
+        }
     }
 }

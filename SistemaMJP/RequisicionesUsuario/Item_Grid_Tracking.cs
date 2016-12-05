@@ -9,10 +9,12 @@ namespace SistemaMJP.RequisicionesUsuario
     {
         private DateTime fecha;
         private String estado;
+        private String persona;
 
-        public Item_Grid_Tracking(DateTime fecha, String estado) {
+        public Item_Grid_Tracking(DateTime fecha, String estado,String persona) {
             Fecha = fecha;
             Estado = estado;
+            Persona = persona;
         }
         /*
        * Requiere: una Hilera con el valor nuevo
@@ -34,6 +36,17 @@ namespace SistemaMJP.RequisicionesUsuario
         {
             get { return estado; }
             set { estado = value; }
+        }
+
+        /*
+      * Requiere: una Hilera con el valor nuevo
+      * Efectúa : Asigna a la variable global Estado con el parámetro
+      * Retorna : El valor de la variable global Persona
+      */
+        public String Persona
+        {
+            get { return persona; }
+            set { persona = value; }
         }
     }
 }
