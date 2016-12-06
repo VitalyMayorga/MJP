@@ -20,17 +20,17 @@ namespace SistemaMJP {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("Tabla_Articulos_Destino")]
+    [global::System.Xml.Serialization.XmlRootAttribute("Tabla_Trazabilidad")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class Tabla_Articulos_Destino : global::System.Data.DataSet {
+    public partial class Tabla_Trazabilidad : global::System.Data.DataSet {
         
-        private DataSet_Articulos_DestinoDataTable tableDataSet_Articulos_Destino;
+        private DB_TrazabilidadDataTable tableDB_Trazabilidad;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public Tabla_Articulos_Destino() {
+        public Tabla_Trazabilidad() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SistemaMJP {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected Tabla_Articulos_Destino(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected Tabla_Trazabilidad(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SistemaMJP {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["DataSet_Articulos_Destino"] != null)) {
-                    base.Tables.Add(new DataSet_Articulos_DestinoDataTable(ds.Tables["DataSet_Articulos_Destino"]));
+                if ((ds.Tables["DB_Trazabilidad"] != null)) {
+                    base.Tables.Add(new DB_TrazabilidadDataTable(ds.Tables["DB_Trazabilidad"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SistemaMJP {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DataSet_Articulos_DestinoDataTable DataSet_Articulos_Destino {
+        public DB_TrazabilidadDataTable DB_Trazabilidad {
             get {
-                return this.tableDataSet_Articulos_Destino;
+                return this.tableDB_Trazabilidad;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SistemaMJP {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            Tabla_Articulos_Destino cln = ((Tabla_Articulos_Destino)(base.Clone()));
+            Tabla_Trazabilidad cln = ((Tabla_Trazabilidad)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SistemaMJP {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["DataSet_Articulos_Destino"] != null)) {
-                    base.Tables.Add(new DataSet_Articulos_DestinoDataTable(ds.Tables["DataSet_Articulos_Destino"]));
+                if ((ds.Tables["DB_Trazabilidad"] != null)) {
+                    base.Tables.Add(new DB_TrazabilidadDataTable(ds.Tables["DB_Trazabilidad"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SistemaMJP {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableDataSet_Articulos_Destino = ((DataSet_Articulos_DestinoDataTable)(base.Tables["DataSet_Articulos_Destino"]));
+            this.tableDB_Trazabilidad = ((DB_TrazabilidadDataTable)(base.Tables["DB_Trazabilidad"]));
             if ((initTable == true)) {
-                if ((this.tableDataSet_Articulos_Destino != null)) {
-                    this.tableDataSet_Articulos_Destino.InitVars();
+                if ((this.tableDB_Trazabilidad != null)) {
+                    this.tableDB_Trazabilidad.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SistemaMJP {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "Tabla_Articulos_Destino";
+            this.DataSetName = "Tabla_Trazabilidad";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/Tabla_Articulos_Destino.xsd";
+            this.Namespace = "http://tempuri.org/Tabla_Trazabilidad.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableDataSet_Articulos_Destino = new DataSet_Articulos_DestinoDataTable();
-            base.Tables.Add(this.tableDataSet_Articulos_Destino);
+            this.tableDB_Trazabilidad = new DB_TrazabilidadDataTable();
+            base.Tables.Add(this.tableDB_Trazabilidad);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeDataSet_Articulos_Destino() {
+        private bool ShouldSerializeDB_Trazabilidad() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SistemaMJP {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            Tabla_Articulos_Destino ds = new Tabla_Articulos_Destino();
+            Tabla_Trazabilidad ds = new Tabla_Trazabilidad();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,31 +270,29 @@ namespace SistemaMJP {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void DataSet_Articulos_DestinoRowChangeEventHandler(object sender, DataSet_Articulos_DestinoRowChangeEvent e);
+        public delegate void DB_TrazabilidadRowChangeEventHandler(object sender, DB_TrazabilidadRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DataSet_Articulos_DestinoDataTable : global::System.Data.TypedTableBase<DataSet_Articulos_DestinoRow> {
-            
-            private global::System.Data.DataColumn columnNumerorRequisicion;
-            
-            private global::System.Data.DataColumn columnSubPartida;
+        public partial class DB_TrazabilidadDataTable : global::System.Data.TypedTableBase<DB_TrazabilidadRow> {
             
             private global::System.Data.DataColumn columnDescripcion;
             
-            private global::System.Data.DataColumn columnCantidad;
+            private global::System.Data.DataColumn columnHistorico;
             
-            private global::System.Data.DataColumn columnPrecioUnitario;
+            private global::System.Data.DataColumn columnRotacionPorMes;
             
-            private global::System.Data.DataColumn columnPrecioTotal;
+            private global::System.Data.DataColumn columnCantidadAlmacen;
+            
+            private global::System.Data.DataColumn columnCantidadProyectada;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataSet_Articulos_DestinoDataTable() {
-                this.TableName = "DataSet_Articulos_Destino";
+            public DB_TrazabilidadDataTable() {
+                this.TableName = "DB_Trazabilidad";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -302,7 +300,7 @@ namespace SistemaMJP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DataSet_Articulos_DestinoDataTable(global::System.Data.DataTable table) {
+            internal DB_TrazabilidadDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -319,25 +317,9 @@ namespace SistemaMJP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected DataSet_Articulos_DestinoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected DB_TrazabilidadDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NumerorRequisicionColumn {
-                get {
-                    return this.columnNumerorRequisicion;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SubPartidaColumn {
-                get {
-                    return this.columnSubPartida;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -350,25 +332,33 @@ namespace SistemaMJP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CantidadColumn {
+            public global::System.Data.DataColumn HistoricoColumn {
                 get {
-                    return this.columnCantidad;
+                    return this.columnHistorico;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PrecioUnitarioColumn {
+            public global::System.Data.DataColumn RotacionPorMesColumn {
                 get {
-                    return this.columnPrecioUnitario;
+                    return this.columnRotacionPorMes;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PrecioTotalColumn {
+            public global::System.Data.DataColumn CantidadAlmacenColumn {
                 get {
-                    return this.columnPrecioTotal;
+                    return this.columnCantidadAlmacen;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CantidadProyectadaColumn {
+                get {
+                    return this.columnCantidadProyectada;
                 }
             }
             
@@ -383,50 +373,49 @@ namespace SistemaMJP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataSet_Articulos_DestinoRow this[int index] {
+            public DB_TrazabilidadRow this[int index] {
                 get {
-                    return ((DataSet_Articulos_DestinoRow)(this.Rows[index]));
+                    return ((DB_TrazabilidadRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DataSet_Articulos_DestinoRowChangeEventHandler DataSet_Articulos_DestinoRowChanging;
+            public event DB_TrazabilidadRowChangeEventHandler DB_TrazabilidadRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DataSet_Articulos_DestinoRowChangeEventHandler DataSet_Articulos_DestinoRowChanged;
+            public event DB_TrazabilidadRowChangeEventHandler DB_TrazabilidadRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DataSet_Articulos_DestinoRowChangeEventHandler DataSet_Articulos_DestinoRowDeleting;
+            public event DB_TrazabilidadRowChangeEventHandler DB_TrazabilidadRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DataSet_Articulos_DestinoRowChangeEventHandler DataSet_Articulos_DestinoRowDeleted;
+            public event DB_TrazabilidadRowChangeEventHandler DB_TrazabilidadRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddDataSet_Articulos_DestinoRow(DataSet_Articulos_DestinoRow row) {
+            public void AddDB_TrazabilidadRow(DB_TrazabilidadRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataSet_Articulos_DestinoRow AddDataSet_Articulos_DestinoRow(string NumerorRequisicion, string SubPartida, string Descripcion, string Cantidad, string PrecioUnitario, string PrecioTotal) {
-                DataSet_Articulos_DestinoRow rowDataSet_Articulos_DestinoRow = ((DataSet_Articulos_DestinoRow)(this.NewRow()));
+            public DB_TrazabilidadRow AddDB_TrazabilidadRow(string Descripcion, string Historico, string RotacionPorMes, string CantidadAlmacen, string CantidadProyectada) {
+                DB_TrazabilidadRow rowDB_TrazabilidadRow = ((DB_TrazabilidadRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        NumerorRequisicion,
-                        SubPartida,
                         Descripcion,
-                        Cantidad,
-                        PrecioUnitario,
-                        PrecioTotal};
-                rowDataSet_Articulos_DestinoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDataSet_Articulos_DestinoRow);
-                return rowDataSet_Articulos_DestinoRow;
+                        Historico,
+                        RotacionPorMes,
+                        CantidadAlmacen,
+                        CantidadProyectada};
+                rowDB_TrazabilidadRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDB_TrazabilidadRow);
+                return rowDB_TrazabilidadRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                DataSet_Articulos_DestinoDataTable cln = ((DataSet_Articulos_DestinoDataTable)(base.Clone()));
+                DB_TrazabilidadDataTable cln = ((DB_TrazabilidadDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -434,61 +423,58 @@ namespace SistemaMJP {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new DataSet_Articulos_DestinoDataTable();
+                return new DB_TrazabilidadDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnNumerorRequisicion = base.Columns["NumerorRequisicion"];
-                this.columnSubPartida = base.Columns["SubPartida"];
                 this.columnDescripcion = base.Columns["Descripcion"];
-                this.columnCantidad = base.Columns["Cantidad"];
-                this.columnPrecioUnitario = base.Columns["PrecioUnitario"];
-                this.columnPrecioTotal = base.Columns["PrecioTotal"];
+                this.columnHistorico = base.Columns["Historico"];
+                this.columnRotacionPorMes = base.Columns["RotacionPorMes"];
+                this.columnCantidadAlmacen = base.Columns["CantidadAlmacen"];
+                this.columnCantidadProyectada = base.Columns["CantidadProyectada"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnNumerorRequisicion = new global::System.Data.DataColumn("NumerorRequisicion", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNumerorRequisicion);
-                this.columnSubPartida = new global::System.Data.DataColumn("SubPartida", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSubPartida);
                 this.columnDescripcion = new global::System.Data.DataColumn("Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescripcion);
-                this.columnCantidad = new global::System.Data.DataColumn("Cantidad", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCantidad);
-                this.columnPrecioUnitario = new global::System.Data.DataColumn("PrecioUnitario", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPrecioUnitario);
-                this.columnPrecioTotal = new global::System.Data.DataColumn("PrecioTotal", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPrecioTotal);
+                this.columnHistorico = new global::System.Data.DataColumn("Historico", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHistorico);
+                this.columnRotacionPorMes = new global::System.Data.DataColumn("RotacionPorMes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRotacionPorMes);
+                this.columnCantidadAlmacen = new global::System.Data.DataColumn("CantidadAlmacen", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantidadAlmacen);
+                this.columnCantidadProyectada = new global::System.Data.DataColumn("CantidadProyectada", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantidadProyectada);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataSet_Articulos_DestinoRow NewDataSet_Articulos_DestinoRow() {
-                return ((DataSet_Articulos_DestinoRow)(this.NewRow()));
+            public DB_TrazabilidadRow NewDB_TrazabilidadRow() {
+                return ((DB_TrazabilidadRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DataSet_Articulos_DestinoRow(builder);
+                return new DB_TrazabilidadRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(DataSet_Articulos_DestinoRow);
+                return typeof(DB_TrazabilidadRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.DataSet_Articulos_DestinoRowChanged != null)) {
-                    this.DataSet_Articulos_DestinoRowChanged(this, new DataSet_Articulos_DestinoRowChangeEvent(((DataSet_Articulos_DestinoRow)(e.Row)), e.Action));
+                if ((this.DB_TrazabilidadRowChanged != null)) {
+                    this.DB_TrazabilidadRowChanged(this, new DB_TrazabilidadRowChangeEvent(((DB_TrazabilidadRow)(e.Row)), e.Action));
                 }
             }
             
@@ -496,8 +482,8 @@ namespace SistemaMJP {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.DataSet_Articulos_DestinoRowChanging != null)) {
-                    this.DataSet_Articulos_DestinoRowChanging(this, new DataSet_Articulos_DestinoRowChangeEvent(((DataSet_Articulos_DestinoRow)(e.Row)), e.Action));
+                if ((this.DB_TrazabilidadRowChanging != null)) {
+                    this.DB_TrazabilidadRowChanging(this, new DB_TrazabilidadRowChangeEvent(((DB_TrazabilidadRow)(e.Row)), e.Action));
                 }
             }
             
@@ -505,8 +491,8 @@ namespace SistemaMJP {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.DataSet_Articulos_DestinoRowDeleted != null)) {
-                    this.DataSet_Articulos_DestinoRowDeleted(this, new DataSet_Articulos_DestinoRowChangeEvent(((DataSet_Articulos_DestinoRow)(e.Row)), e.Action));
+                if ((this.DB_TrazabilidadRowDeleted != null)) {
+                    this.DB_TrazabilidadRowDeleted(this, new DB_TrazabilidadRowChangeEvent(((DB_TrazabilidadRow)(e.Row)), e.Action));
                 }
             }
             
@@ -514,14 +500,14 @@ namespace SistemaMJP {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.DataSet_Articulos_DestinoRowDeleting != null)) {
-                    this.DataSet_Articulos_DestinoRowDeleting(this, new DataSet_Articulos_DestinoRowChangeEvent(((DataSet_Articulos_DestinoRow)(e.Row)), e.Action));
+                if ((this.DB_TrazabilidadRowDeleting != null)) {
+                    this.DB_TrazabilidadRowDeleting(this, new DB_TrazabilidadRowChangeEvent(((DB_TrazabilidadRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveDataSet_Articulos_DestinoRow(DataSet_Articulos_DestinoRow row) {
+            public void RemoveDB_TrazabilidadRow(DB_TrazabilidadRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -530,7 +516,7 @@ namespace SistemaMJP {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                Tabla_Articulos_Destino ds = new Tabla_Articulos_Destino();
+                Tabla_Trazabilidad ds = new Tabla_Trazabilidad();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -548,7 +534,7 @@ namespace SistemaMJP {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DataSet_Articulos_DestinoDataTable";
+                attribute2.FixedValue = "DB_TrazabilidadDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -592,49 +578,15 @@ namespace SistemaMJP {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DataSet_Articulos_DestinoRow : global::System.Data.DataRow {
+        public partial class DB_TrazabilidadRow : global::System.Data.DataRow {
             
-            private DataSet_Articulos_DestinoDataTable tableDataSet_Articulos_Destino;
+            private DB_TrazabilidadDataTable tableDB_Trazabilidad;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DataSet_Articulos_DestinoRow(global::System.Data.DataRowBuilder rb) : 
+            internal DB_TrazabilidadRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableDataSet_Articulos_Destino = ((DataSet_Articulos_DestinoDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NumerorRequisicion {
-                get {
-                    try {
-                        return ((string)(this[this.tableDataSet_Articulos_Destino.NumerorRequisicionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NumerorRequisicion\' in table \'DataSet_Articulos_Destino\' is" +
-                                " DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDataSet_Articulos_Destino.NumerorRequisicionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SubPartida {
-                get {
-                    try {
-                        return ((string)(this[this.tableDataSet_Articulos_Destino.SubPartidaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SubPartida\' in table \'DataSet_Articulos_Destino\' is DBNull." +
-                                "", e);
-                    }
-                }
-                set {
-                    this[this.tableDataSet_Articulos_Destino.SubPartidaColumn] = value;
-                }
+                this.tableDB_Trazabilidad = ((DB_TrazabilidadDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -642,138 +594,139 @@ namespace SistemaMJP {
             public string Descripcion {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet_Articulos_Destino.DescripcionColumn]));
+                        return ((string)(this[this.tableDB_Trazabilidad.DescripcionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Descripcion\' in table \'DataSet_Articulos_Destino\' is DBNull" +
-                                ".", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Descripcion\' in table \'DB_Trazabilidad\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet_Articulos_Destino.DescripcionColumn] = value;
+                    this[this.tableDB_Trazabilidad.DescripcionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Cantidad {
+            public string Historico {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet_Articulos_Destino.CantidadColumn]));
+                        return ((string)(this[this.tableDB_Trazabilidad.HistoricoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Cantidad\' in table \'DataSet_Articulos_Destino\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Historico\' in table \'DB_Trazabilidad\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet_Articulos_Destino.CantidadColumn] = value;
+                    this[this.tableDB_Trazabilidad.HistoricoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PrecioUnitario {
+            public string RotacionPorMes {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet_Articulos_Destino.PrecioUnitarioColumn]));
+                        return ((string)(this[this.tableDB_Trazabilidad.RotacionPorMesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PrecioUnitario\' in table \'DataSet_Articulos_Destino\' is DBN" +
-                                "ull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RotacionPorMes\' in table \'DB_Trazabilidad\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet_Articulos_Destino.PrecioUnitarioColumn] = value;
+                    this[this.tableDB_Trazabilidad.RotacionPorMesColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PrecioTotal {
+            public string CantidadAlmacen {
                 get {
                     try {
-                        return ((string)(this[this.tableDataSet_Articulos_Destino.PrecioTotalColumn]));
+                        return ((string)(this[this.tableDB_Trazabilidad.CantidadAlmacenColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PrecioTotal\' in table \'DataSet_Articulos_Destino\' is DBNull" +
-                                ".", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CantidadAlmacen\' in table \'DB_Trazabilidad\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataSet_Articulos_Destino.PrecioTotalColumn] = value;
+                    this[this.tableDB_Trazabilidad.CantidadAlmacenColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNumerorRequisicionNull() {
-                return this.IsNull(this.tableDataSet_Articulos_Destino.NumerorRequisicionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNumerorRequisicionNull() {
-                this[this.tableDataSet_Articulos_Destino.NumerorRequisicionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSubPartidaNull() {
-                return this.IsNull(this.tableDataSet_Articulos_Destino.SubPartidaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSubPartidaNull() {
-                this[this.tableDataSet_Articulos_Destino.SubPartidaColumn] = global::System.Convert.DBNull;
+            public string CantidadProyectada {
+                get {
+                    try {
+                        return ((string)(this[this.tableDB_Trazabilidad.CantidadProyectadaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CantidadProyectada\' in table \'DB_Trazabilidad\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDB_Trazabilidad.CantidadProyectadaColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescripcionNull() {
-                return this.IsNull(this.tableDataSet_Articulos_Destino.DescripcionColumn);
+                return this.IsNull(this.tableDB_Trazabilidad.DescripcionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescripcionNull() {
-                this[this.tableDataSet_Articulos_Destino.DescripcionColumn] = global::System.Convert.DBNull;
+                this[this.tableDB_Trazabilidad.DescripcionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCantidadNull() {
-                return this.IsNull(this.tableDataSet_Articulos_Destino.CantidadColumn);
+            public bool IsHistoricoNull() {
+                return this.IsNull(this.tableDB_Trazabilidad.HistoricoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCantidadNull() {
-                this[this.tableDataSet_Articulos_Destino.CantidadColumn] = global::System.Convert.DBNull;
+            public void SetHistoricoNull() {
+                this[this.tableDB_Trazabilidad.HistoricoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPrecioUnitarioNull() {
-                return this.IsNull(this.tableDataSet_Articulos_Destino.PrecioUnitarioColumn);
+            public bool IsRotacionPorMesNull() {
+                return this.IsNull(this.tableDB_Trazabilidad.RotacionPorMesColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPrecioUnitarioNull() {
-                this[this.tableDataSet_Articulos_Destino.PrecioUnitarioColumn] = global::System.Convert.DBNull;
+            public void SetRotacionPorMesNull() {
+                this[this.tableDB_Trazabilidad.RotacionPorMesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPrecioTotalNull() {
-                return this.IsNull(this.tableDataSet_Articulos_Destino.PrecioTotalColumn);
+            public bool IsCantidadAlmacenNull() {
+                return this.IsNull(this.tableDB_Trazabilidad.CantidadAlmacenColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPrecioTotalNull() {
-                this[this.tableDataSet_Articulos_Destino.PrecioTotalColumn] = global::System.Convert.DBNull;
+            public void SetCantidadAlmacenNull() {
+                this[this.tableDB_Trazabilidad.CantidadAlmacenColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCantidadProyectadaNull() {
+                return this.IsNull(this.tableDB_Trazabilidad.CantidadProyectadaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCantidadProyectadaNull() {
+                this[this.tableDB_Trazabilidad.CantidadProyectadaColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -781,22 +734,22 @@ namespace SistemaMJP {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class DataSet_Articulos_DestinoRowChangeEvent : global::System.EventArgs {
+        public class DB_TrazabilidadRowChangeEvent : global::System.EventArgs {
             
-            private DataSet_Articulos_DestinoRow eventRow;
+            private DB_TrazabilidadRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataSet_Articulos_DestinoRowChangeEvent(DataSet_Articulos_DestinoRow row, global::System.Data.DataRowAction action) {
+            public DB_TrazabilidadRowChangeEvent(DB_TrazabilidadRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataSet_Articulos_DestinoRow Row {
+            public DB_TrazabilidadRow Row {
                 get {
                     return this.eventRow;
                 }

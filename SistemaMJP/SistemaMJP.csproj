@@ -161,7 +161,9 @@
     <Content Include="Administracion.aspx" />
     <Content Include="Bajas.aspx" />
     <Content Include="Bodegas.aspx" />
+    <Content Include="Content\Reporte.css" />
     <Content Include="ReporteArticulosDestino.aspx" />
+    <Content Include="ReporteTrazabilidad.aspx" />
     <Content Include="ReporteArticulosDestinoSubPartida.aspx" />
     <Content Include="ReporteArticulosGeneral.aspx" />
     <Content Include="ReporteExistencia.aspx" />
@@ -304,17 +306,6 @@
     <Content Include="Tabla_Articulos_General.xsc">
       <DependentUpon>Tabla_Articulos_General.xsd</DependentUpon>
     </Content>
-    <Content Include="Tabla_Articulos_Destino.xsc">
-      <DependentUpon>Tabla_Articulos_Destino.xsd</DependentUpon>
-    </Content>
-    <None Include="Tabla_Articulos_Destino.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Tabla_Articulos_Destino.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Tabla_Articulos_Destino.xss">
-      <DependentUpon>Tabla_Articulos_Destino.xsd</DependentUpon>
-    </Content>
     <None Include="Tabla_Articulos_General.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -352,6 +343,17 @@
     </None>
     <Content Include="Tabla_Requisiciones.xss">
       <DependentUpon>Tabla_Requisiciones.xsd</DependentUpon>
+    </Content>
+    <Content Include="Tabla_Trazabilidad.xsc">
+      <DependentUpon>Tabla_Trazabilidad.xsd</DependentUpon>
+    </Content>
+    <None Include="Tabla_Trazabilidad.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabla_Trazabilidad.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Tabla_Trazabilidad.xss">
+      <DependentUpon>Tabla_Trazabilidad.xsd</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -457,6 +459,13 @@
     <Compile Include="ReporteArticulosDestino.aspx.designer.cs">
       <DependentUpon>ReporteArticulosDestino.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReporteTrazabilidad.aspx.cs">
+      <DependentUpon>ReporteTrazabilidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteTrazabilidad.aspx.designer.cs">
+      <DependentUpon>ReporteTrazabilidad.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteArticulosDestinoSubPartida.aspx.cs">
       <DependentUpon>ReporteArticulosDestinoSubPartida.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -486,6 +495,12 @@
     </Compile>
     <Compile Include="Reporte_Articulos_Destino.cs">
       <DependentUpon>Reporte_Articulos_Destino.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reporte_Trazabilidad.cs">
+      <DependentUpon>Reporte_Trazabilidad.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -757,11 +772,6 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Tabla_Articulos_Destino.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Tabla_Articulos_Destino.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Tabla_Articulos_General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -781,6 +791,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Tabla_Requisiciones.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Tabla_Trazabilidad.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabla_Trazabilidad.xsd</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -822,6 +837,10 @@
     <EmbeddedResource Include="Reporte_Articulos_Destino.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Articulos_Destino.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte_Trazabilidad.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Trazabilidad.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte_Articulos_Destino_SubPartida.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

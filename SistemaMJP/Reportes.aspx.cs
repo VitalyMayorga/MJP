@@ -209,22 +209,22 @@ namespace SistemaMJP
         {
             programa = ListProgramas.SelectedItem.Text;
             idprograma = ListProgramas.SelectedItem.Value;
-            string destino = ListDestino2.SelectedItem.Text;
+            string subPartida = ListSubPartida2.SelectedItem.Text;
             string periodo = ListPeriodo.SelectedItem.Text;
             int año = Int32.Parse(DateTime.Now.ToString("yyyy"));
             int dia = Int32.Parse(DateTime.Now.ToString("dd"));
             int mes = Int32.Parse(DateTime.Now.ToString("MM"));
             DateTime fechaInicial  = new DateTime(año - Int32.Parse(periodo), mes, dia);
             string fechaI = fechaInicial.ToString("yyyy/MM/dd");
-            Response.Redirect("ReporteTrazabilidad.aspx?idPrograma=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idprograma, "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(programa, "MJP")) + "&destino=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(destino, "MJP")) + "&periodo=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(periodo, "MJP")) + "&fechaI=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(fechaI, "MJP")) + "&fechaF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(DateTime.Now.ToString("yyyy/MM/dd"), "MJP")));      
+            Response.Redirect("ReporteTrazabilidad.aspx?idPrograma=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idprograma, "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(programa, "MJP")) + "&subPartida=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(subPartida, "MJP")) + "&periodo=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(periodo, "MJP")) + "&fechaI=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(fechaI, "MJP")) + "&fechaF=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(DateTime.Now.ToString("yyyy/MM/dd"), "MJP")));      
         }
 
         protected void requisiciones(object sender, EventArgs e)
         {
             programa = ListProgramas.SelectedItem.Text;
             idprograma = ListProgramas.SelectedItem.Value;
-            string subPartida = ListSubPartida2.SelectedItem.Text;
-            Response.Redirect("ReporteArticulosDestino.aspx?idPrograma=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idprograma, "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(programa, "MJP")) + "&destino=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(subPartida, "MJP")));      
+            string destino = ListDestino2.SelectedItem.Text;
+            Response.Redirect("ReporteArticulosDestino.aspx?idPrograma=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(idprograma, "MJP")) + "&programa=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(programa, "MJP")) + "&destino=" + HttpUtility.UrlEncode(servicio.TamperProofStringEncode(destino, "MJP")));      
         }
 
     }

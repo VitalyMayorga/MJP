@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Tabla_Trazabilidad" targetNamespace="http://tempuri.org/Tabla_Trazabilidad.xsd" xmlns:mstns="http://tempuri.org/Tabla_Trazabilidad.xsd" xmlns="http://tempuri.org/Tabla_Trazabilidad.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Tabla_Trazabilidad" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Tabla_Trazabilidad" msprop:Generator_UserDSName="Tabla_Trazabilidad">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DB_Trazabilidad" msprop:Generator_TableClassName="DB_TrazabilidadDataTable" msprop:Generator_TableVarName="tableDB_Trazabilidad" msprop:Generator_TablePropName="DB_Trazabilidad" msprop:Generator_RowDeletingName="DB_TrazabilidadRowDeleting" msprop:Generator_RowChangingName="DB_TrazabilidadRowChanging" msprop:Generator_RowEvHandlerName="DB_TrazabilidadRowChangeEventHandler" msprop:Generator_RowDeletedName="DB_TrazabilidadRowDeleted" msprop:Generator_UserTableName="DB_Trazabilidad" msprop:Generator_RowChangedName="DB_TrazabilidadRowChanged" msprop:Generator_RowEvArgName="DB_TrazabilidadRowChangeEvent" msprop:Generator_RowClassName="DB_TrazabilidadRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="Historico" msprop:Generator_ColumnVarNameInTable="columnHistorico" msprop:Generator_ColumnPropNameInRow="Historico" msprop:Generator_ColumnPropNameInTable="HistoricoColumn" msprop:Generator_UserColumnName="Historico" type="xs:string" minOccurs="0" />
+              <xs:element name="RotacionPorMes" msprop:Generator_ColumnVarNameInTable="columnRotacionPorMes" msprop:Generator_ColumnPropNameInRow="RotacionPorMes" msprop:Generator_ColumnPropNameInTable="RotacionPorMesColumn" msprop:Generator_UserColumnName="RotacionPorMes" type="xs:string" minOccurs="0" />
+              <xs:element name="CantidadAlmacen" msprop:Generator_ColumnVarNameInTable="columnCantidadAlmacen" msprop:Generator_ColumnPropNameInRow="CantidadAlmacen" msprop:Generator_ColumnPropNameInTable="CantidadAlmacenColumn" msprop:Generator_UserColumnName="CantidadAlmacen" type="xs:string" minOccurs="0" />
+              <xs:element name="CantidadProyectada" msprop:Generator_ColumnVarNameInTable="columnCantidadProyectada" msprop:Generator_ColumnPropNameInRow="CantidadProyectada" msprop:Generator_ColumnPropNameInTable="CantidadProyectadaColumn" msprop:Generator_UserColumnName="CantidadProyectada" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reportes.aspx.cs" Inherits="SistemaMJP.Reportes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+    <link rel="stylesheet" href="Content/Reporte.css"/>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" runat="server">
      <asp:UpdatePanel ID="UpdatePanel1" runat="server"
      UpdateMode="Conditional">
@@ -46,13 +49,13 @@
 
                  <div class="form-group" style="display: none;" id="rExistencias" runat="server">                    
                    <div class="BotonAgregar">
-                        <asp:Button ID="Btn_reporteExistencia" class="btn btn-default" runat="server" Text="Generar Reporte" OnClick="existencia" />
+                        <asp:Button ID="Btn_reporteExistencia" class="btn btn-default botonAgregar" runat="server" Text="Generar Reporte" OnClick="existencia" />
                     </div>                     
                 </div>
 
                 <div class="form-group" style="display: none;" id="rGeneral" runat="server">
                    <div class="BotonAgregar">
-                        <asp:Button ID="Btn_articulosGeneral" class="btn btn-default" runat="server" Text="Generar Reporte" OnClick="general" />
+                        <asp:Button ID="Btn_articulosGeneral" class="btn btn-default botonAgregar" runat="server" Text="Generar Reporte" OnClick="general" />
                    </div>   
                 </div>
 
@@ -71,7 +74,7 @@
                 <div class="form-group" style="display: none;" id="rDestinoSubPartida2" runat="server">
                     <label class="col-md-2 control-label" >SubPartida: </label>
                      <div class="col-md-10">
-                        <asp:DropDownList ID = "ListSubPartida1" class="form-control dropdown cmbsize" AutoPostBack="true" runat="server">                                
+                        <asp:DropDownList ID = "ListSubPartida1" class="form-control dropdown cmbsize spaceb" AutoPostBack="true" runat="server">                                
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrorSubPartida1" class="col-md-offset-2" runat="server">
@@ -79,7 +82,7 @@
                         <br/> 
                     </div>
                      <div class="BotonAgregar">
-                        <asp:Button ID="Btn_articulosDestinoSubpartida" class="btn btn-default" runat="server" Text="Generar Reporte" OnClick="destinoSubPartida" />
+                        <asp:Button ID="Btn_articulosDestinoSubpartida" class="btn btn-default botonAgregar" runat="server" Text="Generar Reporte" OnClick="destinoSubPartida" />
                     </div>                    
                 </div>
 
@@ -98,7 +101,7 @@
                      <div class="form-group" style="display: none;" id="rTrazabilidad2" runat="server">
                      <label class="col-md-2 control-label" >Periodo: </label>
                      <div class="col-md-10">
-                        <asp:DropDownList ID = "ListPeriodo" class="form-control dropdown cmbsize" AutoPostBack="true" runat="server">                                
+                        <asp:DropDownList ID = "ListPeriodo" class="form-control dropdown cmbsize spaceb" AutoPostBack="true" runat="server">                                
                             <asp:ListItem Value="12">12</asp:ListItem>
                             <asp:ListItem Value="24">24</asp:ListItem>
                             <asp:ListItem Value="36">36</asp:ListItem>
@@ -109,14 +112,14 @@
                         <br/> 
                     </div>
                      <div class="BotonAgregar">
-                        <asp:Button ID="Btn_trazabilidad" class="btn btn-default" runat="server" Text="Generar Reporte" OnClick="trazabilidad" />
+                        <asp:Button ID="Btn_trazabilidad" class="btn btn-default botonAgregar" runat="server" Text="Generar Reporte" OnClick="trazabilidad" />
                     </div>                    
                 </div>
 
                 <div class="form-group" style="display: none;" id="rRequisicion" runat="server">
                     <label class="col-md-2 control-label" >Destino: </label>
                    <div class="col-md-10">
-                        <asp:DropDownList ID = "ListDestino2" class="form-control dropdown cmbsize" AutoPostBack="true" runat="server">                                
+                        <asp:DropDownList ID = "ListDestino2" class="form-control dropdown cmbsize spaceb" AutoPostBack="true" runat="server">                                
                         </asp:DropDownList>
                     </div>
                     <div style="display: none;" id="MsjErrordestino2" class="col-md-offset-2" runat="server">
@@ -124,7 +127,7 @@
                         <br/> 
                     </div>
                      <div class="BotonAgregar">
-                        <asp:Button ID="Btn_requisicion" class="btn btn-default" runat="server" Text="Generar Reporte" OnClick="requisiciones" />
+                        <asp:Button ID="Btn_requisicion" class="btn btn-default botonAgregar" runat="server" Text="Generar Reporte" OnClick="requisiciones" />
                     </div>                    
                 </div>
 
