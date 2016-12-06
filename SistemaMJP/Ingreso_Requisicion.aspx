@@ -1,6 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso_Requisicion.aspx.cs" Inherits="SistemaMJP.Ingreso_Requisicion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
+    <script>
+        $(document).keypress(function (e) {
+            if ((e.keyCode || e.which) == 13) {
+                // Enter key pressed
+                $('#btnModificar').click();
+            }
+
+        });
+
+    </script>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="form-horizontal">

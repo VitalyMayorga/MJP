@@ -156,10 +156,11 @@ namespace SistemaMJP
         {
 
             String estado = HttpUtility.HtmlDecode(GridProductos.Rows[i + (this.GridProductos.PageIndex * 10)].Cells[3].Text);
+                
             if (estado.Equals("En edición"))
             {
                 controladora.enviarAAprobacion(id_factura);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a aprobación.\n Cuando sea revisada por el administrador, su estado será Finalizado')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Mensaje de alerta", "alert('Factura enviada a aprobación.\\nCuando sea revisada por el administrador, su estado será Finalizado');", true);
                 llenarDetallesProducto();
                 string descripcionRA = "Factura" + numFactura + " enviada a revisión";
                 string usuario = (string)Session["correoInstitucional"];
@@ -168,7 +169,7 @@ namespace SistemaMJP
                 string bodega = bodegas[0];
                 List<string> correos = email.obtenerCorreosAdminAlmacen(bodega);
                 email.MailSender("Nueva factura enviada a revisión por el usuario " + usuario + ".\nNúmero de factura " + numFactura + ".", "Notificación de solicitud de aprobación de productos de factura", correos);
-
+                btnEnviarAprobacion.Enabled = false;
             }
         }
         //Llena la grid de productos con los datos correspondientes

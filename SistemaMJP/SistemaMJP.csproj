@@ -702,11 +702,11 @@
     <Compile Include="Requisiciones.aspx.designer.cs">
       <DependentUpon>Requisiciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RequisicionesUsuario\ControladoraBDRequisicionesUsuario.cs" />
-    <Compile Include="RequisicionesUsuario\ControladoraRequisicionesUsuario.cs" />
-    <Compile Include="RequisicionesUsuario\Item_Grid_Productos_Bodega.cs" />
-    <Compile Include="RequisicionesUsuario\Item_Grid_Requisiciones.cs" />
-    <Compile Include="RequisicionesUsuario\Item_Grid_Tracking.cs" />
+    <Compile Include="App_Data\RequisicionesUsuario\ControladoraBDRequisicionesUsuario.cs" />
+    <Compile Include="App_Data\RequisicionesUsuario\ControladoraRequisicionesUsuario.cs" />
+    <Compile Include="App_Data\RequisicionesUsuario\Item_Grid_Productos_Bodega.cs" />
+    <Compile Include="App_Data\RequisicionesUsuario\Item_Grid_Requisiciones.cs" />
+    <Compile Include="App_Data\RequisicionesUsuario\Item_Grid_Tracking.cs" />
     <Compile Include="Restablecer_contraseña.aspx.cs">
       <DependentUpon>Restablecer_contraseña.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
